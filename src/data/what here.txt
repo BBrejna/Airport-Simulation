@@ -1,0 +1,2 @@
+final properties
+all hard-coded data necessary for the program
