@@ -1,6 +1,0 @@
-All ViewModels in our project that process/hold data (their properties can be observed in the Thread)
-
-ViewModels in our project:
-- Admin
-- Ekspedient
-- Robol ?
