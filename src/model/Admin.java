@@ -53,7 +53,7 @@ public class Admin extends Person {
     /** generate one random flight */
     public Flight generateRandomSingleFlight() {
 
-        int hour = getHour();
+        int hour = generateHour();
 
 
         return null;
@@ -61,7 +61,8 @@ public class Admin extends Person {
     }
 
     /** getHour for a random flight */
-    private int getHour() {
+    // public so that tests see this
+    public int generateHour() {
 
         Random random = new Random();
         int number = random.nextInt(475);
