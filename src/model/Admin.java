@@ -1,5 +1,8 @@
 package model;
 
+import data.admin.AirplaneModelsSet;
+import model.classes.admin.Airplane;
+import model.classes.admin.AirplaneModel;
 import model.classes.admin.Flight;
 import model.classes.people.Person;
 
@@ -53,8 +56,9 @@ public class Admin extends Person {
     /** generate one random flight */
     public Flight generateRandomSingleFlight() {
 
+        boolean isArrival = isArrival();
         int hour = generateHour();
-
+        Airplane airplane = generateAirplane();
 
         return null;
 
@@ -83,6 +87,18 @@ public class Admin extends Person {
 
         return interval*180 + random.nextInt(180);
     }
+
+    /** decide whether it is arival or not */
+    private boolean isArrival() {
+        Random random = new Random();
+        return random.nextInt(2) % 2 == 1;
+    }
+
+    /** generate a plane */
+    private Airplane generateAirplane() {
+        return new Airplane();
+    }
+
 
     /** GETTERS AND SETTERS */
     public ArrayList<Flight> getFlights() { return flights; }

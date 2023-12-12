@@ -1,6 +1,7 @@
 package tests.admin;
 
 import model.Admin;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AdminTests {
 
-    @Test
-    public void properHour() {
+    @RepeatedTest(10000)
+    public void properHourReturnTest() {
 
         Admin admin = new Admin("1321", "Stefan", "Kowalski");
         int hour = admin.generateHour();

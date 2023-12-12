@@ -1,0 +1,8 @@
+all classes that store data
+
+Examples of such classes:
+- Airplane
+- Person
+- Ticket
+- Weather
+- and so on
