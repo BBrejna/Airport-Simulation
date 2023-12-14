@@ -1,8 +1,8 @@
 package model.classes.people;
 
 public class Pilot extends Person {
-    boolean isCaptain;
-    double hoursFlown;
+    private boolean isCaptain;
+    private double hoursFlown;
 
 
     public Pilot(String pesel, String name, String surname, boolean isCaptain, double hoursFlown) {
