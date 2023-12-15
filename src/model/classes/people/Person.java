@@ -1,5 +1,9 @@
 package model.classes.people;
 
+import data.NamesAndSurnames;
+
+import java.util.Random;
+
 public class Person {
 
     private String pesel;
@@ -10,6 +14,17 @@ public class Person {
         this.pesel = pesel;
         this.name = name;
         this.surname = surname;
+    }
+
+    public Person() {
+
+        Random random = new Random();
+
+        // TODO method generating PESEL
+        this.pesel = "1111111111";
+        this.name = NamesAndSurnames.NAMES[random.nextInt(NamesAndSurnames.NAMES.length)];
+        this.surname = NamesAndSurnames.SURNAMES[random.nextInt(NamesAndSurnames.SURNAMES.length)];
+
     }
 
     /** GETTERS AND SETTERS */

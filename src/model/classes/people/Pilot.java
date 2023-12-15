@@ -11,6 +11,12 @@ public class Pilot extends Person {
         this.isCaptain = isCaptain;
     }
 
+    public Pilot(boolean isCaptain, double hoursFlown) {
+        super();
+        this.hoursFlown = hoursFlown;
+        this.isCaptain = isCaptain;
+    }
+
 
     public boolean isCaptain() {return isCaptain;}
 

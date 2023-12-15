@@ -1,10 +1,10 @@
 package model;
 
+import data.admin.AirlinesSet;
 import data.admin.AirplaneModelsSet;
-import model.classes.admin.Airplane;
-import model.classes.admin.AirplaneModel;
-import model.classes.admin.Flight;
+import model.classes.admin.*;
 import model.classes.people.Person;
+import model.classes.people.Pilot;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,18 +24,21 @@ public class Admin extends Person {
      * Sum: 475
      */
     private final int[] HOUR_DISTRIBUTION = {20, 30, 100, 70, 75, 80, 70, 40};
-
+    private ArrayList<Runway> runways = new ArrayList<>();
     private ArrayList<Flight> flights;
     private int allFlightsCount;
+    private ArrayList<Integer> existingFlightIdentifiers = new ArrayList<>();
 
     public Admin(String pesel, String name, String surname) {
         super(pesel, name, surname);
     }
 
     /** generate flight for a day, there will be  */
-    public ArrayList<Flight> generateFlights(int flightsCount) {
+    public ArrayList<Flight> generateFlights(int flightsCount, int runwaysNumber) {
 
         Random random = new Random();
+
+        generateRunways(runwaysNumber);
 
         // specify the number of flights
         int flightsCountDiff = flightsCount * 3/10;
@@ -49,7 +52,18 @@ public class Admin extends Person {
             flights.add(generateRandomSingleFlight());
         }
 
+        // TODO segregate flights by hour
+
         return getFlights();
+
+    }
+
+    /** generate and assign runways */
+    private void generateRunways(int runwaysNum) {
+
+        for(int i = 0; i < runwaysNum; i++) {
+            runways.add(new Runway(i+1));
+        }
 
     }
 
@@ -59,13 +73,15 @@ public class Admin extends Person {
         boolean isArrival = isArrival();
         int hour = generateHour();
         Airplane airplane = generateAirplane();
+        String flightNumber = generateFlightNumber(airplane, hour);
+        ArrayList<Pilot> pilots = generatePilots(airplane.getNumberOfSeats());
 
         return null;
 
     }
 
-    /** getHour for a random flight */
-    // public so that tests see this
+    /** getHour for a random flight, number of minutes after 12:00 AM */
+    // public so that tests can see this
     public int generateHour() {
 
         Random random = new Random();
@@ -97,6 +113,51 @@ public class Admin extends Person {
     /** generate a plane */
     private Airplane generateAirplane() {
         return new Airplane();
+    }
+
+    private String generateFlightNumber(Airplane airplane, int minutes) {
+
+        String number = airplane.getAirline().getIATA_code();
+        Random random = new Random();
+
+        int flightNumberIdentifier = 9600/1440 * minutes + random.nextInt(400);
+        number += Integer.toString(flightNumberIdentifier);
+
+        if(!checkFreeNumber(number)) number = generateFlightNumber(airplane, minutes);
+
+        return number;
+
+    }
+
+    // TODO check whether given flightNumber exists
+    private boolean checkFreeNumber(String flightNumber) {
+        return true;
+    }
+
+    // TODO do list of pilots
+    private ArrayList<Pilot> generatePilots(int numberOfSeats) {
+
+        Random random = new Random();
+
+        int pilotsCount = 2;
+        if(numberOfSeats > 303) {
+            if(random.nextInt(10) < 7) {
+                pilotsCount = 3 + random.nextInt(2);
+            }
+        } else if(numberOfSeats > 177) {
+            if(random.nextInt(10) < 4) {
+                pilotsCount = 3;
+            }
+        }
+
+        ArrayList<Pilot> pilots = new ArrayList<>();
+        for(int i = 0; i < pilotsCount; i++) {
+            boolean isCaptain = (i == 0);
+            int hoursFlown = 50 + random.nextInt(20000);
+            pilots.add(new Pilot(isCaptain, hoursFlown));
+        }
+
+        return pilots;
     }
 
 
