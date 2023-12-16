@@ -47,7 +47,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
     public void run() {
         while (t.isAlive()) {
             try {
-                t.sleep(1000);
+                Thread.sleep(1000);
                 if (isTimeStopped) {
                     continue;
                 }
