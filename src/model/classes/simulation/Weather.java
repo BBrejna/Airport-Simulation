@@ -30,7 +30,7 @@ public class Weather {
 
     public void generateWeather(){
         Random rand = new Random();
-        temperature = temperature + rand.nextDouble(-1, 1);
+        temperature = Math.min(40, Math.max(-20, temperature + rand.nextDouble(-1, 1)));
         wind = rand.nextDouble(0, 1);
         rain = rand.nextDouble(0, 1);
         snow = rand.nextDouble(0, 1);
