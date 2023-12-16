@@ -52,7 +52,9 @@ public class Salesman extends Person {
         //creating an array of available flight classes
         boolean[] flightClassAvailability=new boolean[flight.getNumOfOccupiedSeats().length];
         for (int i = 0; i < flightClassAvailability.length; i++) {
-            if(flight.getNumOfOccupiedSeats()[i]<flight.getAirplane().getNumberOfSeats()[i])flightClassAvailability[i]=true;
+            //todo update this when airplane gets updated seats
+            //if(flight.getNumOfOccupiedSeats()[i]<flight.getAirplane().getNumberOfSeats()[i])flightClassAvailability[i]=true;
+            if(flight.getNumOfOccupiedSeats()[i]<flight.getAirplane().getNumberOfSeats())flightClassAvailability[i]=true;
             else flightClassAvailability[i]=false;
         }
         //asking passenger to choose a flight class
@@ -109,7 +111,9 @@ public class Salesman extends Person {
     }
     public boolean luggageOverweight(Passenger passenger, Flight flight){
         int weight= passenger.getLuggageWeight();
-        int allowed=flight.getAirplane().getMaxFreeLuggageWeight();
+        //todo update this when airplane gets its atribute
+        //int allowed=flight.getAirplane().getMaxFreeLuggageWeight();
+        int allowed=100;
         if(weight>allowed)return true;
         return false;
     }

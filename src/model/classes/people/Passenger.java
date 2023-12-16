@@ -45,9 +45,13 @@ public class Passenger extends Person{
 
     //METHODS
     public Flight chooseFlight(ArrayList<Flight> list){
+        //todo to be updated by kufel
+        return list.get(0);
         //returns a random flight from the list
     }
     public int chooseFlightClass(double[] prices,boolean[] isAvailable){
+        //todo to be updated by kufel
+        return 0;
         //returns a random flight class index based on available flight classes
     }
 }
