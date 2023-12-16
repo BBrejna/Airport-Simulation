@@ -18,5 +18,4 @@ public class JUnitAdminTests {
         assertTrue(hour < 1440);
 
     }
-
 }
