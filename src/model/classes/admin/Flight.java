@@ -13,9 +13,12 @@ public class Flight {
     private Runway runway;
     private int[] numOfOccupiedSeats;
     private double[] ticketPrice;
+    private String sourcePoint;
+    private String destinationPoint;
+    private int delayMinutes;
 
 
-    public Flight(boolean isArrival, int hour, Airplane airplane, String flightNumber, ArrayList<Pilot> pilots, Runway runway, int[] numOfOccupiedSeats, double[] ticketPrice) {
+    public Flight(boolean isArrival, int hour, Airplane airplane, String flightNumber, ArrayList<Pilot> pilots, Runway runway, int[] numOfOccupiedSeats, double[] ticketPrice, String sourcePoint, String destinationPoint, int delayMinutes) {
         this.isArrival = isArrival;
         this.hour = hour;
         this.airplane = airplane;
@@ -24,6 +27,9 @@ public class Flight {
         this.runway = runway;
         this.numOfOccupiedSeats = numOfOccupiedSeats;
         this.ticketPrice = ticketPrice;
+        this.sourcePoint = sourcePoint;
+        this.destinationPoint = destinationPoint;
+        this.delayMinutes = delayMinutes;
     }
 
 
@@ -89,5 +95,29 @@ public class Flight {
 
     public void setTicketPrice(double[] ticketPrice) {
         this.ticketPrice = ticketPrice;
+    }
+
+    public String getSourcePoint() {
+        return sourcePoint;
+    }
+
+    public void setSourcePoint(String sourcePoint) {
+        this.sourcePoint = sourcePoint;
+    }
+
+    public String getDestinationPoint() {
+        return destinationPoint;
+    }
+
+    public void setDestinationPoint(String destinationPoint) {
+        this.destinationPoint = destinationPoint;
+    }
+
+    public int getDelayMinutes() {
+        return delayMinutes;
+    }
+
+    public void setDelayMinutes(int delayMinutes) {
+        this.delayMinutes = delayMinutes;
     }
 }
