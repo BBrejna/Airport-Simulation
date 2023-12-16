@@ -10,6 +10,8 @@ public class Airplane  {
     private final AirplaneModel airplaneModel;
     private final Airline airline;
     private final int numberOfSeats;
+    private final int[] numberOfSeatsClasses;
+    private final int maxFreeLuggageWeight;
 
     public Airplane() {
 
@@ -24,6 +26,21 @@ public class Airplane  {
         int seatsRange = airplaneModel.getMaxSeats() - airplaneModel.getMinSeats();
         this.numberOfSeats = airplaneModel.getMinSeats() + random.nextInt(seatsRange + 1);
 
+        //assign maxFreeLuggageWeight
+        this.maxFreeLuggageWeight = 10 - random.nextInt(5);
+
+        //generate number of seats in each class
+        this.numberOfSeatsClasses = new int[3];
+        if (numberOfSeats < 100) {
+            numberOfSeatsClasses[2] = numberOfSeats;
+        } else {
+            int eko = (int) (0.5 * numberOfSeats);
+            int standard = (int) (0.4 * numberOfSeats);
+            int prem = numberOfSeats - eko - standard;
+            numberOfSeatsClasses[0] = eko;
+            numberOfSeatsClasses[1] = standard;
+            numberOfSeatsClasses[2] = prem;
+        }
     }
 
     /** GETTERS AND SETTERS */
@@ -33,4 +50,10 @@ public class Airplane  {
     public Airline getAirline() { return airline; }
     public int getNumberOfSeats() { return numberOfSeats; }
 
+    public int[] getNumberOfSeatsClasses() {
+        return numberOfSeatsClasses;
+    }
+    public int getMaxFreeLuggageWeight() {
+        return maxFreeLuggageWeight;
+    }
 }

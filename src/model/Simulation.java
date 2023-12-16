@@ -15,15 +15,10 @@ public class Simulation extends Subject<Weather> implements Runnable {
     int time;
     boolean isTimeStopped;
     int timeDelta;
-    Admin admin;
-    Salesman salesman;
 
-    public Simulation(String threadName, Admin admin, Salesman salesMan, Listener listener) {
+    public Simulation(String threadName) {
         this.threadName = threadName;
-        this.admin = admin;
-        this.salesman = salesMan;
         this.weather = new Weather();
-        addObserver(listener);
     }
 
     public void start(int timeDelta) {
@@ -36,7 +31,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
             Random random = new Random();
             int flightsCount = random.nextInt(100,500);
             int runwaysNumber = random.nextInt(3, 6);
-//            admin.generateFlights(flightsCount, runwaysNumber);
+//            Admin.getInstance().generateFlights(flightsCount, runwaysNumber);
 
             int peopleCount = random.nextInt(flightsCount*50, flightsCount*150);
             int peopleGenerated = generatePeople(peopleCount);
