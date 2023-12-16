@@ -11,7 +11,7 @@ public class Weather {
     private double clouds;
 
     public Weather() {
-        this.temperature = 0.5;
+        this.temperature = 25;
         this.wind = 0.5;
         this.rain = 0.5;
         this.snow = 0.5;
@@ -30,7 +30,7 @@ public class Weather {
 
     public void generateWeather(){
         Random rand = new Random();
-        temperature = rand.nextDouble(0, 1);
+        temperature = rand.nextDouble(0, 40);
         wind = rand.nextDouble(0, 1);
         rain = rand.nextDouble(0, 1);
         snow = rand.nextDouble(0, 1);
