@@ -9,7 +9,7 @@ import model.classes.people.Pilot;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Admin extends Person {
+public final class Admin extends Person {
 
     /**
      * Los Angeles International Airport (LAX)
@@ -29,9 +29,17 @@ public class Admin extends Person {
     private int allFlightsCount;
     private ArrayList<Integer> existingFlightIdentifiers = new ArrayList<>();
 
-    public Admin(String pesel, String name, String surname) {
+    /** Singleton design pattern */
+    private static final Admin instance = new Admin("21376969696", "Gal", "Anonim");
+
+    private Admin(String pesel, String name, String surname) {
         super(pesel, name, surname);
     }
+
+    public static Admin getInstance() {
+        return instance;
+    }
+
 
     /** generate flight for a day, there will be  */
     public ArrayList<Flight> generateFlights(int flightsCount, int runwaysNumber) {
