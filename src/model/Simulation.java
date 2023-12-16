@@ -8,22 +8,17 @@ import data.NamesAndSurnames;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Simulation extends Subject implements Runnable {
+public class Simulation extends Subject<Weather> implements Runnable {
     private Thread t;
     private String threadName;
     Weather weather;
     int time;
     boolean isTimeStopped;
     int timeDelta;
-    Admin admin;
-    SalesMan salesMan;
 
-    public Simulation(String threadName, Admin admin, SalesMan salesMan, Listener listener) {
+    public Simulation(String threadName) {
         this.threadName = threadName;
-        this.admin = admin;
-        this.salesMan = salesMan;
         this.weather = new Weather();
-        addObserver(listener);
     }
 
     public void start(int timeDelta) {
@@ -36,7 +31,7 @@ public class Simulation extends Subject implements Runnable {
             Random random = new Random();
             int flightsCount = random.nextInt(100,500);
             int runwaysNumber = random.nextInt(3, 6);
-//            admin.generateFlights(flightsCount, runwaysNumber);
+//            Admin.getInstance().generateFlights(flightsCount, runwaysNumber);
 
             int peopleCount = random.nextInt(flightsCount*50, flightsCount*150);
             int peopleGenerated = generatePeople(peopleCount);

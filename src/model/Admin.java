@@ -27,7 +27,7 @@ public final class Admin extends Person {
     private ArrayList<Runway> runways = new ArrayList<>();
     private ArrayList<Flight> flights;
     private int allFlightsCount;
-    private ArrayList<Integer> existingFlightIdentifiers = new ArrayList<>();
+    private ArrayList<String> existingFlightNumbers = new ArrayList<>();
 
     /** Singleton design pattern */
     private static final Admin instance = new Admin("21376969696", "Gal", "Anonim");
@@ -78,13 +78,45 @@ public final class Admin extends Person {
     /** generate one random flight */
     public Flight generateRandomSingleFlight() {
 
+        Random random = new Random();
+
         boolean isArrival = isArrival();
         int hour = generateHour();
         Airplane airplane = generateAirplane();
         String flightNumber = generateFlightNumber(airplane, hour);
         ArrayList<Pilot> pilots = generatePilots(airplane.getNumberOfSeats());
 
-        return null;
+        int runwayNum = getRunway(hour);
+        boolean adding = random.nextBoolean();
+        while( runwayNum == -1 ) {
+            if(adding) {
+                hour += 3;
+                if(hour > 1440) {
+                    hour -= 6;
+                    adding = false;
+                }
+            } else {
+                hour -= 3;
+                if(hour < 0) {
+                    hour += 6;
+                    adding = true;
+                }
+            }
+            runwayNum = getRunway(hour);
+        }
+
+        Runway runway = runways.get(0);
+        for(Runway runwayCandidate: runways) {
+            if(runwayNum == runwayCandidate.getRunwayNumber()) runway = runwayCandidate;
+        }
+
+        // TODO number of occupied seats
+        // TODO ticket price
+        // TODO destination
+        // TODO source
+        // TODO delay
+        return new Flight(isArrival, hour, airplane, flightNumber, pilots, runway, new int[]{}, new double[]{},
+                "Wrocław", "W pizdu daleko", 0);
 
     }
 
@@ -137,12 +169,13 @@ public final class Admin extends Person {
 
     }
 
-    // TODO check whether given flightNumber exists
     private boolean checkFreeNumber(String flightNumber) {
+        for(String existingFlightNumber: existingFlightNumbers) {
+            if(existingFlightNumber.equals(flightNumber)) return false;
+        }
         return true;
     }
 
-    // TODO do list of pilots
     private ArrayList<Pilot> generatePilots(int numberOfSeats) {
 
         Random random = new Random();
@@ -168,10 +201,28 @@ public final class Admin extends Person {
         return pilots;
     }
 
+    /** checks whether there are free runways at a specific time */
+    private int getRunway(int hour) {
+        ArrayList<Runway> freeRunways = getRunways();
+          for(Flight flight : flights) {
+              if(Math.abs(flight.getHour() - hour) < 3) {
+                  freeRunways.remove(flight.getRunway());
+              }
+          }
+
+          if(freeRunways.isEmpty()) return -1;
+          Random random = new Random();
+          return freeRunways.get(random.nextInt(freeRunways.size())).getRunwayNumber();
+
+    }
+
 
     /** GETTERS AND SETTERS */
     public ArrayList<Flight> getFlights() { return flights; }
     public ArrayList<Flight> getArrivals() { return flights; }
     public ArrayList<Flight> getDepartures() { return flights; }
     public void setFlights(ArrayList<Flight> flights) { this.flights = flights; }
+    public ArrayList<Runway> getRunways() {return runways;}
+    public int getAllFlightsCount() {return allFlightsCount;}
+    public ArrayList<String> getExistingFlightNumbers() {return existingFlightNumbers;}
 }

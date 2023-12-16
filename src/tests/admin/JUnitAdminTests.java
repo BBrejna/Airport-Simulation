@@ -11,7 +11,7 @@ public class JUnitAdminTests {
     @RepeatedTest(10000)
     public void properHourReturnTest() {
 
-        Admin admin = new Admin("1321", "Stefan", "Kowalski");
+        Admin admin = Admin.getInstance();
         int hour = admin.generateHour();
 
         assertTrue(hour >= 0);
