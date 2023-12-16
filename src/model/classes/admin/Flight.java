@@ -120,4 +120,11 @@ public class Flight {
     public void setDelayMinutes(int delayMinutes) {
         this.delayMinutes = delayMinutes;
     }
+    public boolean isFull(){
+        int available=this.airplane.getNumberOfSeats();
+        for (int i = 0; i < this.numOfOccupiedSeats.length; i++) {
+            available-=this.numOfOccupiedSeats[i];
+        }
+        return available==0;
+    }
 }

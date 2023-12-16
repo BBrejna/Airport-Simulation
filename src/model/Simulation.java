@@ -16,12 +16,12 @@ public class Simulation extends Subject implements Runnable {
     boolean isTimeStopped;
     int timeDelta;
     Admin admin;
-    SalesMan salesMan;
+    Salesman salesman;
 
-    public Simulation(String threadName, Admin admin, SalesMan salesMan, Listener listener) {
+    public Simulation(String threadName, Admin admin, Salesman salesMan, Listener listener) {
         this.threadName = threadName;
         this.admin = admin;
-        this.salesMan = salesMan;
+        this.salesman = salesMan;
         this.weather = new Weather();
         addObserver(listener);
     }
