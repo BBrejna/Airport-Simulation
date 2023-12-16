@@ -2,7 +2,7 @@ package model.classes.simulation;
 
 import model.classes.Observer;
 
-public class listener implements Observer {
+public class Listener implements Observer {
     @Override
     public void calculateDelayProbability(Object _weather) {
         Weather weather = (Weather) _weather;

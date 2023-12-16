@@ -1,5 +1,6 @@
 package model;
 
+import model.classes.Subject;
 import model.classes.simulation.*;
 import model.classes.people.Person;
 import data.NamesAndSurnames;
@@ -7,7 +8,7 @@ import data.NamesAndSurnames;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Simulation extends Thread{
+public class Simulation extends Subject implements Runnable {
     private Thread t;
     private String threadName;
     Weather weather;
@@ -17,11 +18,12 @@ public class Simulation extends Thread{
     Admin admin;
     SalesMan salesMan;
 
-    public Simulation(String threadName, Admin admin, SalesMan salesMan) {
+    public Simulation(String threadName, Admin admin, SalesMan salesMan, Listener listener) {
         this.threadName = threadName;
         this.admin = admin;
         this.salesMan = salesMan;
         this.weather = new Weather();
+        addObserver(listener);
     }
 
     public void start(int timeDelta) {
@@ -56,6 +58,7 @@ public class Simulation extends Thread{
                 }
 
                 weather.generateWeather();
+                notifyObservers(weather);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
