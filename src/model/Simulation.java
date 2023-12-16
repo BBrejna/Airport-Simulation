@@ -8,7 +8,7 @@ import data.NamesAndSurnames;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Simulation extends Subject implements Runnable {
+public class Simulation extends Subject<Weather> implements Runnable {
     private Thread t;
     private String threadName;
     Weather weather;
