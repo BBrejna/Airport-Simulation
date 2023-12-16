@@ -25,7 +25,7 @@ public final class Admin extends Person {
      */
     private final int[] HOUR_DISTRIBUTION = {20, 30, 100, 70, 75, 80, 70, 40};
     private ArrayList<Runway> runways = new ArrayList<>();
-    private ArrayList<Flight> flights;
+    private ArrayList<Flight> flights = new ArrayList<>();
     private int allFlightsCount;
     private ArrayList<String> existingFlightNumbers = new ArrayList<>();
 
@@ -50,13 +50,14 @@ public final class Admin extends Person {
 
         // specify the number of flights
         int flightsCountDiff = flightsCount * 3/10;
-        if(random.nextInt(2) % 2 == 1) flightsCount += flightsCountDiff;
+        if(random.nextBoolean()) flightsCount += flightsCountDiff;
         else flightsCount -= flightsCountDiff;
 
         this.allFlightsCount = flightsCount;
 
         // generate calculated number of flights
         for(int i = 0; i< allFlightsCount; i++ ) {
+            System.out.println(i);
             flights.add(generateRandomSingleFlight());
         }
 
