@@ -21,6 +21,7 @@ public class Simulation extends Thread{
         this.threadName = threadName;
         this.admin = admin;
         this.salesMan = salesMan;
+        this.weather = new Weather();
     }
 
     public void start(int timeDelta) {
@@ -33,7 +34,7 @@ public class Simulation extends Thread{
             Random random = new Random();
             int flightsCount = random.nextInt(100,500);
             int runwaysNumber = random.nextInt(3, 6);
-            admin.generateFlights(flightsCount, runwaysNumber);
+//            admin.generateFlights(flightsCount, runwaysNumber);
 
             int peopleCount = random.nextInt(flightsCount*50, flightsCount*150);
             int peopleGenerated = generatePeople(peopleCount);
@@ -53,7 +54,6 @@ public class Simulation extends Thread{
                 if (isTimeStopped) {
                     continue;
                 }
-
 
                 weather.generateWeather();
             } catch (InterruptedException e) {
