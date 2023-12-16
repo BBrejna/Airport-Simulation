@@ -56,7 +56,7 @@ public class Simulation extends Subject implements Runnable {
                 if (isTimeStopped) {
                     continue;
                 }
-
+                // realizacja timetables, announceLastCall do ekspedienta
                 weather.generateWeather();
                 notifyObservers(weather);
             } catch (InterruptedException e) {
