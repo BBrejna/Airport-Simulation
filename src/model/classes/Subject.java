@@ -3,7 +3,7 @@ package model.classes;
 import java.util.ArrayList;
 
 public class Subject<T> {
-    ArrayList<Observer<T>> observers = new ArrayList<>();
+    protected ArrayList<Observer<T>> observers = new ArrayList<>();
 
     public void notifyObservers(T t) {
         observers.forEach(observer -> observer.calculateDelayProbability(t));
