@@ -1,4 +1,4 @@
-/*package tests.admin;
+package tests.admin;
 
 import model.Admin;
 import org.junit.jupiter.api.RepeatedTest;
@@ -18,6 +18,4 @@ public class JUnitAdminTests {
         assertTrue(hour < 1440);
 
     }
-
 }
-*/
