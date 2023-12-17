@@ -3,7 +3,7 @@ package model.classes.people;
 import model.classes.admin.Flight;
 import model.classes.salesman.Ticket;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Passenger extends Person{
     //ATRIBUTES
@@ -44,14 +44,27 @@ public class Passenger extends Person{
     }
 
     //METHODS
-    public Flight chooseFlight(ArrayList<Flight> list){
-        //todo to be updated by kufel
-        return list.get(0);
-        //returns a random flight from the list
+    public Flight chooseFlight(ArrayList<Flight> list) {
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        Random rand = new Random();
+        return list.get(rand.nextInt(list.size()));
     }
-    public int chooseFlightClass(double[] prices,boolean[] isAvailable){
-        //todo to be updated by kufel
-        return 0;
-        //returns a random flight class index based on available flight classes
+    public int chooseFlightClass(double[] prices, boolean[] isAvailable) {
+        if (prices == null || isAvailable == null || prices.length != isAvailable.length) {
+            return -1;
+        }
+        ArrayList<Integer> availableClasses = new ArrayList<>();
+        for (int i = 0; i < isAvailable.length; i++) {
+            if (isAvailable[i]) {
+                availableClasses.add(i);
+            }
+        }
+        if (availableClasses.isEmpty()) {
+            return -1;
+        }
+        Random rand = new Random();
+        return availableClasses.get(rand.nextInt(availableClasses.size()));
     }
 }
