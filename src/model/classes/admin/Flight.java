@@ -152,8 +152,9 @@ public class Flight {
     }
     public boolean isFull(){
         for (int i = 0; i < this.numOfOccupiedSeats.length; i++) {
-            if(this.numOfOccupiedSeats[i] < this.airplane.getNumberOfSeatsClasses()[i])
+            if(this.numOfOccupiedSeats[i] < this.airplane.getNumberOfSeatsClasses()[i]){
                 return false;
+            }
         }
         return true;
     }

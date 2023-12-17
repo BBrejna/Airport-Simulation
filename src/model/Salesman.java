@@ -112,14 +112,11 @@ public class Salesman extends Person {
     }
 
     public ArrayList<Flight> searchFlights(String city) {
-        ArrayList<Flight> list = new ArrayList<>(Admin.getInstance().getDepartures());
-        int size = list.size();
-        for (int i = 0; i < size; i++) {
-            Flight flight = list.get(i);
-            if (flight.isFull() || flight.getDestinationPoint().getCity()!= city) {
-                size--;
-                list.remove(flight);
-                i--;
+        ArrayList<Flight> list=new ArrayList<>();
+        ArrayList<Flight> allDepartures=new ArrayList<>(Admin.getInstance().getDepartures());
+        for (int i = 0; i < allDepartures.size(); i++) {
+            if(!allDepartures.get(i).isFull() && allDepartures.get(i).getDestinationPoint().getCity() == city){
+                list.add(allDepartures.get(i));
             }
         }
         return list;
