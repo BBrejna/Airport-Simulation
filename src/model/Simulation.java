@@ -23,6 +23,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
     public Simulation(String threadName) {
         this.threadName = threadName;
         this.weather = new Weather();
+        this.t = null;
     }
 
     public void start(int timeDelta) {

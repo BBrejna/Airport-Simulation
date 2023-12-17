@@ -62,7 +62,8 @@ public final class Admin extends Person {
             flights.add(generateRandomSingleFlight());
         }
 
-        // TODO segregate flights by hour
+        //sort flights by hour
+        flights.sort(Comparator.comparing(Flight::getHour));
 
         return getFlights();
 
