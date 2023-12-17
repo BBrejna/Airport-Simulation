@@ -67,7 +67,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
                         return;
                     }
                     else if (flight.getHour() <= stopTime) {
-                        System.out.println("Time "+convertMinutesToTime(flight.getHour())+", Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departured")+"!");
+                        System.out.println("Time "+convertMinutesToTime(flight.getHour())+", Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departed")+"!");
                     }
                     else {
                         if (time < flight.getHour()-15 && flight.getHour()-15 <= stopTime) {
