@@ -1,8 +1,9 @@
-package tools;
+package model.tools;
 
 public class Tools {
 
     // POTRZEBUJE INFORMACJI W JAKICH JEDNOSTKACH GENEROWANY JEST CZAS, PRZUJALEM ZE GENERUJEMY GO W MINUTACH
+    // To dobrze przyjales XD
     public static String convertMinutesToTime(int minutes) {
         if (minutes < 0 || minutes > 1440) {
             return "Nieprawidłowa liczba minut";
