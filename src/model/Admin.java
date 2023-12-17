@@ -235,7 +235,9 @@ public final class Admin extends Person {
 
 
     /** GETTERS AND SETTERS */
-    public ArrayList<Flight> getFlights() { return flights; }
+    public ArrayList<Flight> getFlights() {
+        return new ArrayList<>(flights);
+    }
     public ArrayList<Flight> getArrivals() { return flights; }
     public ArrayList<Flight> getDepartures() { return flights; }
     public void setFlights(ArrayList<Flight> flights) { this.flights = flights; }
