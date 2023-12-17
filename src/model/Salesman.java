@@ -94,6 +94,9 @@ public class Salesman extends Person {
         passengers.remove(passenger);
         passenger.setTicket(null);
         cashbox -= 0.5 * flight.getTicketPrice()[ticket.getFlightClass()];
+        int[] tmp = flight.getNumOfOccupiedSeats();
+        tmp[ticket.getFlightClass()]--;
+        flight.setNumOfOccupiedSeats(tmp);
     }
 
     public Flight findFlight(Passenger passenger) {

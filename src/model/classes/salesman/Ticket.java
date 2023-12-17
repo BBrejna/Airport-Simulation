@@ -7,6 +7,7 @@ public class Ticket {
 
     //CONSTRUCTORS
     public Ticket() {
+        this("",-1);
     }
     public Ticket(String flightNumber, int flightClass) {
         this.flightNumber = flightNumber;
