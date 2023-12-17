@@ -27,7 +27,7 @@ public class Airplane  {
         this.numberOfSeats = airplaneModel.getMinSeats() + random.nextInt(seatsRange + 1);
 
         //assign maxFreeLuggageWeight
-        this.maxFreeLuggageWeight = 10 - random.nextInt(5);
+        this.maxFreeLuggageWeight = 20 - random.nextInt(5);
 
         //generate number of seats in each class
         this.numberOfSeatsClasses = new int[3];

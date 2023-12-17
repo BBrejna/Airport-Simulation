@@ -16,7 +16,28 @@ public class Passenger extends Person{
     public Passenger(String pesel, String name, String surname) {
         super(pesel, name, surname);
     }
+    public Passenger() {
+        super();
+        this.personalInfo = true;
+        this.luggageWeight = 0;
+        this.destinationCity = "";
+        this.ticket = null;
+    }
 
+    public Passenger(String pesel, String name, String surname, boolean personalInfo, int luggageWeight, String destinationCity, Ticket ticket) {
+        super(pesel, name, surname);
+        this.personalInfo = personalInfo;
+        this.luggageWeight = luggageWeight;
+        this.destinationCity = destinationCity;
+        this.ticket = ticket;
+    }
+    public Passenger(String pesel, String name, String surname, boolean personalInfo, int luggageWeight, String destinationCity) {
+        super(pesel, name, surname);
+        this.personalInfo = personalInfo;
+        this.luggageWeight = luggageWeight;
+        this.destinationCity = destinationCity;
+        this.ticket = null;
+    }
     //GETTERS & SETTERS
     public boolean isPersonalInfo() {
         return personalInfo;

@@ -26,7 +26,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
         this.t = null;
     }
 
-    public void start(int timeDelta) {
+    public void start(int timeDelta) { // todo changing delta time on time stopped
         System.out.println("Starting " +  threadName );
         if (t == null) {
             t = new Thread (this, threadName);
@@ -37,7 +37,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
             int flightsCount = random.nextInt(100,500);
             int runwaysNumber = random.nextInt(3, 6);
             Admin.getInstance().generateFlights(flightsCount, runwaysNumber);
-            System.out.println(Admin.getInstance().getAllFlightsCount());
+            System.out.println("Generating " + Admin.getInstance().getAllFlightsCount() +" flights");
             int peopleCount = random.nextInt(flightsCount*50, flightsCount*150);
             int peopleGenerated = generatePeople(peopleCount);
             System.out.println("Generating people: "+peopleGenerated+"/"+peopleCount+" succeeded");
@@ -79,6 +79,10 @@ public class Simulation extends Subject<Weather> implements Runnable {
                 });
                 Admin.getInstance().setFlights(futureFlights);
                 time = stopTime;
+                if (time >= 1440) {
+                    System.out.println("SIMULATION HAS ENDED!");
+                    return;
+                }
                 // realizacja timetables, announceLastCall do ekspedienta
                 weather.generateWeather();
                 notifyObservers(weather);
@@ -101,16 +105,16 @@ public class Simulation extends Subject<Weather> implements Runnable {
     public boolean generatePassenger(){
         Random rand = new Random();
 
-        int[] tab_pesel = new int[11];
-        for(int i = 0; i < 12; i++){
-            tab_pesel[0] = rand.nextInt(0, 10);
-
+        String pesel = "";
+        int z;
+        for(int i = 0; i < 11; i++){
+            z= rand.nextInt(0, 10);
+            pesel = pesel + Integer.toString(z);
         }
-        String pesel = Arrays.toString(tab_pesel);
+
         String name = NamesAndSurnames.NAMES[rand.nextInt(NamesAndSurnames.NAMES.length)];
         String surname = NamesAndSurnames.SURNAMES[rand.nextInt(NamesAndSurnames.SURNAMES.length)];
 
-        Passenger passenger = new Passenger(pesel, name, surname);
         ArrayList<String> destinations = new ArrayList<>();
 
         for(Flight flight : Admin.getInstance().getDepartures()) {
@@ -119,9 +123,9 @@ public class Simulation extends Subject<Weather> implements Runnable {
         }
 //        System.out.println(destinations.size());
         String destination = destinations.get(rand.nextInt(0, destinations.size()));
-        passenger.setDestinationCity(destination);
-        passenger.setLuggageWeight(rand.nextInt(5, 50));
-        passenger.setPersonalInfo(rand.nextBoolean());
+        boolean personalInfo = 0 != rand.nextInt(0,10);
+        int luggageWeight = rand.nextInt(5, 30);
+        Passenger passenger = new Passenger(pesel, name, surname, personalInfo, luggageWeight, destination);
 
         return Salesman.getInstance().addPassenger(passenger);
     }
