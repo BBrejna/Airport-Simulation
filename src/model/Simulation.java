@@ -118,7 +118,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
         ArrayList<String> destinations = new ArrayList<>();
 
         for(Flight flight : Admin.getInstance().getDepartures()) {
-            destinations.add(flight.getDestinationPoint().getAirportName());
+            destinations.add(flight.getDestinationPoint().getCity());
             //System.out.println(flight.getDestinationPoint().getAirportName());
         }
 //        System.out.println(destinations.size());

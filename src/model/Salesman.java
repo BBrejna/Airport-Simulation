@@ -4,6 +4,7 @@ import model.classes.admin.Flight;
 import model.classes.people.Passenger;
 import model.classes.people.Person;
 import model.classes.salesman.Ticket;
+import model.tools.Tools;
 
 import java.util.ArrayList;
 
@@ -50,7 +51,6 @@ public class Salesman extends Person {
         }
         //checking passenger's passport
         if (!passenger.isPersonalInfo()) {
-            System.out.println("Incorrect personal info, passenger not served");
             return false;
         }
         //weighing the luggage
@@ -111,11 +111,10 @@ public class Salesman extends Person {
         int size = list.size();
         for (int i = 0; i < size; i++) {
             Flight flight = list.get(i);
-            if (flight.isArrival() || flight.isFull() || flight.getDestinationPoint().getAirportName() != city) {
+            if (flight.isArrival() || flight.isFull() || flight.getDestinationPoint().getCity()!= city) {
                 size--;
                 list.remove(flight);
                 i--;
-                continue;
             }
         }
         return list;
@@ -135,12 +134,17 @@ public class Salesman extends Person {
     }
 
     public void announceLastCall(Flight flight) {
-        System.out.println("Attention, flight no. " + flight.getFlightNumber() + " flying to " + flight.getDestinationPoint() +
-                " is going to take off in 15 minutes");
+        System.out.println("Attention, flight no. " + flight.getFlightNumber() + " flying to "
+                + flight.getDestinationPoint().getAirportName()+" in "+ flight.getDestinationPoint().getCity() +
+                " is going to take off in 15 minutes (at "+ Tools.convertMinutesToTime(flight.getHour()) +").");
+        if(flight.getDelayMinutes()>0)
+            System.out.print("The current delay is "+flight.getDelayMinutes()+" minutes. We are sorry for the delay.");
     }
 
     public void announceDelay(Flight flight) {
-        System.out.println("Attention, flight no. " + flight.getFlightNumber() + " flying to " + flight.getDestinationPoint() +
-                " is going to take off with a delay of " + flight.getDelayMinutes() + " due to bad weather conditions");
+        System.out.println("Attention, flight no. " + flight.getFlightNumber() + " flying to "
+                +flight.getDestinationPoint().getAirportName()+" in "+ flight.getDestinationPoint().getCity() +
+                " is going to take off with a delay of " + flight.getDelayMinutes() +
+                " due to bad weather conditions. The new departure time is "+ Tools.convertMinutesToTime(flight.getHour()));
     }
 }
