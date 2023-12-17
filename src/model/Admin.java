@@ -57,7 +57,6 @@ public final class Admin extends Person {
 
         // generate calculated number of flights
         for(int i = 0; i< allFlightsCount; i++ ) {
-            System.out.println(i);
             flights.add(generateRandomSingleFlight());
         }
 
@@ -204,16 +203,18 @@ public final class Admin extends Person {
 
     /** checks whether there are free runways at a specific time */
     private int getRunway(int hour) {
-        ArrayList<Runway> freeRunways = getRunways();
-          for(Flight flight : flights) {
-              if(Math.abs(flight.getHour() - hour) < 3) {
-                  freeRunways.remove(flight.getRunway());
-              }
-          }
 
-          if(freeRunways.isEmpty()) return -1;
-          Random random = new Random();
-          return freeRunways.get(random.nextInt(freeRunways.size())).getRunwayNumber();
+        ArrayList<Runway> freeRunways = new ArrayList<>(getRunways());
+
+        for(Flight flight : flights) {
+          if(Math.abs(flight.getHour() - hour) < 3) {
+              freeRunways.remove(flight.getRunway());
+          }
+        }
+
+        if(freeRunways.isEmpty()) return -1;
+        Random random = new Random();
+        return freeRunways.get(random.nextInt(freeRunways.size())).getRunwayNumber();
 
     }
 
