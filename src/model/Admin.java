@@ -10,6 +10,8 @@ import model.classes.people.Pilot;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public final class Admin extends Person {
 
@@ -242,8 +244,12 @@ public final class Admin extends Person {
     public ArrayList<Flight> getFlights() {
         return new ArrayList<>(flights);
     }
-    public ArrayList<Flight> getArrivals() { return flights; }
-    public ArrayList<Flight> getDepartures() { return flights; }
+    public ArrayList<Flight> getArrivals() {
+        return flights.stream().filter(Flight::isArrival).collect(Collectors.toCollection(ArrayList::new));
+    }
+    public ArrayList<Flight> getDepartures() {
+        return flights.stream().filter(Predicate.not(Flight::isArrival)).collect(Collectors.toCollection(ArrayList::new));
+    }
     public void setFlights(ArrayList<Flight> flights) { this.flights = flights; }
     public ArrayList<Runway> getRunways() {return runways;}
     public int getAllFlightsCount() {return allFlightsCount;}
