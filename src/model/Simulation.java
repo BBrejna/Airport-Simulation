@@ -1,10 +1,12 @@
 package model;
 
 import model.classes.Subject;
+import model.classes.admin.Flight;
 import model.classes.simulation.*;
 import model.classes.people.Person;
 import data.NamesAndSurnames;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -31,12 +33,13 @@ public class Simulation extends Subject<Weather> implements Runnable {
             Random random = new Random();
             int flightsCount = random.nextInt(100,500);
             int runwaysNumber = random.nextInt(3, 6);
-//            Admin.getInstance().generateFlights(flightsCount, runwaysNumber);
+            Admin.getInstance().generateFlights(flightsCount, runwaysNumber);
 
             int peopleCount = random.nextInt(flightsCount*50, flightsCount*150);
             int peopleGenerated = generatePeople(peopleCount);
             System.out.println("Generating people: "+peopleGenerated+"/"+peopleCount+" succeeded");
 
+            time = -1*((15+timeDelta-1)/timeDelta)*timeDelta;
             t.start ();
         }
     }
@@ -51,6 +54,27 @@ public class Simulation extends Subject<Weather> implements Runnable {
                 if (isTimeStopped) {
                     continue;
                 }
+                int stopTime = time+timeDelta;
+//                ArrayList<Flight> flights = Admin.getInstance().getFlights();
+//                ArrayList<Flight> futureFlights = new ArrayList<>();
+//                System.out.println("DEBUG "+time+" "+stopTime);
+//                flights.forEach(flight -> {
+//                    System.out.println("DEBUG "+flight.getHour());
+//                    if (flight.getHour() <= time) {
+//                        return;
+//                    }
+//                    else if (flight.getHour() <= stopTime) {
+//                        System.out.println("Time "+makePrettyTime(flight.getHour())+", Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departured")+"!");
+//                    }
+//                    else {
+//                        if (time < flight.getHour()-15 && flight.getHour()-15 <= stopTime) {
+//                            System.out.println("Flight nr "+flight.getFlightNumber()+" is "+(flight.isArrival() ? "arriving" : "departuring")+" in 15 minutes @ "+makePrettyTime(flight.getHour())+"! (delay = "+flight.getDelayMinutes()+")");
+//                        }
+//                        futureFlights.add(flight);
+//                    }
+//                });
+//                Admin.getInstance().setFlights(futureFlights);
+                time = stopTime;
                 // realizacja timetables, announceLastCall do ekspedienta
                 weather.generateWeather();
                 notifyObservers(weather);
@@ -58,6 +82,14 @@ public class Simulation extends Subject<Weather> implements Runnable {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    String makePrettyTime(int time) {
+        String hh = Integer.toString(time/60);
+        if (hh.length() == 1) hh = "0"+hh;
+        String mm = Integer.toString(time%60);
+        if (mm.length() == 1) mm = "0"+mm;
+        return hh+":"+mm;
     }
 
     int generatePeople(int peopleCount) {
