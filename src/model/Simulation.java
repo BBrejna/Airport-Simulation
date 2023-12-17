@@ -70,7 +70,8 @@ public class Simulation extends Subject<Weather> implements Runnable {
                     }
                     else {
                         if (time < flight.getHour()-15 && flight.getHour()-15 <= stopTime) {
-                            System.out.println("Flight nr "+flight.getFlightNumber()+" is "+(flight.isArrival() ? "arriving" : "departuring")+" in 15 minutes @ "+convertMinutesToTime(flight.getHour())+"! (delay = "+flight.getDelayMinutes()+")");
+//                            System.out.println("Flight nr "+flight.getFlightNumber()+" is "+(flight.isArrival() ? "arriving" : "departuring")+" in 15 minutes @ "+convertMinutesToTime(flight.getHour())+"! (delay = "+flight.getDelayMinutes()+")");
+                            Salesman.getInstance().announceLastCall(flight);
                         }
                         futureFlights.add(flight);
                     }
@@ -115,13 +116,13 @@ public class Simulation extends Subject<Weather> implements Runnable {
             destinations.add(flight.getDestinationPoint().getAirportName());
             //System.out.println(flight.getDestinationPoint().getAirportName());
         }
-        System.out.println(destinations.size());
+//        System.out.println(destinations.size());
         String destination = destinations.get(rand.nextInt(0, destinations.size()));
         passenger.setDestinationCity(destination);
         passenger.setLuggageWeight(rand.nextInt(5, 50));
         passenger.setPersonalInfo(rand.nextBoolean());
 
-        return true; //Salesman.getInstance().addPassenger(passenger);
+        return Salesman.getInstance().addPassenger(passenger);
     }
 
 }
