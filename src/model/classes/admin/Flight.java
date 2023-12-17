@@ -151,10 +151,10 @@ public class Flight {
         this.delayMinutes = delayMinutes;
     }
     public boolean isFull(){
-        int available=this.airplane.getNumberOfSeats();
         for (int i = 0; i < this.numOfOccupiedSeats.length; i++) {
-            available-=this.numOfOccupiedSeats[i];
+            if(this.numOfOccupiedSeats[i] < this.airplane.getNumberOfSeatsClasses()[i])
+                return false;
         }
-        return available==0;
+        return true;
     }
 }

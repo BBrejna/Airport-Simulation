@@ -77,19 +77,23 @@ public class Salesman extends Person {
         return true;
     }
 
-    public void changeData(Passenger passenger) {
+    public boolean changeData(Passenger passenger) {
         cashbox += 50;
+        return true;
     }
 
-    public void returnTicket(Passenger passenger) {
+    public boolean returnTicket(Passenger passenger) {
         Ticket ticket = passenger.getTicket();
-        ArrayList<Flight> flights = getFlights();
-        Flight flight = flights.get(0);
+        ArrayList<Flight> flights = new ArrayList<>(Admin.getInstance().getDepartures());
+        Flight flight = null;
         for (int i = 0; i < flights.size(); i++) {
             if (flights.get(i).getFlightNumber() == ticket.getFlightNumber()) {
                 flight = flights.get(i);
                 break;
             }
+        }
+        if(flight==null){
+            return false;
         }
         passengers.remove(passenger);
         passenger.setTicket(null);
@@ -97,6 +101,7 @@ public class Salesman extends Person {
         int[] tmp = flight.getNumOfOccupiedSeats();
         tmp[ticket.getFlightClass()]--;
         flight.setNumOfOccupiedSeats(tmp);
+        return true;
     }
 
     public Flight findFlight(Passenger passenger) {
@@ -107,22 +112,16 @@ public class Salesman extends Person {
     }
 
     public ArrayList<Flight> searchFlights(String city) {
-        ArrayList<Flight> list = getFlights();
+        ArrayList<Flight> list = new ArrayList<>(Admin.getInstance().getDepartures());
         int size = list.size();
         for (int i = 0; i < size; i++) {
             Flight flight = list.get(i);
-            if (flight.isArrival() || flight.isFull() || flight.getDestinationPoint().getCity()!= city) {
+            if (flight.isFull() || flight.getDestinationPoint().getCity()!= city) {
                 size--;
                 list.remove(flight);
                 i--;
             }
         }
-        return list;
-    }
-
-    public ArrayList<Flight> getFlights() {
-        Admin admin = Admin.getInstance();
-        ArrayList<Flight> list = admin.getFlights();
         return list;
     }
 
