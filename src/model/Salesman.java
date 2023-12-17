@@ -108,7 +108,7 @@ public class Salesman extends Person {
         int size = list.size();
         for (int i = 0; i < size; i++) {
             Flight flight = list.get(i);
-            if (flight.isArrival() || flight.isFull() || flight.getDestinationPoint() != city) {
+            if (flight.isArrival() || flight.isFull() || flight.getDestinationPoint().getAirportName() != city) {
                 size--;
                 list.remove(flight);
                 i--;
