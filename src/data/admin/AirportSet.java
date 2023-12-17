@@ -1,11 +1,9 @@
 package data.admin;
+import model.classes.admin.Airport;
 
-//import model.classes.admin.;
-//import model.classes.admin.; <TUTAJ TRZEBA DODAC CO IMPORTUJEMY
+public class AirportSet {
 
-public class Airport {
-
-    public static final model.classes.admin.Airport[] AIRPORTS = {
+    public static final Airport[] AIRPORTS = {
             new model.classes.admin.Airport("New York", "John F. Kennedy International Airport"),
             new model.classes.admin.Airport("Los Angeles", "Los Angeles International Airport"),
             new model.classes.admin.Airport("Chicago", "O'Hare International Airport"),

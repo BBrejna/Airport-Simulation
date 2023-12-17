@@ -13,6 +13,10 @@ public class Airline {
         this.IATA_code = ICAO_code;
     }
 
+    public String toString() {
+        return "\n\t\t\tAirline name: " + getAirlineName() + "\n\t\t\tICAO code: " + getICAO_code() + "\n\t\t\tIATA code: " + getIATA_code();
+    }
+
     /** GETTERS AND SETTERS */
     public String getAirlineName() {return airlineName;}
     public String getICAO_code() { return ICAO_code; }

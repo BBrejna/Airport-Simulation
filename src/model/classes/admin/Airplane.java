@@ -43,6 +43,14 @@ public class Airplane  {
         }
     }
 
+    public String toString() {
+        String toReturn = "\n\t\tAirplane model: " + getAirplaneModel().toString() + "\n\t\tAirline: " + getAirline().toString()
+                + "\n\t\tNumber of seats: " + getNumberOfSeats() + "\n\t\tMax free luggage weight: " + getMaxFreeLuggageWeight()
+                + "\n\t\tSeats classes division: ";
+        for(int seats: getNumberOfSeatsClasses()) toReturn += seats + " ";
+        return toReturn;
+    }
+
     /** GETTERS AND SETTERS */
     public AirplaneModel getAirplaneModel() {
         return airplaneModel;

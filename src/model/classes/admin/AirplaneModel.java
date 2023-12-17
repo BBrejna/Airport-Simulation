@@ -16,6 +16,10 @@ public class AirplaneModel {
         this.maxSeats = maxSeats;
     }
 
+    public String toString() {
+        return "\n\t\t\tModel name: " + getModelName() + "\n\t\t\tMin seats: " + getMinSeats() + "\n\t\t\tMax seats: " + getMaxSeats();
+    }
+
     /** GETTERS */
     public String getModelName() {
         return modelName;

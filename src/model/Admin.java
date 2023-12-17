@@ -2,6 +2,7 @@ package model;
 
 import data.admin.AirlinesSet;
 import data.admin.AirplaneModelsSet;
+import data.admin.AirportSet;
 import model.classes.admin.*;
 import model.classes.people.Person;
 import model.classes.people.Pilot;
@@ -82,7 +83,7 @@ public final class Admin extends Person {
 
         boolean isArrival = isArrival();
         int hour = generateHour();
-        Airplane airplane = generateAirplane();
+        Airplane airplane = new Airplane();
         String flightNumber = generateFlightNumber(airplane, hour);
         ArrayList<Pilot> pilots = generatePilots(airplane.getNumberOfSeats());
 
@@ -110,15 +111,28 @@ public final class Admin extends Person {
             if(runwayNum == runwayCandidate.getRunwayNumber()) runway = runwayCandidate;
         }
 
+        int[] numberOfOccupiedSeats = {0, 0, 0};
+        for(int i = 0; i < 3; i++) {
+            if(random.nextBoolean()) numberOfOccupiedSeats[i] = airplane.getNumberOfSeatsClasses()[i];
+            else {
+                int seats = airplane.getNumberOfSeatsClasses()[i];
+                if(seats != 0) {
+                    numberOfOccupiedSeats[i] = (int) (0.5 * seats) + random.nextInt((int) (0.5 * seats));
+                    if(numberOfOccupiedSeats[i] > seats) numberOfOccupiedSeats[i] = seats;
+                }
+            }
+        }
 
+        Airport[] airports = AirportSet.AIRPORTS;
+        Airport source = airports[random.nextInt(airports.length)];
+        Airport destination = airports[random.nextInt(airports.length)];
+        while(source == destination) destination = airports[random.nextInt(airports.length)];
 
         // TODO number of occupied seats
         // TODO ticket price
-        // TODO destination
-        // TODO source
         // TODO delay
-        return new Flight(isArrival, hour, airplane, flightNumber, pilots, runway, new int[]{}, new double[]{},
-                "Wrocław", "W pizdu daleko", 0);
+        return new Flight(isArrival, hour, airplane, flightNumber, pilots, runway, numberOfOccupiedSeats, new double[]{},
+                source, destination, 0);
 
     }
 
@@ -150,11 +164,6 @@ public final class Admin extends Person {
     private boolean isArrival() {
         Random random = new Random();
         return random.nextInt(2) % 2 == 1;
-    }
-
-    /** generate a plane */
-    private Airplane generateAirplane() {
-        return new Airplane();
     }
 
     private String generateFlightNumber(Airplane airplane, int minutes) {

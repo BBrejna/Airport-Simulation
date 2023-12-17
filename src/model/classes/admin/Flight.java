@@ -35,10 +35,31 @@ public class Flight {
 
 
     public String toString() {
-        return "\n\tisArrival: " + isArrival() + "\n\thour: " + getHour() + "\n\tAirplane" + "\n\tFlight number: "
-                + getFlightNumber() + "\n\tPilots" + "\n\tRunway: " + getRunway().getRunwayNumber() + "\n\tSeats: "
-                + "\n\tTicket price: " + "\n\tSource: " + getSourcePoint() + "\n\tDestination: " + getDestinationPoint()
-                + "\n\tDelay: " + getDelayMinutes();
+        return "\n\tisArrival: " + isArrival() + "\n\thour: " + getHour() + "\n\tAirplane: " + getAirplane().toString() +
+                "\n\tFlight number: " + getFlightNumber() + "\n\tPilots: " + pilotsString() + "\n\tRunway: " + getRunway().getRunwayNumber()
+                + "\n\tOccupied seats: " + occupiedSeatsString() + "\n\tTicket price: " + ticketPricesString() + "\n\tSource: " + getSourcePoint().toString() + "\n\tDestination: "
+                + getDestinationPoint().toString() + "\n\tDelay: " + getDelayMinutes();
+    }
+
+    private String pilotsString() {
+        String toReturn = "";
+        for (Pilot pilot : pilots) {
+            toReturn += "\n\t\t\t--------------------";
+            toReturn += pilot.toString();
+        }
+        return toReturn;
+    }
+
+    private String occupiedSeatsString() {
+        String toReturn = "";
+        for(int seats: getNumOfOccupiedSeats()) toReturn += seats + " ";
+        return toReturn;
+    }
+
+    private String ticketPricesString() {
+        String toReturn = "";
+        for(double price: getTicketPrice()) toReturn += price + " ";
+        return toReturn;
     }
 
     /** GETTERS AND SETTERS */

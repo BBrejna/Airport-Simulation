@@ -4,7 +4,6 @@ public class Pilot extends Person {
     private boolean isCaptain;
     private double hoursFlown;
 
-
     public Pilot(String pesel, String name, String surname, boolean isCaptain, double hoursFlown) {
         super(pesel, name, surname);
         this.hoursFlown = hoursFlown;
@@ -15,6 +14,11 @@ public class Pilot extends Person {
         super();
         this.hoursFlown = hoursFlown;
         this.isCaptain = isCaptain;
+    }
+
+    public String toString() {
+        return "\n\t\t\tName and surname: " + getName() + " " + getSurname() + "\n\t\t\tHours flown: " + getHoursFlown()
+                + "\n\t\t\tCaptain: " + isCaptain();
     }
 
 
