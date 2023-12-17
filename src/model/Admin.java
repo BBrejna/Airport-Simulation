@@ -8,6 +8,7 @@ import model.classes.people.Person;
 import model.classes.people.Pilot;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
 
 public final class Admin extends Person {
@@ -61,7 +62,8 @@ public final class Admin extends Person {
             flights.add(generateRandomSingleFlight());
         }
 
-        // TODO segregate flights by hour
+        //sort flights by hour
+        flights.sort(Comparator.comparing(Flight::getHour));
 
         return getFlights();
 
