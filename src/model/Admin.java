@@ -123,15 +123,19 @@ public final class Admin extends Person {
             }
         }
 
+        double[] ticketPrices = {-1, -1, -1};
+        ticketPrices[0] = 200 + random.nextInt(3000);
+        ticketPrices[1] = ticketPrices[0] + 200 + random.nextInt(500);
+        ticketPrices[2] =  ticketPrices[1] + 1100 + random.nextInt(5000);
+
         Airport[] airports = AirportSet.AIRPORTS;
         Airport source = airports[random.nextInt(airports.length)];
         Airport destination = airports[random.nextInt(airports.length)];
         while(source == destination) destination = airports[random.nextInt(airports.length)];
 
-        // TODO number of occupied seats
-        // TODO ticket price
         // TODO delay
-        return new Flight(isArrival, hour, airplane, flightNumber, pilots, runway, numberOfOccupiedSeats, new double[]{},
+
+        return new Flight(isArrival, hour, airplane, flightNumber, pilots, runway, numberOfOccupiedSeats, ticketPrices,
                 source, destination, 0);
 
     }

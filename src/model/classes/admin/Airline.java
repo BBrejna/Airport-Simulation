@@ -10,7 +10,7 @@ public class Airline {
     public Airline(String airlineName, String ICAO_code, String IATA_code) {
         this.airlineName = airlineName;
         this.ICAO_code = ICAO_code;
-        this.IATA_code = ICAO_code;
+        this.IATA_code = IATA_code;
     }
 
     public String toString() {

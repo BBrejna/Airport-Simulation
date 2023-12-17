@@ -35,7 +35,7 @@ public class Flight {
 
 
     public String toString() {
-        return "\n\tisArrival: " + isArrival() + "\n\thour: " + getHour() + "\n\tAirplane: " + getAirplane().toString() +
+        return "\n\n=================\nFlight " + getFlightNumber() + "\n\tisArrival: " + isArrival() + "\n\thour: " + getHour() + "\n\tAirplane: " + getAirplane().toString() +
                 "\n\tFlight number: " + getFlightNumber() + "\n\tPilots: " + pilotsString() + "\n\tRunway: " + getRunway().getRunwayNumber()
                 + "\n\tOccupied seats: " + occupiedSeatsString() + "\n\tTicket price: " + ticketPricesString() + "\n\tSource: " + getSourcePoint().toString() + "\n\tDestination: "
                 + getDestinationPoint().toString() + "\n\tDelay: " + getDelayMinutes();
