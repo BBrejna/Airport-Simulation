@@ -76,6 +76,8 @@ public final class Admin extends Person {
 
     }
 
+    // TODO flight sorting by hour
+
     /** generate one random flight */
     public Flight generateRandomSingleFlight() {
 
