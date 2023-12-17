@@ -3,7 +3,7 @@ package model;
 import model.classes.Subject;
 import model.classes.admin.Flight;
 import model.classes.simulation.*;
-import model.classes.people.Person;
+import model.classes.people.Passenger;
 import data.NamesAndSurnames;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
             int flightsCount = random.nextInt(100,500);
             int runwaysNumber = random.nextInt(3, 6);
             Admin.getInstance().generateFlights(flightsCount, runwaysNumber);
-
+            System.out.println(Admin.getInstance().getAllFlightsCount());
             int peopleCount = random.nextInt(flightsCount*50, flightsCount*150);
             int peopleGenerated = generatePeople(peopleCount);
             System.out.println("Generating people: "+peopleGenerated+"/"+peopleCount+" succeeded");
@@ -95,35 +95,40 @@ public class Simulation extends Subject<Weather> implements Runnable {
     int generatePeople(int peopleCount) {
         int peopleGenerated = 0;
         for (int i = 0; i < peopleCount; i++) {
-            if (generatePerson()) {
+            if (generatePassenger()) {
                 peopleGenerated++;
             }
         }
         return peopleGenerated;
     }
 
-    public boolean generatePerson(){
+    public boolean generatePassenger(){
         Random rand = new Random();
-        Person person = new Person();
+
         int[] tab_pesel = new int[11];
         for(int i = 0; i < 12; i++){
             tab_pesel[0] = rand.nextInt(0, 10);
+
         }
         String pesel = Arrays.toString(tab_pesel);
-        person.setPesel(pesel);
-        person.setName(NamesAndSurnames.NAMES[rand.nextInt(NamesAndSurnames.NAMES.length)]);
-        person.setSurname(NamesAndSurnames.SURNAMES[rand.nextInt(NamesAndSurnames.SURNAMES.length)]);
+        String name = NamesAndSurnames.NAMES[rand.nextInt(NamesAndSurnames.NAMES.length)];
+        String surname = NamesAndSurnames.SURNAMES[rand.nextInt(NamesAndSurnames.SURNAMES.length)];
 
-        /*
-            String[] destinations = new String[admin.getDepartures.size()];
-            for(int i = 0; i < admin.getDepartures.size(); i++){
-                destinations[i] = admin.getDepartures.destination
+        Passenger passenger = new Passenger(pesel, name, surname);
+        ArrayList<String> destinations = new ArrayList<>();
 
+        for(Flight flight : Admin.getInstance().getDepartures()) {
+            destinations.add(flight.getDestinationPoint().getAirportName());
+            //System.out.println(flight.getDestinationPoint().getAirportName());
+        }
+        System.out.println(destinations.size());
+        String destination = destinations.get(rand.nextInt(0, destinations.size()));
+        passenger.setDestinationCity(destination);
+        passenger.setLuggageWeight(rand.nextInt(5, 50));
+        passenger.setPersonalInfo(rand.nextBoolean());
 
-            }
-
-         */
-
-        return true;
+        return Salesman.getInstance().addPassenger(passenger);
     }
+
 }
+
