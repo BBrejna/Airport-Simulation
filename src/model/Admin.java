@@ -3,6 +3,7 @@ package model;
 import data.admin.AirlinesSet;
 import data.admin.AirplaneModelsSet;
 import data.admin.AirportSet;
+import model.classes.Observer;
 import model.classes.admin.*;
 import model.classes.people.Person;
 import model.classes.people.Pilot;
@@ -13,7 +14,7 @@ import java.util.Random;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public final class Admin extends Person {
+public final class Admin extends Person implements Observer {
 
     /**
      * Los Angeles International Airport (LAX)
@@ -236,6 +237,12 @@ public final class Admin extends Person {
         if(freeRunways.isEmpty()) return -1;
         Random random = new Random();
         return freeRunways.get(random.nextInt(freeRunways.size())).getRunwayNumber();
+
+    }
+
+    /** observe weather and calculate delay probability */
+    @Override
+    public void calculateDelayProbability(Object o) {
 
     }
 
