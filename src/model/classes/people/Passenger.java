@@ -23,7 +23,6 @@ public class Passenger extends Person{
         this.destinationCity = "";
         this.ticket = null;
     }
-
     public Passenger(String pesel, String name, String surname, boolean personalInfo, int luggageWeight, String destinationCity, Ticket ticket) {
         super(pesel, name, surname);
         this.personalInfo = personalInfo;
@@ -38,6 +37,7 @@ public class Passenger extends Person{
         this.destinationCity = destinationCity;
         this.ticket = null;
     }
+
     //GETTERS & SETTERS
     public boolean isPersonalInfo() {
         return personalInfo;

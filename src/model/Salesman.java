@@ -15,7 +15,7 @@ public class Salesman extends Person {
     private static final Salesman instance = new Salesman("11111111111", "Pan", "Ekspedient", 0, new ArrayList<>());
 
     //CONSTRUCTORS
-    public Salesman(String pesel, String name, String surname, double cashbox, ArrayList<Passenger> passengers) {
+    private Salesman(String pesel, String name, String surname, double cashbox, ArrayList<Passenger> passengers) {
         super(pesel, name, surname);
         this.cashbox = cashbox;
         this.passengers = passengers;
