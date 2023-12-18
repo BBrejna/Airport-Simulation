@@ -36,7 +36,7 @@ public final class Admin extends Person implements Observer<Weather> {
     private ArrayList<String> existingFlightNumbers = new ArrayList<>();
 
     /** Singleton design pattern */
-    private static final Admin instance = new Admin("21376969696", "Gal", "Anonim");
+    private static final Admin instance = new Admin("78013058819", "Jan", "Nowak");
 
     private Admin(String pesel, String name, String surname) {
         super(pesel, name, surname);
