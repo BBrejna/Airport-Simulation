@@ -30,7 +30,7 @@ public final class Admin extends Person implements Observer<Weather> {
      * Sum: 475
      */
     private final int[] HOUR_DISTRIBUTION = {20, 30, 100, 70, 75, 80, 70, 40};
-    private ArrayList<Runway> runways = new ArrayList<>();
+    private final ArrayList<Runway> runways = new ArrayList<>();
     private ArrayList<Flight> flights = new ArrayList<>();
     private int allFlightsCount;
     private ArrayList<String> existingFlightNumbers = new ArrayList<>();
@@ -93,6 +93,7 @@ public final class Admin extends Person implements Observer<Weather> {
         int hour = generateHour();
         Airplane airplane = new Airplane();
         String flightNumber = generateFlightNumber(airplane, hour);
+        existingFlightNumbers.add(flightNumber);
         ArrayList<Pilot> pilots = generatePilots(airplane.getNumberOfSeats());
 
         int runwayNum = getRunway(hour);
