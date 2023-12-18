@@ -19,7 +19,15 @@ public class Simulation extends Subject<Weather> implements Runnable {
     boolean isTimeStopped;
     int timeDelta;
 
-    public Simulation(String threadName) {
+
+    /** Singleton design pattern */
+    private static final Simulation instance = new Simulation("Simulation Thread");
+
+    public static Simulation getInstance() {
+        return instance;
+    }
+
+    private Simulation(String threadName) {
         this.threadName = threadName;
         this.weather = new Weather();
         this.t = null;
