@@ -7,6 +7,7 @@ import model.classes.Observer;
 import model.classes.admin.*;
 import model.classes.people.Person;
 import model.classes.people.Pilot;
+import model.classes.simulation.Weather;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -14,7 +15,7 @@ import java.util.Random;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public final class Admin extends Person implements Observer {
+public final class Admin extends Person implements Observer<Weather> {
 
     /**
      * Los Angeles International Airport (LAX)
@@ -242,7 +243,7 @@ public final class Admin extends Person implements Observer {
 
     /** observe weather and calculate delay probability */
     @Override
-    public void calculateDelayProbability(Object o) {
+    public void calculateDelayProbability(Weather weather) {
 
     }
 
