@@ -7,7 +7,6 @@ import model.classes.people.Passenger;
 import data.NamesAndSurnames;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 import static model.tools.Tools.convertMinutesToTime;
@@ -38,7 +37,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
             int runwaysNumber = random.nextInt(3, 6);
             Admin.getInstance().generateFlights(flightsCount, runwaysNumber);
             System.out.println("Generating " + Admin.getInstance().getAllFlightsCount() +" flights");
-            int peopleCount = random.nextInt(flightsCount*50, flightsCount*150);
+            int peopleCount = random.nextInt(flightsCount*5, flightsCount*15);
             int peopleGenerated = generatePeople(peopleCount);
             System.out.println("Generating people: "+peopleGenerated+"/"+peopleCount+" succeeded");
 
@@ -109,7 +108,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
         int z;
         for(int i = 0; i < 11; i++){
             z= rand.nextInt(0, 10);
-            pesel = pesel + Integer.toString(z);
+            pesel = pesel + z;
         }
 
         String name = NamesAndSurnames.NAMES[rand.nextInt(NamesAndSurnames.NAMES.length)];

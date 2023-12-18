@@ -130,11 +130,12 @@ public class Salesman extends Person {
     }
 
     public void announceLastCall(Flight flight) {
-        System.out.println("Attention, flight no. " + flight.getFlightNumber() + " flying to "
+        String output = "Attention, flight no. " + flight.getFlightNumber() + " flying to "
                 + flight.getDestinationPoint().getAirportName()+" in "+ flight.getDestinationPoint().getCity() +
-                " is going to take off in 15 minutes (at "+ Tools.convertMinutesToTime(flight.getHour()) +").");
+                " is going to "+(flight.isArrival() ? "ARRIVE" : "DEPARTURE")+" in 15 minutes (at "+ Tools.convertMinutesToTime(flight.getHour()) +").";
         if(flight.getDelayMinutes()>0)
-            System.out.print("The current delay is "+flight.getDelayMinutes()+" minutes. We are sorry for the delay.");
+            output += " Current delay is "+flight.getDelayMinutes()+" minutes. We are sorry for the delay.";
+        System.out.println(output);
     }
 
     public void announceDelay(Flight flight) {
