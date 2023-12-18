@@ -45,6 +45,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
             int runwaysNumber = random.nextInt(3, 6);
             Admin.getInstance().generateFlights(flightsCount, runwaysNumber);
             System.out.println("Generating " + Admin.getInstance().getAllFlightsCount() +" flights");
+
             int peopleCount = random.nextInt(flightsCount*5, flightsCount*15);
             int peopleGenerated = generatePeople(peopleCount);
             System.out.println("Generating people: "+peopleGenerated+"/"+peopleCount+" succeeded");
