@@ -7,7 +7,7 @@ public class Thread {
 
     public static void main(String[] args) {
         Simulation sim = Simulation.getInstance();
-        sim.addObserver(new Listener());
+        sim.addObserver(Admin.getInstance());
         sim.start();
     }
 

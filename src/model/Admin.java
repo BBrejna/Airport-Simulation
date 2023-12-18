@@ -244,8 +244,8 @@ public final class Admin extends Person implements Observer<Weather> {
 
     /** observe weather and calculate delay probability */
     @Override
-    public void calculateDelayProbability(Weather weather) {
-
+    public void updateState(Weather weather) {
+        System.out.println("Observer pattern from "+this.getClass().getSimpleName()+": current temperature = "+weather.getTemperature()+"!");
     }
 
 

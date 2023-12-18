@@ -14,10 +14,10 @@ import static model.tools.Tools.convertMinutesToTime;
 public class Simulation extends Subject<Weather> implements Runnable {
     private Thread t;
     private String threadName;
-    Weather weather;
-    int time;
-    boolean isTimeStopped;
-    int timeDelta;
+    private Weather weather;
+    private int time;
+    private boolean isTimeStopped;
+    private int timeDelta;
 
 
     /** Singleton design pattern */
@@ -99,7 +99,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
         }
     }
 
-    int generatePeople(int peopleCount) {
+    private int generatePeople(int peopleCount) {
         int peopleGenerated = 0;
         for (int i = 0; i < peopleCount; i++) {
             if (generatePassenger()) {
@@ -109,7 +109,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
         return peopleGenerated;
     }
 
-    public boolean generatePassenger(){
+    private boolean generatePassenger(){
         Random rand = new Random();
 
         String pesel = "";
@@ -137,5 +137,32 @@ public class Simulation extends Subject<Weather> implements Runnable {
         return Salesman.getInstance().addPassenger(passenger);
     }
 
+    public String getThreadName() {
+        return threadName;
+    }
+
+    public Weather getWeather() {
+        return weather;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public boolean isTimeStopped() {
+        return isTimeStopped;
+    }
+
+    public int getTimeDelta() {
+        return timeDelta;
+    }
+
+    public void setTimeStopped(boolean timeStopped) {
+        isTimeStopped = timeStopped;
+    }
+
+//    public void setTimeDelta(int timeDelta) {
+//        this.timeDelta = timeDelta;
+//    }
 }
 
