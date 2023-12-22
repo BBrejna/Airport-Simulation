@@ -34,6 +34,7 @@ public final class Admin extends Person implements Observer<Weather> {
     private ArrayList<Flight> flights = new ArrayList<>();
     private int allFlightsCount;
     private ArrayList<String> existingFlightNumbers = new ArrayList<>();
+    private float currentDelayProbability;
 
     /** Singleton design pattern */
     private static final Admin instance = new Admin("78013058819", "Jan", "Nowak");
@@ -81,8 +82,6 @@ public final class Admin extends Person implements Observer<Weather> {
         }
 
     }
-
-    // TODO flight sorting by hour
 
     /** generate one random flight */
     public Flight generateRandomSingleFlight() {
@@ -245,7 +244,45 @@ public final class Admin extends Person implements Observer<Weather> {
     /** observe weather and calculate delay probability */
     @Override
     public void updateState(Weather weather) {
-        System.out.println("Observer pattern from "+this.getClass().getSimpleName()+": current temperature = "+weather.getTemperature()+"!");
+
+        /*
+          default - 0.08
+          temp - 0.35
+          snow - 0.3
+          rain - 0.25
+          wind - 0.02
+         */
+
+//        double delayProb = 0.08;
+//
+//        // temperature
+//        if(weather.getTemperature() < -40) delayProb += 1;
+//        else if(weather.getTemperature() < -30) delayProb += 0.92;
+//        else if(weather.getTemperature() < -20) delayProb += 0.6;
+//        else if(weather.getTemperature() < -10) delayProb += 0.35;
+//        else if(weather.getTemperature() < -5) delayProb += 0.30;
+//        else if(weather.getTemperature() < 0) delayProb += 0.25;
+//        else if(weather.getTemperature() < 5) delayProb += 0.10;
+//        else if(weather.getTemperature() < 10) delayProb += 0.03;
+//        else if(weather.getTemperature() < 15) delayProb += 0.007;
+//        else if(weather.getTemperature() < 20) delayProb += 0.002;
+//
+//        // snow
+//        if(weather.getSnow() > 14) delayProb += 1;
+//        else if(weather.getSnow() > 10) delayProb += 0.7;
+//        else if(weather.getSnow() > 5) delayProb += 0.3;
+//        else if(weather.getSnow() > 3) delayProb += 0.15;
+//        else if(weather.getSnow() > 1) delayProb += 0.08;
+//        else if(weather.getSnow() > 0.01) delayProb += 0.02;
+//
+//        // rain
+//        if(weather.getRain() > 60) delayProb += 1;
+//        else if(weather.getRain() > 50) delayProb += 0.9;
+//        else if(weather.getRain() > 32) delayProb += 0.35;
+//        else if(weather.getRain() > 15) delayProb += 0.2;
+//        else if(weather.getRain() > 7.5) delayProb += 0.1;
+//        else if(weather.getRain() > 3) delayProb += 0.03;
+
     }
 
 
@@ -263,4 +300,7 @@ public final class Admin extends Person implements Observer<Weather> {
     public ArrayList<Runway> getRunways() {return runways;}
     public int getAllFlightsCount() {return allFlightsCount;}
     public ArrayList<String> getExistingFlightNumbers() {return existingFlightNumbers;}
+    public void setAllFlightsCount(int allFlightsCount) {this.allFlightsCount = allFlightsCount;}
+    public float getCurrentDelayProbability() {return currentDelayProbability;}
+    public void setCurrentDelayProbability(float currentDelayProbability) {this.currentDelayProbability = currentDelayProbability;}
 }
