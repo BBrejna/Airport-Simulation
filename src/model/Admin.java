@@ -1,7 +1,5 @@
 package model;
 
-import data.admin.AirlinesSet;
-import data.admin.AirplaneModelsSet;
 import data.admin.AirportSet;
 import model.classes.Observer;
 import model.classes.admin.*;
@@ -34,7 +32,7 @@ public final class Admin extends Person implements Observer<Weather> {
     private ArrayList<Flight> flights = new ArrayList<>();
     private int allFlightsCount;
     private ArrayList<String> existingFlightNumbers = new ArrayList<>();
-    private float currentDelayProbability;
+    private double currentDelayProbability;
 
     /** Singleton design pattern */
     private static final Admin instance = new Admin("78013058819", "Jan", "Nowak");
@@ -245,43 +243,28 @@ public final class Admin extends Person implements Observer<Weather> {
     @Override
     public void updateState(Weather weather) {
 
-        /*
-          default - 0.08
-          temp - 0.35
-          snow - 0.3
-          rain - 0.25
-          wind - 0.02
-         */
+        double delayProb = 0;
 
-//        double delayProb = 0.08;
-//
-//        // temperature
-//        if(weather.getTemperature() < -40) delayProb += 1;
-//        else if(weather.getTemperature() < -30) delayProb += 0.92;
-//        else if(weather.getTemperature() < -20) delayProb += 0.6;
-//        else if(weather.getTemperature() < -10) delayProb += 0.35;
-//        else if(weather.getTemperature() < -5) delayProb += 0.30;
-//        else if(weather.getTemperature() < 0) delayProb += 0.25;
-//        else if(weather.getTemperature() < 5) delayProb += 0.10;
-//        else if(weather.getTemperature() < 10) delayProb += 0.03;
-//        else if(weather.getTemperature() < 15) delayProb += 0.007;
-//        else if(weather.getTemperature() < 20) delayProb += 0.002;
-//
-//        // snow
-//        if(weather.getSnow() > 14) delayProb += 1;
-//        else if(weather.getSnow() > 10) delayProb += 0.7;
-//        else if(weather.getSnow() > 5) delayProb += 0.3;
-//        else if(weather.getSnow() > 3) delayProb += 0.15;
-//        else if(weather.getSnow() > 1) delayProb += 0.08;
-//        else if(weather.getSnow() > 0.01) delayProb += 0.02;
-//
-//        // rain
-//        if(weather.getRain() > 60) delayProb += 1;
-//        else if(weather.getRain() > 50) delayProb += 0.9;
-//        else if(weather.getRain() > 32) delayProb += 0.35;
-//        else if(weather.getRain() > 15) delayProb += 0.2;
-//        else if(weather.getRain() > 7.5) delayProb += 0.1;
-//        else if(weather.getRain() > 3) delayProb += 0.03;
+        double temp = weather.getTemperature();
+        double[] tempCoefficients = new double[]{0.02000000e+00, -2.27544944e-02, 1.06078294e-03, 3.61321648e-06, -1.04910230e-06, 6.27672899e-09, 4.49151696e-10, -4.71116785e-12, -5.21281385e-14, 6.42199681e-16};
+        double tempProb = 0;
+        for(int i = 0; i < tempCoefficients.length; i++)
+            tempProb += tempCoefficients[i] * Math.pow(temp, i);
+
+        double snow = weather.getSnow();
+        double[] snowCoefficients = new double[]{0.02, -0.0227193, 0.01569328, -0.00012821};
+        double snowProb = 0;
+        for(int i = 0; i < snowCoefficients.length; i++)
+            snowProb += snowCoefficients[i] * Math.pow(snow, i);
+
+        double rain = weather.getRain();
+        double[] rainCoefficients = new double[]{0.02, -2.83991270e-03, 2.45207523e-04, -2.50406842e-07};
+        double rainProb = 0;
+        for(int i = 0; i < rainCoefficients.length; i++)
+            rainProb += rainCoefficients[i] * Math.pow(rain, i);
+
+        delayProb += tempProb + snowProb + rainProb;
+        currentDelayProbability = delayProb;
 
     }
 
@@ -301,6 +284,6 @@ public final class Admin extends Person implements Observer<Weather> {
     public int getAllFlightsCount() {return allFlightsCount;}
     public ArrayList<String> getExistingFlightNumbers() {return existingFlightNumbers;}
     public void setAllFlightsCount(int allFlightsCount) {this.allFlightsCount = allFlightsCount;}
-    public float getCurrentDelayProbability() {return currentDelayProbability;}
-    public void setCurrentDelayProbability(float currentDelayProbability) {this.currentDelayProbability = currentDelayProbability;}
+    public double getCurrentDelayProbability() {return currentDelayProbability;}
+    public void setCurrentDelayProbability(double currentDelayProbability) {this.currentDelayProbability = currentDelayProbability;}
 }

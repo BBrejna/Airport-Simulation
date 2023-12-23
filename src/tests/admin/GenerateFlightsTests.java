@@ -5,7 +5,7 @@ import model.classes.admin.Flight;
 
 import java.util.ArrayList;
 
-public class OtherAdminTests {
+public class GenerateFlightsTests {
 
     public static void main(String[] args) {
 
