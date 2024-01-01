@@ -15,7 +15,7 @@ public class MainApp extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/MainView.fxml"));
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 300, 200);
+        Scene scene = new Scene(root);
 
         stage.setTitle("Lotnisko");
         stage.setScene(scene);
