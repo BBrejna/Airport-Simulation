@@ -1,9 +1,0 @@
-final properties
-all hard-coded data necessary for the program
-
-Examples of final properties in our program:
-- set of names
-- set of surnames
-- set of airplanes models
-- set of airports
-- set of runways
