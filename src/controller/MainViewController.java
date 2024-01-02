@@ -98,7 +98,7 @@ public class MainViewController {
         }
     }
 
-    public void handleRerunButtonClick() {
+    public void handleRerunButtonClick() { //todo rerun doby jakoś
         System.out.println("You shall not pass");
     }
 

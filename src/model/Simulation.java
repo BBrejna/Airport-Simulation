@@ -22,6 +22,8 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
     private boolean isTimeStopped;
     private int timeDelta;
     private boolean isSimulationStarted = false;
+    private final int MINUTES_IN_DAY = 1440;
+    private final int LAST_CALL_TIME = 15;
 
 
     /** Singleton design pattern */
@@ -39,7 +41,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         if (mainViewController != null) {
             Platform.runLater(() -> {
                 if (mainViewController != null) {
-                    mainViewController.updateCurrentTimeLabel(convertMinutesToTime((time + 1440) % 1440));  // Change the text accordingly
+                    mainViewController.updateCurrentTimeLabel(convertMinutesToTime((time + MINUTES_IN_DAY) % MINUTES_IN_DAY));  // Change the text accordingly
                     mainViewController.updateTimeTables();
                     mainViewController.updateLogs();
                 }
@@ -52,7 +54,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         this.t = null;
     }
 
-    public void start(int timeDelta) { // todo changing delta time on time stopped
+    public void start(int timeDelta) { // todo changing delta time on time stopped. In UI textbox with button, background text in grey in textbox should be current delta time
         System.out.println("Starting " +  threadName );
         if (t == null) {
             t = new Thread (this, threadName);
@@ -69,7 +71,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
             int peopleGenerated = generatePeople(peopleCount);
             log("Generating people: "+peopleGenerated+"/"+peopleCount+" succeeded");
 
-            time = -1*((15+timeDelta-1)/timeDelta)*timeDelta;
+            time = -1*((LAST_CALL_TIME+timeDelta-1)/timeDelta)*timeDelta;
             updateUI();
             t.start ();
             isSimulationStarted = true;
@@ -87,7 +89,13 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                 if (isTimeStopped) {
                     continue;
                 }
-                int stopTime = time+timeDelta;
+                int stopTime;
+                if ((time+timeDelta)%timeDelta != 0) {
+                    stopTime = timeDelta*((time+timeDelta)/timeDelta+1);
+                } else {
+                    stopTime = time+timeDelta;
+                }
+
                 ArrayList<Flight> flights = Admin.getInstance().getFlights();
                 ArrayList<Flight> futureFlights = new ArrayList<>();
 //                System.out.println("DEBUG "+time+" "+stopTime);
@@ -100,8 +108,8 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                         log("Time "+convertMinutesToTime(flight.getHour())+", Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departed")+"!");
                     }
                     else {
-                        if (time < flight.getHour()-15 && flight.getHour()-15 <= stopTime) {
-//                            System.out.println("Flight nr "+flight.getFlightNumber()+" is "+(flight.isArrival() ? "arriving" : "departuring")+" in 15 minutes @ "+convertMinutesToTime(flight.getHour())+"! (delay = "+flight.getDelayMinutes()+")");
+                        if (time < flight.getHour()-LAST_CALL_TIME && flight.getHour()-LAST_CALL_TIME <= stopTime) {
+//                            System.out.println("Flight nr "+flight.getFlightNumber()+" is "+(flight.isArrival() ? "arriving" : "departuring")+" in "+LAST_CALL_TIME+" minutes @ "+convertMinutesToTime(flight.getHour())+"! (delay = "+flight.getDelayMinutes()+")");
                             Salesman.getInstance().announceLastCall(flight);
                         }
                         futureFlights.add(flight);
@@ -109,8 +117,9 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                 });
                 Admin.getInstance().setFlights(futureFlights);
                 time = stopTime;
-                if (time >= 1440) {
-                    log("SIMULATION HAS JUST FINISHED!");
+                if (time >= MINUTES_IN_DAY) {
+                    log("SIMULATION HAS JUST FINISHED!"); //todo ładne kończenie doby, czyszczenie symulacji, gotowość na ponowne kliknięcie play
+                    updateUI();
                     return;
                 }
                 // realizacja timetables, announceLastCall do ekspedienta
@@ -197,8 +206,12 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
     public boolean isSimulationStarted() {
         return isSimulationStarted;
     }
-//    public void setTimeDelta(int timeDelta) {
-//        this.timeDelta = timeDelta;
-//    }
+    public void setTimeDelta(int timeDelta) {
+        if (isTimeStopped) {
+            this.timeDelta = timeDelta;
+        } else {
+            log("TIME ISN'T STOPPED, CANNOT CHANGE TIME DELTA");
+        }
+    }
 }
 
