@@ -36,13 +36,15 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         this.mainViewController = mainViewController;
     }
     private void updateUI() {
-        Platform.runLater(() -> {
-            if (mainViewController != null) {
-                mainViewController.updateCurrentTimeLabel(convertMinutesToTime((time+1440)%1440));  // Change the text accordingly
-                mainViewController.updateTimeTables();
-                mainViewController.updateLogs();
-            }
-        });
+        if (mainViewController != null) {
+            Platform.runLater(() -> {
+                if (mainViewController != null) {
+                    mainViewController.updateCurrentTimeLabel(convertMinutesToTime((time + 1440) % 1440));  // Change the text accordingly
+                    mainViewController.updateTimeTables();
+                    mainViewController.updateLogs();
+                }
+            });
+        }
     }
     private Simulation(String threadName) {
         this.threadName = threadName;

@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Label?>
 
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
@@ -12,6 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
+
 <VBox spacing="10" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MainViewController">
     <stylesheets>
         <URL value="@/styles/style.css"/>
@@ -36,55 +36,49 @@
         <Button fx:id="physicalWorkerButton" styleClass="RoleButton" text="Physical Worker" GridPane.columnIndex="3"
                 GridPane.rowIndex="0"/>
     </GridPane>
-    <BorderPane fx:id="bodyBorderPane">
-        <top>
-            <HBox fx:id="timeBarHBox" alignment="CENTER">
-                <Label fx:id="currentTimeLabel" text="TIME"/>
-                <Region minWidth="20"/>
-                <Button fx:id="playButton" text="Play" onAction="#handlePlayButtonClick"/>
-                <Button disable="true" fx:id="pauseButton" text="Pause" onAction="#handlePauseButtonClick"/>
-                <Button disable="true" fx:id="rerunButton" text="Rerun" onAction="#handleRerunButtonClick"/>
-            </HBox>
-        </top>
-        <center>
-            <GridPane gridLinesVisible="true" minHeight="200">
-                <columnConstraints>
-                    <ColumnConstraints hgrow="ALWAYS" percentWidth="33.0"/>
-                    <ColumnConstraints hgrow="ALWAYS" percentWidth="33.0"/>
-                    <ColumnConstraints hgrow="ALWAYS" percentWidth="34.0"/>
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints vgrow="ALWAYS"/>
-                </rowConstraints>
-                <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                        <Label text="DEPARTURES:"/>
-                    <ListView fx:id="departuresList"/>
-                </VBox>
-                <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                    <Label text="ARRIVALS:"/>
-                    <ListView fx:id="arrivalsList"/>
-                </VBox>
-                <VBox GridPane.columnIndex="2" GridPane.rowIndex="0">
-                    <VBox>
-                        <Label text="Admin Activity:"/>
-                        <ListView fx:id="adminLogsList"/>
-                    </VBox>
-                    <VBox>
-                        <Label text="Salesman Activity:"/>
-                        <ListView fx:id="salesmanLogsList"/>
-                    </VBox>
-                    <VBox>
-                        <Label text="Physical Worker Activity:"/>
-                        <ListView fx:id="physicalWorkerLogsList"/>
-                    </VBox>
-                </VBox>
-            </GridPane>
-        </center>
-        <bottom>
-            <VBox minWidth="75">
-                <Label text="Simulation Activity:"/>
-                <ListView fx:id="simulationLogsList"/>
+    <VBox VBox.vgrow="ALWAYS">
+        <HBox fx:id="timeBarHBox" alignment="CENTER">
+            <Label fx:id="currentTimeLabel" text="TIME"/>
+            <Region minWidth="20"/>
+            <Button fx:id="playButton" text="Play" onAction="#handlePlayButtonClick"/>
+            <Button disable="true" fx:id="pauseButton" text="Pause" onAction="#handlePauseButtonClick"/>
+            <Button disable="true" fx:id="rerunButton" text="Rerun" onAction="#handleRerunButtonClick"/>
+        </HBox>
+        <GridPane VBox.vgrow="ALWAYS" minHeight="200" gridLinesVisible="true">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" percentWidth="33.0"/>
+                <ColumnConstraints hgrow="ALWAYS" percentWidth="33.0"/>
+                <ColumnConstraints hgrow="ALWAYS" percentWidth="34.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="ALWAYS"/>
+            </rowConstraints>
+            <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="DEPARTURES:"/>
+                <ListView VBox.vgrow="ALWAYS" fx:id="departuresList"/>
             </VBox>
-        </bottom>
-    </BorderPane>
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Label text="ARRIVALS:"/>
+                <ListView VBox.vgrow="ALWAYS" fx:id="arrivalsList"/>
+            </VBox>
+            <VBox GridPane.columnIndex="2" GridPane.rowIndex="0">
+                <VBox>
+                    <Label text="Admin Activity:"/>
+                    <ListView VBox.vgrow="ALWAYS" fx:id="adminLogsList"/>
+                </VBox>
+                <VBox>
+                    <Label text="Salesman Activity:"/>
+                    <ListView VBox.vgrow="ALWAYS" fx:id="salesmanLogsList"/>
+                </VBox>
+                <VBox>
+                    <Label text="Physical Worker Activity:"/>
+                    <ListView VBox.vgrow="ALWAYS" fx:id="physicalWorkerLogsList"/>
+                </VBox>
+            </VBox>
+        </GridPane>
+        <VBox VBox.vgrow="ALWAYS" minHeight="200" fx:id="BottomVBox">
+            <Label text="Simulation Activity:"/>
+            <ListView VBox.vgrow="ALWAYS" fx:id="simulationLogsList"/>
+        </VBox>
+    </VBox>
 </VBox>

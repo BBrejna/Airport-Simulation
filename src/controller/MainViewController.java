@@ -6,24 +6,20 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Paint;
+import javafx.scene.layout.VBox;
 import model.Admin;
 import model.Simulation;
 import model.classes.admin.Flight;
 import model.classes.logging.Log;
 
-import java.util.ArrayList;
-
 public class MainViewController {
+    @FXML
+    public VBox BottomVBox;
     @FXML
     private ListView<Flight> arrivalsList;
     @FXML
     private ListView<Flight> departuresList;
-    @FXML
-    private HBox RoleMenuHBox;
     @FXML
     private Button simulationButton;
     @FXML
@@ -32,8 +28,6 @@ public class MainViewController {
     private Button salesmanButton;
     @FXML
     private Button physicalWorkerButton;
-    @FXML
-    private BorderPane bodyBorderPane;
     @FXML
     private HBox timeBarHBox;
     @FXML
