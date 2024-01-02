@@ -71,6 +71,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
             updateUI();
             t.start ();
             isSimulationStarted = true;
+            log("SIMULATION HAS JUST STARTED!");
         }
     }
     public void start() {
@@ -107,7 +108,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                 Admin.getInstance().setFlights(futureFlights);
                 time = stopTime;
                 if (time >= 1440) {
-                    System.out.println("SIMULATION HAS ENDED!");
+                    log("SIMULATION HAS JUST FINISHED!");
                     return;
                 }
                 // realizacja timetables, announceLastCall do ekspedienta
@@ -179,6 +180,15 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
     }
 
     public void setTimeStopped(boolean timeStopped) {
+        if (isSimulationStarted) {
+            if (isTimeStopped && !timeStopped) {
+                log("SIMULATION HAS JUST BEEN RESUMED!");
+            }
+            else if (!isTimeStopped && timeStopped) {
+                log("SIMULATION HAS JUST BEEN STOPPED!");
+            }
+            updateUI();
+        }
         isTimeStopped = timeStopped;
     }
 

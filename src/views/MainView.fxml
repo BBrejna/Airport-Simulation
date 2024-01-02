@@ -42,7 +42,7 @@
                 <Label fx:id="currentTimeLabel" text="TIME"/>
                 <Region minWidth="20"/>
                 <Button fx:id="playButton" text="Play" onAction="#handlePlayButtonClick"/>
-                <Button fx:id="pauseButton" text="Pause" onAction="#handlePauseButtonClick"/>
+                <Button disable="true" fx:id="pauseButton" text="Pause" onAction="#handlePauseButtonClick"/>
                 <Button disable="true" fx:id="rerunButton" text="Rerun" onAction="#handleRerunButtonClick"/>
             </HBox>
         </top>
@@ -81,7 +81,7 @@
             </GridPane>
         </center>
         <bottom>
-            <VBox minHeight="150">
+            <VBox minWidth="75">
                 <Label text="Simulation Activity:"/>
                 <ListView fx:id="simulationLogsList"/>
             </VBox>

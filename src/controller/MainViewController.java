@@ -65,6 +65,7 @@ public class MainViewController {
     }
     public void updateLogs() {
         this.simulationLogs.setAll(Simulation.getInstance().getLogs());
+        this.simulationLogsList.scrollTo(this.simulationLogs.size()-1);
     }
 
 
@@ -87,10 +88,17 @@ public class MainViewController {
         } else {
             Simulation.getInstance().start();
         }
+        pauseButton.setDisable(false);
+        playButton.setDisable(true);
     }
     public void handlePauseButtonClick() {
-        Simulation.getInstance().setTimeStopped(true);
-        currentTimeLabel.setText("TIME STOPPED");
+        if (Simulation.getInstance().isSimulationStarted()) {
+            if (!Simulation.getInstance().isTimeStopped()) {
+                pauseButton.setDisable(true);
+                playButton.setDisable(false);
+            }
+            Simulation.getInstance().setTimeStopped(true);
+        }
     }
 
     public void handleRerunButtonClick() {
