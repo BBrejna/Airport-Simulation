@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,13 +10,18 @@ import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
+import model.Admin;
 import model.Simulation;
+import model.classes.admin.Flight;
+import model.classes.logging.Log;
+
+import java.util.ArrayList;
 
 public class MainViewController {
     @FXML
-    private ListView arrivalsList;
+    private ListView<Flight> arrivalsList;
     @FXML
-    private ListView departuresList;
+    private ListView<Flight> departuresList;
     @FXML
     private HBox RoleMenuHBox;
     @FXML
@@ -44,9 +51,50 @@ public class MainViewController {
     @FXML
     private ListView physicalWorkerLogsList;
     @FXML
-    private ListView simulationLogsList;
+    private ListView<Log> simulationLogsList;
+
+    public void updateCurrentTimeLabel(String newText) {
+        currentTimeLabel.setText(newText);
+    }
+    ObservableList<Flight> departures = null;
+    ObservableList<Flight> arrivals = null;
+    ObservableList<Log> simulationLogs = null;
+    public void updateTimeTables() {
+        this.departures.setAll(Admin.getInstance().getDepartures());
+        this.arrivals.setAll(Admin.getInstance().getArrivals());
+    }
+    public void updateLogs() {
+        this.simulationLogs.setAll(Simulation.getInstance().getLogs());
+    }
+
 
     public void initialize() {
-        currentTimeLabel.setText(String.valueOf(Simulation.getInstance().getTime()));
+        Simulation.getInstance().setMainViewController(this);
+        Simulation.getInstance().addObserver(Admin.getInstance());
+
+        departures = FXCollections.observableArrayList(Admin.getInstance().getDepartures());
+        departuresList.setItems(departures);
+        arrivals = FXCollections.observableArrayList(Admin.getInstance().getArrivals());
+        arrivalsList.setItems(arrivals);
+
+        simulationLogs = FXCollections.observableArrayList(Simulation.getInstance().getLogs());
+        simulationLogsList.setItems(simulationLogs);
     }
+
+    public void handlePlayButtonClick() {
+        if (Simulation.getInstance().isSimulationStarted()) {
+            Simulation.getInstance().setTimeStopped(false);
+        } else {
+            Simulation.getInstance().start();
+        }
+    }
+    public void handlePauseButtonClick() {
+        Simulation.getInstance().setTimeStopped(true);
+        currentTimeLabel.setText("TIME STOPPED");
+    }
+
+    public void handleRerunButtonClick() {
+        System.out.println("You shall not pass");
+    }
+
 }

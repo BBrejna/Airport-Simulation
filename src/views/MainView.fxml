@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.Label?>
 
 <?import javafx.scene.layout.BorderPane?>
@@ -9,34 +8,63 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.control.ListView?>
-<?import java.lang.String?>
 <?import java.net.URL?>
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MainViewController">
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<VBox spacing="10" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MainViewController">
     <stylesheets>
         <URL value="@/styles/style.css"/>
         <URL value="@/styles/mainView.css"/>
     </stylesheets>
-    <HBox fx:id="RoleMenuHBox" minWidth="1200">
-            <Button fx:id="simulationButton"     styleClass="RoleButton" text="Simulation" prefWidth="300"/>
-            <Button fx:id="adminButton"          styleClass="RoleButton" text="Admin" prefWidth="300"/>
-            <Button fx:id="salesmanButton"       styleClass="RoleButton" text="Salesman" prefWidth="300"/>
-            <Button fx:id="physicalWorkerButton" styleClass="RoleButton" text="Physical Worker" prefWidth="300"/>
-    </HBox>
+    <GridPane gridLinesVisible="true" minWidth="400">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0"/>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0"/>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0"/>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="ALWAYS"/>
+        </rowConstraints>
+        <Button disable="true" fx:id="simulationButton" styleClass="RoleButton" text="Simulation" GridPane.columnIndex="0"
+                GridPane.rowIndex="0"/>
+        <Button fx:id="adminButton" styleClass="RoleButton" text="Admin" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                maxWidth="Infinity"/>
+        <Button fx:id="salesmanButton" styleClass="RoleButton" text="Salesman" GridPane.columnIndex="2"
+                GridPane.rowIndex="0"/>
+        <Button fx:id="physicalWorkerButton" styleClass="RoleButton" text="Physical Worker" GridPane.columnIndex="3"
+                GridPane.rowIndex="0"/>
+    </GridPane>
     <BorderPane fx:id="bodyBorderPane">
         <top>
-            <HBox fx:id="timeBarHBox">
-                <Label fx:id="currentTimeLabel"/>
+            <HBox fx:id="timeBarHBox" alignment="CENTER">
+                <Label fx:id="currentTimeLabel" text="TIME"/>
                 <Region minWidth="20"/>
-                <Button fx:id="playButton" text="Play"/>
-                <Button fx:id="pauseButton" text="Pause"/>
-                <Button fx:id="rerunButton" text="Rerun"/>
+                <Button fx:id="playButton" text="Play" onAction="#handlePlayButtonClick"/>
+                <Button fx:id="pauseButton" text="Pause" onAction="#handlePauseButtonClick"/>
+                <Button disable="true" fx:id="rerunButton" text="Rerun" onAction="#handleRerunButtonClick"/>
             </HBox>
         </top>
         <center>
-            <HBox>
-                <ListView fx:id="arrivalsList" />
-                <ListView fx:id="departuresList"/>
-                <VBox>
+            <GridPane gridLinesVisible="true" minHeight="200">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="33.0"/>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="33.0"/>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="34.0"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints vgrow="ALWAYS"/>
+                </rowConstraints>
+                <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label text="DEPARTURES:"/>
+                    <ListView fx:id="departuresList"/>
+                </VBox>
+                <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="ARRIVALS:"/>
+                    <ListView fx:id="arrivalsList"/>
+                </VBox>
+                <VBox GridPane.columnIndex="2" GridPane.rowIndex="0">
                     <VBox>
                         <Label text="Admin Activity:"/>
                         <ListView fx:id="adminLogsList"/>
@@ -50,10 +78,10 @@
                         <ListView fx:id="physicalWorkerLogsList"/>
                     </VBox>
                 </VBox>
-            </HBox>
+            </GridPane>
         </center>
         <bottom>
-            <VBox>
+            <VBox minHeight="150">
                 <Label text="Simulation Activity:"/>
                 <ListView fx:id="simulationLogsList"/>
             </VBox>

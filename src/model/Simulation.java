@@ -1,7 +1,10 @@
 package model;
 
+import controller.MainViewController;
+import javafx.application.Platform;
 import model.classes.Subject;
 import model.classes.admin.Flight;
+import model.classes.logging.Logger;
 import model.classes.simulation.*;
 import model.classes.people.Passenger;
 import data.NamesAndSurnames;
@@ -11,13 +14,14 @@ import java.util.Random;
 
 import static model.tools.Tools.convertMinutesToTime;
 
-public class Simulation extends Subject<Weather> implements Runnable {
+public class Simulation extends Subject<Weather> implements Runnable, Logger {
     private Thread t;
     private String threadName;
     private Weather weather;
     private int time;
     private boolean isTimeStopped;
     private int timeDelta;
+    private boolean isSimulationStarted = false;
 
 
     /** Singleton design pattern */
@@ -27,6 +31,19 @@ public class Simulation extends Subject<Weather> implements Runnable {
         return instance;
     }
 
+    private MainViewController mainViewController;
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
+    }
+    private void updateUI() {
+        Platform.runLater(() -> {
+            if (mainViewController != null) {
+                mainViewController.updateCurrentTimeLabel(convertMinutesToTime((time+1440)%1440));  // Change the text accordingly
+                mainViewController.updateTimeTables();
+                mainViewController.updateLogs();
+            }
+        });
+    }
     private Simulation(String threadName) {
         this.threadName = threadName;
         this.weather = new Weather();
@@ -44,14 +61,16 @@ public class Simulation extends Subject<Weather> implements Runnable {
             int flightsCount = random.nextInt(100,500);
             int runwaysNumber = random.nextInt(3, 6);
             Admin.getInstance().generateFlights(flightsCount, runwaysNumber);
-            System.out.println("Generating " + Admin.getInstance().getAllFlightsCount() +" flights");
+            log("Generating " + Admin.getInstance().getAllFlightsCount() +" flights");
 
             int peopleCount = random.nextInt(flightsCount*5, flightsCount*15);
             int peopleGenerated = generatePeople(peopleCount);
-            System.out.println("Generating people: "+peopleGenerated+"/"+peopleCount+" succeeded");
+            log("Generating people: "+peopleGenerated+"/"+peopleCount+" succeeded");
 
             time = -1*((15+timeDelta-1)/timeDelta)*timeDelta;
+            updateUI();
             t.start ();
+            isSimulationStarted = true;
         }
     }
     public void start() {
@@ -75,7 +94,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
                         return;
                     }
                     else if (flight.getHour() <= stopTime) {
-                        System.out.println("Time "+convertMinutesToTime(flight.getHour())+", Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departed")+"!");
+                        log("Time "+convertMinutesToTime(flight.getHour())+", Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departed")+"!");
                     }
                     else {
                         if (time < flight.getHour()-15 && flight.getHour()-15 <= stopTime) {
@@ -94,6 +113,7 @@ public class Simulation extends Subject<Weather> implements Runnable {
                 // realizacja timetables, announceLastCall do ekspedienta
                 weather.generateWeather();
                 notifyObservers(weather);
+                updateUI();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -162,6 +182,9 @@ public class Simulation extends Subject<Weather> implements Runnable {
         isTimeStopped = timeStopped;
     }
 
+    public boolean isSimulationStarted() {
+        return isSimulationStarted;
+    }
 //    public void setTimeDelta(int timeDelta) {
 //        this.timeDelta = timeDelta;
 //    }

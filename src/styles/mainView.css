@@ -1,4 +1,10 @@
 #RoleMenuHBox {
 }
+.RoleButton:hover {
+}
 .RoleButton {
+    -fx-max-width: infinity;
+}
+Button:hover,disabled {
+    -fx-background-color: #c9c9c9;
 }
