@@ -65,7 +65,10 @@ public class MainViewController {
     }
     public void updateLogs() {
         this.simulationLogs.setAll(Simulation.getInstance().getLogs());
-        this.simulationLogsList.scrollTo(this.simulationLogs.size()-1);
+
+        int lastIndexSimulation = this.simulationLogs.size()-1;
+        this.simulationLogsList.scrollTo(lastIndexSimulation);
+        this.simulationLogsList.getSelectionModel().select(lastIndexSimulation);
     }
 
 
