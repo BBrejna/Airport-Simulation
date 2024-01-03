@@ -12,6 +12,11 @@ public class Airplane  {
     private final int numberOfSeats;
     private final int[] numberOfSeatsClasses;
     private final int maxFreeLuggageWeight;
+    private boolean isSnowy;
+    private boolean isClean;
+    private boolean areBinsFull;
+    private boolean isBroken;
+
 
     public Airplane() {
 
@@ -41,12 +46,19 @@ public class Airplane  {
             numberOfSeatsClasses[1] = standard;
             numberOfSeatsClasses[2] = prem;
         }
+
+        //assign values to airplane status
+        isBroken = false;
+        isClean = false;
+        isSnowy = false;
+        areBinsFull = false;
     }
 
     public String toString() {
         String toReturn = "\n\t\tAirplane model: " + getAirplaneModel().toString() + "\n\t\tAirline: " + getAirline().toString()
                 + "\n\t\tNumber of seats: " + getNumberOfSeats() + "\n\t\tMax free luggage weight: " + getMaxFreeLuggageWeight()
-                + "\n\t\tSeats classes division: ";
+                + "\n\t\tSeats classes division: "
+                + "\n\t\tisClean: " + isClean + "\n\t\tisSnowy: " + isSnowy + "\n\t\tisBroken: " + isBroken + "\n\t\tareBinsFull: " + areBinsFull;
         for(int seats: getNumberOfSeatsClasses()) toReturn += seats + " ";
         return toReturn;
     }
@@ -63,5 +75,37 @@ public class Airplane  {
     }
     public int getMaxFreeLuggageWeight() {
         return maxFreeLuggageWeight;
+    }
+
+    public boolean isSnowy() {
+        return isSnowy;
+    }
+
+    public void setSnowy(boolean snowy) {
+        isSnowy = snowy;
+    }
+
+    public boolean isClean() {
+        return isClean;
+    }
+
+    public void setClean(boolean clean) {
+        isClean = clean;
+    }
+
+    public boolean isAreBinsFull() {
+        return areBinsFull;
+    }
+
+    public void setAreBinsFull(boolean areBinsFull) {
+        this.areBinsFull = areBinsFull;
+    }
+
+    public boolean isBroken() {
+        return isBroken;
+    }
+
+    public void setBroken(boolean broken) {
+        isBroken = broken;
     }
 }
