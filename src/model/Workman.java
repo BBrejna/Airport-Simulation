@@ -1,13 +1,23 @@
 package model;
 
+import model.classes.admin.Airplane;
+import model.classes.admin.Runway;
+import model.classes.logging.Logger;
 import model.classes.people.Person;
 
-public class Workman extends Person {
+public class Workman extends Person implements Logger {
+    /** Singleton design pattern **/
+    private static final Workman instance = new Workman("78014305881", "Zbigniew", "Kowalski");
 
-    /** 2137 */
-    public Workman(String pesel, String name, String surname) {
+    private Workman(String pesel, String name, String surname) {
         super(pesel, name, surname);
     }
+
+    public static Workman getInstance() {
+        return instance;
+    }
+
+
 
 //    planeGetStan() Parameters: isClean, isSnowy, isBroken, areBinsFull, isLuggageToCollect
 //    UWAGA; jesli samolot nie jest zdolny do lotu przekazuje on informacje do administratora lotow
@@ -18,50 +28,53 @@ public class Workman extends Person {
 //    emptyBins( areBinsFull )
 
 
-    public void planeGetStan(boolean isRunwayReady, boolean isClean, boolean isSnowy, boolean isBroken, boolean areBinsFull, boolean isLuggageToCollect) {
-        System.out.println("planeGetStan:\n\nisClean: " + isClean + "\nisSnowy: " + isSnowy + "\nisBroken: " + isBroken + "\nareBinsFull: " + areBinsFull + "\nisLuggageToCollect: " + isLuggageToCollect);
+//    public void planeGetStan(boolean isRunwayReady, boolean isClean, boolean isSnowy, boolean isBroken, boolean areBinsFull, boolean isLuggageToCollect) {
+//        System.out.println("planeGetStan:\n\nisClean: " + isClean + "\nisSnowy: " + isSnowy + "\nisBroken: " + isBroken + "\nareBinsFull: " + areBinsFull + "\nisLuggageToCollect: " + isLuggageToCollect);
+//
+//        if (!isRunwayReady || !isClean || isSnowy || isBroken || areBinsFull || isLuggageToCollect) {
+//            System.out.println("UWAGA: samolot nie jest zdolny do lotu");
+//        }
+//    }
 
-        if (!isRunwayReady || !isClean || isSnowy || isBroken || areBinsFull || isLuggageToCollect) {
-            System.out.println("UWAGA: samolot nie jest zdolny do lotu");
+
+    public void washPlane(Airplane airplane) {
+        if (!airplane.isClean()) {
+            log("Samolot zostal wysprzatany");
+            airplane.setClean(true);
         }
     }
 
-    public void prepareRunway(boolean isRunwayReady) {
-        if (!isRunwayReady) {
-            System.out.println("Pas startowy zostal przygotowany do odlotu samolotu");
-            isRunwayReady = true;
+    public void clearSnow(Airplane airplane) {
+        if (airplane.isSnowy()) {
+            log("Samolot zostal odsniezony");
+            airplane.setSnowy(false);
         }
     }
 
-    public void washPlane(boolean isClean) {
-        if (!isClean) {
-            System.out.println("Samolot zostal wysprzatany");
-            isClean = true;
+    public void clearRunway(Runway runway){
+        if (runway.isSnowy()) {
+            log("Pas startowy został odsnieżony");
+            runway.setSnowy(false);
         }
-    }
-
-    public void clearSnow(boolean isSnowy) {
-        if (isSnowy) {
-            System.out.println("Samolot zostal odsniezony");
-            isSnowy = false;
-        }
-    }
-
-    public void repairPlane(boolean isBroken) {
-        if (isBroken) {
-            System.out.println("Samolot zostal naprawiony");
-            isBroken = false;
-        }
-    }
-
-    public void emptyBins(boolean areBinsFull) {
-        if (areBinsFull) {
-            System.out.println("Smietniki zostaly oproznione");
-            areBinsFull = false;
+        if (runway.isIced()){
+            log("Pas startowy został odlodzony");
+            runway.setIced(false);
         }
     }
 
 
+    public void repairPlane(Airplane airplane) {
+        if (airplane.isBroken()) {
+            log("Samolot zostal naprawiony");
+            airplane.setBroken(false);
+        }
+    }
 
+    public void emptyBins(Airplane airplane) {
+        if (airplane.isAreBinsFull()) {
+            log("Smietniki zostaly oproznione");
+            airplane.setAreBinsFull(false);
+        }
+    }
 
 }
