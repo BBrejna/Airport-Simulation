@@ -1,5 +1,6 @@
 package model.classes.admin;
 
+import model.classes.logging.Log;
 import model.classes.logging.Logger;
 import model.classes.people.Pilot;
 import model.tools.Tools;
@@ -7,6 +8,10 @@ import model.tools.Tools;
 import java.util.ArrayList;
 
 public class Flight implements Logger {
+    private ArrayList<Log> logs = new ArrayList<>();
+    public ArrayList<Log> getLogs() {
+        return logs;
+    }
     private boolean isArrival;
     private int hour;
     private Airplane airplane;

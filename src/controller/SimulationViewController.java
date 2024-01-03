@@ -6,10 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.Admin;
 import model.Simulation;
+import model.Workman;
 import model.classes.admin.Flight;
 import model.classes.logging.Log;
 
@@ -29,16 +29,6 @@ public class SimulationViewController {
     @FXML
     private ListView<Flight> departuresList;
     @FXML
-    private Button simulationButton;
-    @FXML
-    private Button adminButton;
-    @FXML
-    private Button salesmanButton;
-    @FXML
-    private Button physicalWorkerButton;
-    @FXML
-    private HBox timeBarHBox;
-    @FXML
     private Label currentTimeLabel;
     @FXML
     private Button playButton;
@@ -51,7 +41,7 @@ public class SimulationViewController {
     @FXML
     private ListView salesmanLogsList;
     @FXML
-    private ListView physicalWorkerLogsList;
+    private ListView<Log> workmanLogsList;
     @FXML
     private ListView<Log> simulationLogsList;
 
@@ -61,6 +51,7 @@ public class SimulationViewController {
     ObservableList<Flight> departures = null;
     ObservableList<Flight> arrivals = null;
     ObservableList<Log> simulationLogs = null;
+    ObservableList<Log> workmanLogs = null;
     public void updateTimeTables() {
         this.departures.setAll(Admin.getInstance().getDepartures());
         this.arrivals.setAll(Admin.getInstance().getArrivals());
@@ -71,16 +62,23 @@ public class SimulationViewController {
         int lastIndexSimulation = this.simulationLogs.size()-1;
         this.simulationLogsList.scrollTo(lastIndexSimulation);
         this.simulationLogsList.getSelectionModel().select(lastIndexSimulation);
+
+        this.workmanLogs.setAll(Workman.getInstance().getLogs());
+
+        int lastIndexWorkman = this.workmanLogs.size()-1;
+        this.workmanLogsList.scrollTo(lastIndexWorkman);
+        this.workmanLogsList.getSelectionModel().select(lastIndexWorkman);
     }
     public void handleSimulationFinish() {
         playButton.setDisable(false);
         pauseButton.setDisable(true);
         rerunButton.setDisable(true);
+        ControllersHandler.getInstance().getMainViewController().lockButtonsOnSimulationRunning(false);
     }
 
 
     public void initialize() {
-        Simulation.getInstance().setSimulationViewController(this);
+        ControllersHandler.getInstance().setSimulationViewController(this);
         Simulation.getInstance().addObserver(Admin.getInstance());
 
         departures = FXCollections.observableArrayList(Admin.getInstance().getDepartures());
@@ -90,6 +88,9 @@ public class SimulationViewController {
 
         simulationLogs = FXCollections.observableArrayList(Simulation.getInstance().getLogs());
         simulationLogsList.setItems(simulationLogs);
+
+        workmanLogs = FXCollections.observableArrayList(Workman.getInstance().getLogs());
+        workmanLogsList.setItems(workmanLogs);
     }
 
     public void handlePlayButtonClick() {
@@ -101,6 +102,7 @@ public class SimulationViewController {
         playButton.setDisable(true);
         pauseButton.setDisable(false);
         rerunButton.setDisable(true);
+        ControllersHandler.getInstance().getMainViewController().lockButtonsOnSimulationRunning(true);
     }
     public void handlePauseButtonClick() {
         if (Simulation.getInstance().isSimulationStarted()) {
@@ -110,6 +112,7 @@ public class SimulationViewController {
                 rerunButton.setDisable(false);
             }
             Simulation.getInstance().setTimeStopped(true);
+            ControllersHandler.getInstance().getMainViewController().lockButtonsOnSimulationRunning(false);
         }
     }
 
@@ -118,6 +121,7 @@ public class SimulationViewController {
         playButton.setDisable(true);
         pauseButton.setDisable(false);
         rerunButton.setDisable(true);
+        ControllersHandler.getInstance().getMainViewController().lockButtonsOnSimulationRunning(true);
     }
 
     public void handleSettingsButtonClick() throws IOException {

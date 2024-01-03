@@ -2,10 +2,17 @@ package model;
 
 import model.classes.admin.Airplane;
 import model.classes.admin.Runway;
+import model.classes.logging.Log;
 import model.classes.logging.Logger;
 import model.classes.people.Person;
 
+import java.util.ArrayList;
+
 public class Workman extends Person implements Logger {
+    private ArrayList<Log> logs = new ArrayList<>();
+    public ArrayList<Log> getLogs() {
+        return logs;
+    }
     /** Singleton design pattern **/
     private static final Workman instance = new Workman("78014305881", "Zbigniew", "Kowalski");
 

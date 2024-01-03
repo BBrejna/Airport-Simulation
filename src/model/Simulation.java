@@ -1,9 +1,11 @@
 package model;
 
+import controller.ControllersHandler;
 import controller.SimulationViewController;
 import javafx.application.Platform;
 import model.classes.Subject;
 import model.classes.admin.Flight;
+import model.classes.logging.Log;
 import model.classes.logging.Logger;
 import model.classes.simulation.*;
 import model.classes.people.Passenger;
@@ -16,6 +18,10 @@ import java.util.Random;
 import static model.tools.Tools.convertMinutesToTime;
 
 public class Simulation extends Subject<Weather> implements Runnable, Logger {
+    private ArrayList<Log> logs = new ArrayList<>();
+    public ArrayList<Log> getLogs() {
+        return logs;
+    }
     private Thread t;
     private String threadName;
     private Weather weather;
@@ -37,11 +43,8 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         return instance;
     }
 
-    private SimulationViewController simulationViewController;
-    public void setSimulationViewController(SimulationViewController simulationViewController) {
-        this.simulationViewController = simulationViewController;
-    }
     private void updateUI() {
+        SimulationViewController simulationViewController = ControllersHandler.getInstance().getSimulationViewController();
         if (simulationViewController != null) {
             Platform.runLater(() -> {
                 simulationViewController.updateCurrentTimeLabel(convertMinutesToTime((time + MINUTES_IN_DAY) % MINUTES_IN_DAY));  // Change the text accordingly
@@ -51,12 +54,11 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         }
     }
     private void finishSimulation() {
+        SimulationViewController simulationViewController = ControllersHandler.getInstance().getSimulationViewController();
         isTimeStopped = true;
         isSimulationFinished = true;
         if (simulationViewController != null) {
-            Platform.runLater(() -> {
-                simulationViewController.handleSimulationFinish();
-            });
+            Platform.runLater(simulationViewController::handleSimulationFinish);
         }
     }
 
@@ -78,7 +80,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
             int flightsCount = random.nextInt(100,500);
             int runwaysNumber = random.nextInt(3, 6);
             Admin.getInstance().generateFlights(flightsCount, runwaysNumber);
-            generatearrivingPassengers();
+            generateArrivingPassengers();
             log("Generating " + Admin.getInstance().getAllFlightsCount() +" flights");
 
             int peopleCount = random.nextInt(flightsCount*(seats_median()/2), (int) (flightsCount*(seats_median()*1.5)));
@@ -104,7 +106,6 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
     public void rerun() {
         isTimeStopped = true;
         isSimulationFinished = true;
-        clearLogs();
         t.interrupt();
     }
 
@@ -132,6 +133,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                         return;
                     }
                     else if (flight.getHour() <= stopTime) {
+                        Admin.getInstance().checkFlight(flight);
                         log("Time "+convertMinutesToTime(flight.getHour())+", Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departed")+"!");
                     }
                     else {
@@ -158,6 +160,13 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
             } catch (InterruptedException e) {
                 log("Simulation thread has just been INTERRUPTED!");
                 log("RESTARTING SIMULATION...");
+                Admin.getInstance().clearAllComponents();
+//                Salesman.getInstance().clearAllComponents();
+
+                clearLogs();
+//                Admin.getInstance().clearLogs();
+//                Salesman.getInstance().clearLogs();
+                Workman.getInstance().clearLogs();
                 start();
                 return;
             }
@@ -201,7 +210,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
 
         return Salesman.getInstance().addPassenger(passenger);
     }
-    public void generatearrivingPassengers(){
+    public void generateArrivingPassengers(){
         Random rand = new Random();
         for(Flight flight : Admin.getInstance().getFlights()){
             if(flight.isArrival()){

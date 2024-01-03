@@ -42,7 +42,7 @@
             </VBox>
             <VBox>
                 <Label text="Physical Worker Activity:"/>
-                <ListView VBox.vgrow="ALWAYS" fx:id="physicalWorkerLogsList"/>
+                <ListView VBox.vgrow="ALWAYS" fx:id="workmanLogsList"/>
             </VBox>
         </VBox>
     </GridPane>

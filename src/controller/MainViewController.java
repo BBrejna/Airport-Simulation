@@ -31,6 +31,11 @@ public class MainViewController { //todo somehow locking buttons when simulation
         currentContent.setVisible(true);
         currentContent.setManaged(true);
     }
+    public void lockButtonsOnSimulationRunning(boolean value) {
+        adminButton.setDisable(value);
+        salesmanButton.setDisable(value);
+        workmanButton.setDisable(value);
+    }
 
     public void showSimulationContent(ActionEvent actionEvent) {
         changeView(simulationButton, simulationContent);
@@ -53,6 +58,7 @@ public class MainViewController { //todo somehow locking buttons when simulation
     }
 
     public void initialize() throws IOException {
+        ControllersHandler.getInstance().setMainViewController(this);
         disabledButton = simulationButton;
         currentContent = simulationContent;
     }
