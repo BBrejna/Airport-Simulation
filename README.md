@@ -31,5 +31,6 @@ The Airport Simulation project aims to replicate a day of activity at a chosen a
 5. **Data Logging:** Record relevant data during the simulation for analysis and evaluation purposes.
 
 ## Requirements
-- java 21
+- Java 21.0.1
+- JavaFX 21.0.1
 - JUnit 5.8.1
