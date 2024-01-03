@@ -18,11 +18,18 @@ public class Workman extends Person {
 //    emptyBins( areBinsFull )
 
 
-    public void planeGetStan(boolean isClean, boolean isSnowy, boolean isBroken, boolean areBinsFull, boolean isLuggageToCollect) {
+    public void planeGetStan(boolean isRunwayReady, boolean isClean, boolean isSnowy, boolean isBroken, boolean areBinsFull, boolean isLuggageToCollect) {
         System.out.println("planeGetStan:\n\nisClean: " + isClean + "\nisSnowy: " + isSnowy + "\nisBroken: " + isBroken + "\nareBinsFull: " + areBinsFull + "\nisLuggageToCollect: " + isLuggageToCollect);
 
-        if (!isClean || isSnowy || isBroken || areBinsFull || isLuggageToCollect) {
+        if (!isRunwayReady || !isClean || isSnowy || isBroken || areBinsFull || isLuggageToCollect) {
             System.out.println("UWAGA: samolot nie jest zdolny do lotu");
+        }
+    }
+
+    public void prepareRunway(boolean isRunwayReady) {
+        if (!isRunwayReady) {
+            System.out.println("Pas startowy zostal przygotowany do odlotu samolotu");
+            isRunwayReady = true;
         }
     }
 
@@ -53,5 +60,8 @@ public class Workman extends Person {
             areBinsFull = false;
         }
     }
+
+
+
 
 }
