@@ -103,5 +103,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="JavaFX21_lib" level="application" />
   </component>
 </module>

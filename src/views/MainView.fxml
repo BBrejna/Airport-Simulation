@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.ListView?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MainViewController">
+    <stylesheets>
+        <URL value="@/styles/style.css"/>
+        <URL value="@/styles/mainView.css"/>
+    </stylesheets>
+    <GridPane gridLinesVisible="true" minWidth="400">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0"/>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0"/>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0"/>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="ALWAYS"/>
+        </rowConstraints>
+        <Button disable="true" fx:id="simulationButton" styleClass="RoleButton" text="Simulation" GridPane.columnIndex="0"
+                GridPane.rowIndex="0"/>
+        <Button fx:id="adminButton" styleClass="RoleButton" text="Admin" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                maxWidth="Infinity"/>
+        <Button fx:id="salesmanButton" styleClass="RoleButton" text="Salesman" GridPane.columnIndex="2"
+                GridPane.rowIndex="0"/>
+        <Button fx:id="physicalWorkerButton" styleClass="RoleButton" text="Physical Worker" GridPane.columnIndex="3"
+                GridPane.rowIndex="0"/>
+    </GridPane>
+    <VBox VBox.vgrow="ALWAYS">
+        <HBox fx:id="timeBarHBox" alignment="CENTER">
+            <Label fx:id="currentTimeLabel" text="TIME"/>
+            <Region minWidth="20"/>
+            <Button fx:id="playButton" text="Play" onAction="#handlePlayButtonClick"/>
+            <Button disable="true" fx:id="pauseButton" text="Pause" onAction="#handlePauseButtonClick"/>
+            <Button disable="true" fx:id="rerunButton" text="Rerun" onAction="#handleRerunButtonClick"/>
+            <Button fx:id="settingsButton" text="Settings" onAction="#handleSettingsButtonClick"/>
+        </HBox>
+        <GridPane VBox.vgrow="ALWAYS" minHeight="200" gridLinesVisible="true">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" percentWidth="33.0"/>
+                <ColumnConstraints hgrow="ALWAYS" percentWidth="33.0"/>
+                <ColumnConstraints hgrow="ALWAYS" percentWidth="34.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="ALWAYS"/>
+            </rowConstraints>
+            <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="DEPARTURES:"/>
+                <ListView VBox.vgrow="ALWAYS" fx:id="departuresList"/>
+            </VBox>
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Label text="ARRIVALS:"/>
+                <ListView VBox.vgrow="ALWAYS" fx:id="arrivalsList"/>
+            </VBox>
+            <VBox GridPane.columnIndex="2" GridPane.rowIndex="0">
+                <VBox>
+                    <Label text="Admin Activity:"/>
+                    <ListView VBox.vgrow="ALWAYS" fx:id="adminLogsList"/>
+                </VBox>
+                <VBox>
+                    <Label text="Salesman Activity:"/>
+                    <ListView VBox.vgrow="ALWAYS" fx:id="salesmanLogsList"/>
+                </VBox>
+                <VBox>
+                    <Label text="Physical Worker Activity:"/>
+                    <ListView VBox.vgrow="ALWAYS" fx:id="physicalWorkerLogsList"/>
+                </VBox>
+            </VBox>
+        </GridPane>
+        <VBox VBox.vgrow="ALWAYS" minHeight="200" fx:id="BottomVBox">
+            <Label text="Simulation Activity:"/>
+            <ListView VBox.vgrow="ALWAYS" fx:id="simulationLogsList"/>
+        </VBox>
+    </VBox>
+</VBox>

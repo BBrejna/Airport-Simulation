@@ -1,0 +1,7 @@
+.root{
+    -fx-background-color: aqua;
+    -fx-max-height: 600px;
+    -fx-max-width: 1200px;
+}
+#bodyBorderPane {
+}
