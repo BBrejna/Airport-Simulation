@@ -8,6 +8,7 @@ import model.classes.logging.Logger;
 import model.classes.simulation.*;
 import model.classes.people.Passenger;
 import data.NamesAndSurnames;
+import model.classes.salesman.Ticket;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -26,6 +27,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
     private final int MINUTES_IN_DAY = 1440;
     private final int LAST_CALL_TIME = 15;
     private final int MAX_TIME_DELTA = 60;
+    private ArrayList<Passenger> arrivingPassengers = new ArrayList<>();
 
 
     /** Singleton design pattern */
@@ -76,11 +78,12 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
             int flightsCount = random.nextInt(100,500);
             int runwaysNumber = random.nextInt(3, 6);
             Admin.getInstance().generateFlights(flightsCount, runwaysNumber);
+            generatearrivingPassengers();
             log("Generating " + Admin.getInstance().getAllFlightsCount() +" flights");
 
-            int peopleCount = random.nextInt(flightsCount*5, flightsCount*15);
-            int peopleGenerated = generatePeople(peopleCount);
-            log("Generating people: "+peopleGenerated+"/"+peopleCount+" succeeded");
+            int peopleCount = random.nextInt(flightsCount*(seats_median()/2), (int) (flightsCount*(seats_median()*1.5)));
+            int passengersGenerated = generatePeople(peopleCount);
+            log("Generating passengers: "+passengersGenerated+"/"+peopleCount+" succeeded");
 
             time = -1*((LAST_CALL_TIME+timeDelta-1)/timeDelta)*timeDelta;
             isSimulationStarted = true;
@@ -188,15 +191,73 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
 
         for(Flight flight : Admin.getInstance().getDepartures()) {
             destinations.add(flight.getDestinationPoint().getCity());
-            //System.out.println(flight.getDestinationPoint().getAirportName());
+
         }
-//        System.out.println(destinations.size());
+
         String destination = destinations.get(rand.nextInt(0, destinations.size()));
         boolean personalInfo = 0 != rand.nextInt(0,10);
         int luggageWeight = rand.nextInt(5, 30);
         Passenger passenger = new Passenger(pesel, name, surname, personalInfo, luggageWeight, destination);
 
         return Salesman.getInstance().addPassenger(passenger);
+    }
+    public void generatearrivingPassengers(){
+        Random rand = new Random();
+        for(Flight flight : Admin.getInstance().getFlights()){
+            if(flight.isArrival()){
+                int[] occupied_seats = {0, 0, 0};
+                if(flight.getAirplane().getNumberOfSeatsClasses()[0] != 0){
+                    occupied_seats[0] = rand.nextInt((int) (flight.getAirplane().getNumberOfSeatsClasses()[0]*0.7),
+                            flight.getAirplane().getNumberOfSeatsClasses()[0]);
+                    occupied_seats[1] = rand.nextInt((int) (flight.getAirplane().getNumberOfSeatsClasses()[1]*0.7),
+                            flight.getAirplane().getNumberOfSeatsClasses()[1]);
+                    occupied_seats[2] = rand.nextInt((int) (flight.getAirplane().getNumberOfSeatsClasses()[2]*0.7),
+                            flight.getAirplane().getNumberOfSeatsClasses()[2]);
+                }
+                else{
+                    occupied_seats[0] =0;
+                    occupied_seats[1] = 0;
+                    occupied_seats[2] = rand.nextInt((int) (flight.getAirplane().getNumberOfSeatsClasses()[2]*0.7),
+                            flight.getAirplane().getNumberOfSeatsClasses()[2]);
+                }
+
+                for(int i = 0; i < occupied_seats[0]+occupied_seats[1]+occupied_seats[2]; i++){
+                    Passenger passenger;
+                    String pesel = "";
+                    int z;
+                    for(int k = 0; k < 11; k++){
+                        z= rand.nextInt(0, 10);
+                        pesel = pesel + z;
+                    }
+
+                    String name = NamesAndSurnames.NAMES[rand.nextInt(NamesAndSurnames.NAMES.length)];
+                    String surname = NamesAndSurnames.SURNAMES[rand.nextInt(NamesAndSurnames.SURNAMES.length)];
+                    boolean personalInfo = 0 != rand.nextInt(0,10);
+                    int luggageWeight = rand.nextInt(5, 30);
+                    String destinationCity = flight.getDestinationPoint().getCity();
+                    int flightClass;
+                    if(i<occupied_seats[0]){
+                        flightClass=0;
+                    }
+                    else if(i<occupied_seats[0]+occupied_seats[1]){
+                        flightClass=1;
+                    }
+                    else{
+                        flightClass=2;
+                    }
+                    passenger = new Passenger(pesel, name, surname, personalInfo, luggageWeight, destinationCity, new Ticket(flight.getFlightNumber(), flightClass));
+                    arrivingPassengers.add(passenger);
+                }
+                flight.setNumOfOccupiedSeats(occupied_seats);
+            }
+        }
+    }
+    public int seats_median(){
+        int all_seats = 0;
+        for(Flight flight : Admin.getInstance().getFlights()){
+            all_seats+=flight.getAirplane().getNumberOfSeats();
+        }
+        return all_seats/Admin.getInstance().getFlights().size();
     }
 
     public String getThreadName() {

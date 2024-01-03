@@ -37,6 +37,8 @@ public class Airplane  {
         //generate number of seats in each class
         this.numberOfSeatsClasses = new int[3];
         if (numberOfSeats < 100) {
+            numberOfSeatsClasses[0] = 0;
+            numberOfSeatsClasses[1] = 0;
             numberOfSeatsClasses[2] = numberOfSeats;
         } else {
             int eko = (int) (0.5 * numberOfSeats);
