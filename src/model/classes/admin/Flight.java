@@ -1,10 +1,12 @@
 package model.classes.admin;
 
+import model.classes.logging.Logger;
 import model.classes.people.Pilot;
+import model.tools.Tools;
 
 import java.util.ArrayList;
 
-public class Flight {
+public class Flight implements Logger {
     private boolean isArrival;
     private int hour;
     private Airplane airplane;
@@ -35,11 +37,17 @@ public class Flight {
 
 
     public String toString() {
+        return "Godzina " + Tools.convertMinutesToTime(getHour()) + " | "  + "Lot " + getFlightNumber();
+    }
+
+
+    public String getState(){
         return "\n\n=================\nFlight " + getFlightNumber() + "\n\tisArrival: " + isArrival() + "\n\thour: " + getHour() + "\n\tAirplane: " + getAirplane().toString() +
                 "\n\tFlight number: " + getFlightNumber() + "\n\tPilots: " + pilotsString() + "\n\tRunway: " + getRunway().getRunwayNumber()
                 + "\n\tOccupied seats: " + occupiedSeatsString() + "\n\tTicket price: " + ticketPricesString() + "\n\tSource: " + getSourcePoint().toString() + "\n\tDestination: "
                 + getDestinationPoint().toString() + "\n\tDelay: " + getDelayMinutes();
     }
+
 
     private String pilotsString() {
         String toReturn = "";
