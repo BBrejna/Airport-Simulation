@@ -10,4 +10,5 @@ public interface Logger {
     default ArrayList<Log> getLogs() {
         return logs;
     }
+    default void clearLogs() { logs.clear(); }
 }

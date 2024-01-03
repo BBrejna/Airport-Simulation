@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import java.net.URL?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.SimulationSettingsPopupController"
+      spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <stylesheets>
+        <URL value="@/styles/simulationSettingsPopup.css"/>
+    </stylesheets>
+
+    <HBox spacing="5">
+        <Label text="Time delta value:" />
+        <Label fx:id="valueLabel" text="${slider.value}" />
+    </HBox>
+    <Slider fx:id="slider" min="1" max="120" value="20" snapToTicks="true"/>
+
+    <HBox spacing="10">
+        <Button text="OK" onAction="#onOkButtonClicked" />
+        <Button text="Cancel" onAction="#onCancelButtonClicked" />
+    </HBox>
+</VBox>

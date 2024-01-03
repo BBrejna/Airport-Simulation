@@ -13,9 +13,17 @@ import model.Simulation;
 import model.classes.admin.Flight;
 import model.classes.logging.Log;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
 public class MainViewController {
     @FXML
     public VBox BottomVBox;
+    @FXML
+    public Button settingsButton;
     @FXML
     private ListView<Flight> arrivalsList;
     @FXML
@@ -64,6 +72,11 @@ public class MainViewController {
         this.simulationLogsList.scrollTo(lastIndexSimulation);
         this.simulationLogsList.getSelectionModel().select(lastIndexSimulation);
     }
+    public void handleSimulationFinish() {
+        playButton.setDisable(false);
+        pauseButton.setDisable(true);
+        rerunButton.setDisable(true);
+    }
 
 
     public void initialize() {
@@ -80,26 +93,49 @@ public class MainViewController {
     }
 
     public void handlePlayButtonClick() {
-        if (Simulation.getInstance().isSimulationStarted()) {
+        if (Simulation.getInstance().isSimulationStarted() && !Simulation.getInstance().isSimulationFinished()) {
             Simulation.getInstance().setTimeStopped(false);
         } else {
             Simulation.getInstance().start();
         }
-        pauseButton.setDisable(false);
         playButton.setDisable(true);
+        pauseButton.setDisable(false);
+        rerunButton.setDisable(true);
     }
     public void handlePauseButtonClick() {
         if (Simulation.getInstance().isSimulationStarted()) {
             if (!Simulation.getInstance().isTimeStopped()) {
-                pauseButton.setDisable(true);
                 playButton.setDisable(false);
+                pauseButton.setDisable(true);
+                rerunButton.setDisable(false);
             }
             Simulation.getInstance().setTimeStopped(true);
         }
     }
 
-    public void handleRerunButtonClick() { //todo rerun doby jakoś
-        System.out.println("You shall not pass");
+    public void handleRerunButtonClick() {
+        Simulation.getInstance().rerun();
+        playButton.setDisable(true);
+        pauseButton.setDisable(false);
+        rerunButton.setDisable(true);
     }
 
+    public void handleSettingsButtonClick() throws IOException {
+        handlePauseButtonClick();
+
+        // Load the popup FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SimulationSettingsPopup.fxml"));
+        Parent root = loader.load();
+
+        // Create a new stage for the popup
+        Stage popupStage = new Stage();
+
+        // Set the popup controller and stage
+        SimulationSettingsPopupController popupController = loader.getController();
+        popupController.display(popupStage, root, Simulation.getInstance().getTimeDelta(), Simulation.getInstance().getMAX_TIME_DELTA());
+
+        // Retrieve the selected value from the popup controller
+        int selectedValue = popupController.getSelectedValue();
+        Simulation.getInstance().setTimeDelta(selectedValue);
+    }
 }
