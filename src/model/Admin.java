@@ -3,6 +3,7 @@ package model;
 import data.admin.AirportSet;
 import model.classes.Observer;
 import model.classes.admin.*;
+import model.classes.logging.Logger;
 import model.classes.people.Person;
 import model.classes.people.Pilot;
 import model.classes.simulation.Weather;
@@ -13,7 +14,7 @@ import java.util.Random;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public final class Admin extends Person implements Observer<Weather> {
+public final class Admin extends Person implements Observer<Weather>{
 
     /**
      * Los Angeles International Airport (LAX)
@@ -28,7 +29,7 @@ public final class Admin extends Person implements Observer<Weather> {
      * Sum: 475
      */
     private final int[] HOUR_DISTRIBUTION = {20, 30, 100, 70, 75, 80, 70, 40};
-    private final ArrayList<Runway> runways = new ArrayList<>();
+    private ArrayList<Runway> runways = new ArrayList<>();
     private ArrayList<Flight> flights = new ArrayList<>();
     private int allFlightsCount;
     private ArrayList<String> existingFlightNumbers = new ArrayList<>();
@@ -257,6 +258,7 @@ public final class Admin extends Person implements Observer<Weather> {
         for(int i = 0; i < snowCoefficients.length; i++)
             snowProb += snowCoefficients[i] * Math.pow(snow, i);
 
+
         double rain = weather.getRain();
         double[] rainCoefficients = new double[]{0.02, -2.83991270e-03, 2.45207523e-04, -2.50406842e-07};
         double rainProb = 0;
@@ -266,6 +268,40 @@ public final class Admin extends Person implements Observer<Weather> {
         delayProb += tempProb + snowProb + rainProb;
         currentDelayProbability = delayProb;
 
+
+        //checking weather values and setting states of airplane and runway
+        double snowValue = 0.6;
+
+        for (int i = 0; i < flights.size(); i++) {
+            if (!flights.get(i).isArrival() && snow > snowValue){
+                flights.get(i).getAirplane().setSnowy(true);
+            }
+        }
+        for (int i = 0; i < runways.size(); i++) {
+            if (snow > snowValue){
+                runways.get(i).setSnowy(true);
+            }
+            if (temp < -5){
+                runways.get(i).setIced(true);
+            }
+        }
+    }
+
+
+    // checking state of runway and airplane
+    public void checkFlight(Flight flight){
+        Workman.getInstance().clearSnow(flight.getAirplane());
+        Workman.getInstance().clearRunway(flight.getRunway());
+    }
+
+
+    //clearing all Admin compoments
+    public void clearAllComponents(){
+        runways.clear();
+        flights.clear();
+        allFlightsCount = 0;
+        existingFlightNumbers.clear();
+        currentDelayProbability = 0;
     }
 
 
