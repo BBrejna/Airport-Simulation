@@ -1,6 +1,6 @@
 package model;
 
-import controller.MainViewController;
+import controller.SimulationViewController;
 import javafx.application.Platform;
 import model.classes.Subject;
 import model.classes.admin.Flight;
@@ -35,25 +35,25 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         return instance;
     }
 
-    private MainViewController mainViewController;
-    public void setMainViewController(MainViewController mainViewController) {
-        this.mainViewController = mainViewController;
+    private SimulationViewController simulationViewController;
+    public void setSimulationViewController(SimulationViewController simulationViewController) {
+        this.simulationViewController = simulationViewController;
     }
     private void updateUI() {
-        if (mainViewController != null) {
+        if (simulationViewController != null) {
             Platform.runLater(() -> {
-                mainViewController.updateCurrentTimeLabel(convertMinutesToTime((time + MINUTES_IN_DAY) % MINUTES_IN_DAY));  // Change the text accordingly
-                mainViewController.updateTimeTables();
-                mainViewController.updateLogs();
+                simulationViewController.updateCurrentTimeLabel(convertMinutesToTime((time + MINUTES_IN_DAY) % MINUTES_IN_DAY));  // Change the text accordingly
+                simulationViewController.updateTimeTables();
+                simulationViewController.updateLogs();
             });
         }
     }
     private void finishSimulation() {
         isTimeStopped = true;
         isSimulationFinished = true;
-        if (mainViewController != null) {
+        if (simulationViewController != null) {
             Platform.runLater(() -> {
-                mainViewController.handleSimulationFinish();
+                simulationViewController.handleSimulationFinish();
             });
         }
     }
