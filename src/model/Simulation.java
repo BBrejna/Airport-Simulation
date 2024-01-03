@@ -82,11 +82,13 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
             Admin.getInstance().generateFlights(flightsCount, runwaysNumber);
             generateArrivingPassengers();
             log("Generating " + Admin.getInstance().getAllFlightsCount() +" flights");
+            System.out.println("departures: "+Admin.getInstance().getDepartures().size());
+            int peopleCount = random.nextInt(Admin.getInstance().getDepartures().size()*seats_median()/2,
+                    (int) (Admin.getInstance().getDepartures().size()*seats_median()*1.5));
 
-            int peopleCount = random.nextInt(flightsCount*(seats_median()/2), (int) (flightsCount*(seats_median()*1.5)));
             int passengersGenerated = generatePeople(peopleCount);
             log("Generating passengers: "+passengersGenerated+"/"+peopleCount+" succeeded");
-
+            System.out.println("Seats median: "+seats_median());
             time = -1*((LAST_CALL_TIME+timeDelta-1)/timeDelta)*timeDelta;
             isSimulationStarted = true;
             isTimeStopped = false;

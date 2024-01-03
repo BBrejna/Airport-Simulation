@@ -119,16 +119,6 @@ public final class Admin extends Person implements Observer<Weather>{
         }
 
         int[] numberOfOccupiedSeats = {0, 0, 0};
-        /*for(int i = 0; i < 3; i++) {
-            if(random.nextBoolean()) numberOfOccupiedSeats[i] = airplane.getNumberOfSeatsClasses()[i];
-            else {
-                int seats = airplane.getNumberOfSeatsClasses()[i];
-                if(seats != 0) {
-                    numberOfOccupiedSeats[i] = (int) (0.5 * seats) + random.nextInt((int) (0.5 * seats));
-                    if(numberOfOccupiedSeats[i] > seats) numberOfOccupiedSeats[i] = seats;
-                }
-            }
-        }*/
 
         double[] ticketPrices = {-1, -1, -1};
         ticketPrices[0] = 200 + random.nextInt(3000);
