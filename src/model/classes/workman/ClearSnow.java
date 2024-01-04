@@ -3,13 +3,13 @@ package model.classes.workman;
 import model.classes.admin.Airplane;
 import model.classes.admin.Runway;
 
-public class Odsniezanie implements Strategia{
+public class ClearSnow implements Strategy {
     @Override
-    public void przygotujSamolot(Airplane airplane) {
+    public void prepareAirplane(Airplane airplane) {
         airplane.setSnowy(false);
     }
     @Override
-    public void przygotujPas(Runway runway) {
+    public void prepareRunway(Runway runway) {
         runway.setSnowy(false);
     }
 }

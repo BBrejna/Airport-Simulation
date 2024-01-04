@@ -41,7 +41,19 @@ public class Weather {
         temperature = Math.min(40, Math.max(-20, temperature + rand.nextDouble(-1, 1)));
         wind = rand.nextDouble(0, 1);
         rain = rand.nextDouble(0, 1);
-        snow = rand.nextDouble(0, 1);
+        if(temperature < -5){
+            snow = rand.nextDouble(0.7, 1);
+        }
+        else if(temperature < 0){
+            snow = rand.nextDouble(0.4, 0.7);
+        }
+        else if(temperature < 5){
+            snow = rand.nextDouble(0, 0.3);
+        }
+        else{
+            snow = 0;
+        }
+
         fog = rand.nextDouble(0, 1);
         clouds = rand.nextDouble(0, 1);
     }

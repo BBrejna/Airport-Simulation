@@ -5,9 +5,9 @@ import model.classes.admin.Runway;
 import model.classes.logging.Log;
 import model.classes.logging.Logger;
 import model.classes.people.Person;
-import model.classes.workman.Odladzanie;
-import model.classes.workman.Odsniezanie;
-import model.classes.workman.Strategia;
+import model.classes.workman.ClearIce;
+import model.classes.workman.ClearSnow;
+import model.classes.workman.Strategy;
 
 import java.util.ArrayList;
 
@@ -27,10 +27,10 @@ public class Workman extends Person implements Logger {
         return instance;
     }
 
-    Strategia strategia;
+    Strategy strategy;
 
-    public void setStrategia(Strategia strategia) {
-        this.strategia = strategia;
+    public void setStrategia(Strategy strategy) {
+        this.strategy = strategy;
     }
 //    planeGetStan() Parameters: isClean, isSnowy, isBroken, areBinsFull, isLuggageToCollect
 //    UWAGA; jesli samolot nie jest zdolny do lotu przekazuje on informacje do administratora lotow
@@ -57,23 +57,23 @@ public class Workman extends Person implements Logger {
         }
     }
     // Metoda wykonujaca strategie
-    public void wykonaj_przygotwania(Airplane airplane, Runway runway) {
+    public void prepareFlight(Airplane airplane, Runway runway, String flightNumber) {
         // nie trzeba sprawdzac osobno pasu i samolotu bo gdy jeden z nich jest zasniezony to drugi tez itd.
         if (airplane.isSnowy() || runway.isSnowy()) {
-            setStrategia(new Odsniezanie());
+            setStrategia(new ClearSnow());
 
-            strategia.przygotujSamolot(airplane);
-            strategia.przygotujPas(runway);
+            strategy.prepareAirplane(airplane);
+            strategy.prepareRunway(runway);
 
-            log("The plane was cleared of snow");
-            log("The runway has been cleared of snow");
+            log("The plane for flight " + flightNumber  + " was cleared of snow");
+            log("The runway " + runway.getRunwayNumber() + " has been cleared of snow");
 
         }
         if (airplane.isIced() || runway.isIced()) {
-            setStrategia(new Odladzanie());
+            setStrategia(new ClearIce());
 
-            strategia.przygotujSamolot(airplane);
-            strategia.przygotujPas(runway);
+            strategy.prepareAirplane(airplane);
+            strategy.prepareRunway(runway);
 
             log("The plane was cleared of ice");
             log("The runway was cleared of ice");
