@@ -65,7 +65,7 @@ public class Workman extends Person implements Logger {
             strategy.prepareAirplane(airplane);
             strategy.prepareRunway(runway);
 
-            log("The plane for flight " + flightNumber  + " has been  cleared of snow");
+            log("The plane for flight " + flightNumber  + " has been cleared of snow");
             log("The runway " + runway.getRunwayNumber() + " has been cleared of snow");
 
         }
@@ -75,7 +75,7 @@ public class Workman extends Person implements Logger {
             strategy.prepareAirplane(airplane);
             strategy.prepareRunway(runway);
 
-            log("The plane for flight " + flightNumber  + " has been  cleared of ice");
+            log("The plane for flight " + flightNumber  + " has been cleared of ice");
             log("The runway " + runway.getRunwayNumber() + " has been cleared of ice");
         }
     }
