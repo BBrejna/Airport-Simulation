@@ -45,14 +45,14 @@ public class Workman extends Person implements Logger {
 //        System.out.println("planeGetStan:\n\nisClean: " + isClean + "\nisSnowy: " + isSnowy + "\nisBroken: " + isBroken + "\nareBinsFull: " + areBinsFull + "\nisLuggageToCollect: " + isLuggageToCollect);
 //
 //        if (!isRunwayReady || !isClean || isSnowy || isBroken || areBinsFull || isLuggageToCollect) {
-//            System.out.println("UWAGA: samolot nie jest zdolny do lotu");
+//            System.out.println("ATTENTION: the plane is not capable of flying");
 //        }
 //    }
 
 
     public void washPlane(Airplane airplane) {
         if (!airplane.isClean()) {
-            log("Samolot zostal wysprzatany");
+            log("The plane has been cleaned");
             airplane.setClean(true);
         }
     }
@@ -65,8 +65,8 @@ public class Workman extends Person implements Logger {
             strategia.przygotujSamolot(airplane);
             strategia.przygotujPas(runway);
 
-            log("Samolot zostal odsniezony");
-            log("Pas startowy został odsniezony");
+            log("The plane was cleared of snow");
+            log("The runway has been cleared of snow");
 
         }
         if (airplane.isIced() || runway.isIced()) {
@@ -75,24 +75,24 @@ public class Workman extends Person implements Logger {
             strategia.przygotujSamolot(airplane);
             strategia.przygotujPas(runway);
 
-            log("Samolot zostal odlodzony");
-            log("Pas startowy został odlodzony");
+            log("The plane was cleared of ice");
+            log("The runway was cleared of ice");
         }
     }
    /* public void clearSnow(Airplane airplane) {
         if (airplane.isSnowy()) {
-            log("Samolot zostal odsniezony");
+            log("The plane was cleared of snow");
             airplane.setSnowy(false);
         }
     }*/
 
    /* public void clearRunway(Runway runway){
         if (runway.isSnowy()) {
-            log("Pas startowy został odsnieżony");
+            log("The runway has been cleared of snow");
             runway.setSnowy(false);
         }
         if (runway.isIced()){
-            log("Pas startowy został odlodzony");
+            log("The runway was cleared of ice");
             runway.setIced(false);
         }
     }*/
@@ -100,14 +100,14 @@ public class Workman extends Person implements Logger {
 
     public void repairPlane(Airplane airplane) {
         if (airplane.isBroken()) {
-            log("Samolot zostal naprawiony");
+            log("The plane was repaired");
             airplane.setBroken(false);
         }
     }
 
     public void emptyBins(Airplane airplane) {
         if (airplane.isAreBinsFull()) {
-            log("Smietniki zostaly oproznione");
+            log("The garbage cans have been emptied");
             airplane.setAreBinsFull(false);
         }
     }
