@@ -64,7 +64,6 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
 
     private Simulation(String threadName) {
         this.threadName = threadName;
-
         this.weather = new Weather();
         this.t = null;
     }
@@ -73,7 +72,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         if (t == null || isSimulationFinished) {
             if (t != null) {
                 clearAllLogs();
-
+                weather = new Weather();
                 log("!!! RESTARTING SIMULATION... !!!");
             }
 
