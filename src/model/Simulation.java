@@ -64,11 +64,8 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
 
     private Simulation(String threadName) {
         this.threadName = threadName;
-        Random random = new Random();
-        Weather initial_weather = new Weather(random.nextDouble(-10, 25), random.nextDouble(0, 1),
-                random.nextDouble(0, 1), random.nextDouble(0, 1), random.nextDouble(0, 1),
-                random.nextDouble(0, 1));
-        this.weather = initial_weather;
+
+        this.weather = new Weather();
         this.t = null;
     }
 

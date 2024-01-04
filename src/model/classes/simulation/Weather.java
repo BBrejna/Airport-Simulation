@@ -10,13 +10,14 @@ public class Weather {
     private double fog;
     private double clouds;
 
-    public Weather() {
-        this.temperature = 25;
-        this.wind = 0.5;
-        this.rain = 0.5;
-        this.snow = 0.5;
-        this.fog = 0.5;
-        this.clouds = 0.5;
+    public Weather(){
+        Random rand = new Random();
+        this.temperature = rand.nextDouble(-10, 25);
+        this.wind = rand.nextDouble(0, 1);
+        this.rain = rand.nextDouble(0, 1);
+        this.snow = rand.nextDouble(0, 1);
+        this.fog = rand.nextDouble(0, 1);
+        this.clouds = rand.nextDouble(0, 1);
     }
 
     public Weather(double temperature, double wind, double rain, double snow, double fog, double clouds) {
