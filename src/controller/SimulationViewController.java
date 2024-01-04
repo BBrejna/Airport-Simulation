@@ -37,7 +37,7 @@ public class SimulationViewController {
     @FXML
     private Button rerunButton;
     @FXML
-    private ListView adminLogsList;
+    private ListView<Log> adminLogsList;
     @FXML
     private ListView salesmanLogsList;
     @FXML
@@ -51,6 +51,7 @@ public class SimulationViewController {
     ObservableList<Flight> departures = null;
     ObservableList<Flight> arrivals = null;
     ObservableList<Log> simulationLogs = null;
+    ObservableList<Log> adminLogs = null;
     ObservableList<Log> workmanLogs = null;
     public void updateTimeTables() {
         this.departures.setAll(Admin.getInstance().getDepartures());
@@ -62,6 +63,14 @@ public class SimulationViewController {
         int lastIndexSimulation = this.simulationLogs.size()-1;
         this.simulationLogsList.scrollTo(lastIndexSimulation);
         this.simulationLogsList.getSelectionModel().select(lastIndexSimulation);
+
+
+        this.adminLogs.setAll(Admin.getInstance().getLogs());
+
+        int lastIndexAdmin = this.adminLogs.size()-1;
+        this.adminLogsList.scrollTo(lastIndexAdmin);
+        this.adminLogsList.getSelectionModel().select(lastIndexAdmin);
+
 
         this.workmanLogs.setAll(Workman.getInstance().getLogs());
 
@@ -88,6 +97,9 @@ public class SimulationViewController {
 
         simulationLogs = FXCollections.observableArrayList(Simulation.getInstance().getLogs());
         simulationLogsList.setItems(simulationLogs);
+
+        adminLogs = FXCollections.observableArrayList(Admin.getInstance().getLogs());
+        adminLogsList.setItems(adminLogs);
 
         workmanLogs = FXCollections.observableArrayList(Workman.getInstance().getLogs());
         workmanLogsList.setItems(workmanLogs);
