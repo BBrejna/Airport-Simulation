@@ -7,11 +7,7 @@ import model.tools.Tools;
 
 import java.util.ArrayList;
 
-public class Flight implements Logger {
-    private ArrayList<Log> logs = new ArrayList<>();
-    public ArrayList<Log> getLogs() {
-        return logs;
-    }
+public class Flight {
     private boolean isArrival;
     private int hour;
     private Airplane airplane;
@@ -42,7 +38,7 @@ public class Flight implements Logger {
 
 
     public String toString() {
-        return "Godzina " + Tools.convertMinutesToTime(getHour()) + " | "  + "Lot " + getFlightNumber();
+        return Tools.convertMinutesToTime(getHour()) + " | "  + getFlightNumber() + " | " + (isArrival() ? getSourcePoint().getCity(): getDestinationPoint().getCity());
     }
 
 

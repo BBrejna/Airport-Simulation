@@ -3,6 +3,7 @@ package model;
 import data.admin.AirportSet;
 import model.classes.Observer;
 import model.classes.admin.*;
+import model.classes.logging.Log;
 import model.classes.logging.Logger;
 import model.classes.people.Person;
 import model.classes.people.Pilot;
@@ -14,7 +15,11 @@ import java.util.Random;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public final class Admin extends Person implements Observer<Weather>{
+public final class Admin extends Person implements Observer<Weather>, Logger{
+    private ArrayList<Log> logs = new ArrayList<>();
+    public ArrayList<Log> getLogs() {
+        return logs;
+    }
 
     /**
      * Los Angeles International Airport (LAX)
@@ -284,6 +289,7 @@ public final class Admin extends Person implements Observer<Weather>{
     // checking state of runway and airplane
     public void checkFlight(Flight flight){
         Workman.getInstance().wykonaj_przygotwania(flight.getAirplane(), flight.getRunway());
+        log("Flight " + flight.getFlightNumber() + " is ready to" + (flight.isArrival() ? "land": "take off") + "on runway nr " + flight.getRunway().getRunwayNumber() + ".");
     }
 
 
