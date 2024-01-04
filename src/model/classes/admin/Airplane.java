@@ -13,6 +13,17 @@ public class Airplane  {
     private final int[] numberOfSeatsClasses;
     private final int maxFreeLuggageWeight;
     private boolean isSnowy;
+
+    private boolean isIced;
+
+    public boolean isIced() {
+        return isIced;
+    }
+
+    public void setIced(boolean iced) {
+        isIced = iced;
+    }
+
     private boolean isClean;
     private boolean areBinsFull;
     private boolean isBroken;

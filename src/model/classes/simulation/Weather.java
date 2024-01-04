@@ -30,6 +30,14 @@ public class Weather {
 
     public void generateWeather(){
         Random rand = new Random();
+        //Do sprawdzania czy dziala odladzanie
+        /*boolean b = 0 != rand.nextInt(0,10);
+        if(!b) {
+            temperature = -6;
+        }
+        else{
+            temperature = Math.min(40, Math.max(-20, temperature + rand.nextDouble(-1, 1)));
+        }*/
         temperature = Math.min(40, Math.max(-20, temperature + rand.nextDouble(-1, 1)));
         wind = rand.nextDouble(0, 1);
         rain = rand.nextDouble(0, 1);

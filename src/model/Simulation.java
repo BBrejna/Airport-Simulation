@@ -157,6 +157,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                 }
                 // realizacja timetables, announceLastCall do ekspedienta
                 weather.generateWeather();
+                System.out.println("temperature: "+weather.getTemperature());
                 notifyObservers(weather);
                 updateUI();
             } catch (InterruptedException e) {

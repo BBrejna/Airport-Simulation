@@ -5,6 +5,9 @@ import model.classes.admin.Runway;
 import model.classes.logging.Log;
 import model.classes.logging.Logger;
 import model.classes.people.Person;
+import model.classes.workman.Odladzanie;
+import model.classes.workman.Odsniezanie;
+import model.classes.workman.Strategia;
 
 import java.util.ArrayList;
 
@@ -24,8 +27,11 @@ public class Workman extends Person implements Logger {
         return instance;
     }
 
+    Strategia strategia;
 
-
+    public void setStrategia(Strategia strategia) {
+        this.strategia = strategia;
+    }
 //    planeGetStan() Parameters: isClean, isSnowy, isBroken, areBinsFull, isLuggageToCollect
 //    UWAGA; jesli samolot nie jest zdolny do lotu przekazuje on informacje do administratora lotow
 //    washPlane( isClean )
@@ -50,15 +56,37 @@ public class Workman extends Person implements Logger {
             airplane.setClean(true);
         }
     }
+    // Metoda wykonujaca strategie
+    public void wykonaj_przygotwania(Airplane airplane, Runway runway) {
+        // nie trzeba sprawdzac osobno pasu i samolotu bo gdy jeden z nich jest zasniezony to drugi tez itd.
+        if (airplane.isSnowy() || runway.isSnowy()) {
+            setStrategia(new Odsniezanie());
 
-    public void clearSnow(Airplane airplane) {
+            strategia.przygotujSamolot(airplane);
+            strategia.przygotujPas(runway);
+
+            log("Samolot zostal odsniezony");
+            log("Pas startowy został odsniezony");
+
+        }
+        if (airplane.isIced() || runway.isIced()) {
+            setStrategia(new Odladzanie());
+
+            strategia.przygotujSamolot(airplane);
+            strategia.przygotujPas(runway);
+
+            log("Samolot zostal odlodzony");
+            log("Pas startowy został odlodzony");
+        }
+    }
+   /* public void clearSnow(Airplane airplane) {
         if (airplane.isSnowy()) {
             log("Samolot zostal odsniezony");
             airplane.setSnowy(false);
         }
-    }
+    }*/
 
-    public void clearRunway(Runway runway){
+   /* public void clearRunway(Runway runway){
         if (runway.isSnowy()) {
             log("Pas startowy został odsnieżony");
             runway.setSnowy(false);
@@ -67,7 +95,7 @@ public class Workman extends Person implements Logger {
             log("Pas startowy został odlodzony");
             runway.setIced(false);
         }
-    }
+    }*/
 
 
     public void repairPlane(Airplane airplane) {

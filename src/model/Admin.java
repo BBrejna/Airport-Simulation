@@ -266,6 +266,9 @@ public final class Admin extends Person implements Observer<Weather>{
             if (!flights.get(i).isArrival() && snow > snowValue){
                 flights.get(i).getAirplane().setSnowy(true);
             }
+            if (!flights.get(i).isArrival() && temp < -5){
+                flights.get(i).getAirplane().setIced(true);
+            }
         }
         for (int i = 0; i < runways.size(); i++) {
             if (snow > snowValue){
@@ -280,8 +283,7 @@ public final class Admin extends Person implements Observer<Weather>{
 
     // checking state of runway and airplane
     public void checkFlight(Flight flight){
-        Workman.getInstance().clearSnow(flight.getAirplane());
-        Workman.getInstance().clearRunway(flight.getRunway());
+        Workman.getInstance().wykonaj_przygotwania(flight.getAirplane(), flight.getRunway());
     }
 
 
