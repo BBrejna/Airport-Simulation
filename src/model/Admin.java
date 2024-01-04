@@ -289,7 +289,7 @@ public final class Admin extends Person implements Observer<Weather>, Logger{
     // checking state of runway and airplane
     public void checkFlight(Flight flight){
         Workman.getInstance().wykonaj_przygotwania(flight.getAirplane(), flight.getRunway());
-        log("Flight " + flight.getFlightNumber() + " is ready to" + (flight.isArrival() ? "land": "take off") + "on runway nr " + flight.getRunway().getRunwayNumber() + ".");
+        log("Flight " + flight.getFlightNumber() + " is ready to " + (flight.isArrival() ? "land": "take off") + " on runway nr " + flight.getRunway().getRunwayNumber() + ".");
     }
 
 

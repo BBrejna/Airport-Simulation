@@ -74,6 +74,12 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
 
     public void start(int timeDelta) {
         if (t == null || isSimulationFinished) {
+            if (t != null) {
+                clearAllLogs();
+
+                log("!!! RESTARTING SIMULATION... !!!");
+            }
+
             System.out.println("Starting " +  threadName );
             t = new Thread (this, threadName);
 
@@ -110,11 +116,15 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
     }
 
     public void rerun() {
-        isTimeStopped = true;
-        isSimulationFinished = true;
         t.interrupt();
     }
 
+    private void clearAllLogs() {
+        clearLogs();
+        Admin.getInstance().clearLogs();
+//        Salesman.getInstance().clearLogs();
+        Workman.getInstance().clearLogs();
+    }
     public void run() {
         while (t.isAlive() && !isSimulationFinished) {
             try {
@@ -165,15 +175,12 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                 notifyObservers(weather);
                 updateUI();
             } catch (InterruptedException e) {
-                log("Simulation thread has just been INTERRUPTED!");
-                log("RESTARTING SIMULATION...");
+                isTimeStopped = true;
+                isSimulationFinished = true;
+
                 Admin.getInstance().clearAllComponents();
 //                Salesman.getInstance().clearAllComponents();
 
-                clearLogs();
-//                Admin.getInstance().clearLogs();
-//                Salesman.getInstance().clearLogs();
-                Workman.getInstance().clearLogs();
                 start();
                 return;
             }
