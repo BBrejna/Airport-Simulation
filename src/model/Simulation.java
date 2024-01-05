@@ -118,7 +118,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
     private void clearAllLogs() {
         clearLogs();
         Admin.getInstance().clearLogs();
-//        Salesman.getInstance().clearLogs();
+        Salesman.getInstance().clearLogs();
         Workman.getInstance().clearLogs();
     }
     public void run() {
@@ -175,7 +175,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                 isSimulationFinished = true;
 
                 Admin.getInstance().clearAllComponents();
-//                Salesman.getInstance().clearAllComponents();
+//                Salesman.getInstance().clearAllComponents(); // todo use Salesman clearAllComponents
 
                 start();
                 return;

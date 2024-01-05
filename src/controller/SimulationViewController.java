@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import model.Admin;
+import model.Salesman;
 import model.Simulation;
 import model.Workman;
 import model.classes.admin.Flight;
@@ -39,7 +40,7 @@ public class SimulationViewController {
     @FXML
     private ListView<Log> adminLogsList;
     @FXML
-    private ListView salesmanLogsList;
+    private ListView<Log> salesmanLogsList;
     @FXML
     private ListView<Log> workmanLogsList;
     @FXML
@@ -52,6 +53,7 @@ public class SimulationViewController {
     ObservableList<Flight> arrivals = null;
     ObservableList<Log> simulationLogs = null;
     ObservableList<Log> adminLogs = null;
+    ObservableList<Log> salesmanLogs = null;
     ObservableList<Log> workmanLogs = null;
     public void updateTimeTables() {
         this.departures.setAll(Admin.getInstance().getDepartures());
@@ -71,6 +73,12 @@ public class SimulationViewController {
         this.adminLogsList.scrollTo(lastIndexAdmin);
         this.adminLogsList.getSelectionModel().select(lastIndexAdmin);
 
+
+        this.salesmanLogs.setAll(Salesman.getInstance().getLogs());
+
+        int lastIndexSalesman = this.salesmanLogs.size()-1;
+        this.salesmanLogsList.scrollTo(lastIndexSalesman);
+        this.salesmanLogsList.getSelectionModel().select(lastIndexSalesman);
 
         this.workmanLogs.setAll(Workman.getInstance().getLogs());
 
@@ -100,6 +108,9 @@ public class SimulationViewController {
 
         adminLogs = FXCollections.observableArrayList(Admin.getInstance().getLogs());
         adminLogsList.setItems(adminLogs);
+
+        salesmanLogs = FXCollections.observableArrayList(Salesman.getInstance().getLogs());
+        salesmanLogsList.setItems(salesmanLogs);
 
         workmanLogs = FXCollections.observableArrayList(Workman.getInstance().getLogs());
         workmanLogsList.setItems(workmanLogs);
