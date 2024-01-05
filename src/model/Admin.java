@@ -265,7 +265,7 @@ public final class Admin extends Person implements Observer<Weather>, Logger{
 
 
         //checking weather values and setting states of airplane and runway
-        double snowValue = 0.6;
+        double snowValue = 18; //changed from 0.6 to 18
 
         for (int i = 0; i < flights.size(); i++) {
             if (!flights.get(i).isArrival() && snow > snowValue){

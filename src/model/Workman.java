@@ -5,6 +5,7 @@ import model.classes.admin.Runway;
 import model.classes.logging.Log;
 import model.classes.logging.Logger;
 import model.classes.people.Person;
+import model.classes.workman.CleanIceSnow;
 import model.classes.workman.ClearIce;
 import model.classes.workman.ClearSnow;
 import model.classes.workman.Strategy;
@@ -29,7 +30,7 @@ public class Workman extends Person implements Logger {
 
     Strategy strategy;
 
-    public void setStrategia(Strategy strategy) {
+    public void setStrategy(Strategy strategy) {
         this.strategy = strategy;
     }
 //    planeGetStan() Parameters: isClean, isSnowy, isBroken, areBinsFull, isLuggageToCollect
@@ -59,18 +60,18 @@ public class Workman extends Person implements Logger {
     // Metoda wykonujaca strategie
     public void prepareFlight(Airplane airplane, Runway runway, String flightNumber) {
         // nie trzeba sprawdzac osobno pasu i samolotu bo gdy jeden z nich jest zasniezony to drugi tez itd.
-        if (airplane.isSnowy() || runway.isSnowy()) {
-            setStrategia(new ClearSnow());
+        if (airplane.isSnowy() && airplane.isIced()) {
+            setStrategy(new CleanIceSnow());
 
             strategy.prepareAirplane(airplane);
             strategy.prepareRunway(runway);
 
-            log("The plane for flight " + flightNumber  + " has been cleared of snow");
-            log("The runway " + runway.getRunwayNumber() + " has been cleared of snow");
+            log("The plane for flight " + flightNumber  + " has been cleared of snow and ice");
+            log("The runway " + runway.getRunwayNumber() + " has been cleared of snow and ice");
 
         }
-        if (airplane.isIced() || runway.isIced()) {
-            setStrategia(new ClearIce());
+        else if (airplane.isIced()) {
+            setStrategy(new ClearIce());
 
             strategy.prepareAirplane(airplane);
             strategy.prepareRunway(runway);
@@ -78,6 +79,16 @@ public class Workman extends Person implements Logger {
             log("The plane for flight " + flightNumber  + " has been cleared of ice");
             log("The runway " + runway.getRunwayNumber() + " has been cleared of ice");
         }
+        else if(airplane.isSnowy()){
+            setStrategy(new ClearSnow());
+
+            strategy.prepareAirplane(airplane);
+            strategy.prepareRunway(runway);
+
+            log("The plane for flight " + flightNumber  + " has been cleared of snow");
+            log("The runway " + runway.getRunwayNumber() + " has been cleared of snow");
+        }
+
     }
    /* public void clearSnow(Airplane airplane) {
         if (airplane.isSnowy()) {
