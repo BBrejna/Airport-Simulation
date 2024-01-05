@@ -5,8 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import model.Admin;
 import model.Salesman;
 import model.Simulation;
@@ -93,6 +95,25 @@ public class SimulationViewController {
         ControllersHandler.getInstance().getMainViewController().lockButtonsOnSimulationRunning(false);
     }
 
+    private void setLineBreaker(ListView<Log> listView) {
+        listView.setCellFactory(param -> new ListCell<Log>() {
+            private Text text = new Text();
+
+            @Override
+            protected void updateItem(Log item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    // Use a Text node for wrapping
+                    text.setText(item.toString());
+                    text.setWrappingWidth(listView.getWidth() - 30); // Adjust the padding as needed
+                    setGraphic(text);
+                }
+            }
+        });
+    }
 
     public void initialize() {
         ControllersHandler.getInstance().setSimulationViewController(this);
@@ -114,6 +135,12 @@ public class SimulationViewController {
 
         workmanLogs = FXCollections.observableArrayList(Workman.getInstance().getLogs());
         workmanLogsList.setItems(workmanLogs);
+
+        setLineBreaker(simulationLogsList);
+        setLineBreaker(adminLogsList);
+        setLineBreaker(salesmanLogsList);
+        setLineBreaker(workmanLogsList);
+
     }
 
     public void handlePlayButtonClick() {

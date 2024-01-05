@@ -20,9 +20,9 @@
     </HBox>
     <GridPane VBox.vgrow="ALWAYS" minHeight="200" gridLinesVisible="true">
         <columnConstraints>
-            <ColumnConstraints hgrow="ALWAYS" percentWidth="28.0"/>
-            <ColumnConstraints hgrow="ALWAYS" percentWidth="28.0"/>
-            <ColumnConstraints hgrow="ALWAYS" percentWidth="44.0"/>
+            <ColumnConstraints prefWidth="250"/>
+            <ColumnConstraints prefWidth="250"/>
+            <ColumnConstraints hgrow="ALWAYS" minWidth="400"/>
         </columnConstraints>
         <rowConstraints>
             <RowConstraints vgrow="ALWAYS"/>
