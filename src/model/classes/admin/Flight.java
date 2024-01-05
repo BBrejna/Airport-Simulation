@@ -38,7 +38,11 @@ public class Flight {
 
 
     public String toString() {
-        return Tools.convertMinutesToTime(getHour()) + " | "  + getFlightNumber() + " | " + (isArrival() ? getSourcePoint().getCity(): getDestinationPoint().getCity());
+        String additionalSpaces = "";
+        for (int i = 0; i < 6-getFlightNumber().length(); i++) {
+            additionalSpaces += " ";
+        }
+        return Tools.convertMinutesToTime(getHour()) + " | "  + getFlightNumber() + additionalSpaces + " | " + (isArrival() ? getSourcePoint().getCity(): getDestinationPoint().getCity());
     }
 
 

@@ -3,9 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import java.net.URL?>
 <VBox VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controller.SimulationViewController">
+    <stylesheets>
+        <URL value="@/styles/style.css"/>
+    </stylesheets>
     <HBox fx:id="timeBarHBox" alignment="CENTER">
         <Label fx:id="currentTimeLabel" text="TIME"/>
         <Region minWidth="20"/>
@@ -23,11 +27,11 @@
         <rowConstraints>
             <RowConstraints vgrow="ALWAYS"/>
         </rowConstraints>
-        <VBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <VBox styleClass="monospacedText" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <Label text="DEPARTURES:"/>
             <ListView VBox.vgrow="ALWAYS" fx:id="departuresList"/>
         </VBox>
-        <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <VBox styleClass="monospacedText" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <Label text="ARRIVALS:"/>
             <ListView VBox.vgrow="ALWAYS" fx:id="arrivalsList"/>
         </VBox>

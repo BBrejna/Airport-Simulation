@@ -5,3 +5,7 @@
 }
 #bodyBorderPane {
 }
+
+.monospacedText {
+    -fx-font-family: "Monospaced";
+}
