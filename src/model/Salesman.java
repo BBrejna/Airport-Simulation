@@ -1,6 +1,8 @@
 package model;
 
 import model.classes.admin.Flight;
+import model.classes.logging.Log;
+import model.classes.logging.Logger;
 import model.classes.people.Passenger;
 import model.classes.people.Person;
 import model.classes.salesman.Ticket;
@@ -8,7 +10,11 @@ import model.tools.Tools;
 
 import java.util.ArrayList;
 
-public class Salesman extends Person {
+public class Salesman extends Person implements Logger {
+    private ArrayList<Log> logs = new ArrayList<>();
+    public ArrayList<Log> getLogs() {
+        return logs;
+    }
     //ARIBUTES
     private double cashbox;
     private ArrayList<Passenger> passengers;
@@ -135,11 +141,11 @@ public class Salesman extends Person {
                 " is going to "+(flight.isArrival() ? "ARRIVE" : "DEPARTURE")+" in 15 minutes (at "+ Tools.convertMinutesToTime(flight.getHour()) +").";
         if(flight.getDelayMinutes()>0)
             output += " Current delay is "+flight.getDelayMinutes()+" minutes. We are sorry for the delay.";
-        System.out.println(output);
+        log(output);
     }
 
     public void announceDelay(Flight flight) {
-        System.out.println("Attention, flight no. " + flight.getFlightNumber() + " flying to "
+        log("Attention, flight no. " + flight.getFlightNumber() + " flying to "
                 +flight.getDestinationPoint().getAirportName()+" in "+ flight.getDestinationPoint().getCity() +
                 " is going to take off with a delay of " + flight.getDelayMinutes() +
                 " due to bad weather conditions. The new departure time is "+ Tools.convertMinutesToTime(flight.getHour()));
