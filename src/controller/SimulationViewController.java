@@ -1,28 +1,47 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.Admin;
 import model.Salesman;
 import model.Simulation;
 import model.Workman;
+import model.classes.Observer;
 import model.classes.admin.Flight;
 import model.classes.logging.Log;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
+import model.classes.simulation.Weather;
 
 import java.io.IOException;
 
-public class SimulationViewController {
+public class SimulationViewController implements Observer<Weather> {
+    @FXML
+    private TableView<WeatherProperty> weatherTableView;
+    @FXML
+    private Label temperatureLabel;
+
+    @FXML
+    private Label windLabel;
+
+    @FXML
+    private Label rainLabel;
+
+    @FXML
+    private Label snowLabel;
+
+    @FXML
+    private Label fogLabel;
+
+    @FXML
+    private Label cloudsLabel;
     @FXML
     public VBox BottomVBox;
     @FXML
@@ -118,6 +137,7 @@ public class SimulationViewController {
     public void initialize() {
         ControllersHandler.getInstance().setSimulationViewController(this);
         Simulation.getInstance().addObserver(Admin.getInstance());
+        Simulation.getInstance().addObserver(this);
 
         departures = FXCollections.observableArrayList(Admin.getInstance().getDepartures());
         departuresList.setItems(departures);
@@ -191,5 +211,21 @@ public class SimulationViewController {
         // Retrieve the selected value from the popup controller
         int selectedValue = popupController.getSelectedValue();
         Simulation.getInstance().setTimeDelta(selectedValue);
+    }
+
+    @Override
+    public void updateState(Weather weather) {
+        Platform.runLater(() -> {weatherTableView.getItems().clear();  // Clear previous items
+
+            // Populate TableView with new items
+            weatherTableView.getItems().addAll(
+                    new WeatherProperty("Temperature [°C]", weather.getTemperature()),
+                    new WeatherProperty("Wind [knots]", weather.getWind()),
+                    new WeatherProperty("Rain [mm/h]", weather.getRain()),
+                    new WeatherProperty("Snow [mm/h]", weather.getSnow()),
+                    new WeatherProperty("Fog [RS]", weather.getFog()),
+                    new WeatherProperty("Clouds [RS]", weather.getClouds())
+            );
+        });
     }
 }

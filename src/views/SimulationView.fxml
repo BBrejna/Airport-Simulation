@@ -50,8 +50,30 @@
             </VBox>
         </VBox>
     </GridPane>
-    <VBox VBox.vgrow="ALWAYS" minHeight="200" fx:id="BottomVBox">
-        <Label text="Simulation Activity:"/>
-        <ListView VBox.vgrow="ALWAYS" fx:id="simulationLogsList"/>
-    </VBox>
+    <HBox minHeight="190">
+        <VBox prefWidth="250">
+            <Label text="Weather:"/>
+            <TableView fx:id="weatherTableView">
+                <columnResizePolicy>
+                    <TableView fx:constant = "CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+                <columns>
+                    <TableColumn text="Property">
+                        <cellValueFactory>
+                            <javafx.scene.control.cell.PropertyValueFactory property="property"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Value">
+                        <cellValueFactory>
+                            <javafx.scene.control.cell.PropertyValueFactory property="value"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
+        </VBox>
+        <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" fx:id="BottomVBox">
+            <Label text="Simulation Activity:"/>
+            <ListView VBox.vgrow="ALWAYS" fx:id="simulationLogsList"/>
+        </VBox>
+    </HBox>
 </VBox>

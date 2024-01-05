@@ -102,6 +102,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
             t.start ();
             log("SIMULATION HAS JUST STARTED!");
             updateUI();
+            notifyObservers(this.weather);
         } else {
             log("CANNOT START SIMULATION, IT'S ALREADY STARTED AND HASN'T FINISHED");
         }
