@@ -85,17 +85,17 @@ public class Weather {
         Random rand = new Random();
 
         if(temperature > 0){
-            return rand.nextDouble(-2, -1);
+            return rand.nextDouble(-1, -0.5);
         }
         else if(clouds < 2){
             return  rand.nextDouble(-1, -0.5);
         }
         else{
             if(clouds > 4){
-                return rand.nextDouble(0.3, 0.7);
+                return rand.nextDouble(-0.1, 0.3);
             }
             else if (clouds > 2){
-                return rand.nextDouble(-0.2, 0.3);
+                return rand.nextDouble(-0.2, 0.2);
             }
         }
         return 0;
@@ -110,7 +110,7 @@ public class Weather {
             return rand.nextDouble(-0.2, 0.2);
         }
         else if(wind < 80){
-            return rand.nextDouble(0, 0.1);
+            return rand.nextDouble(-0.3, -0.1);
         }
         else{
             return rand.nextDouble(-0.5, -0.3);
