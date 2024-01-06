@@ -43,7 +43,8 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
     private ArrayList<Flight> flights = new ArrayList<>();
     private int allFlightsCount;
     private ArrayList<String> existingFlightNumbers = new ArrayList<>();
-    private double currentDelayProbability;
+    private double currentDelayProbability = 0;
+
 
     /** Singleton design pattern */
     private static final Admin instance = new Admin();
@@ -142,9 +143,7 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
         Airport destination = airports[random.nextInt(airports.length)];
         while(source == destination) destination = airports[random.nextInt(airports.length)];
 
-        // TODO delay
-
-        return new Flight(isArrival, hour, airplane, flightNumber, pilots, runway, numberOfOccupiedSeats, ticketPrices,
+        return new Flight(isArrival, hour, hour, airplane, flightNumber, pilots, runway, numberOfOccupiedSeats, ticketPrices,
                 source, destination, 0);
 
     }
@@ -249,28 +248,38 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
         double delayProb = 0;
 
         double temp = weather.getTemperature();
-        double[] tempCoefficients = new double[]{0.02000000e+00, -2.27544944e-02, 1.06078294e-03, 3.61321648e-06, -1.04910230e-06, 6.27672899e-09, 4.49151696e-10, -4.71116785e-12, -5.21281385e-14, 6.42199681e-16};
+        double[] tempCoefficients = new double[]{0.02, -2.27544944e-02, 1.06078294e-03, 3.61321648e-06, -1.04910230e-06, 6.27672899e-09, 4.49151696e-10, -4.71116785e-12, -5.21281385e-14, 6.42199681e-16};
         double tempProb = 0;
         for(int i = 0; i < tempCoefficients.length; i++)
             tempProb += tempCoefficients[i] * Math.pow(temp, i);
+        if(tempProb < 0.02) tempProb = 0.02;
 
         double snow = weather.getSnow();
         double[] snowCoefficients = new double[]{0.02, -0.0227193, 0.01569328, -0.00012821};
         double snowProb = 0;
         for(int i = 0; i < snowCoefficients.length; i++)
             snowProb += snowCoefficients[i] * Math.pow(snow, i);
-
+        if(snowProb < 0.02) snowProb = 0.02;
 
         double rain = weather.getRain();
         double[] rainCoefficients = new double[]{0.02, -2.83991270e-03, 2.45207523e-04, -2.50406842e-07};
         double rainProb = 0;
         for(int i = 0; i < rainCoefficients.length; i++)
             rainProb += rainCoefficients[i] * Math.pow(rain, i);
+        if(rainProb < 0.02) rainProb = 0.02;
 
         delayProb += tempProb + snowProb + rainProb;
-        currentDelayProbability = delayProb;
+        if(delayProb > 0.90) delayProb = 0.90;
 
-        log("The flight delay probability has been set to " + getCurrentDelayProbability());
+        if(delayProb > currentDelayProbability) {
+            addDelaysToFlights(delayProb);
+            setCurrentDelayProbability(delayProb);
+            log("The flight delay probability has been set to " + getCurrentDelayProbability());
+            notifyObservers(getFlights());
+
+        } else {
+            log("The flight delay probability remains the same: " + getCurrentDelayProbability());
+        }
 
         //checking weather values and setting states of airplane and runway
         double snowValue = 18; //changed from 0.6 to 18
@@ -293,6 +302,45 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
         }
     }
 
+    /** add delays to the flights */
+    private void addDelaysToFlights(double prob) {
+
+        Random random = new Random();
+        double probDiff = prob - currentDelayProbability;
+        double newProb = (probDiff)/(1-currentDelayProbability);
+
+        for(Flight flight: flights) {
+            if(flight.getDelayMinutes() == 0) {
+                if(newProb > random.nextDouble()) {
+                    int flightDelay = 0;
+                    if(prob < 0.10) {
+                        flightDelay = random.nextInt(3,61);
+                    } else if(prob < 0.20) {
+                        flightDelay = random.nextInt(3, 121);
+                    } else if(prob < 0.30) {
+                        flightDelay = random.nextInt(3,241);
+                    } else {
+                        flightDelay = random.nextInt(3, 601);
+                    }
+                    flight.setDelayMinutes(flightDelay);
+                }
+            } else {
+                if(probDiff > random.nextDouble()) {
+                    int additionalFlightDelay = 0;
+                    if(prob < 0.10) {
+                        additionalFlightDelay = random.nextInt(10,31);
+                    } else if(prob < 0.20) {
+                        additionalFlightDelay = random.nextInt(10, 61);
+                    } else if(prob < 0.30) {
+                        additionalFlightDelay = random.nextInt(10,121);
+                    } else {
+                        additionalFlightDelay = random.nextInt(10, 301);
+                    }
+                    flight.setDelayMinutes(flight.getDelayMinutes()+additionalFlightDelay);
+                }
+            }
+        }
+    }
 
     // checking state of runway and airplane
     public void checkFlight(Flight flight){
@@ -313,13 +361,18 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
 
     /** GETTERS AND SETTERS */
     public ArrayList<Flight> getFlights() {
-        return new ArrayList<>(flights);
+        return flights.stream().sorted(Comparator.comparing(Flight::getActualHour))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
     public ArrayList<Flight> getArrivals() {
-        return flights.stream().filter(Flight::isArrival).collect(Collectors.toCollection(ArrayList::new));
+        return flights.stream().filter(Flight::isArrival)
+                .sorted(Comparator.comparing(Flight::getActualHour))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
     public ArrayList<Flight> getDepartures() {
-        return flights.stream().filter(Predicate.not(Flight::isArrival)).collect(Collectors.toCollection(ArrayList::new));
+        return flights.stream().filter(Predicate.not(Flight::isArrival))
+                .sorted(Comparator.comparing(Flight::getActualHour))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
     public void setFlights(ArrayList<Flight> flights) { this.flights = flights; }
     public ArrayList<Runway> getRunways() {return runways;}

@@ -70,6 +70,7 @@ public class SimulationViewController implements Observer<Weather> {
     public void updateCurrentTimeLabel(String newText) {
         currentTimeLabel.setText(newText);
     }
+
     ObservableList<Flight> departures = null;
     ObservableList<Flight> arrivals = null;
     ObservableList<Log> simulationLogs = null;

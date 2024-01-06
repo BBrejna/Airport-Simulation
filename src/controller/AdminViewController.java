@@ -47,9 +47,11 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
     @Override
     public void observerUpdateState(ArrayList<Flight> flights) {
 
-        log("Adding flights");
+        log("Adding flights to the Admin UI");
 
         Platform.runLater(() -> {
+
+            delayInfo.setText("Current flight delay: " + Admin.getInstance().getCurrentDelayProbability());
 
             flightsTableView.getItems().clear();
 
@@ -63,20 +65,22 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
                     type = "ARRIVAL";
                 }
 
+                String delay = Integer.toString(flight.getDelayMinutes());
+                if(delay.length() == 2) delay = "0" + delay;
+                else if(delay.length() == 1) delay = "00" + delay;
+
                 FlightProperty flightProperty = new FlightProperty(
                         flight.getFlightNumber(),
                         flight.getHour(),
                         city,
                         type,
                         flight.getAirplane().getAirplaneModel().getModelName(),
-                        Integer.toString(flight.getDelayMinutes())
+                        delay
                 );
 
                 flightsProperties.add(flightProperty);
 
             }
-
-
 
             flightsTableView.getItems().addAll(flightsProperties);
 

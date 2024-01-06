@@ -148,6 +148,6 @@ public class Salesman extends Person implements Logger {
         log("Attention, flight no. " + flight.getFlightNumber() + " flying to "
                 +flight.getDestinationPoint().getAirportName()+" in "+ flight.getDestinationPoint().getCity() +
                 " is going to take off with a delay of " + flight.getDelayMinutes() +
-                " due to bad weather conditions. The new departure time is "+ Tools.convertMinutesToTime(flight.getHour()));
+                " due to bad weather conditions. The new departure time is "+ Tools.convertMinutesToTime(flight.getActualHour()));
     }
 }

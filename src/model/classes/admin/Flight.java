@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Flight {
     private boolean isArrival;
     private int hour;
+    private int actualHour;
     private Airplane airplane;
     private String flightNumber;
     private ArrayList<Pilot> pilots;
@@ -19,10 +20,11 @@ public class Flight {
     private int delayMinutes;
 
 
-    public Flight(boolean isArrival, int hour, Airplane airplane, String flightNumber, ArrayList<Pilot> pilots, Runway runway,
+    public Flight(boolean isArrival, int hour, int actualHour, Airplane airplane, String flightNumber, ArrayList<Pilot> pilots, Runway runway,
                   int[] numOfOccupiedSeats, double[] ticketPrice, Airport sourcePoint, Airport destinationPoint, int delayMinutes) {
         this.isArrival = isArrival;
         this.hour = hour;
+        this.actualHour = actualHour;
         this.airplane = airplane;
         this.flightNumber = flightNumber;
         this.pilots = pilots;
@@ -40,7 +42,7 @@ public class Flight {
         for (int i = 0; i < 6-getFlightNumber().length(); i++) {
             additionalSpaces += " ";
         }
-        return Tools.convertMinutesToTime(getHour()) + " | "  + getFlightNumber() + additionalSpaces + " | " + (isArrival() ? getSourcePoint().getCity(): getDestinationPoint().getCity());
+        return Tools.convertMinutesToTime(getActualHour()) + " | "  + getFlightNumber() + additionalSpaces + " | " + (isArrival() ? getSourcePoint().getCity(): getDestinationPoint().getCity());
     }
 
 
@@ -89,7 +91,8 @@ public class Flight {
     public void setHour(int hour) {
         this.hour = hour;
     }
-
+    public int getActualHour() {return actualHour;}
+    public void setActualHour(int actualHour) {this.actualHour = actualHour;}
     public Airplane getAirplane() {
         return airplane;
     }
@@ -149,17 +152,13 @@ public class Flight {
     public Airport getDestinationPoint() {
         return destinationPoint;
     }
-
     public void setDestinationPoint(Airport destinationPoint) {
         this.destinationPoint = destinationPoint;
     }
-
-    public int getDelayMinutes() {
-        return delayMinutes;
-    }
-
+    public int getDelayMinutes() {return delayMinutes;}
     public void setDelayMinutes(int delayMinutes) {
         this.delayMinutes = delayMinutes;
+        this.actualHour += delayMinutes;
     }
     public boolean isFull(){
         for (int i = 0; i < this.numOfOccupiedSeats.length; i++) {

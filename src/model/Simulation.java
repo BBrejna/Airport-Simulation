@@ -163,7 +163,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                 });
                 Admin.getInstance().setFlights(futureFlights);
                 time = stopTime;
-                if (time >= MINUTES_IN_DAY) {
+                if (time >= MINUTES_IN_DAY && Admin.getInstance().getFlights().isEmpty()) {
                     log("SIMULATION HAS JUST FINISHED!");
                     time = MINUTES_IN_DAY;
                     updateUI();
