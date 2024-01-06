@@ -1,5 +1,5 @@
 package model.classes;
 
 public interface Observer<T> {
-    void updateState(T t);
+    void observerUpdateState(T t);
 }

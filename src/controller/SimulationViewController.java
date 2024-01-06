@@ -214,7 +214,7 @@ public class SimulationViewController implements Observer<Weather> {
     }
 
     @Override
-    public void updateState(Weather weather) {
+    public void observerUpdateState(Weather weather) {
         Platform.runLater(() -> {weatherTableView.getItems().clear();  // Clear previous items
 
             // Populate TableView with new items

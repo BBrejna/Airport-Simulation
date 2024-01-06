@@ -244,7 +244,7 @@ public final class Admin extends Person implements Observer<Weather>, Logger{
 
     /** observe weather and calculate delay probability */
     @Override
-    public void updateState(Weather weather) {
+    public void observerUpdateState(Weather weather) {
 
         double delayProb = 0;
 

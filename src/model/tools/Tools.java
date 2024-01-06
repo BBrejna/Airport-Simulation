@@ -5,7 +5,8 @@ public class Tools {
     // POTRZEBUJE INFORMACJI W JAKICH JEDNOSTKACH GENEROWANY JEST CZAS, PRZUJALEM ZE GENERUJEMY GO W MINUTACH
     // To dobrze przyjales XD
     public static String convertMinutesToTime(int minutes) {
-        if (minutes < 0 || minutes >= 1440) {
+        minutes = (minutes+1440)%1440;
+        if (minutes < 0) {
             return "Nieprawidłowa liczba minut";
         }
 

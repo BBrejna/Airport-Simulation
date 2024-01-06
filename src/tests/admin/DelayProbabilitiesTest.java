@@ -9,7 +9,7 @@ public class DelayProbabilitiesTest {
 
         Admin admin = Admin.getInstance();
         Weather weather = new Weather(-3,1,0,1,1,1);
-        admin.updateState(weather);
+        admin.observerUpdateState(weather);
         System.out.println(admin.getCurrentDelayProbability());
 
 

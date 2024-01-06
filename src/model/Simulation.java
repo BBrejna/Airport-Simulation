@@ -80,20 +80,20 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
             t = new Thread (this, threadName);
 
             this.timeDelta = timeDelta;
-            log("PREPARING SIMULATION");
+            log("PREPARING SIMULATION", false);
 
             Random random = new Random();
             int flightsCount = random.nextInt(100,500);
             int runwaysNumber = random.nextInt(3, 6);
             Admin.getInstance().generateFlights(flightsCount, runwaysNumber);
             generateArrivingPassengers();
-            log("Generating " + Admin.getInstance().getAllFlightsCount() +" flights");
+            log("Generating " + Admin.getInstance().getAllFlightsCount() +" flights", false);
             System.out.println("departures: "+Admin.getInstance().getDepartures().size());
             int peopleCount = random.nextInt(Admin.getInstance().getDepartures().size()*seats_median()/2,
                     (int) (Admin.getInstance().getDepartures().size()*seats_median()*1.5));
 
             int passengersGenerated = generatePeople(peopleCount);
-            log("Generating passengers: "+passengersGenerated+"/"+peopleCount+" succeeded");
+            log("Generating passengers: "+passengersGenerated+"/"+peopleCount+" succeeded", false);
             System.out.println("Seats median: "+seats_median());
             time = -1*((LAST_CALL_TIME+timeDelta-1)/timeDelta)*timeDelta;
             isSimulationStarted = true;
@@ -137,20 +137,24 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                     stopTime = time+timeDelta;
                 }
 
+                int prevTime = time;
+
                 ArrayList<Flight> flights = Admin.getInstance().getFlights();
                 ArrayList<Flight> futureFlights = new ArrayList<>();
-//                System.out.println("DEBUG "+time+" "+stopTime);
+//                System.out.println("DEBUG "+prevTime+" "+stopTime);
                 flights.forEach(flight -> {
 //                    System.out.println("DEBUG "+flight.getHour());
-                    if (flight.getHour() <= time) {
+                    if (flight.getHour() <= prevTime) {
                         return;
                     }
                     else if (flight.getHour() <= stopTime) {
+                        time = flight.getHour();
                         Admin.getInstance().checkFlight(flight);
-                        log("Time "+convertMinutesToTime(flight.getHour())+", Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departed")+"!");
+                        log("Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departed")+"!");
                     }
                     else {
-                        if (time < flight.getHour()-LAST_CALL_TIME && flight.getHour()-LAST_CALL_TIME <= stopTime) {
+                        if (prevTime < flight.getHour()-LAST_CALL_TIME && flight.getHour()-LAST_CALL_TIME <= stopTime) {
+                            time = flight.getHour() - LAST_CALL_TIME;
 //                            System.out.println("Flight nr "+flight.getFlightNumber()+" is "+(flight.isArrival() ? "arriving" : "departuring")+" in "+LAST_CALL_TIME+" minutes @ "+convertMinutesToTime(flight.getHour())+"! (delay = "+flight.getDelayMinutes()+")");
                             Salesman.getInstance().announceLastCall(flight);
                         }
