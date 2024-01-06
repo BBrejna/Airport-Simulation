@@ -1,7 +1,5 @@
 package model.classes.admin;
 
-import model.classes.logging.Log;
-import model.classes.logging.Logger;
 import model.classes.people.Pilot;
 import model.tools.Tools;
 

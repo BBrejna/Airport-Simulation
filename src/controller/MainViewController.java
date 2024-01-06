@@ -16,7 +16,6 @@ public class MainViewController { //todo somehow locking buttons when simulation
     public Parent adminContent;
     public Parent salesmanContent;
     public Parent workmanContent;
-
     private Button disabledButton;
     private Parent currentContent;
 

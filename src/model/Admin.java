@@ -2,13 +2,17 @@ package model;
 
 import data.admin.AirportSet;
 import model.classes.Observer;
-import model.classes.admin.*;
+import model.classes.admin.Airplane;
+import model.classes.admin.Airport;
+import model.classes.admin.Flight;
+import model.classes.admin.Runway;
 import model.classes.logging.Log;
 import model.classes.logging.Logger;
 import model.classes.people.Person;
 import model.classes.people.Pilot;
 import model.classes.simulation.Weather;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
@@ -34,6 +38,7 @@ public final class Admin extends Person implements Observer<Weather>, Logger{
      * Sum: 475
      */
     private final int[] HOUR_DISTRIBUTION = {20, 30, 100, 70, 75, 80, 70, 40};
+    private final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("00.00");
     private ArrayList<Runway> runways = new ArrayList<>();
     private ArrayList<Flight> flights = new ArrayList<>();
     private int allFlightsCount;
@@ -73,6 +78,8 @@ public final class Admin extends Person implements Observer<Weather>, Logger{
 
         //sort flights by hour
         flights.sort(Comparator.comparing(Flight::getHour));
+
+        log(Integer.toString(getFlights().size()) + " flights has been generated");
 
         return getFlights();
 
@@ -263,6 +270,7 @@ public final class Admin extends Person implements Observer<Weather>, Logger{
         delayProb += tempProb + snowProb + rainProb;
         currentDelayProbability = delayProb;
 
+        log("The flight delay probability has been set to " + getCurrentDelayProbability());
 
         //checking weather values and setting states of airplane and runway
         double snowValue = 18; //changed from 0.6 to 18
@@ -318,6 +326,8 @@ public final class Admin extends Person implements Observer<Weather>, Logger{
     public int getAllFlightsCount() {return allFlightsCount;}
     public ArrayList<String> getExistingFlightNumbers() {return existingFlightNumbers;}
     public void setAllFlightsCount(int allFlightsCount) {this.allFlightsCount = allFlightsCount;}
-    public double getCurrentDelayProbability() {return currentDelayProbability;}
+    public String getCurrentDelayProbability() {
+        return DECIMAL_FORMAT.format(100 * currentDelayProbability) + "%";
+    }
     public void setCurrentDelayProbability(double currentDelayProbability) {this.currentDelayProbability = currentDelayProbability;}
 }
