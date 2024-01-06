@@ -156,7 +156,8 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                         if (areBinsFull) flight.getAirplane().setAreBinsFull(true);
                         if (isAirplaneBroken) flight.getAirplane().setBroken(true);
 
-                        Admin.getInstance().checkFlight(flight);
+                        if (!flight.isArrival()) Admin.getInstance().checkFlight(flight);
+
                         log("Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departed")+"!");
                     }
                     else {

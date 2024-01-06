@@ -7,7 +7,7 @@ import model.Simulation;
 
 import java.io.IOException;
 
-public class MainViewController { //todo somehow locking buttons when simulation is running
+public class MainViewController {
     public Button simulationButton;
     public Button adminButton;
     public Button salesmanButton;
