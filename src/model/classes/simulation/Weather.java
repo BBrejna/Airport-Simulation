@@ -14,14 +14,14 @@ public class Weather {
     temperature: -20 - 40 celcius
     wind: 0 - 120 kph
     rain: 0 - 50 mm/h
-    snow: 0 - 30 mm/h
+    snow: 0 - 10 mm/h
     fog: 1 - 5
     clouds: 1 - 5
      */
 
     public Weather(){
         Random rand = new Random();
-        this.temperature = rand.nextDouble(-20, 40);
+        this.temperature = rand.nextDouble(-20, 35);
         this.wind = rand.nextDouble(0, 120);
         this.rain = rand.nextDouble(0, 50);
         this.snow = rand.nextDouble(0, 30);
@@ -43,8 +43,8 @@ public class Weather {
 
         temperature = Math.min(40, Math.max(-20, temperature + rand.nextDouble(-1, 1)));
         wind = Math.min(120, Math.max(0, wind + rand.nextDouble(-5, 5)));
-        rain = generateRain(temperature);
-        snow = generateSnow(temperature);
+        rain = generateRain(temperature, clouds);
+        snow = generateSnow(temperature, clouds);
         clouds = generateClouds(wind);
         fog = generateFog(wind);
     }
@@ -79,34 +79,46 @@ public class Weather {
             return 1;
         }
     }
-    public double generateSnow(double temperature){
+    public double generateSnow(double temperature, double clouds){
         Random rand = new Random();
-        if(temperature < -10){
-            return rand.nextDouble(20, 30);
+        if(temperature < -10 && clouds > 3){
+            return rand.nextDouble(5, 10);
         }
-        else if(temperature < 0){
-            return rand.nextDouble(10, 20);
+        else if(temperature < 0 && clouds > 2){
+            return rand.nextDouble(1, 5);
         }
-        else if(temperature < 5){
-            return rand.nextDouble(0, 10);
+        else if(temperature < 5 && clouds > 2){
+            return rand.nextDouble(0, 1);
         }
         else{
             return 0;
         }
     }
-    public double generateRain(double temperature){
+    public double generateRain(double temperature, double clouds){
         Random rand = new Random();
-        if(temperature < 0){
-            return rand.nextDouble(0, 10);
+        if(temperature < 0 && temperature > -5 && clouds > 2){
+            return rand.nextDouble(0, 3);
         }
-        else if(temperature < 5){
+        else if(temperature < 5 && temperature > 0 && clouds == 5){
             return rand.nextDouble(10, 30);
         }
-        else if(temperature < 10){
-            return rand.nextDouble(30, 50);
+        else if(temperature < 5 && temperature > 0 && clouds > 3){
+            return rand.nextDouble(8, 15);
         }
-        else if(temperature < 15){
-            return rand.nextDouble(15, 35);
+        else if(temperature < 5 && temperature > 0 && clouds > 2){
+            return rand.nextDouble(2, 8);
+        }
+        else if(temperature < 10 && temperature > 5 && clouds > 3){
+            return rand.nextDouble(8, 20);
+        }
+        else if(temperature < 10 && temperature > 5 && clouds > 2){
+            return rand.nextDouble(0, 8);
+        }
+        else if(temperature < 15 && temperature > 10 && clouds > 2){
+            return rand.nextDouble(0, 8);
+        }
+        else if(temperature < 15 && temperature > 10 && clouds > 1){
+            return rand.nextDouble(0, 3);
         }
         else{
             return 0;
