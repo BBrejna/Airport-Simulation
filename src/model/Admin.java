@@ -2,13 +2,13 @@ package model;
 
 import data.admin.AirportSet;
 import model.classes.Observer;
+import model.classes.Subject;
 import model.classes.admin.Airplane;
 import model.classes.admin.Airport;
 import model.classes.admin.Flight;
 import model.classes.admin.Runway;
 import model.classes.logging.Log;
 import model.classes.logging.Logger;
-import model.classes.people.Person;
 import model.classes.people.Pilot;
 import model.classes.simulation.Weather;
 
@@ -19,7 +19,7 @@ import java.util.Random;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public final class Admin extends Person implements Observer<Weather>, Logger{
+public final class Admin extends Subject<ArrayList<Flight>> implements Observer<Weather>, Logger{
     private ArrayList<Log> logs = new ArrayList<>();
     public ArrayList<Log> getLogs() {
         return logs;
@@ -46,11 +46,9 @@ public final class Admin extends Person implements Observer<Weather>, Logger{
     private double currentDelayProbability;
 
     /** Singleton design pattern */
-    private static final Admin instance = new Admin("78013058819", "Jan", "Nowak");
+    private static final Admin instance = new Admin();
 
-    private Admin(String pesel, String name, String surname) {
-        super(pesel, name, surname);
-    }
+    private Admin() {}
 
     public static Admin getInstance() {
         return instance;
@@ -79,7 +77,9 @@ public final class Admin extends Person implements Observer<Weather>, Logger{
         //sort flights by hour
         flights.sort(Comparator.comparing(Flight::getHour));
 
-        log(Integer.toString(getFlights().size()) + " flights has been generated");
+        log(getFlights().size() + " flights has been generated");
+
+        notifyObservers(getFlights());
 
         return getFlights();
 
