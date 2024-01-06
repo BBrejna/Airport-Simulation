@@ -30,7 +30,7 @@
         </rowConstraints>
         <VBox styleClass="monospacedText" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <Label text="DEPARTURES:"/>
-            <TableView fx:id="departuresTable">
+            <TableView fx:id="departuresTable" VBox.vgrow="ALWAYS">
                 <columnResizePolicy>
                     <TableView fx:constant = "CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
@@ -60,7 +60,7 @@
         </VBox>
         <VBox styleClass="monospacedText" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <Label text="ARRIVALS:"/>
-            <TableView fx:id="arrivalsTable">
+            <TableView fx:id="arrivalsTable" VBox.vgrow="ALWAYS">
                 <columnResizePolicy>
                     <TableView fx:constant = "CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
