@@ -1,5 +1,7 @@
 package controller;
 
+import controller.elementsProperties.FlightProperty;
+import controller.elementsProperties.WeatherProperty;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,37 +21,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import model.classes.simulation.Weather;
+import model.tools.Tools;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class SimulationViewController implements Observer<Weather> {
+public class SimulationViewController {
+    public TableView<FlightProperty> departuresTable;
+    public TableView<FlightProperty> arrivalsTable;
     @FXML
     private TableView<WeatherProperty> weatherTableView;
-    @FXML
-    private Label temperatureLabel;
-
-    @FXML
-    private Label windLabel;
-
-    @FXML
-    private Label rainLabel;
-
-    @FXML
-    private Label snowLabel;
-
-    @FXML
-    private Label fogLabel;
-
-    @FXML
-    private Label cloudsLabel;
     @FXML
     public VBox BottomVBox;
     @FXML
     public Button settingsButton;
-    @FXML
-    private ListView<Flight> arrivalsList;
-    @FXML
-    private ListView<Flight> departuresList;
     @FXML
     private Label currentTimeLabel;
     @FXML
@@ -67,20 +52,16 @@ public class SimulationViewController implements Observer<Weather> {
     @FXML
     private ListView<Log> simulationLogsList;
 
+
     public void updateCurrentTimeLabel(String newText) {
         currentTimeLabel.setText(newText);
     }
 
-    ObservableList<Flight> departures = null;
-    ObservableList<Flight> arrivals = null;
     ObservableList<Log> simulationLogs = null;
     ObservableList<Log> adminLogs = null;
     ObservableList<Log> salesmanLogs = null;
     ObservableList<Log> workmanLogs = null;
-    public void updateTimeTables() {
-        this.departures.setAll(Admin.getInstance().getDepartures());
-        this.arrivals.setAll(Admin.getInstance().getArrivals());
-    }
+
     public void updateLogs() {
         this.simulationLogs.setAll(Simulation.getInstance().getLogs());
 
@@ -138,12 +119,8 @@ public class SimulationViewController implements Observer<Weather> {
     public void initialize() {
         ControllersHandler.getInstance().setSimulationViewController(this);
         Simulation.getInstance().addObserver(Admin.getInstance());
-        Simulation.getInstance().addObserver(this);
-
-        departures = FXCollections.observableArrayList(Admin.getInstance().getDepartures());
-        departuresList.setItems(departures);
-        arrivals = FXCollections.observableArrayList(Admin.getInstance().getArrivals());
-        arrivalsList.setItems(arrivals);
+        Simulation.getInstance().addObserver(new WeatherObserver());
+        Admin.getInstance().addObserver(new FlightsObserver());
 
         simulationLogs = FXCollections.observableArrayList(Simulation.getInstance().getLogs());
         simulationLogsList.setItems(simulationLogs);
@@ -214,19 +191,40 @@ public class SimulationViewController implements Observer<Weather> {
         Simulation.getInstance().setTimeDelta(selectedValue);
     }
 
-    @Override
-    public void observerUpdateState(Weather weather) {
-        Platform.runLater(() -> {weatherTableView.getItems().clear();  // Clear previous items
+    class WeatherObserver implements Observer<Weather> {
+        @Override
+        public void observerUpdateState(Weather weather) {
+            Platform.runLater(() -> {
+                weatherTableView.getItems().clear();  // Clear previous items
 
-            // Populate TableView with new items
-            weatherTableView.getItems().addAll(
-                    new WeatherProperty("Temperature [°C]", weather.getTemperature()),
-                    new WeatherProperty("Wind [knots]", weather.getWind()),
-                    new WeatherProperty("Rain [mm/h]", weather.getRain()),
-                    new WeatherProperty("Snow [mm/h]", weather.getSnow()),
-                    new WeatherProperty("Fog [RS]", weather.getFog()),
-                    new WeatherProperty("Clouds [RS]", weather.getClouds())
-            );
-        });
+                // Populate TableView with new items
+                weatherTableView.getItems().addAll(
+                        new WeatherProperty("Temperature [°C]", weather.getTemperature()),
+                        new WeatherProperty("Wind [knots]", weather.getWind()),
+                        new WeatherProperty("Rain [mm/h]", weather.getRain()),
+                        new WeatherProperty("Snow [mm/h]", weather.getSnow()),
+                        new WeatherProperty("Fog [RS]", weather.getFog()),
+                        new WeatherProperty("Clouds [RS]", weather.getClouds())
+                );
+            });
+        }
+    }
+    class FlightsObserver implements Observer<ArrayList<Flight>> {
+        @Override
+        public void observerUpdateState(ArrayList<Flight> flights) {
+            Platform.runLater(() -> {
+                departuresTable.getItems().clear();  // Clear previous items
+                arrivalsTable.getItems().clear();  // Clear previous items
+
+                flights.forEach(flight -> {
+                    if (flight.isArrival()) {
+                        arrivalsTable.getItems().add(new FlightProperty(flight.getFlightNumber(), flight.getHour(), flight.getSourcePoint().getCity(), "ARRIVAL", "AIRPLANE", Tools.convertMinutesToTime(flight.getActualHour())));
+                    }
+                    else {
+                        departuresTable.getItems().add(new FlightProperty(flight.getFlightNumber(), flight.getHour(), flight.getDestinationPoint().getCity(), "DEPARTURE", "AIRPLANE", Tools.convertMinutesToTime(flight.getActualHour())));
+                    }
+                });
+            });
+        }
     }
 }

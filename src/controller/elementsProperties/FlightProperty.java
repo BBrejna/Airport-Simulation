@@ -1,4 +1,4 @@
-package controller;
+package controller.elementsProperties;
 
 import model.tools.Tools;
 

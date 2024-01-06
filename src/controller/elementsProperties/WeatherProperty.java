@@ -1,4 +1,4 @@
-package controller;
+package controller.elementsProperties;
 
 public class WeatherProperty {
     private String property;

@@ -374,7 +374,10 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
                 .sorted(Comparator.comparing(Flight::getActualHour))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
-    public void setFlights(ArrayList<Flight> flights) { this.flights = flights; }
+    public void setFlights(ArrayList<Flight> flights) {
+        this.flights = flights;
+        notifyObservers(getFlights());
+    }
     public ArrayList<Runway> getRunways() {return runways;}
     public int getAllFlightsCount() {return allFlightsCount;}
     public ArrayList<String> getExistingFlightNumbers() {return existingFlightNumbers;}

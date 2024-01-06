@@ -48,7 +48,6 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         if (simulationViewController != null) {
             Platform.runLater(() -> {
                 simulationViewController.updateCurrentTimeLabel(convertMinutesToTime((time + MINUTES_IN_DAY) % MINUTES_IN_DAY));  // Change the text accordingly
-                simulationViewController.updateTimeTables();
                 simulationViewController.updateLogs();
             });
         }

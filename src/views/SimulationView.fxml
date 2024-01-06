@@ -30,11 +30,63 @@
         </rowConstraints>
         <VBox styleClass="monospacedText" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <Label text="DEPARTURES:"/>
-            <ListView VBox.vgrow="ALWAYS" fx:id="departuresList"/>
+            <TableView fx:id="departuresTable">
+                <columnResizePolicy>
+                    <TableView fx:constant = "CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+                <columns>
+                    <TableColumn text="Flight" prefWidth="60">
+                        <cellValueFactory>
+                            <javafx.scene.control.cell.PropertyValueFactory property="flightNumber"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="City" prefWidth="110">
+                        <cellValueFactory>
+                            <javafx.scene.control.cell.PropertyValueFactory property="city"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Sched." prefWidth="60">
+                        <cellValueFactory>
+                            <javafx.scene.control.cell.PropertyValueFactory property="hour"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Est." prefWidth="60">
+                        <cellValueFactory>
+                            <javafx.scene.control.cell.PropertyValueFactory property="delay"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
         </VBox>
         <VBox styleClass="monospacedText" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <Label text="ARRIVALS:"/>
-            <ListView VBox.vgrow="ALWAYS" fx:id="arrivalsList"/>
+            <TableView fx:id="arrivalsTable">
+                <columnResizePolicy>
+                    <TableView fx:constant = "CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+                <columns>
+                    <TableColumn text="Flight" prefWidth="60">
+                        <cellValueFactory>
+                            <javafx.scene.control.cell.PropertyValueFactory property="flightNumber"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="City" prefWidth="110">
+                        <cellValueFactory>
+                            <javafx.scene.control.cell.PropertyValueFactory property="city"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Sched." prefWidth="60">
+                        <cellValueFactory>
+                            <javafx.scene.control.cell.PropertyValueFactory property="hour"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Est." prefWidth="60">
+                        <cellValueFactory>
+                            <javafx.scene.control.cell.PropertyValueFactory property="delay"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
         </VBox>
         <VBox GridPane.columnIndex="2" GridPane.rowIndex="0">
             <VBox>
@@ -52,7 +104,7 @@
         </VBox>
     </GridPane>
     <HBox minHeight="190">
-        <VBox prefWidth="250">
+        <VBox prefWidth="290">
             <Label text="Weather:"/>
             <TableView fx:id="weatherTableView">
                 <columnResizePolicy>
