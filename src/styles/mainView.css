@@ -8,6 +8,3 @@
 Button:hover,disabled {
     -fx-background-color: #c9c9c9;
 }
-#BottomVBox {
-    -fx-background-color: green;
-}

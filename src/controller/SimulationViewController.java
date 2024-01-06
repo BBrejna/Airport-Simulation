@@ -26,23 +26,6 @@ public class SimulationViewController implements Observer<Weather> {
     @FXML
     private TableView<WeatherProperty> weatherTableView;
     @FXML
-    private Label temperatureLabel;
-
-    @FXML
-    private Label windLabel;
-
-    @FXML
-    private Label rainLabel;
-
-    @FXML
-    private Label snowLabel;
-
-    @FXML
-    private Label fogLabel;
-
-    @FXML
-    private Label cloudsLabel;
-    @FXML
     public VBox BottomVBox;
     @FXML
     public Button settingsButton;
@@ -115,7 +98,7 @@ public class SimulationViewController implements Observer<Weather> {
     }
 
     private void setLineBreaker(ListView<Log> listView) {
-        listView.setCellFactory(param -> new ListCell<Log>() {
+        listView.setCellFactory(param -> new ListCell<>() {
             private Text text = new Text();
 
             @Override
