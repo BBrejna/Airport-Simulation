@@ -143,18 +143,25 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                 ArrayList<Flight> futureFlights = new ArrayList<>();
 //                System.out.println("DEBUG "+prevTime+" "+stopTime);
                 flights.forEach(flight -> {
-//                    System.out.println("DEBUG "+flight.getHour());
-                    if (flight.getHour() <= prevTime) {
+//                    System.out.println("DEBUG "+flight.getActualHour());
+                    if (flight.getActualHour() <= prevTime) {
                         return;
                     }
-                    else if (flight.getHour() <= stopTime) {
-                        time = flight.getHour();
+                    else if (flight.getActualHour() <= stopTime) {
+                        time = flight.getActualHour();
+
+                        int tmp = (new Random()).nextInt(0,5);
+                        boolean isAirplaneBroken = tmp == 0;
+                        boolean areBinsFull = tmp <= 3;
+                        if (areBinsFull) flight.getAirplane().setAreBinsFull(true);
+                        if (isAirplaneBroken) flight.getAirplane().setBroken(true);
+
                         Admin.getInstance().checkFlight(flight);
                         log("Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departed")+"!");
                     }
                     else {
-                        if (prevTime < flight.getHour()-LAST_CALL_TIME && flight.getHour()-LAST_CALL_TIME <= stopTime) {
-                            time = flight.getHour() - LAST_CALL_TIME;
+                        if (prevTime < flight.getActualHour()-LAST_CALL_TIME && flight.getActualHour()-LAST_CALL_TIME <= stopTime) {
+                            time = flight.getActualHour() - LAST_CALL_TIME;
 //                            System.out.println("Flight nr "+flight.getFlightNumber()+" is "+(flight.isArrival() ? "arriving" : "departuring")+" in "+LAST_CALL_TIME+" minutes @ "+convertMinutesToTime(flight.getHour())+"! (delay = "+flight.getDelayMinutes()+")");
                             Salesman.getInstance().announceLastCall(flight);
                         }

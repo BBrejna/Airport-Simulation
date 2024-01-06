@@ -59,6 +59,9 @@ public class Workman extends Person implements Logger {
     }
     // Metoda wykonujaca strategie
     public void prepareFlight(Airplane airplane, Runway runway, String flightNumber) {
+        emptyBins(airplane, flightNumber);
+        repairPlane(airplane, flightNumber);
+
         // nie trzeba sprawdzac osobno pasu i samolotu bo gdy jeden z nich jest zasniezony to drugi tez itd.
         if (airplane.isSnowy() && airplane.isIced()) {
             setStrategy(new CleanIceSnow());
@@ -109,16 +112,16 @@ public class Workman extends Person implements Logger {
     }*/
 
 
-    public void repairPlane(Airplane airplane) {
+    public void repairPlane(Airplane airplane, String flightNumber) {
         if (airplane.isBroken()) {
-            log("The plane was repaired");
+            log("The plane for flight "+flightNumber+" was repaired");
             airplane.setBroken(false);
         }
     }
 
-    public void emptyBins(Airplane airplane) {
+    public void emptyBins(Airplane airplane, String flightNumber) {
         if (airplane.isAreBinsFull()) {
-            log("The garbage cans have been emptied");
+            log("The garbage cans on the plane for flight "+flightNumber+" have been emptied");
             airplane.setAreBinsFull(false);
         }
     }
