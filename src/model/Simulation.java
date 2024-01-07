@@ -72,12 +72,11 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
             if (t != null) {
                 clearAllLogs();
 
-                Admin.getInstance().clearAllComponents();
-                Salesman.getInstance().clearAllComponents();
-
                 weather = new Weather();
-                log("!!! RESTARTING SIMULATION... !!!");
+                log("!!! RESTARTING SIMULATION... !!!", false);
             }
+            Admin.getInstance().clearAllComponents();
+            Salesman.getInstance().clearAllComponents();
 
             System.out.println("Starting " +  threadName );
             t = new Thread (this, threadName);
