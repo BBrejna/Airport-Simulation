@@ -27,6 +27,7 @@ public class MainApp extends Application {
             e.consume();
             if(ControllersHandler.getInstance().getMainViewController().getCurrentContent().equals(ControllersHandler.getInstance().getMainViewController().simulationContent) &&
                     !ControllersHandler.getInstance().getSimulationViewController().getPauseButton().isDisabled()) {
+                ControllersHandler.getInstance().getSimulationViewController().handlePauseButtonClick();
                 try {
                     if(((MainViewController)loader.getController()).handleCloseButtonClick()){
                         Platform.exit();
