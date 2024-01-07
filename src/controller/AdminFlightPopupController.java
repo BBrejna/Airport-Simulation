@@ -22,15 +22,15 @@ public class AdminFlightPopupController {
     @FXML
     private CheckBox arrivalCheckBox;
     @FXML
-    private Spinner hourSpinner;
+    private Spinner<Integer> hourSpinner;
     @FXML
-    private Spinner minutesSpinner;
+    private Spinner<Integer> minutesSpinner;
     @FXML
-    private Spinner delaySpinner;
+    private Spinner<Integer> delaySpinner;
     @FXML
-    private ComboBox cityComboBox;
+    private ComboBox<String> cityComboBox;
     @FXML
-    private ComboBox airlineComboBox;
+    private ComboBox<String> airlineComboBox;
     private Stage stage;
 
 
