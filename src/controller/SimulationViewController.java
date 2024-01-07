@@ -189,6 +189,10 @@ public class SimulationViewController {
         // Retrieve the selected value from the popup controller
         int selectedValue = popupController.getSelectedValue();
         Simulation.getInstance().setTimeDelta(selectedValue);
+
+        int value = popupController.getTemperatureValue();
+        Simulation.getInstance().getWeather().setTemperature(value);
+
     }
 
     /*public void handleSetWeatherButtonClick() throws IOException {
@@ -209,22 +213,6 @@ public class SimulationViewController {
         Simulation.getInstance().getWeather().setTemperature(selectedValue);
         //Simulation.getInstance().setTimeDelta(selectedValue);
     }*/
-
-    public void handleSetWeatherButtonClick() throws IOException {
-        handlePauseButtonClick();
-        // Load the popup FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SimulationSetWeather.fxml"));
-        Parent root = loader.load();
-
-        // Create a new stage for the popup
-        Stage popupStage = new Stage();
-
-        // Set the popup controller and stage
-        SimulationSetWeatherController popupController = loader.getController();
-        popupController.display(popupStage, root);
-        handlePlayButtonClick();
-        // The actual value handling is now within the onOkButtonClicked in the controller
-    }
 
     class WeatherObserver implements Observer<Weather> {
         @Override

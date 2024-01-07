@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -15,6 +16,9 @@ public class SimulationSettingsPopupController {
     private Slider slider;
 
     private Stage stage;
+
+    @FXML
+    private TextField textField;
 
     private int oldTimeDeltaValue;
     public void display(Stage stage, Parent root, int value, int maxValue) {
@@ -54,6 +58,7 @@ public class SimulationSettingsPopupController {
     private void onCancelButtonClicked() {
         slider.setValue(oldTimeDeltaValue);
         closeWindow();
+
     }
 
     public int getSelectedValue() {
@@ -65,5 +70,9 @@ public class SimulationSettingsPopupController {
     private void initialize() {
         slider.setMajorTickUnit(1);
         slider.setMinorTickCount(0);
+    }
+
+    public int getTemperatureValue() {
+        return Integer.parseInt(textField.getText().trim());
     }
 }

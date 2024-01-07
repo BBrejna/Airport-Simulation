@@ -18,7 +18,6 @@
         <Button disable="true" fx:id="pauseButton" text="Pause" onAction="#handlePauseButtonClick"/>
         <Button disable="true" fx:id="rerunButton" text="Rerun" onAction="#handleRerunButtonClick"/>
         <Button fx:id="settingsButton" text="Settings" onAction="#handleSettingsButtonClick"/>
-        <Button fx:id="setWeatherButton" text="Set Weather" onAction="#handleSetWeatherButtonClick"/>
     </HBox>
     <GridPane VBox.vgrow="ALWAYS" minHeight="200" gridLinesVisible="true">
         <columnConstraints>

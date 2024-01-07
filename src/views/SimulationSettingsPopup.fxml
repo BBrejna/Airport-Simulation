@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
 <?import java.net.URL?>
+<?import javafx.scene.control.TextField?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controller.SimulationSettingsPopupController"
@@ -24,7 +25,8 @@
         <Label fx:id="valueLabel" text="${slider.value}" />
     </HBox>
     <Slider fx:id="slider" min="1" max="120" value="20" snapToTicks="true"/>
-
+    <Label text="New temperature: "/>
+    <TextField fx:id="textField" />
     <HBox spacing="10">
         <Button text="OK" onAction="#onOkButtonClicked" />
         <Button text="Cancel" onAction="#onCancelButtonClicked" />
