@@ -190,12 +190,57 @@ public class SimulationViewController {
         int selectedValue = popupController.getSelectedValue();
         Simulation.getInstance().setTimeDelta(selectedValue);
 
-        int value = popupController.getTemperatureValue();
-        Simulation.getInstance().getWeather().setTemperature(value);
+        // Setting new temperature
+        double current_temp = Simulation.getInstance().getWeather().getTemperature();
+        try{
+            int value = popupController.getTemperatureValue();
+            Simulation.getInstance().getWeather().setTemperature(value);
+        }catch (NumberFormatException e){
+            Simulation.getInstance().getWeather().setTemperature(current_temp);
+        }
+        //Setting new wind
+        double current_wind = Simulation.getInstance().getWeather().getWind();
+        try{
+            int value = popupController.getWindValue();
+            Simulation.getInstance().getWeather().setWind(value);
+        }catch (NumberFormatException e){
+            Simulation.getInstance().getWeather().setWind(current_temp);
+        }
+        //Setting new rain
+        double current_rain = Simulation.getInstance().getWeather().getRain();
+        try{
+            int value = popupController.getRainValue();
+            Simulation.getInstance().getWeather().setRain(value);
+        }catch (NumberFormatException e){
+            Simulation.getInstance().getWeather().setRain(current_rain);
+        }
+        //Setting new snow
+        double current_snow = Simulation.getInstance().getWeather().getSnow();
+        try{
+            int value = popupController.getSnowValue();
+            Simulation.getInstance().getWeather().setSnow(value);
+        }catch (NumberFormatException e){
+            Simulation.getInstance().getWeather().setSnow(current_snow);
+        }
+        //Setting new fog
+        double current_fog = Simulation.getInstance().getWeather().getFog();
+        try{
+            int value = popupController.getFogValue();
+            Simulation.getInstance().getWeather().setFog(value);
+        }catch (NumberFormatException e){
+            Simulation.getInstance().getWeather().setFog(current_fog);
+        }
+        //Setting new clouds
+        double current_clouds = Simulation.getInstance().getWeather().getClouds();
+        try{
+            int value = popupController.getCloudsValue();
+            Simulation.getInstance().getWeather().setClouds(value);
+        }catch (NumberFormatException e){
+            Simulation.getInstance().getWeather().setClouds(current_clouds);
+        }
 
     }
-
-    /*public void handleSetWeatherButtonClick() throws IOException {
+    /*public void handleSetWeatherB uttonClick() throws IOException {
         handlePauseButtonClick();
         // Load the popup FXML
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SimulationSetWeather.fxml"));

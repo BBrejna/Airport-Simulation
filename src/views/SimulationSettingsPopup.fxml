@@ -26,7 +26,22 @@
     </HBox>
     <Slider fx:id="slider" min="1" max="120" value="20" snapToTicks="true"/>
     <Label text="New temperature: "/>
-    <TextField fx:id="textField" />
+    <TextField fx:id="textFieldTemperature" />
+
+    <Label text="New wind: "/>
+    <TextField fx:id="textFieldWind" />
+
+    <Label text="New clouds: "/>
+    <TextField fx:id="textFieldClouds" />
+
+    <Label text="New rain: "/>
+    <TextField fx:id="textFieldRain" />
+
+    <Label text="New snow: "/>
+    <TextField fx:id="textFieldSnow" />
+
+    <Label text="New fog: "/>
+    <TextField fx:id="textFieldFog" />
     <HBox spacing="10">
         <Button text="OK" onAction="#onOkButtonClicked" />
         <Button text="Cancel" onAction="#onCancelButtonClicked" />

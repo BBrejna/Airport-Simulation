@@ -18,8 +18,17 @@ public class SimulationSettingsPopupController {
     private Stage stage;
 
     @FXML
-    private TextField textField;
-
+    private TextField textFieldTemperature;
+    @FXML
+    private TextField textFieldWind;
+    @FXML
+    private TextField textFieldClouds;
+    @FXML
+    private TextField textFieldRain;
+    @FXML
+    private TextField textFieldSnow;
+    @FXML
+    private TextField textFieldFog;
     private int oldTimeDeltaValue;
     public void display(Stage stage, Parent root, int value, int maxValue) {
         this.stage = stage;
@@ -72,7 +81,24 @@ public class SimulationSettingsPopupController {
         slider.setMinorTickCount(0);
     }
 
-    public int getTemperatureValue() {
-        return Integer.parseInt(textField.getText().trim());
+    public int getTemperatureValue() throws NumberFormatException{
+        return Integer.parseInt(textFieldTemperature.getText().trim());
     }
+    public int getWindValue() throws NumberFormatException{
+        return Integer.parseInt(textFieldWind.getText().trim());
+    }
+    public int getCloudsValue() throws NumberFormatException{
+        return Integer.parseInt(textFieldClouds.getText().trim());
+    }
+    public int getRainValue() throws NumberFormatException{
+        return Integer.parseInt(textFieldRain.getText().trim());
+    }
+    public int getSnowValue() throws NumberFormatException{
+        return Integer.parseInt(textFieldSnow.getText().trim());
+    }
+    public int getFogValue() throws NumberFormatException{
+        return Integer.parseInt(textFieldFog.getText().trim());
+    }
+
+
 }
