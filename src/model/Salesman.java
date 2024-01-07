@@ -138,17 +138,17 @@ public class Salesman extends Person implements Logger {
     public void announceLastCall(Flight flight) {
         String output = "Attention, flight no. " + flight.getFlightNumber() + " flying to "
                 + flight.getDestinationPoint().getAirportName()+" in "+ flight.getDestinationPoint().getCity() +
-                " is going to "+(flight.isArrival() ? "ARRIVE" : "DEPARTURE")+" in 15 minutes (at "+ Tools.convertMinutesToTime(flight.getHour()) +").";
+                " is going to "+(flight.isArrival() ? "ARRIVE" : "DEPARTURE")+" in 15 minutes (at "+ Tools.convertMinutesToTime(flight.getActualHour()) +").";
         if(flight.getDelayMinutes()>0)
             output += " Current delay is "+flight.getDelayMinutes()+" minutes. We are sorry for the delay.";
         log(output);
     }
 
     public void announceDelay(Flight flight) {
-        log("Attention, flight no. " + flight.getFlightNumber() + " flying to "
-                +flight.getDestinationPoint().getAirportName()+" in "+ flight.getDestinationPoint().getCity() +
-                " is going to take off with a delay of " + flight.getDelayMinutes() +
-                " due to bad weather conditions. The new departure time is "+ Tools.convertMinutesToTime(flight.getActualHour()));
+        log("Attention, flight no. " + flight.getFlightNumber() + " flying "+
+                (flight.isArrival() ? "from "+flight.getSourcePoint().getAirportName()+" in "+flight.getSourcePoint().getCity() : "to "+flight.getDestinationPoint().getAirportName()+ " in "+flight.getDestinationPoint().getCity()) +
+                " is going to "+(flight.isArrival() ? "land" : "take off")+" with a delay of " + flight.getDelayMinutes() +
+                " minutes due to bad weather conditions. The new "+(flight.isArrival() ? "arrive" : "departure")+" time is "+ Tools.convertMinutesToTime(flight.getActualHour()));
     }
 
     public void clearAllComponents() {

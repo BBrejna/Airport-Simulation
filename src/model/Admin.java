@@ -310,6 +310,7 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
         double newProb = (probDiff)/(1-currentDelayProbability);
 
         for(Flight flight: flights) {
+            int currentActualHour = flight.getActualHour();
             if(flight.getDelayMinutes() == 0) {
                 if(newProb > random.nextDouble()) {
                     int flightDelay = 0;
@@ -337,6 +338,11 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
                         additionalFlightDelay = random.nextInt(10, 301);
                     }
                     flight.setDelayMinutes(flight.getDelayMinutes()+additionalFlightDelay);
+                }
+            }
+            if (currentActualHour != flight.getActualHour()) {
+                if (currentActualHour-60 <= Simulation.getInstance().getTime()) {
+                    Salesman.getInstance().announceDelay(flight);
                 }
             }
         }
