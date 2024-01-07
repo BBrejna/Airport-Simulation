@@ -150,4 +150,13 @@ public class Salesman extends Person implements Logger {
                 " is going to take off with a delay of " + flight.getDelayMinutes() +
                 " due to bad weather conditions. The new departure time is "+ Tools.convertMinutesToTime(flight.getActualHour()));
     }
+
+    public void clearAllComponents() {
+        cashbox = 0;
+
+        passengers = new ArrayList<>();
+
+        logs = new ArrayList<>();
+    }
+
 }
