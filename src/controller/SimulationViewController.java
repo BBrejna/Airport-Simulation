@@ -191,6 +191,41 @@ public class SimulationViewController {
         Simulation.getInstance().setTimeDelta(selectedValue);
     }
 
+    /*public void handleSetWeatherButtonClick() throws IOException {
+        handlePauseButtonClick();
+        // Load the popup FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SimulationSetWeather.fxml"));
+        Parent root = loader.load();
+
+        // Create a new stage for the popup
+        Stage popupStage = new Stage();
+
+        // Set the popup controller and stage
+        SimulationSetWeatherController popupController = loader.getController();
+        popupController.display(popupStage, root);
+
+        // Retrieve the selected value from the popup controller
+        int selectedValue = popupController.getValue();
+        Simulation.getInstance().getWeather().setTemperature(selectedValue);
+        //Simulation.getInstance().setTimeDelta(selectedValue);
+    }*/
+
+    public void handleSetWeatherButtonClick() throws IOException {
+        handlePauseButtonClick();
+        // Load the popup FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SimulationSetWeather.fxml"));
+        Parent root = loader.load();
+
+        // Create a new stage for the popup
+        Stage popupStage = new Stage();
+
+        // Set the popup controller and stage
+        SimulationSetWeatherController popupController = loader.getController();
+        popupController.display(popupStage, root);
+        handlePlayButtonClick();
+        // The actual value handling is now within the onOkButtonClicked in the controller
+    }
+
     class WeatherObserver implements Observer<Weather> {
         @Override
         public void observerUpdateState(Weather weather) {
@@ -200,7 +235,7 @@ public class SimulationViewController {
                 // Populate TableView with new items
                 weatherTableView.getItems().addAll(
                         new WeatherProperty("Temperature [°C]", weather.getTemperature()),
-                        new WeatherProperty("Wind [knots]", weather.getWind()),
+                        new WeatherProperty("Wind [km/h]", weather.getWind()),
                         new WeatherProperty("Rain [mm/h]", weather.getRain()),
                         new WeatherProperty("Snow [mm/h]", weather.getSnow()),
                         new WeatherProperty("Fog [RS]", weather.getFog()),
