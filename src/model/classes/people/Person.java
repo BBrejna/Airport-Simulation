@@ -26,14 +26,23 @@ public class Person {
 
     }
 
-
     public static String generatePESEL() {
         Random rand = new Random();
 
-        // Generowanie daty urodzenia (rok: 1900-1999, miesiąc: 1-12, dzień: 1-28)
-        int year = 1900 + rand.nextInt(100);
+        // Generowanie roku i miesiąca urodzenia
+        int year = 1900 + rand.nextInt(125); // Losowy rok od 1900 do 2024
         int month = 1 + rand.nextInt(12);
-        int day = 1 + rand.nextInt(28);
+
+        // Dostosowanie miesiąca dla różnych stuleci
+        if (year > 1999) {
+            month += 20; // Dodanie 20 do miesiąca dla lat 2000-2024
+        }
+
+        // Ustalenie liczby dni w miesiącu
+        int daysInMonth = getDaysInMonth(month % 20, year);
+
+        // Generowanie dnia urodzenia
+        int day = 1 + rand.nextInt(daysInMonth);
 
         // Generowanie numeru dla płci (kobieta: parzysta, mężczyzna: nieparzysta)
         int genderNumber = rand.nextInt(10);
@@ -47,13 +56,32 @@ public class Person {
                         (month < 10 ? "0" : "") + month +
                         (day < 10 ? "0" : "") + day +
                         genderNumber +
-                        (randomDigits < 1000 ? "0" : "") + randomDigits;
+                        randomDigits;
 
         // Obliczanie cyfry kontrolnej
         int controlNumber = calculateControlNumber(partialPESEL);
 
         // Zwracanie pełnego numeru PESEL
         return partialPESEL + controlNumber;
+    }
+
+    private static int getDaysInMonth(int month, int year) {
+        switch (month) {
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                return 30;
+            case 2:
+                // Sprawdzenie roku przestępnego
+                if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+                    return 29;
+                } else {
+                    return 28;
+                }
+            default:
+                return 31;
+        }
     }
 
     private static int calculateControlNumber(String partialPESEL) {
@@ -67,6 +95,7 @@ public class Person {
         int controlDigit = 10 - (sum % 10);
         return controlDigit == 10 ? 0 : controlDigit;
     }
+
     /** GETTERS AND SETTERS */
     public String getPesel() {return pesel;}
     public void setPesel(String pesel) {this.pesel = pesel;}
