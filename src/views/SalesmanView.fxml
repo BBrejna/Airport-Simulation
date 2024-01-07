@@ -1,11 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.* ?>
+<?import java.net.URL ?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.SalesmanViewController"
-            prefHeight="400.0" prefWidth="600.0">
-    <Label text="SalesmanView"/>
-</AnchorPane>
+<?import javafx.geometry.Insets?>
+<VBox
+        VBox.vgrow="ALWAYS"
+        xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="controller.SalesmanViewController">
+
+    <stylesheets>
+        <URL value="@/styles/style.css"/>
+    </stylesheets>
+
+    <GridPane minHeight="36" maxHeight="64">
+
+        <columnConstraints>
+            <ColumnConstraints percentWidth="100"/>
+        </columnConstraints>
+        <HBox GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" >
+            <padding>
+                <Insets left="10" right="10"/>
+            </padding>
+            <Button fx:id="createPassengerButton" text="Create a passenger" />
+
+
+        </HBox>
+
+    </GridPane>
+    <VBox VBox.vgrow="ALWAYS">
+        <TableView fx:id="flightsTableView" VBox.vgrow="ALWAYS">
+            <columnResizePolicy>
+                <TableView fx:constant = "CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+            <columns>
+                <TableColumn text="Flight number">
+                    <cellValueFactory>
+                        <javafx.scene.control.cell.PropertyValueFactory property="flightNumber"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Name">
+                    <cellValueFactory>
+                        <javafx.scene.control.cell.PropertyValueFactory property="name"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Surname">
+                    <cellValueFactory>
+                        <javafx.scene.control.cell.PropertyValueFactory property="surname"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="PESEL">
+                    <cellValueFactory>
+                        <javafx.scene.control.cell.PropertyValueFactory property="pesel"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Class">
+                    <cellValueFactory>
+                        <javafx.scene.control.cell.PropertyValueFactory property="class"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+
+    </VBox>
+</VBox>
