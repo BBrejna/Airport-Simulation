@@ -52,6 +52,9 @@ public class SimulationViewController {
     @FXML
     private ListView<Log> simulationLogsList;
 
+    public Button getPauseButton() {
+        return pauseButton;
+    }
 
     public void updateCurrentTimeLabel(String newText) {
         currentTimeLabel.setText(newText);
