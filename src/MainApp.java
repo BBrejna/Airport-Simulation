@@ -3,6 +3,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
@@ -22,7 +23,7 @@ public class MainApp extends Application {
             Platform.exit();
             System.exit(0);
         });
-
+        stage.getIcons().add(new Image("/resources/icon.png"));
         stage.setTitle("Lotnisko");
         stage.setScene(scene);
         stage.show();
