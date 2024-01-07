@@ -153,13 +153,24 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                     else if (flight.getActualHour() <= stopTime) {
                         time = flight.getActualHour();
 
-                        int tmp = (new Random()).nextInt(0,5);
+                        Random random = new Random();
+                        int tmp = random.nextInt(0,5);
                         boolean isAirplaneBroken = tmp == 0;
+
+                        tmp = random.nextInt(0,5);
                         boolean areBinsFull = tmp <= 3;
+
+                        tmp = random.nextInt(0,5);
+                        boolean isAirplaneDirty = tmp <= 3;
+                        if (flight.getAirplane().isSnowy() || flight.getAirplane().isIced()) {
+                            isAirplaneDirty = false;
+                        }
+
                         if (areBinsFull) flight.getAirplane().setAreBinsFull(true);
                         if (isAirplaneBroken) flight.getAirplane().setBroken(true);
+                        if (isAirplaneDirty) flight.getAirplane().setClean(false);
 
-                        if (!flight.isArrival()) Admin.getInstance().checkFlight(flight);
+                        Admin.getInstance().checkFlight(flight);
 
                         log("Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departed")+"!");
                     }

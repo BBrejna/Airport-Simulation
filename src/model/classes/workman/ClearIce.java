@@ -12,4 +12,8 @@ public class ClearIce implements Strategy {
     public void prepareRunway(Runway runway) {
         runway.setIced(false);
     }
+    @Override
+    public String getAction() {
+        return "cleared of ice";
+    }
 }

@@ -12,4 +12,8 @@ public class ClearSnow implements Strategy {
     public void prepareRunway(Runway runway) {
         runway.setSnowy(false);
     }
+    @Override
+    public String getAction() {
+        return "cleared of snow";
+    }
 }

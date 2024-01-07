@@ -344,7 +344,7 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
 
     // checking state of runway and airplane
     public void checkFlight(Flight flight){
-        Workman.getInstance().prepareFlight(flight.getAirplane(), flight.getRunway(), flight.getFlightNumber());
+        Workman.getInstance().prepareFlight(flight.getAirplane(), flight.getRunway(), flight.getFlightNumber(), flight.isArrival());
         log("Flight " + flight.getFlightNumber() + " is ready to " + (flight.isArrival() ? "land": "take off") + " on runway nr " + flight.getRunway().getRunwayNumber() + ".");
     }
 

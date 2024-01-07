@@ -28,93 +28,52 @@ public class Workman extends Person implements Logger {
         return instance;
     }
 
-    Strategy strategy;
+    Strategy strategy = null;
 
-    public void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
+
+    // Metoda wykonujaca strategie
+    public void prepareFlight(Airplane airplane, Runway runway, String flightNumber, boolean isArrival) {
+        // nie trzeba sprawdzac osobno pasu i samolotu bo gdy jeden z nich jest zasniezony to drugi tez itd.
+        if (runway.isSnowy() && runway.isIced()) {
+            strategy = new CleanIceSnow();
+        }
+        else if (runway.isIced()) {
+            strategy = new ClearIce();
+        }
+        else if(runway.isSnowy()){
+            strategy = new ClearSnow();
+        }
+
+        if (strategy != null) {
+            if (!isArrival) {
+                strategy.prepareAirplane(airplane);
+                log("The plane for flight " + flightNumber + " has been "+strategy.getAction());
+            }
+
+            strategy.prepareRunway(runway);
+            log("The runway " + runway.getRunwayNumber() + " for flight " + flightNumber + " has been "+strategy.getAction());
+        }
+
+        repairPlane(airplane, flightNumber, isArrival);
+
+        if (!isArrival){
+            if (strategy == null) washPlane(airplane, flightNumber);
+            emptyBins(airplane, flightNumber);
+        }
+
+        strategy = null;
     }
-//    planeGetStan() Parameters: isClean, isSnowy, isBroken, areBinsFull, isLuggageToCollect
-//    UWAGA; jesli samolot nie jest zdolny do lotu przekazuje on informacje do administratora lotow
-//    washPlane( isClean )
-//    clearSnow( isSnowy )
-//    repairPlane( isBroken )
-//    UWAGA; jesli samolotu nie da sie naprawic wyswietl informacje //przekaz ja do admina
-//    emptyBins( areBinsFull )
 
-
-//    public void planeGetStan(boolean isRunwayReady, boolean isClean, boolean isSnowy, boolean isBroken, boolean areBinsFull, boolean isLuggageToCollect) {
-//        System.out.println("planeGetStan:\n\nisClean: " + isClean + "\nisSnowy: " + isSnowy + "\nisBroken: " + isBroken + "\nareBinsFull: " + areBinsFull + "\nisLuggageToCollect: " + isLuggageToCollect);
-//
-//        if (!isRunwayReady || !isClean || isSnowy || isBroken || areBinsFull || isLuggageToCollect) {
-//            System.out.println("ATTENTION: the plane is not capable of flying");
-//        }
-//    }
-
-
-    public void washPlane(Airplane airplane) {
+    public void washPlane(Airplane airplane, String flightNumber) {
         if (!airplane.isClean()) {
-            log("The plane has been cleaned");
+            log("The plane for flight "+flightNumber+" has been cleaned");
             airplane.setClean(true);
         }
     }
-    // Metoda wykonujaca strategie
-    public void prepareFlight(Airplane airplane, Runway runway, String flightNumber) {
-        emptyBins(airplane, flightNumber);
-        repairPlane(airplane, flightNumber);
 
-        // nie trzeba sprawdzac osobno pasu i samolotu bo gdy jeden z nich jest zasniezony to drugi tez itd.
-        if (airplane.isSnowy() && airplane.isIced()) {
-            setStrategy(new CleanIceSnow());
-
-            strategy.prepareAirplane(airplane);
-            strategy.prepareRunway(runway);
-
-            log("The plane for flight " + flightNumber  + " has been cleared of snow and ice");
-            log("The runway " + runway.getRunwayNumber() + " has been cleared of snow and ice");
-
-        }
-        else if (airplane.isIced()) {
-            setStrategy(new ClearIce());
-
-            strategy.prepareAirplane(airplane);
-            strategy.prepareRunway(runway);
-
-            log("The plane for flight " + flightNumber  + " has been cleared of ice");
-            log("The runway " + runway.getRunwayNumber() + " has been cleared of ice");
-        }
-        else if(airplane.isSnowy()){
-            setStrategy(new ClearSnow());
-
-            strategy.prepareAirplane(airplane);
-            strategy.prepareRunway(runway);
-
-            log("The plane for flight " + flightNumber  + " has been cleared of snow");
-            log("The runway " + runway.getRunwayNumber() + " has been cleared of snow");
-        }
-
-    }
-   /* public void clearSnow(Airplane airplane) {
-        if (airplane.isSnowy()) {
-            log("The plane was cleared of snow");
-            airplane.setSnowy(false);
-        }
-    }*/
-
-   /* public void clearRunway(Runway runway){
-        if (runway.isSnowy()) {
-            log("The runway has been cleared of snow");
-            runway.setSnowy(false);
-        }
-        if (runway.isIced()){
-            log("The runway was cleared of ice");
-            runway.setIced(false);
-        }
-    }*/
-
-
-    public void repairPlane(Airplane airplane, String flightNumber) {
+    public void repairPlane(Airplane airplane, String flightNumber, boolean isArrival) {
         if (airplane.isBroken()) {
-            log("The plane for flight "+flightNumber+" was repaired");
+            log("The plane "+(isArrival ? "from" : "for")+" flight "+flightNumber+" was repaired");
             airplane.setBroken(false);
         }
     }
