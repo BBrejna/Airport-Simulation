@@ -22,7 +22,7 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 import model.classes.simulation.Weather;
 import model.tools.Tools;
-
+import model.classes.Subject;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -203,8 +203,15 @@ public class SimulationViewController {
         try{
             int value = popupController.getWindValue();
             Simulation.getInstance().getWeather().setWind(value);
+            Simulation.getInstance().notifyObservers(Simulation.getInstance().getWeather());
         }catch (NumberFormatException e){
-            Simulation.getInstance().getWeather().setWind(current_temp);
+            Simulation.getInstance().getWeather().setWind(current_wind);
+        }catch (Weather.WindValueOutOfRangeException e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Wind vale range: 0-100!");
+            alert.showAndWait();
         }
         //Setting new rain
         double current_rain = Simulation.getInstance().getWeather().getRain();

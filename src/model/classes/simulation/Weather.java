@@ -12,7 +12,7 @@ public class Weather {
 
     /*
     temperature: -20 - 40 celcius
-    wind: 0 - 120 kph
+    wind: 0 - 100 kph
     rain: 0 - 50 mm/h
     snow: 0 - 10 mm/h
     fog: 1 - 5
@@ -237,5 +237,11 @@ public class Weather {
 
     public void setClouds(double clouds) {
         this.clouds = clouds;
+    }
+
+    public static class WindValueOutOfRangeException extends Exception {
+        public WindValueOutOfRangeException(String message) {
+            super(message);
+        }
     }
 }

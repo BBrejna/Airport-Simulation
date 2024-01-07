@@ -8,6 +8,8 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.classes.simulation.Weather;
+
 
 public class SimulationSettingsPopupController {
 
@@ -81,11 +83,15 @@ public class SimulationSettingsPopupController {
         slider.setMinorTickCount(0);
     }
 
-    public int getTemperatureValue() throws NumberFormatException{
+    public int getTemperatureValue() throws NumberFormatException   {
         return Integer.parseInt(textFieldTemperature.getText().trim());
     }
-    public int getWindValue() throws NumberFormatException{
-        return Integer.parseInt(textFieldWind.getText().trim());
+    public int getWindValue() throws NumberFormatException, Weather.WindValueOutOfRangeException {
+        int windValue = Integer.parseInt(textFieldWind.getText().trim());
+        if (windValue > 40) {
+            throw new Weather.WindValueOutOfRangeException("Wind value cannot exceed 40");
+        }
+        return windValue;
     }
     public int getCloudsValue() throws NumberFormatException{
         return Integer.parseInt(textFieldClouds.getText().trim());
