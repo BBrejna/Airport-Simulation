@@ -4,6 +4,7 @@
 <?import javafx.scene.control.* ?>
 <?import java.net.URL ?>
 
+<?import javafx.geometry.Insets?>
 <VBox
     VBox.vgrow="ALWAYS"
     xmlns="http://javafx.com/javafx"
@@ -19,11 +20,16 @@
         <columnConstraints>
             <ColumnConstraints percentWidth="100"/>
         </columnConstraints>
-        <Button fx:id="createFlightButton" text="Create a flight"/>
-        <HBox
-                fx:id="delayInfoBox" alignment="TOP_RIGHT">
+        <HBox GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" >
+            <padding>
+                <Insets left="10" right="10"/>
+            </padding>
+            <Button fx:id="createFlightButton" text="Create a flight" onAction="#handleCreateFlightButtonClick"/>
 
-            <Label fx:id="delayInfo" text="Current flight delay:"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <HBox fx:id="delayInfoBox" alignment="TOP_RIGHT">
+                <Label fx:id="delayInfo" text="Current flight delay:"/>
+            </HBox>
         </HBox>
 
     </GridPane>

@@ -2,17 +2,22 @@ package controller;
 
 import controller.elementsProperties.FlightProperty;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import model.Admin;
 import model.classes.Observer;
 import model.classes.admin.Flight;
 import model.classes.logging.Log;
 import model.classes.logging.Logger;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class AdminViewController implements Observer<ArrayList<Flight>>, Logger {
@@ -32,6 +37,7 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
     private Label delayInfo;
     @FXML
     private TableView flightsTableView;
+
 
     public void createFlightAction() {
 
@@ -86,6 +92,20 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
             flightsTableView.getItems().addAll(flightsProperties);
 
         });
+
+    }
+
+    public void handleCreateFlightButtonClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AdminFlightPopup.fxml"));
+        Parent root = loader.load();
+
+        Stage popupStage = new Stage();
+
+        AdminFlightPopupController popupController = loader.getController();
+
+        popupController.displayPopup(popupStage, root);
+
+        ArrayList<Object> flightComponents = popupController.getComoponents();
 
     }
 }
