@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.CloseConfirmPopupController"
+      spacing="10" alignment="CENTER">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <Label text="Please confirm aborting and closing the program"/>
+    <HBox alignment="CENTER">
+        <Button fx:id="confirm" text="Confirm" onAction="#onConfirmButtonClicked"/>
+        <Button fx:id="cancel" text="Cancel" onAction="#onCancelButtonClicked"/>
+    </HBox>
+
+</VBox>

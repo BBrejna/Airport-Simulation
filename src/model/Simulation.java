@@ -74,9 +74,10 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
 
                 weather = new Weather();
                 log("!!! RESTARTING SIMULATION... !!!", false);
+
+                Admin.getInstance().clearAllComponents();
+                Salesman.getInstance().clearAllComponents();
             }
-            Admin.getInstance().clearAllComponents();
-            Salesman.getInstance().clearAllComponents();
 
             System.out.println("Starting " +  threadName );
             t = new Thread (this, threadName);
@@ -131,13 +132,14 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                 if (isTimeStopped) {
                     continue;
                 }
-                int stopTime;
-                int tmpTime = time+timeDelta;
-                if ((tmpTime)%timeDelta != 0) {
-                    stopTime = timeDelta*Math.floorDiv(tmpTime, timeDelta);
-                } else {
-                    stopTime = time+timeDelta;
-                }
+//                int stopTime;
+//                int tmpTime = time+timeDelta;
+//                if ((tmpTime)%timeDelta != 0) {
+//                    stopTime = timeDelta*Math.floorDiv(tmpTime, timeDelta);
+//                } else {
+//                    stopTime = time+timeDelta;
+//                }
+                int stopTime = time+timeDelta;
 
                 int prevTime = time;
 
@@ -150,6 +152,11 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                         return;
                     }
                     else if (flight.getActualHour() <= stopTime) {
+                        if (flight.getActualHour()-LAST_CALL_TIME > prevTime) {
+                            time = flight.getActualHour() - LAST_CALL_TIME;
+                            Salesman.getInstance().announceLastCall(flight);
+                        }
+
                         time = flight.getActualHour();
 
                         Random random = new Random();

@@ -1,11 +1,14 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 import model.Simulation;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainViewController {
     public Button simulationButton;
@@ -18,6 +21,11 @@ public class MainViewController {
     public Parent workmanContent;
     private Button disabledButton;
     private Parent currentContent;
+
+
+    public Parent getCurrentContent() {
+        return currentContent;
+    }
 
     private void changeView(Button newButton, Parent newContent) {
         disabledButton.setDisable(false);
@@ -60,5 +68,16 @@ public class MainViewController {
         ControllersHandler.getInstance().setMainViewController(this);
         disabledButton = simulationButton;
         currentContent = simulationContent;
+    }
+    public boolean handleCloseButtonClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/CloseConfirmPopup.fxml"));
+        Parent root = loader.load();
+
+        Stage popupStage = new Stage();
+
+        CloseConfirmPopupController popupController = loader.getController();
+
+        return (popupController.displayPopup(popupStage, root));
+
     }
 }
