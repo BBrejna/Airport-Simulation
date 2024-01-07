@@ -78,7 +78,7 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
         //sort flights by hour
         flights.sort(Comparator.comparing(Flight::getHour));
 
-        log(getFlights().size() + " flights has been generated");
+        log(getFlights().size() + " flights has been generated", false);
 
         notifyObservers(getFlights());
 
@@ -356,6 +356,8 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
         allFlightsCount = 0;
         existingFlightNumbers.clear();
         currentDelayProbability = 0;
+
+        log("All Admin components have just been cleared", false);
     }
 
 

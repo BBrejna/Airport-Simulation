@@ -71,6 +71,10 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         if (t == null || isSimulationFinished) {
             if (t != null) {
                 clearAllLogs();
+
+                Admin.getInstance().clearAllComponents();
+                Salesman.getInstance().clearAllComponents();
+
                 weather = new Weather();
                 log("!!! RESTARTING SIMULATION... !!!");
             }
@@ -185,9 +189,6 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
             } catch (InterruptedException e) {
                 isTimeStopped = true;
                 isSimulationFinished = true;
-
-                Admin.getInstance().clearAllComponents();
-//                Salesman.getInstance().clearAllComponents(); // todo use Salesman clearAllComponents
 
                 start();
                 return;

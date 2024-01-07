@@ -156,7 +156,7 @@ public class Salesman extends Person implements Logger {
 
         passengers = new ArrayList<>();
 
-        logs = new ArrayList<>();
+        log("All Salesman components have just been cleared", false);
     }
 
 }

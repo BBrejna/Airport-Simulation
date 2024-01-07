@@ -65,27 +65,27 @@ public class SimulationViewController {
     public void updateLogs() {
         this.simulationLogs.setAll(Simulation.getInstance().getLogs());
 
-        int lastIndexSimulation = this.simulationLogs.size()-1;
+        int lastIndexSimulation = this.simulationLogs.size() - 1;
         this.simulationLogsList.scrollTo(lastIndexSimulation);
         this.simulationLogsList.getSelectionModel().select(lastIndexSimulation);
 
 
         this.adminLogs.setAll(Admin.getInstance().getLogs());
 
-        int lastIndexAdmin = this.adminLogs.size()-1;
+        int lastIndexAdmin = this.adminLogs.size() - 1;
         this.adminLogsList.scrollTo(lastIndexAdmin);
         this.adminLogsList.getSelectionModel().select(lastIndexAdmin);
 
 
         this.salesmanLogs.setAll(Salesman.getInstance().getLogs());
 
-        int lastIndexSalesman = this.salesmanLogs.size()-1;
+        int lastIndexSalesman = this.salesmanLogs.size() - 1;
         this.salesmanLogsList.scrollTo(lastIndexSalesman);
         this.salesmanLogsList.getSelectionModel().select(lastIndexSalesman);
 
         this.workmanLogs.setAll(Workman.getInstance().getLogs());
 
-        int lastIndexWorkman = this.workmanLogs.size()-1;
+        int lastIndexWorkman = this.workmanLogs.size() - 1;
         this.workmanLogsList.scrollTo(lastIndexWorkman);
         this.workmanLogsList.getSelectionModel().select(lastIndexWorkman);
     }
@@ -97,7 +97,7 @@ public class SimulationViewController {
     }
 
     private void setLineBreaker(ListView<Log> listView) {
-        listView.setCellFactory(param -> new ListCell<Log>() {
+        listView.setCellFactory(param -> new ListCell<>() {
             private Text text = new Text();
 
             @Override
@@ -105,7 +105,7 @@ public class SimulationViewController {
                 super.updateItem(item, empty);
 
                 if (empty || item == null) {
-                    setText(null);
+                    text.setText(null);
                 } else {
                     // Use a Text node for wrapping
                     text.setText(item.toString());
