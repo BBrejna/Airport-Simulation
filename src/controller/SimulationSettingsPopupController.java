@@ -10,6 +10,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.classes.simulation.Weather;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 
 public class SimulationSettingsPopupController {
 
@@ -32,6 +35,8 @@ public class SimulationSettingsPopupController {
     @FXML
     private TextField textFieldFog;
     private int oldTimeDeltaValue;
+
+
     public void display(Stage stage, Parent root, int value, int maxValue) {
         this.stage = stage;
         stage.setResizable(false);
@@ -61,10 +66,36 @@ public class SimulationSettingsPopupController {
         }
     }
     @FXML
-    private void onOkButtonClicked() {
-        closeWindow();
+    private void onOkButtonClicked() throws Weather.ValuesOutOfRangeException {
+        ArrayList<String> exceptions = new ArrayList<>();
+        if((!Objects.equals(textFieldTemperature.getText(), "")) && (Integer.parseInt(textFieldTemperature.getText().trim()) > 40)){
+            exceptions.add("Temperature value range: -20 - 40");
+        }
+        if((!Objects.equals(textFieldWind.getText(), "")) && (Integer.parseInt(textFieldWind.getText().trim()) > 100)){
+            exceptions.add("Wind value range: 0 - 100");
+        }
+        if((!Objects.equals(textFieldRain.getText(), "")) && (Integer.parseInt(textFieldRain.getText().trim()) > 50)){
+            exceptions.add("Rain value range: 0 - 50");
+        }
+        if((!Objects.equals(textFieldSnow.getText(), "")) && (Integer.parseInt(textFieldSnow.getText().trim()) > 10)){
+            exceptions.add("Snow value range: 0 - 10");
+        }
+        if((!Objects.equals(textFieldClouds.getText(), "")) && (Integer.parseInt(textFieldClouds.getText().trim()) > 5)){
+            exceptions.add("Clouds value range: 1 - 5");
+        }
+        if((!Objects.equals(textFieldFog.getText(), "")) && (Integer.parseInt(textFieldFog.getText().trim()) > 5)){
+            exceptions.add("Fog value range: 1 - 5");
+        }
+        checkExceptions(exceptions);
     }
-
+    public void checkExceptions(ArrayList<String> exceptions) throws Weather.ValuesOutOfRangeException {
+        if(!exceptions.isEmpty()){
+            throw new Weather.ValuesOutOfRangeException(exceptions);
+        }
+        else{
+            closeWindow();
+        }
+    }
     @FXML
     private void onCancelButtonClicked() {
         slider.setValue(oldTimeDeltaValue);
@@ -86,12 +117,8 @@ public class SimulationSettingsPopupController {
     public int getTemperatureValue() throws NumberFormatException   {
         return Integer.parseInt(textFieldTemperature.getText().trim());
     }
-    public int getWindValue() throws NumberFormatException, Weather.WindValueOutOfRangeException {
-        int windValue = Integer.parseInt(textFieldWind.getText().trim());
-        if (windValue > 40) {
-            throw new Weather.WindValueOutOfRangeException("Wind value cannot exceed 40");
-        }
-        return windValue;
+    public int getWindValue() throws NumberFormatException {
+        return Integer.parseInt(textFieldWind.getText().trim());
     }
     public int getCloudsValue() throws NumberFormatException{
         return Integer.parseInt(textFieldClouds.getText().trim());
@@ -105,6 +132,5 @@ public class SimulationSettingsPopupController {
     public int getFogValue() throws NumberFormatException{
         return Integer.parseInt(textFieldFog.getText().trim());
     }
-
 
 }

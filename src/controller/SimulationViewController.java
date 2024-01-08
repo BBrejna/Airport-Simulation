@@ -198,6 +198,7 @@ public class SimulationViewController {
         try{
             int value = popupController.getTemperatureValue();
             Simulation.getInstance().getWeather().setTemperature(value);
+            Simulation.getInstance().notifyObservers(Simulation.getInstance().getWeather());
         }catch (NumberFormatException e){
             Simulation.getInstance().getWeather().setTemperature(current_temp);
         }
@@ -209,18 +210,13 @@ public class SimulationViewController {
             Simulation.getInstance().notifyObservers(Simulation.getInstance().getWeather());
         }catch (NumberFormatException e){
             Simulation.getInstance().getWeather().setWind(current_wind);
-        }catch (Weather.WindValueOutOfRangeException e){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Wind vale range: 0-100!");
-            alert.showAndWait();
         }
         //Setting new rain
         double current_rain = Simulation.getInstance().getWeather().getRain();
         try{
             int value = popupController.getRainValue();
             Simulation.getInstance().getWeather().setRain(value);
+            Simulation.getInstance().notifyObservers(Simulation.getInstance().getWeather());
         }catch (NumberFormatException e){
             Simulation.getInstance().getWeather().setRain(current_rain);
         }
@@ -229,6 +225,7 @@ public class SimulationViewController {
         try{
             int value = popupController.getSnowValue();
             Simulation.getInstance().getWeather().setSnow(value);
+            Simulation.getInstance().notifyObservers(Simulation.getInstance().getWeather());
         }catch (NumberFormatException e){
             Simulation.getInstance().getWeather().setSnow(current_snow);
         }
@@ -237,6 +234,7 @@ public class SimulationViewController {
         try{
             int value = popupController.getFogValue();
             Simulation.getInstance().getWeather().setFog(value);
+            Simulation.getInstance().notifyObservers(Simulation.getInstance().getWeather());
         }catch (NumberFormatException e){
             Simulation.getInstance().getWeather().setFog(current_fog);
         }
@@ -245,6 +243,7 @@ public class SimulationViewController {
         try{
             int value = popupController.getCloudsValue();
             Simulation.getInstance().getWeather().setClouds(value);
+            Simulation.getInstance().notifyObservers(Simulation.getInstance().getWeather());
         }catch (NumberFormatException e){
             Simulation.getInstance().getWeather().setClouds(current_clouds);
         }

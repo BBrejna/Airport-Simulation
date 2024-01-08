@@ -1,5 +1,8 @@
 package model.classes.simulation;
 
+import javafx.scene.control.Alert;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Weather {
@@ -239,9 +242,13 @@ public class Weather {
         this.clouds = clouds;
     }
 
-    public static class WindValueOutOfRangeException extends Exception {
-        public WindValueOutOfRangeException(String message) {
-            super(message);
+    public static class ValuesOutOfRangeException extends Exception {
+        public ValuesOutOfRangeException(ArrayList<String> messages) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText(messages.toString());
+            alert.showAndWait();
         }
     }
 }
