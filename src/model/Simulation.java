@@ -43,6 +43,12 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         return instance;
     }
 
+    private Simulation(String threadName) {
+        this.threadName = threadName;
+        this.weather = new Weather();
+        this.t = null;
+    }
+
     private void updateUI() {
         SimulationViewController simulationViewController = ControllersHandler.getInstance().getSimulationViewController();
         if (simulationViewController != null) {
@@ -59,12 +65,6 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         if (simulationViewController != null) {
             Platform.runLater(simulationViewController::handleSimulationFinish);
         }
-    }
-
-    private Simulation(String threadName) {
-        this.threadName = threadName;
-        this.weather = new Weather();
-        this.t = null;
     }
 
     public void start(int timeDelta) {
@@ -119,12 +119,6 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         t.interrupt();
     }
 
-    private void clearAllLogs() {
-        clearLogs();
-        Admin.getInstance().clearLogs();
-        Salesman.getInstance().clearLogs();
-        Workman.getInstance().clearLogs();
-    }
     public void run() {
         while (t.isAlive() && !isSimulationFinished) {
             try {
@@ -211,6 +205,13 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                 return;
             }
         }
+    }
+
+    private void clearAllLogs() {
+        clearLogs();
+        Admin.getInstance().clearLogs();
+        Salesman.getInstance().clearLogs();
+        Workman.getInstance().clearLogs();
     }
 
     private int generatePeople(int peopleCount) {

@@ -25,7 +25,7 @@ public class MainApp extends Application {
 
         stage.setOnCloseRequest(e -> {
             e.consume();
-            if(ControllersHandler.getInstance().getMainViewController().getCurrentContent().equals(ControllersHandler.getInstance().getMainViewController().simulationContent) &&
+            if(ControllersHandler.getInstance().getMainViewController().getCurrentContent().equals(ControllersHandler.getInstance().getMainViewController().getSimulationContent()) &&
                     !ControllersHandler.getInstance().getSimulationViewController().getPauseButton().isDisabled()) {
                 ControllersHandler.getInstance().getSimulationViewController().handlePauseButtonClick();
                 try {

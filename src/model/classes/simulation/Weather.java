@@ -244,10 +244,16 @@ public class Weather {
 
     public static class ValuesOutOfRangeException extends Exception {
         public ValuesOutOfRangeException(ArrayList<String> messages) {
+            String errorString = "";
+            for (String message : messages) {
+                if (!errorString.isEmpty()) errorString+='\n';
+                errorString+=message;
+            }
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
-            alert.setContentText(messages.toString());
+            alert.setContentText(errorString);
             alert.showAndWait();
         }
     }

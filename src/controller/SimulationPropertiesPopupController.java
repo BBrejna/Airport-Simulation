@@ -3,9 +3,9 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Simulation;
@@ -15,14 +15,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class SimulationSettingsPopupController {
-
-    public Label valueLabel;
+public class SimulationPropertiesPopupController {
     @FXML
     private Slider slider;
-
-    private Stage stage;
-
     @FXML
     private TextField textFieldTemperature;
     @FXML
@@ -35,6 +30,7 @@ public class SimulationSettingsPopupController {
     private TextField textFieldSnow;
     @FXML
     private TextField textFieldFog;
+    private Stage stage;
     private int oldTimeDeltaValue;
 
 
@@ -42,7 +38,7 @@ public class SimulationSettingsPopupController {
         this.stage = stage;
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("SIM settings");
+        stage.setTitle("SIM properties");
 
         stage.setOnCloseRequest(e -> {
             e.consume();
@@ -58,6 +54,7 @@ public class SimulationSettingsPopupController {
         // Set up the scene and show the popup
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.getIcons().add(new Image("/resources/icon.png"));
         stage.showAndWait();
     }
 
@@ -67,7 +64,7 @@ public class SimulationSettingsPopupController {
         }
     }
     @FXML
-    private void onOkButtonClicked() throws Weather.ValuesOutOfRangeException {
+    private void onOkButtonClicked() {
         ArrayList<String> exceptions = new ArrayList<>();
         if((!Objects.equals(textFieldTemperature.getText(), "")) && (Integer.parseInt(textFieldTemperature.getText().trim()) > 40)){
             exceptions.add("Temperature value range: -20 - 40");
@@ -87,7 +84,12 @@ public class SimulationSettingsPopupController {
         if((!Objects.equals(textFieldFog.getText(), "")) && (Integer.parseInt(textFieldFog.getText().trim()) > 5)){
             exceptions.add("Fog value range: 1 - 5");
         }
-        checkExceptions(exceptions);
+
+        try {
+            checkExceptions(exceptions);
+        } catch (Weather.ValuesOutOfRangeException e) {
+            System.out.println("CAUGHT WEATHER VALUES OUT OF RANGE ERROR: "+e);
+        }
     }
     public void checkExceptions(ArrayList<String> exceptions) throws Weather.ValuesOutOfRangeException {
         if(!exceptions.isEmpty()){

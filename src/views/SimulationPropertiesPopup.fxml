@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.SimulationSettingsPopupController"
+      fx:controller="controller.SimulationPropertiesPopupController"
       spacing="10">
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
@@ -22,7 +22,7 @@
 
     <HBox spacing="5">
         <Label text="Time delta value:" />
-        <Label fx:id="valueLabel" text="${slider.value}" />
+        <Label text="${slider.value}" />
     </HBox>
     <Slider fx:id="slider" min="1" max="120" value="20" snapToTicks="true"/>
     <GridPane hgap="10" vgap="10">
@@ -32,17 +32,17 @@
         <Label text="New wind: " GridPane.rowIndex="1" GridPane.columnIndex="0"/>
         <TextField fx:id="textFieldWind" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-        <Label text="New clouds: " GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <TextField fx:id="textFieldClouds" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <Label text="New rain: " GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="textFieldRain" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-        <Label text="New rain: " GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        <TextField fx:id="textFieldRain" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        <Label text="New snow: " GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="textFieldSnow" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
-        <Label text="New snow: " GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-        <TextField fx:id="textFieldSnow" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        <Label text="New fog: " GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextField fx:id="textFieldFog" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
 
-        <Label text="New fog: " GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-        <TextField fx:id="textFieldFog" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+        <Label text="New clouds: " GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <TextField fx:id="textFieldClouds" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
     </GridPane>
     <HBox spacing="10">
         <Button text="OK" onAction="#onOkButtonClicked" />

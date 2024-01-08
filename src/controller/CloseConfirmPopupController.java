@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.classes.admin.Airline;
@@ -41,6 +42,7 @@ public class CloseConfirmPopupController {
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.getIcons().add(new Image("/resources/icon.png"));
         stage.showAndWait();
         return answer;
     }

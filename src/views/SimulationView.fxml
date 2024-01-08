@@ -5,7 +5,6 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.Group?>
 <VBox VBox.vgrow="ALWAYS"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
@@ -13,13 +12,13 @@
     <stylesheets>
         <URL value="@/styles/style.css"/>
     </stylesheets>
-    <HBox fx:id="timeBarHBox" alignment="CENTER">
+    <HBox alignment="CENTER">
         <Label fx:id="currentTimeLabel" text="TIME"/>
         <Region minWidth="20"/>
         <Button fx:id="playButton" text="Play" onAction="#handlePlayButtonClick"/>
         <Button disable="true" fx:id="pauseButton" text="Pause" onAction="#handlePauseButtonClick"/>
         <Button disable="true" fx:id="rerunButton" text="Rerun" onAction="#handleRerunButtonClick"/>
-        <Button fx:id="settingsButton" text="Properties" onAction="#handleSettingsButtonClick"/>
+        <Button text="Properties" onAction="#handleSettingsButtonClick"/>
     </HBox>
     <GridPane VBox.vgrow="ALWAYS" minHeight="200" gridLinesVisible="true">
         <columnConstraints>
@@ -33,7 +32,7 @@
         <VBox styleClass="timetable" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <VBox alignment="CENTER">
                 <Label text="DEPARTURES" styleClass="timetableTitle" />
-                <Line startX="0" endX="200.0" stroke="white" strokeLineCap="ROUND" strokeWidth="1"/>
+                <Line endX="200.0" stroke="white" strokeLineCap="ROUND"/>
             </VBox>
             <TableView fx:id="departuresTable" styleClass="timetable" VBox.vgrow="ALWAYS">
                 <columnResizePolicy>
@@ -66,7 +65,7 @@
         <VBox styleClass="timetable" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <VBox alignment="CENTER">
                 <Label text="ARRIVALS" styleClass="timetableTitle" />
-                <Line startX="0" endX="200.0" stroke="white" strokeLineCap="ROUND" strokeWidth="1"/>
+                <Line endX="200.0" stroke="white" strokeLineCap="ROUND"/>
             </VBox>
             <TableView fx:id="arrivalsTable" styleClass="timetable" VBox.vgrow="ALWAYS">
                 <columnResizePolicy>
@@ -132,7 +131,7 @@
                 </columns>
             </TableView>
         </VBox>
-        <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" fx:id="BottomVBox">
+        <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
             <Label text="Simulation Activity:"/>
             <ListView VBox.vgrow="ALWAYS" fx:id="simulationLogsList"/>
         </VBox>

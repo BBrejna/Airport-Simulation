@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.Admin;
 import model.Salesman;
@@ -22,19 +21,17 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 import model.classes.simulation.Weather;
 import model.tools.Tools;
-import model.classes.Subject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class SimulationViewController {
-    public TableView<FlightProperty> departuresTable;
-    public TableView<FlightProperty> arrivalsTable;
+    @FXML
+    private TableView<FlightProperty> departuresTable;
+    @FXML
+    private TableView<FlightProperty> arrivalsTable;
     @FXML
     private TableView<WeatherProperty> weatherTableView;
-    @FXML
-    public VBox BottomVBox;
-    @FXML
-    public Button settingsButton;
     @FXML
     private Label currentTimeLabel;
     @FXML
@@ -51,6 +48,35 @@ public class SimulationViewController {
     private ListView<Log> workmanLogsList;
     @FXML
     private ListView<Log> simulationLogsList;
+    private ObservableList<Log> simulationLogs = null;
+    private ObservableList<Log> adminLogs = null;
+    private ObservableList<Log> salesmanLogs = null;
+    private ObservableList<Log> workmanLogs = null;
+
+    public void initialize() {
+        ControllersHandler.getInstance().setSimulationViewController(this);
+        Simulation.getInstance().addObserver(Admin.getInstance());
+        Simulation.getInstance().addObserver(new WeatherObserver());
+        Admin.getInstance().addObserver(new FlightsObserver());
+
+        simulationLogs = FXCollections.observableArrayList(Simulation.getInstance().getLogs());
+        simulationLogsList.setItems(simulationLogs);
+
+        adminLogs = FXCollections.observableArrayList(Admin.getInstance().getLogs());
+        adminLogsList.setItems(adminLogs);
+
+        salesmanLogs = FXCollections.observableArrayList(Salesman.getInstance().getLogs());
+        salesmanLogsList.setItems(salesmanLogs);
+
+        workmanLogs = FXCollections.observableArrayList(Workman.getInstance().getLogs());
+        workmanLogsList.setItems(workmanLogs);
+
+        setLineBreaker(simulationLogsList);
+        setLineBreaker(adminLogsList);
+        setLineBreaker(salesmanLogsList);
+        setLineBreaker(workmanLogsList);
+
+    }
 
     public Button getPauseButton() {
         return pauseButton;
@@ -59,11 +85,6 @@ public class SimulationViewController {
     public void updateCurrentTimeLabel(String newText) {
         currentTimeLabel.setText(newText);
     }
-
-    ObservableList<Log> simulationLogs = null;
-    ObservableList<Log> adminLogs = null;
-    ObservableList<Log> salesmanLogs = null;
-    ObservableList<Log> workmanLogs = null;
 
     public void updateLogs() {
         this.simulationLogs.setAll(Simulation.getInstance().getLogs());
@@ -92,56 +113,12 @@ public class SimulationViewController {
         this.workmanLogsList.scrollTo(lastIndexWorkman);
         this.workmanLogsList.getSelectionModel().select(lastIndexWorkman);
     }
+
     public void handleSimulationFinish() {
         playButton.setDisable(false);
         pauseButton.setDisable(true);
         rerunButton.setDisable(true);
         ControllersHandler.getInstance().getMainViewController().lockButtonsOnSimulationRunning(false);
-    }
-
-    private void setLineBreaker(ListView<Log> listView) {
-        listView.setCellFactory(param -> new ListCell<>() {
-            private Text text = new Text();
-
-            @Override
-            protected void updateItem(Log item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (empty || item == null) {
-                    text.setText(null);
-                } else {
-                    // Use a Text node for wrapping
-                    text.setText(item.toString());
-                    text.setWrappingWidth(listView.getWidth() - 30); // Adjust the padding as needed
-                    setGraphic(text);
-                }
-            }
-        });
-    }
-
-    public void initialize() {
-        ControllersHandler.getInstance().setSimulationViewController(this);
-        Simulation.getInstance().addObserver(Admin.getInstance());
-        Simulation.getInstance().addObserver(new WeatherObserver());
-        Admin.getInstance().addObserver(new FlightsObserver());
-
-        simulationLogs = FXCollections.observableArrayList(Simulation.getInstance().getLogs());
-        simulationLogsList.setItems(simulationLogs);
-
-        adminLogs = FXCollections.observableArrayList(Admin.getInstance().getLogs());
-        adminLogsList.setItems(adminLogs);
-
-        salesmanLogs = FXCollections.observableArrayList(Salesman.getInstance().getLogs());
-        salesmanLogsList.setItems(salesmanLogs);
-
-        workmanLogs = FXCollections.observableArrayList(Workman.getInstance().getLogs());
-        workmanLogsList.setItems(workmanLogs);
-
-        setLineBreaker(simulationLogsList);
-        setLineBreaker(adminLogsList);
-        setLineBreaker(salesmanLogsList);
-        setLineBreaker(workmanLogsList);
-
     }
 
     public void handlePlayButtonClick() {
@@ -179,14 +156,14 @@ public class SimulationViewController {
         handlePauseButtonClick();
 
         // Load the popup FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SimulationSettingsPopup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SimulationPropertiesPopup.fxml"));
         Parent root = loader.load();
 
         // Create a new stage for the popup
         Stage popupStage = new Stage();
 
         // Set the popup controller and stage
-        SimulationSettingsPopupController popupController = loader.getController();
+        SimulationPropertiesPopupController popupController = loader.getController();
         popupController.display(popupStage, root, Simulation.getInstance().getTimeDelta(), Simulation.getInstance().getMAX_TIME_DELTA());
 
         // Retrieve the selected value from the popup controller
@@ -249,24 +226,26 @@ public class SimulationViewController {
         }
 
     }
-    /*public void handleSetWeatherB uttonClick() throws IOException {
-        handlePauseButtonClick();
-        // Load the popup FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SimulationSetWeather.fxml"));
-        Parent root = loader.load();
 
-        // Create a new stage for the popup
-        Stage popupStage = new Stage();
+    private void setLineBreaker(ListView<Log> listView) {
+        listView.setCellFactory(param -> new ListCell<>() {
+            private Text text = new Text();
 
-        // Set the popup controller and stage
-        SimulationSetWeatherController popupController = loader.getController();
-        popupController.display(popupStage, root);
+            @Override
+            protected void updateItem(Log item, boolean empty) {
+                super.updateItem(item, empty);
 
-        // Retrieve the selected value from the popup controller
-        int selectedValue = popupController.getValue();
-        Simulation.getInstance().getWeather().setTemperature(selectedValue);
-        //Simulation.getInstance().setTimeDelta(selectedValue);
-    }*/
+                if (empty || item == null) {
+                    text.setText(null);
+                } else {
+                    // Use a Text node for wrapping
+                    text.setText(item.toString());
+                    text.setWrappingWidth(listView.getWidth() - 30); // Adjust the padding as needed
+                    setGraphic(text);
+                }
+            }
+        });
+    }
 
     class WeatherObserver implements Observer<Weather> {
         @Override
