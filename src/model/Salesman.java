@@ -18,11 +18,11 @@ public class Salesman extends Person implements Logger {
     //ARIBUTES
     private double cashbox;
     private ArrayList<Passenger> passengers;
-    private static final Salesman instance = new Salesman("11111111111", "Pan", "Ekspedient", 0, new ArrayList<>());
+    private static final Salesman instance = new Salesman("Pan", "Ekspedient", 0, new ArrayList<>());
 
     //CONSTRUCTORS
-    private Salesman(String pesel, String name, String surname, double cashbox, ArrayList<Passenger> passengers) {
-        super(pesel, name, surname);
+    private Salesman(String name, String surname, double cashbox, ArrayList<Passenger> passengers) {
+        super(name, surname);
         this.cashbox = cashbox;
         this.passengers = passengers;
     }

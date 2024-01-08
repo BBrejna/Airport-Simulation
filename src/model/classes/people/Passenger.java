@@ -13,8 +13,8 @@ public class Passenger extends Person{
     private Ticket ticket;
 
     //CONSTRUCTORS
-    public Passenger(String pesel, String name, String surname) {
-        super(pesel, name, surname);
+    public Passenger(String name, String surname) {
+        super(name, surname);
     }
     public Passenger() {
         super();
@@ -23,15 +23,15 @@ public class Passenger extends Person{
         this.destinationCity = "";
         this.ticket = null;
     }
-    public Passenger(String pesel, String name, String surname, boolean personalInfo, int luggageWeight, String destinationCity, Ticket ticket) {
-        super(pesel, name, surname);
+    public Passenger(String name, String surname, boolean personalInfo, int luggageWeight, String destinationCity, Ticket ticket) {
+        super(name, surname);
         this.personalInfo = personalInfo;
         this.luggageWeight = luggageWeight;
         this.destinationCity = destinationCity;
         this.ticket = ticket;
     }
-    public Passenger(String pesel, String name, String surname, boolean personalInfo, int luggageWeight, String destinationCity) {
-        super(pesel, name, surname);
+    public Passenger(String name, String surname, boolean personalInfo, int luggageWeight, String destinationCity) {
+        super(name, surname);
         this.personalInfo = personalInfo;
         this.luggageWeight = luggageWeight;
         this.destinationCity = destinationCity;

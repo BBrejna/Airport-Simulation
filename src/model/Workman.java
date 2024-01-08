@@ -18,10 +18,10 @@ public class Workman extends Person implements Logger {
         return logs;
     }
     /** Singleton design pattern **/
-    private static final Workman instance = new Workman("78014305881", "Zbigniew", "Kowalski");
+    private static final Workman instance = new Workman("Zbigniew", "Kowalski");
 
-    private Workman(String pesel, String name, String surname) {
-        super(pesel, name, surname);
+    private Workman(String name, String surname) {
+        super(name, surname);
     }
 
     public static Workman getInstance() {

@@ -226,13 +226,6 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
     private boolean generatePassenger(){
         Random rand = new Random();
 
-        String pesel = "";
-        int z;
-        for(int i = 0; i < 11; i++){
-            z= rand.nextInt(0, 10);
-            pesel = pesel + z;
-        }
-
         String name = NamesAndSurnames.NAMES[rand.nextInt(NamesAndSurnames.NAMES.length)];
         String surname = NamesAndSurnames.SURNAMES[rand.nextInt(NamesAndSurnames.SURNAMES.length)];
 
@@ -246,7 +239,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         String destination = destinations.get(rand.nextInt(0, destinations.size()));
         boolean personalInfo = 0 != rand.nextInt(0,10);
         int luggageWeight = rand.nextInt(5, 30);
-        Passenger passenger = new Passenger(pesel, name, surname, personalInfo, luggageWeight, destination);
+        Passenger passenger = new Passenger(name, surname, personalInfo, luggageWeight, destination);
 
         return Salesman.getInstance().addPassenger(passenger);
     }
@@ -294,7 +287,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                     else{
                         flightClass=2;
                     }
-                    passenger = new Passenger(pesel, name, surname, personalInfo, luggageWeight, destinationCity, new Ticket(flight.getFlightNumber(), flightClass));
+                    passenger = new Passenger(name, surname, personalInfo, luggageWeight, destinationCity, new Ticket(flight.getFlightNumber(), flightClass));
                     arrivingPassengers.add(passenger);
                 }
                 flight.setNumOfOccupiedSeats(occupied_seats);

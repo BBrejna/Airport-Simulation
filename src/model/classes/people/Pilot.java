@@ -4,8 +4,8 @@ public class Pilot extends Person {
     private boolean isCaptain;
     private double hoursFlown;
 
-    public Pilot(String pesel, String name, String surname, boolean isCaptain, double hoursFlown) {
-        super(pesel, name, surname);
+    public Pilot(String name, String surname, boolean isCaptain, double hoursFlown) {
+        super(name, surname);
         this.hoursFlown = hoursFlown;
         this.isCaptain = isCaptain;
     }

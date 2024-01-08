@@ -1,6 +1,7 @@
 package model.classes.people;
 
 import data.NamesAndSurnames;
+import model.Salesman;
 
 import java.util.Random;
 
@@ -10,8 +11,8 @@ public class Person {
     private String name;
     private String surname;
 
-    public Person(String pesel, String name, String surname) {
-        this.pesel = pesel;
+    public Person(String name, String surname) {
+        this.pesel = Salesman.generatePESEL();
         this.name = name;
         this.surname = surname;
     }
