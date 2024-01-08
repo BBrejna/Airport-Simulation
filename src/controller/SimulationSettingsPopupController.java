@@ -8,6 +8,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Simulation;
 import model.classes.simulation.Weather;
 
 import java.util.ArrayList;
@@ -110,6 +111,12 @@ public class SimulationSettingsPopupController {
 
     @FXML
     private void initialize() {
+        textFieldTemperature.setPromptText(String.valueOf(Simulation.getInstance().getWeather().getTemperature()));
+        textFieldWind.setPromptText(String.valueOf(Simulation.getInstance().getWeather().getWind()));
+        textFieldRain.setPromptText(String.valueOf(Simulation.getInstance().getWeather().getRain()));
+        textFieldSnow.setPromptText(String.valueOf(Simulation.getInstance().getWeather().getSnow()));
+        textFieldClouds.setPromptText(String.valueOf(Simulation.getInstance().getWeather().getClouds()));
+        textFieldFog.setPromptText(String.valueOf(Simulation.getInstance().getWeather().getFog()));
         slider.setMajorTickUnit(1);
         slider.setMinorTickCount(0);
     }

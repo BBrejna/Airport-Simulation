@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
-
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
 <?import java.net.URL?>
