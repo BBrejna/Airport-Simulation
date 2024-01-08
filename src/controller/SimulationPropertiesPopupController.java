@@ -66,22 +66,22 @@ public class SimulationPropertiesPopupController {
     @FXML
     private void onOkButtonClicked() {
         ArrayList<String> exceptions = new ArrayList<>();
-        if((!Objects.equals(textFieldTemperature.getText(), "")) && (Integer.parseInt(textFieldTemperature.getText().trim()) > 40)){
+        if((!Objects.equals(textFieldTemperature.getText(), "")) && ((Integer.parseInt(textFieldTemperature.getText().trim()) > 40 ) || (Integer.parseInt(textFieldTemperature.getText().trim()) < -20))){
             exceptions.add("Temperature value range: -20 - 40");
         }
-        if((!Objects.equals(textFieldWind.getText(), "")) && (Integer.parseInt(textFieldWind.getText().trim()) > 100)){
+        if((!Objects.equals(textFieldWind.getText(), "")) && ((Integer.parseInt(textFieldWind.getText().trim()) > 100) || (Integer.parseInt(textFieldWind.getText().trim()) < 0))){
             exceptions.add("Wind value range: 0 - 100");
         }
-        if((!Objects.equals(textFieldRain.getText(), "")) && (Integer.parseInt(textFieldRain.getText().trim()) > 50)){
+        if((!Objects.equals(textFieldRain.getText(), "")) && ((Integer.parseInt(textFieldRain.getText().trim()) > 50) || (Integer.parseInt(textFieldRain.getText().trim()) < 0))){
             exceptions.add("Rain value range: 0 - 50");
         }
-        if((!Objects.equals(textFieldSnow.getText(), "")) && (Integer.parseInt(textFieldSnow.getText().trim()) > 10)){
+        if((!Objects.equals(textFieldSnow.getText(), "")) && ((Integer.parseInt(textFieldSnow.getText().trim()) > 10) || (Integer.parseInt(textFieldSnow.getText().trim()) < 0))){
             exceptions.add("Snow value range: 0 - 10");
         }
-        if((!Objects.equals(textFieldClouds.getText(), "")) && (Integer.parseInt(textFieldClouds.getText().trim()) > 5)){
+        if((!Objects.equals(textFieldClouds.getText(), "")) && ((Integer.parseInt(textFieldClouds.getText().trim()) > 5) || (Integer.parseInt(textFieldClouds.getText().trim()) < 1))){
             exceptions.add("Clouds value range: 1 - 5");
         }
-        if((!Objects.equals(textFieldFog.getText(), "")) && (Integer.parseInt(textFieldFog.getText().trim()) > 5)){
+        if((!Objects.equals(textFieldFog.getText(), "")) && ((Integer.parseInt(textFieldFog.getText().trim()) > 5) || (Integer.parseInt(textFieldFog.getText().trim()) < 1))){
             exceptions.add("Fog value range: 1 - 5");
         }
 
