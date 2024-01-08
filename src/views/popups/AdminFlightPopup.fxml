@@ -14,7 +14,10 @@
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
 
-    <CheckBox fx:id="arrivalCheckBox" text="Arrival"/>
+    <HBox spacing="10" alignment="CENTER">
+        <RadioButton fx:id="arrivalRadioButton" text="Arrival" />
+        <RadioButton fx:id="departureRadioButton" text="Departure" />
+    </HBox>
 
     <HBox spacing="5">
         <VBox spacing="5">

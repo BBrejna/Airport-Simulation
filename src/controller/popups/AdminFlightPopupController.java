@@ -8,9 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,7 +19,9 @@ import java.util.ArrayList;
 
 public class AdminFlightPopupController {
     @FXML
-    private CheckBox arrivalCheckBox;
+    private RadioButton arrivalRadioButton;
+    @FXML
+    private RadioButton departureRadioButton;
     @FXML
     private Spinner<Integer> hourSpinner;
     @FXML
@@ -83,11 +83,16 @@ public class AdminFlightPopupController {
             airlineList.add(airlines[i].getAirlineName());
         }
         airlineComboBox.setItems(airlineList);
+
+        ToggleGroup toggleGroup = new ToggleGroup();
+
+        arrivalRadioButton.setToggleGroup(toggleGroup);
+        departureRadioButton.setToggleGroup(toggleGroup);
     }
 
     public ArrayList<Object> getComoponents(){
         ArrayList<Object> components = new ArrayList<>();
-        components.add(arrivalCheckBox.isSelected());
+        components.add(arrivalRadioButton.isSelected());
         components.add(hourSpinner.getValue());
         components.add(minutesSpinner.getValue());
         components.add(delaySpinner.getValue());
@@ -95,6 +100,5 @@ public class AdminFlightPopupController {
         components.add(airlineComboBox.getValue());
         return components;
     }
-
 
 }
