@@ -7,7 +7,7 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.CloseConfirmPopupController"
+      fx:controller="controller.popups.CloseConfirmPopupController"
       spacing="10" alignment="CENTER">
 
     <padding>

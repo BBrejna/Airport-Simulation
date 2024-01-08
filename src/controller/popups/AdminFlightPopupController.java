@@ -1,4 +1,4 @@
-package controller;
+package controller.popups;
 
 import data.admin.AirlinesSet;
 import data.admin.AirportSet;

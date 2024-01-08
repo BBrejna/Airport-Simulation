@@ -1,5 +1,6 @@
 package controller;
 
+import controller.popups.CloseConfirmPopupController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -74,7 +75,7 @@ public class MainViewController {
         currentContent = simulationContent;
     }
     public boolean handleCloseButtonClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/CloseConfirmPopup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/popups/CloseConfirmPopup.fxml"));
         Parent root = loader.load();
 
         Stage popupStage = new Stage();

@@ -1,8 +1,8 @@
 package controller;
 
 import controller.elementsProperties.FlightProperty;
+import controller.popups.AdminFlightPopupController;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -96,7 +96,7 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
     }
 
     public void handleCreateFlightButtonClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AdminFlightPopup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/popups/AdminFlightPopup.fxml"));
         Parent root = loader.load();
 
         Stage popupStage = new Stage();

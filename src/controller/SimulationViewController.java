@@ -2,6 +2,7 @@ package controller;
 
 import controller.elementsProperties.FlightProperty;
 import controller.elementsProperties.WeatherProperty;
+import controller.popups.SimulationPropertiesPopupController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -156,7 +157,7 @@ public class SimulationViewController {
         handlePauseButtonClick();
 
         // Load the popup FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SimulationPropertiesPopup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/popups/SimulationPropertiesPopup.fxml"));
         Parent root = loader.load();
 
         // Create a new stage for the popup

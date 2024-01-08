@@ -1,4 +1,4 @@
-package controller;
+package controller.popups;
 
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
