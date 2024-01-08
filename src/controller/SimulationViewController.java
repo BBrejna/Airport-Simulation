@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.Admin;
 import model.Salesman;
@@ -77,6 +78,8 @@ public class SimulationViewController {
         setLineBreaker(salesmanLogsList);
         setLineBreaker(workmanLogsList);
 
+        setCustomTableCellFactory(departuresTable, departuresTable.getColumns().size()-1);
+        setCustomTableCellFactory(arrivalsTable, arrivalsTable.getColumns().size()-1);
     }
 
     public Button getPauseButton() {
@@ -246,6 +249,34 @@ public class SimulationViewController {
                 }
             }
         });
+    }
+
+    private void setCustomTableCellFactory(TableView<FlightProperty> tableView, int columnNumber) {
+        try {
+            TableColumn<FlightProperty, String> stringColumn = (TableColumn<FlightProperty, String>) tableView.getColumns().get(columnNumber);
+            stringColumn.setCellFactory(param -> new TableCell<>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (!isEmpty()) {
+                        FlightProperty flightProperty = getTableView().getItems().get(getIndex());
+                        String valueToCompare = flightProperty.getHour();
+
+                        setText(item);
+
+                        if (!item.equals(valueToCompare)) {
+                            setTextFill(Color.RED);
+                        } else {
+                            setTextFill(Color.BLACK);
+                        }
+                    }
+                }
+            });
+        } catch (ClassCastException e) {
+            System.out.println("CAUGHT ERROR: COLUMN NR "+columnNumber+" IN customTableCellFactory is not a String");
+            e.printStackTrace();
+        }
     }
 
     class WeatherObserver implements Observer<Weather> {
