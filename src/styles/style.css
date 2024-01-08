@@ -1,26 +1,10 @@
 .root{
-    -fx-background-color: aqua;
+    -fx-background-color: #c4c4c4;
     -fx-max-height: 600px;
     -fx-max-width: 1200px;
-}
-#bodyBorderPane {
 }
 
 .monospacedText {
     -fx-font-family: "Monospaced";
 }
-.timetable {
-    -fx-background-color: #393946;
-    -fx-font-family: "Space Mono";
-    -fx-text-fill: WHITE;
-    -fx-padding: 5;
-    -fx-spacing: 10;
-}
-.timetableTitle {
-    -fx-background-color: #393946;
-    -fx-font-family: "Space Mono";
-    -fx-text-fill: WHITE;
-    -fx-padding: 5;
-    -fx-spacing: 10;
-    -fx-font-size: 15;
-}
+

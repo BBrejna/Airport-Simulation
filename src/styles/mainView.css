@@ -1,10 +1,37 @@
-#RoleMenuHBox {
+.RoleButton{
+    -fx-max-width: infinity;
+    -fx-alignment: center;
+    -fx-background-color: #ABA27E;
+    -fx-effect: innershadow(three-pass-box,#000000,10,0,0,0);
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 16;
+    -fx-padding: 10;
 }
 .RoleButton:hover {
+    -fx-background-color: #A9A38E;
+    -fx-text-fill: #7D7D7D;
 }
-.RoleButton {
-    -fx-max-width: infinity;
+.RoleButton:disabled {
+    -fx-background-color: #9b9b9b;
+    -fx-text-fill: #7D7D7D;
+    -fx-opacity: 100%;
 }
-Button:hover,disabled {
-    -fx-background-color: #c9c9c9;
+.activeButton:disabled {
+    -fx-background-color: #FFD42A;
+    -fx-text-fill: #000000;
+}
+.timetable {
+    -fx-background-color: #393946;
+    -fx-font-family: "Space Mono";
+    -fx-text-fill: WHITE;
+    -fx-padding: 5;
+    -fx-spacing: 10;
+}
+.timetableTitle {
+    -fx-background-color: #393946;
+    -fx-font-family: "Space Mono";
+    -fx-text-fill: WHITE;
+    -fx-padding: 5;
+    -fx-spacing: 10;
+    -fx-font-size: 15;
 }

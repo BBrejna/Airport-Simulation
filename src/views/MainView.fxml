@@ -22,13 +22,13 @@
         <rowConstraints>
             <RowConstraints vgrow="ALWAYS"/>
         </rowConstraints>
-        <Button disable="true" fx:id="simulationButton" styleClass="RoleButton" text="Simulation" GridPane.columnIndex="0"
+        <Button disable="true" fx:id="simulationButton" styleClass="RoleButton" text="SIMULATION" GridPane.columnIndex="0"
                 GridPane.rowIndex="0" onAction="#showSimulationContent"/>
-        <Button fx:id="adminButton" styleClass="RoleButton" text="Admin" GridPane.columnIndex="1" GridPane.rowIndex="0"
+        <Button fx:id="adminButton" styleClass="RoleButton" text="ADMIN" GridPane.columnIndex="1" GridPane.rowIndex="0"
                 maxWidth="Infinity" onAction="#showAdminContent"/>
-        <Button fx:id="salesmanButton" styleClass="RoleButton" text="Salesman" GridPane.columnIndex="2"
+        <Button fx:id="salesmanButton" styleClass="RoleButton" text="SALESMAN" GridPane.columnIndex="2"
                 GridPane.rowIndex="0" onAction="#showSalesmanContent"/>
-        <Button fx:id="workmanButton" styleClass="RoleButton" text="Physical Worker" GridPane.columnIndex="3"
+        <Button fx:id="workmanButton" styleClass="RoleButton" text="PHYSICAL WORKER" GridPane.columnIndex="3"
                 GridPane.rowIndex="0" onAction="#showWorkmanContent"/>
     </GridPane>
     <fx:include fx:id="simulationContent" source="SimulationView.fxml"/>
