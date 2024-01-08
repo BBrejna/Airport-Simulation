@@ -4,6 +4,8 @@
 <?import javafx.scene.layout.*?>
 
 <?import java.net.URL?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.Group?>
 <VBox VBox.vgrow="ALWAYS"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
@@ -28,9 +30,12 @@
         <rowConstraints>
             <RowConstraints vgrow="ALWAYS"/>
         </rowConstraints>
-        <VBox styleClass="monospacedText" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
-            <Label text="DEPARTURES:"/>
-            <TableView fx:id="departuresTable" VBox.vgrow="ALWAYS">
+        <VBox styleClass="timetable" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <VBox alignment="CENTER">
+                <Label text="DEPARTURES" styleClass="timetableTitle" />
+                <Line startX="0" endX="200.0" stroke="white" strokeLineCap="ROUND" strokeWidth="1"/>
+            </VBox>
+            <TableView fx:id="departuresTable" styleClass="timetable" VBox.vgrow="ALWAYS">
                 <columnResizePolicy>
                     <TableView fx:constant = "CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
@@ -58,9 +63,12 @@
                 </columns>
             </TableView>
         </VBox>
-        <VBox styleClass="monospacedText" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
-            <Label text="ARRIVALS:"/>
-            <TableView fx:id="arrivalsTable" VBox.vgrow="ALWAYS">
+        <VBox styleClass="timetable" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <VBox alignment="CENTER">
+                <Label text="ARRIVALS" styleClass="timetableTitle" />
+                <Line startX="0" endX="200.0" stroke="white" strokeLineCap="ROUND" strokeWidth="1"/>
+            </VBox>
+            <TableView fx:id="arrivalsTable" styleClass="timetable" VBox.vgrow="ALWAYS">
                 <columnResizePolicy>
                     <TableView fx:constant = "CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
