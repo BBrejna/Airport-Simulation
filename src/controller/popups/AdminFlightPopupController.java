@@ -88,6 +88,8 @@ public class AdminFlightPopupController {
 
         arrivalRadioButton.setToggleGroup(toggleGroup);
         departureRadioButton.setToggleGroup(toggleGroup);
+
+        arrivalRadioButton.setSelected(true);
     }
 
     public ArrayList<Object> getComoponents(){
