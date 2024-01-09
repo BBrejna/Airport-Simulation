@@ -20,18 +20,3 @@
     -fx-background-color: #FFD42A;
     -fx-text-fill: #000000;
 }
-.timetable {
-    -fx-background-color: #393946;
-    -fx-font-family: "Space Mono";
-    -fx-text-fill: WHITE;
-    -fx-padding: 5;
-    -fx-spacing: 10;
-}
-.timetableTitle {
-    -fx-background-color: #393946;
-    -fx-font-family: "Space Mono";
-    -fx-text-fill: WHITE;
-    -fx-padding: 5;
-    -fx-spacing: 10;
-    -fx-font-size: 15;
-}

@@ -11,8 +11,9 @@
       fx:controller="controller.SimulationViewController">
     <stylesheets>
         <URL value="@/styles/style.css"/>
+        <URL value="@/styles/simulationView.css"/>
     </stylesheets>
-    <HBox alignment="CENTER">
+    <HBox alignment="CENTER" fx:id="simulationMenu">
         <Label fx:id="currentTimeLabel" text="TIME"/>
         <Region minWidth="20"/>
         <Button fx:id="playButton" text="Play" onAction="#handlePlayButtonClick"/>
@@ -20,6 +21,8 @@
         <Button disable="true" fx:id="rerunButton" text="Rerun" onAction="#handleRerunButtonClick"/>
         <Button text="Properties" onAction="#handleSettingsButtonClick"/>
     </HBox>
+
+
     <GridPane VBox.vgrow="ALWAYS" minHeight="200" gridLinesVisible="true">
         <columnConstraints>
             <ColumnConstraints minWidth="250"/>
@@ -29,7 +32,9 @@
         <rowConstraints>
             <RowConstraints vgrow="ALWAYS"/>
         </rowConstraints>
-        <VBox styleClass="timetable" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
+
+
+        <VBox fx:id="departuresSection" styleClass="timetable" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <VBox alignment="CENTER">
                 <Label text="DEPARTURES" styleClass="timetableTitle" />
                 <Line endX="200.0" stroke="white" strokeLineCap="ROUND"/>
@@ -39,22 +44,22 @@
                     <TableView fx:constant = "CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
                 <columns>
-                    <TableColumn text="Flight" prefWidth="60">
+                    <TableColumn text="FLIGHT" prefWidth="60">
                         <cellValueFactory>
                             <javafx.scene.control.cell.PropertyValueFactory property="flightNumber"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="City" prefWidth="110">
+                    <TableColumn text="CITY" prefWidth="110">
                         <cellValueFactory>
                             <javafx.scene.control.cell.PropertyValueFactory property="city"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Sched." prefWidth="60">
+                    <TableColumn text="SCHED." prefWidth="60">
                         <cellValueFactory>
                             <javafx.scene.control.cell.PropertyValueFactory property="hour"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Est." prefWidth="60">
+                    <TableColumn text="EST." prefWidth="60">
                         <cellValueFactory>
                             <javafx.scene.control.cell.PropertyValueFactory property="delay"/>
                         </cellValueFactory>
@@ -62,7 +67,9 @@
                 </columns>
             </TableView>
         </VBox>
-        <VBox styleClass="timetable" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
+
+
+        <VBox fx:id="arrivalsSection" styleClass="timetable" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <VBox alignment="CENTER">
                 <Label text="ARRIVALS" styleClass="timetableTitle" />
                 <Line endX="200.0" stroke="white" strokeLineCap="ROUND"/>
@@ -72,22 +79,22 @@
                     <TableView fx:constant = "CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
                 <columns>
-                    <TableColumn text="Flight" prefWidth="60">
+                    <TableColumn text="FLIGHT" prefWidth="60">
                         <cellValueFactory>
                             <javafx.scene.control.cell.PropertyValueFactory property="flightNumber"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="City" prefWidth="110">
+                    <TableColumn text="CITY" prefWidth="110">
                         <cellValueFactory>
                             <javafx.scene.control.cell.PropertyValueFactory property="city"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Sched." prefWidth="60">
+                    <TableColumn text="SCHED." prefWidth="60">
                         <cellValueFactory>
                             <javafx.scene.control.cell.PropertyValueFactory property="hour"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Est." prefWidth="60">
+                    <TableColumn text="EST." prefWidth="60">
                         <cellValueFactory>
                             <javafx.scene.control.cell.PropertyValueFactory property="delay"/>
                         </cellValueFactory>
@@ -95,6 +102,8 @@
                 </columns>
             </TableView>
         </VBox>
+
+
         <VBox GridPane.columnIndex="2" GridPane.rowIndex="0">
             <VBox>
                 <Label text="Admin Activity:"/>
@@ -109,6 +118,8 @@
                 <ListView VBox.vgrow="ALWAYS" fx:id="workmanLogsList"/>
             </VBox>
         </VBox>
+
+
     </GridPane>
     <HBox minHeight="190">
         <VBox prefWidth="290">
