@@ -1,6 +1,7 @@
 
-.timetable {
+.timetable{
     -fx-background-color: #393946;
+    /*-fx-background-radius: 15;*/
 }
 .timetable .table-view .column-header-background {
     -fx-background-color: transparent;
@@ -55,7 +56,11 @@
 }
 .timetable .table-view .virtual-flow .scroll-bar .increment-button,
 .timetable .table-view .virtual-flow .scroll-bar .decrement-button {
-    -fx-opacity: 0;
+    -fx-opacity: 1;
+}
+.timetable .table-view .virtual-flow .scroll-bar .increment-button:hover,
+.timetable .table-view .virtual-flow .scroll-bar .decrement-button:hover {
+    -fx-background-color: transparent;
 }
 .timetable .table-view .virtual-flow .scroll-bar:vertical .thumb{
     -fx-background-color:  white;
