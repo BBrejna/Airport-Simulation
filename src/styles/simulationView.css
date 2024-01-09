@@ -1,0 +1,62 @@
+
+.timetable {
+    -fx-background-color: #393946;
+}
+.timetable .table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+.timetable .table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+.timetable .table-view .column-header{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+.timetable .table-view .column-header .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-text-alignment: left;
+    -fx-font-weight: normal;
+}
+.timetable .timetableTitle {
+    -fx-background-color: transparent;
+    -fx-font-family: "Space Mono";
+    -fx-text-fill: WHITE;
+    -fx-font-weight: bold;
+    -fx-padding: 5;
+    -fx-spacing: 10;
+    -fx-font-size: 15;
+}
+.timetable .table-view {
+    -fx-border-color: transparent;
+}
+.timetable .table-row-cell {
+    -fx-background-color: #2D2D53;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-border-color: #6B655A;
+}
+.timetable .table-row-cell:hover,
+.timetable .table-row-cell:selected{
+    -fx-opacity: 50%;
+}
+.timetable .table-view .table-cell {
+    -fx-font-family: Monospaced;
+    -fx-border-color: transparent;
+    -fx-text-fill: #FFEA99;
+}
+.timetable .table-view .virtual-flow .scroll-bar:vertical,
+.timetable .table-view .virtual-flow .scroll-bar:vertical .track,
+.timetable .table-view .virtual-flow .scroll-bar:vertical .track-background,
+.timetable .table-view .virtual-flow .scroll-bar:horizontal,
+.timetable .table-view .virtual-flow .scroll-bar:horizontal .track,
+.timetable .table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+.timetable .table-view .virtual-flow .scroll-bar .increment-button,
+.timetable .table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+}
+.timetable .table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  white;
+}
