@@ -259,7 +259,9 @@ public class SimulationViewController {
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
 
-                    if (!isEmpty()) {
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
                         FlightProperty flightProperty = getTableView().getItems().get(getIndex());
                         String valueToCompare = flightProperty.getHour();
 
