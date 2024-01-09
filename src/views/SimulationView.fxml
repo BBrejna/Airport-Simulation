@@ -122,7 +122,7 @@
 
     </GridPane>
     <HBox minHeight="190">
-        <VBox prefWidth="290">
+        <VBox minWidth="295">
             <Label text="Weather:"/>
             <TableView fx:id="weatherTableView">
                 <columnResizePolicy>

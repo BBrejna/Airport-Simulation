@@ -268,9 +268,9 @@ public class SimulationViewController {
                         setText(item);
 
                         if (!item.equals(valueToCompare)) {
-                            setTextFill(Color.RED);
+                            setStyle("-fx-text-fill: #f33b3b");
                         } else {
-                            setTextFill(Color.BLACK);
+                            setStyle("-fx-text-fill: #FFEA99");
                         }
                     }
                 }
