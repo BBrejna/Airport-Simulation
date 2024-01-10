@@ -117,6 +117,22 @@
         -fx-border-color: transparent;
     }
 
+.activityBox .list-view{
+    -fx-background-color: transparent;
+}
+.activityBox .list-view .scroll-bar {
+    -fx-background-color: transparent;
+}
+.activityBox .list-view .scroll-bar .increment-button,
+.activityBox .list-view .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+.activityBox .list-view .thumb {
+    /*-fx-background-color: #ABA27E;*/
+    -fx-background-color: #ffffff;
+}
+
+
 .timeLabel {
     -fx-font-family: "Space Mono";
     -fx-font-weight: bold;

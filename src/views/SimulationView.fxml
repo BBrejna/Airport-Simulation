@@ -20,7 +20,7 @@
 
 
     <?comment SIMMENU, TIMETABLES, ADMIN, SALESMAN, WORKER?>
-    <HBox styleClass="container" >
+    <HBox styleClass="container" minHeight="250" >
 
         <?comment SIMMENU, TIMETABLES?>
         <VBox styleClass="container">
@@ -80,7 +80,7 @@
             </HBox>
 
             <?comment TIMETABLES?>
-            <HBox styleClass="container">
+            <HBox styleClass="container" VBox.vgrow="ALWAYS">
 
                 <?comment DEPARTURES?>
                 <VBox  minWidth="250" styleClass="timetable" alignment="CENTER" >
@@ -179,10 +179,10 @@
     </HBox>
 
     <?comment WEATHER, SIMULATION?>
-    <HBox minHeight="210" styleClass="container">
+    <HBox minHeight="208" styleClass="container">
 
         <?comment WEATHER?>
-        <VBox minWidth="301" styleClass="activityBox">
+        <VBox minWidth="301" styleClass="activityBox" >
             <Label text="CURRENT WEATHER"/>
             <TableView fx:id="weatherTableView">
                 <columnResizePolicy>
