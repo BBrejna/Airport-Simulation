@@ -147,6 +147,12 @@ public class SimulationViewController {
         pauseButton.setDisable(false);
         rerunButton.setDisable(true);
         ControllersHandler.getInstance().getMainViewController().lockButtonsOnSimulationRunning(true);
+
+        //UI FEATURES
+        simulationLogsList.setStyle("-fx-background-color: white");
+        adminLogsList.setStyle("-fx-background-color: white");
+        salesmanLogsList.setStyle("-fx-background-color: white");
+        workmanLogsList.setStyle("-fx-background-color: white");
     }
     public void handlePauseButtonClick() {
         if (Simulation.getInstance().isSimulationStarted()) {
