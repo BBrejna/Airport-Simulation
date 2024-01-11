@@ -73,6 +73,12 @@ public class SimulationViewController {
         workmanLogs = FXCollections.observableArrayList(Workman.getInstance().getLogs());
         workmanLogsList.setItems(workmanLogs);
 
+        //UI FEATURES
+        simulationLogsList.setStyle("-fx-background-color: white");
+        adminLogsList.setStyle("-fx-background-color: white");
+        salesmanLogsList.setStyle("-fx-background-color: white");
+        workmanLogsList.setStyle("-fx-background-color: white");
+
         setLineBreaker(simulationLogsList);
         setLineBreaker(adminLogsList);
         setLineBreaker(salesmanLogsList);
@@ -116,6 +122,12 @@ public class SimulationViewController {
         int lastIndexWorkman = this.workmanLogs.size() - 1;
         this.workmanLogsList.scrollTo(lastIndexWorkman);
         this.workmanLogsList.getSelectionModel().select(lastIndexWorkman);
+
+        //UI FEATURES
+        if(!simulationLogs.isEmpty())simulationLogsList.setStyle("-fx-background-color: transparent");
+        if(!adminLogs.isEmpty())adminLogsList.setStyle("-fx-background-color: transparent");
+        if(!salesmanLogs.isEmpty())salesmanLogsList.setStyle("-fx-background-color: transparent");
+        if(!workmanLogs.isEmpty())workmanLogsList.setStyle("-fx-background-color: transparent");
     }
 
     public void handleSimulationFinish() {
@@ -149,6 +161,10 @@ public class SimulationViewController {
     }
 
     public void handleRerunButtonClick() {
+
+        //UI FEATURES
+        workmanLogsList.setStyle("-fx-background-color: white");
+
         Simulation.getInstance().rerun();
         playButton.setDisable(true);
         pauseButton.setDisable(false);

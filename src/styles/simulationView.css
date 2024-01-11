@@ -100,8 +100,12 @@
 .activityBox .table-view .column-header .label{
         -fx-background-color: transparent;
     }
+.activityBox .table-view .table-cell{
+    -fx-border-color: transparent;
+}
 .activityBox .table-view {
-        -fx-border-color: transparent;
+    -fx-border-color: #FFD42A;
+    -fx-background-color: white;
     }
 .activityBox .table-row-cell:even {
         -fx-background-color: #eaeaea;
@@ -121,7 +125,7 @@
     -fx-background-color: transparent;
 }
 .activityBox .list-view .scroll-bar {
-    -fx-background-color: transparent;
+    -fx-background-color: #FFD42A;
 }
 .activityBox .list-view .scroll-bar .increment-button,
 .activityBox .list-view .scroll-bar .decrement-button {
@@ -131,7 +135,6 @@
     /*-fx-background-color: #ABA27E;*/
     -fx-background-color: #ffffff;
 }
-
 
 .timeLabel {
     -fx-font-family: "Space Mono";
