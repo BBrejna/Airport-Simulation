@@ -20,15 +20,56 @@
         <URL value="@/styles/chartStyles.css"/>
     </stylesheets>
 
-    <HBox alignment="CENTER" spacing="5">
-        <padding>
-            <Insets top="20" right="0" bottom="0" left="0"/>
-        </padding>
-        <Button fx:id="temperatureButton" text="Temperature" onAction="#temperatureButtonClicked" styleClass="button" />
-        <Button fx:id="windButton" text="Wind" onAction="#windButtonClicked" styleClass="button"/>
-        <Button fx:id="PassengersButton" text="Passengers" onAction="#passengersButtonClicked" styleClass="button"/>
-    </HBox>
     <StackPane alignment="CENTER">
+
+        <HBox fx:id="buttonsBox" alignment="CENTER" spacing="5" visible="true">
+            <padding>
+                <Insets top="20" right="0" bottom="0" left="0"/>
+            </padding>
+
+            <Button fx:id="weatherButton" text="Weather" onAction="#weatherButtonClicked" styleClass="button" />
+            <Button fx:id="PassengersButton" text="Passengers" onAction="#passengersButtonClicked" styleClass="button"/>
+            <Button fx:id="FlightsButton" text="Flights" onAction="#flightsButtonClicked" styleClass="button"/>
+        </HBox>
+
+        <HBox fx:id="weatherButtonsBox" alignment="CENTER" spacing="5" visible="false">
+            <padding>
+                <Insets top="20" right="0" bottom="0" left="0"/>
+            </padding>
+            <Button fx:id="temperatureButton" text="Temperature" onAction="#temperatureButtonClicked" styleClass="button" />
+            <Button fx:id="windButton" text="Wind" onAction="#windButtonClicked" styleClass="button"/>
+            <Button fx:id="cloudsBox" text="Clouds" onAction="#cloudsButtonClicked" styleClass="button"/>
+            <Button fx:id="rainBox" text="Rain" onAction="#rainButtonClicked" styleClass="button"/>
+            <Button fx:id="snowBox" text="Snow" onAction="#snowButtonClicked" styleClass="button"/>
+        </HBox>
+
+    </StackPane>
+
+
+    <StackPane alignment="CENTER">
+
+        <!-- FLIGHTS -->
+        <VBox fx:id="flightsBox" visible="false">
+            <BarChart fx:id="arrivingFlightsChart" title="Arriving Flights" legendVisible="false" styleClass="barchart">
+                <xAxis>
+                    <CategoryAxis label="Time" side="BOTTOM"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Flights" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
+                </yAxis>
+            </BarChart>
+            <BarChart fx:id="departingFlightsChart" title="Departing Flights" legendVisible="false" styleClass="barchart">
+                <xAxis>
+                    <CategoryAxis label="Time" side="BOTTOM"/>
+
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Flights" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
+                </yAxis>
+            </BarChart>
+        </VBox>
+
+        <!-- PASSENGERS -->
         <VBox fx:id="passengersBox" visible="false">
             <BarChart fx:id="arrivingPassengersChart" title="Arriving Passengers" legendVisible="false" styleClass="barchart">
                 <xAxis>
@@ -49,6 +90,9 @@
             </BarChart>
         </VBox>
 
+        <!-- WEATHER -->
+
+        <!-- TEMPERATURE -->
         <LineChart fx:id="temperatureChart" title="Temperature Over Time" createSymbols="false" legendVisible="false"
                    visible="false" styleClass="chart-line">
             <xAxis>
@@ -58,6 +102,8 @@
                 <NumberAxis label="Temperature (°C)" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
             </yAxis>
         </LineChart>
+
+        <!-- WIND -->
         <LineChart fx:id="windChart" title="Wind Over Time" createSymbols="false" legendVisible="false" visible="false" styleClass="chart-line">
             <xAxis>
                 <CategoryAxis label="Time" side="BOTTOM"/>
@@ -66,5 +112,37 @@
                 <NumberAxis label="Wind (km/h)" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
             </yAxis>
         </LineChart>
+
+        <!-- CLOUDS -->
+        <LineChart fx:id="cloudsChart" title="Clouds Over Time" createSymbols="false" legendVisible="false"
+                   visible="false" styleClass="chart-line">
+            <xAxis>
+                <CategoryAxis label="Time" side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="CLouds (1-5)" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
+            </yAxis>
+        </LineChart>
+
+        <!-- RAIN -->
+        <LineChart fx:id="rainChart" title="Rain Over Time" createSymbols="false" legendVisible="false" visible="false" styleClass="chart-line">
+            <xAxis>
+                <CategoryAxis label="Time" side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Rain (mm/h)" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
+            </yAxis>
+        </LineChart>
+
+        <!-- SNOW -->
+        <LineChart fx:id="snowChart" title="Snow Over Time" createSymbols="false" legendVisible="false" visible="false" styleClass="chart-line">
+            <xAxis>
+                <CategoryAxis label="Time" side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Snow (mm/h)" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
+            </yAxis>
+        </LineChart>
+
    </StackPane>
 </VBox>

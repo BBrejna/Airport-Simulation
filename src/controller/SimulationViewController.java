@@ -178,8 +178,15 @@ public class SimulationViewController {
         ControllersHandler.getInstance().getMainViewController().lockButtonsOnSimulationRunning(true);
         ControllersHandler.getInstance().getStatisticsViewController().getTemp_series().getData().clear();
         ControllersHandler.getInstance().getStatisticsViewController().getWind_series().getData().clear();
+        ControllersHandler.getInstance().getStatisticsViewController().getClouds_series().getData().clear();
+        ControllersHandler.getInstance().getStatisticsViewController().getRain_series().getData().clear();
+        ControllersHandler.getInstance().getStatisticsViewController().getSnow_series().getData().clear();
         ControllersHandler.getInstance().getStatisticsViewController().getDeparting_passengers_series().getData().clear();
         ControllersHandler.getInstance().getStatisticsViewController().getArriving_passengers_series().getData().clear();
+        ControllersHandler.getInstance().getStatisticsViewController().getArriving_flights_series().getData().clear();
+        ControllersHandler.getInstance().getStatisticsViewController().getDeparting_flights_series().getData().clear();
+
+
     }
 
     public void handleSettingsButtonClick() throws IOException {
