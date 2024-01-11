@@ -3,9 +3,39 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.WorkmanViewController"
-            prefHeight="400.0" prefWidth="600.0">
-    <Label text="WorkmanView"/>
-</AnchorPane>
+<?import java.net.URL?>
+<?import javafx.scene.shape.Line?>
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<VBox
+        xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="controller.StatisticsViewController">
+    <stylesheets>
+        <URL value="@/styles/style.css"/>
+    </stylesheets>
+    <HBox alignment="CENTER">
+       <!-- <GridPane> -->
+            <LineChart fx:id="temperatureChart" title="Temperature Over Time" createSymbols="false" legendVisible="false">
+                <xAxis>
+                    <CategoryAxis label="Time" side="BOTTOM"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Temperature (°C)" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
+                </yAxis>
+            </LineChart>
+
+            <!-- <LineChart fx:id="windChart" title="Wind Over Time" createSymbols="false" legendVisible="false">
+                <xAxis>
+                    <CategoryAxis label="Wind (km/h)" side="BOTTOM"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Wind" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
+                </yAxis>
+
+            </LineChart>
+        </GridPane>-->
+    </HBox>
+</VBox>
