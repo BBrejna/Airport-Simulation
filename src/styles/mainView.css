@@ -8,15 +8,13 @@
     -fx-padding: 10;
 }
 .RoleButton:hover {
-    -fx-background-color: #A9A38E;
-    -fx-text-fill: #7D7D7D;
+    -fx-opacity: 75%;
 }
 .RoleButton:disabled {
-    -fx-background-color: #9b9b9b;
-    -fx-text-fill: #7D7D7D;
-    -fx-opacity: 100%;
+    -fx-opacity: 50%;
 }
 .activeButton:disabled {
     -fx-background-color: #FFD42A;
     -fx-text-fill: #000000;
+    -fx-opacity: 100%;
 }

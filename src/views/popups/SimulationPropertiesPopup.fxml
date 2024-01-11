@@ -12,12 +12,10 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controller.popups.SimulationPropertiesPopupController"
-      spacing="10">
-    <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
-    </padding>
+      styleClass="container" style="-fx-padding: 10">
     <stylesheets>
-        <URL value="@/styles/simulationSettingsPopup.css"/>
+        <URL value="@/styles/style.css"/>
+        <URL value="@/styles/popup.css"/>
     </stylesheets>
 
     <HBox spacing="5">
@@ -44,8 +42,8 @@
         <Label text="New clouds: " GridPane.rowIndex="5" GridPane.columnIndex="0"/>
         <TextField fx:id="textFieldClouds" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
     </GridPane>
-    <HBox spacing="10">
-        <Button text="OK" onAction="#onOkButtonClicked" />
-        <Button text="Cancel" onAction="#onCancelButtonClicked" />
+    <HBox styleClass="buttonBox">
+        <Button styleClass="defaultButton" text="OK" onAction="#onOkButtonClicked" />
+        <Button styleClass="secondaryButton" text="Cancel" onAction="#onCancelButtonClicked" />
     </HBox>
 </VBox>

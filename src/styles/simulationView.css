@@ -1,8 +1,3 @@
-.container {
-    -fx-spacing: 10;
-}
-
-
 .timetable{
         -fx-background-color: #393946;
         -fx-border-color: #393946;
@@ -49,9 +44,9 @@
         -fx-border-color: transparent;
         -fx-text-fill: #FFEA99;
     }
-.timetable .table-view .virtual-flow .scroll-bar:vertical,
-.timetable .table-view .virtual-flow .scroll-bar:vertical .track,
-.timetable .table-view .virtual-flow .scroll-bar:vertical .track-background {
+.timetable .table-view .virtual-flow .scroll-bar,
+.timetable .table-view .virtual-flow .scroll-bar .track,
+.timetable .table-view .virtual-flow .scroll-bar .track-background {
         -fx-background-color: transparent;
     }
 .timetable .table-view .virtual-flow .scroll-bar .increment-button,
@@ -62,7 +57,7 @@
 .timetable .table-view .virtual-flow .scroll-bar .decrement-button:hover {
         -fx-background-color: transparent;
     }
-.timetable .table-view .virtual-flow .scroll-bar:vertical .thumb{
+.timetable .table-view .virtual-flow .scroll-bar .thumb{
         -fx-background-color:  white;
     }
 

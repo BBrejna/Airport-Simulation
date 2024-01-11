@@ -3,8 +3,7 @@
     -fx-max-height: 600px;
     -fx-max-width: 1200px;
 }
-
-.monospacedText {
-    -fx-font-family: "Monospaced";
+.container {
+    -fx-spacing: 10;
 }
 

@@ -5,19 +5,21 @@
 
 <?import javafx.geometry.Insets?>
 
+<?import java.net.URL?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controller.popups.CloseConfirmPopupController"
-      spacing="10" alignment="CENTER">
+      styleClass="container" alignment="CENTER" style="-fx-padding: 10">
 
-    <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
-    </padding>
+    <stylesheets>
+        <URL value="@/styles/style.css"/>
+        <URL value="@/styles/popup.css"/>
+    </stylesheets>
 
     <Label text="Please confirm aborting and closing the program"/>
     <HBox alignment="CENTER" spacing="10">
-        <Button fx:id="confirm" text="Confirm" onAction="#onConfirmButtonClicked"/>
-        <Button fx:id="cancel" text="Cancel" onAction="#onCancelButtonClicked"/>
+        <Button fx:id="confirm" styleClass="redButton" text="Confirm" onAction="#onConfirmButtonClicked"/>
+        <Button fx:id="cancel"  styleClass="defaultButton" text="Cancel" onAction="#onCancelButtonClicked"/>
     </HBox>
 
 </VBox>

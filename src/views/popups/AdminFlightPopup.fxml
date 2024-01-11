@@ -5,15 +5,18 @@
 
 <?import javafx.geometry.Insets?>
 
+<?import java.net.URL?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controller.popups.AdminFlightPopupController"
-      spacing="10" alignment="CENTER">
+      styleClass="container" alignment="CENTER" style="-fx-padding: 10">
+    <stylesheets>
+        <URL value="@/styles/style.css"/>
+        <URL value="@/styles/popup.css"/>
+    </stylesheets>
+    <GridPane>
 
-    <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
-    </padding>
-
+    </GridPane>
     <HBox spacing="10" alignment="CENTER">
         <RadioButton fx:id="arrivalRadioButton" text="Arrival" />
         <RadioButton fx:id="departureRadioButton" text="Departure" />
@@ -46,8 +49,8 @@
     </VBox>
 
     <HBox spacing="5" alignment="CENTER">
-        <Button text="Create" onAction="#onCreateButtonClicked" />
-        <Button text="Cancel" onAction="#onCancelButtonClicked" />
+        <Button styleClass="defaultButton" text="Create" onAction="#onCreateButtonClicked" />
+        <Button styleClass="secondaryButton" text="Cancel" onAction="#onCancelButtonClicked" />
     </HBox>
 
 </VBox>
