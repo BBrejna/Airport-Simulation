@@ -28,11 +28,11 @@
                 maxWidth="Infinity" onAction="#showAdminContent"/>
         <Button fx:id="salesmanButton" styleClass="RoleButton" text="SALESMAN" GridPane.columnIndex="2"
                 GridPane.rowIndex="0" onAction="#showSalesmanContent"/>
-        <Button fx:id="workmanButton" styleClass="RoleButton" text="STATISTICS" GridPane.columnIndex="3"
-                GridPane.rowIndex="0" onAction="#showWorkmanContent"/>
+        <Button fx:id="statisticsButton" styleClass="RoleButton" text="STATISTICS" GridPane.columnIndex="3"
+                GridPane.rowIndex="0" onAction="#showStatisticsContent"/>
     </GridPane>
     <fx:include fx:id="simulationContent" source="SimulationView.fxml"/>
     <fx:include fx:id="adminContent" source="AdminView.fxml" visible="false" managed="false"/>
     <fx:include fx:id="salesmanContent" source="SalesmanView.fxml" visible="false" managed="false"/>
-    <fx:include fx:id="workmanContent" source="WorkmanView.fxml" visible="false" managed="false"/>
+    <fx:include fx:id="statisticsContent" source="StatisticsView.fxml" visible="false" managed="false"/>
 </VBox>

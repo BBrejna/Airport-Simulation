@@ -17,7 +17,7 @@ public class MainViewController {
     @FXML
     private Button salesmanButton;
     @FXML
-    private Button workmanButton;
+    private Button statisticsButton;
     @FXML
     private Parent simulationContent;
     @FXML
@@ -25,7 +25,7 @@ public class MainViewController {
     @FXML
     private Parent salesmanContent;
     @FXML
-    private Parent workmanContent;
+    private Parent statisticsContent;
     private Button disabledButton;
     private Parent currentContent;
 
@@ -53,7 +53,7 @@ public class MainViewController {
     public void lockButtonsOnSimulationRunning(boolean value) {
         adminButton.setDisable(value);
         salesmanButton.setDisable(value);
-        workmanButton.setDisable(value);
+        statisticsButton.setDisable(value);
     }
 
     public void showSimulationContent() {
@@ -68,8 +68,8 @@ public class MainViewController {
         changeView(salesmanButton, salesmanContent);
     }
 
-    public void showWorkmanContent() {
-        changeView(workmanButton, workmanContent);
+    public void showStatisticsContent() {
+        changeView(statisticsButton, statisticsContent);
     }
 
     public void initialize() {
