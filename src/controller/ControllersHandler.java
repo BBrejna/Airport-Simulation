@@ -44,11 +44,11 @@ public class ControllersHandler {
         this.salesmanViewController = salesmanViewController;
     }
 
-    public StatisticsViewController getWorkmanViewController() {
+    public StatisticsViewController getStatisticsViewController() {
         return statisticsViewController;
     }
 
-    public void setWorkmanViewController(StatisticsViewController statisticsViewController) {
+    public void setStatisticsViewController(StatisticsViewController statisticsViewController) {
         this.statisticsViewController = statisticsViewController;
     }
 }

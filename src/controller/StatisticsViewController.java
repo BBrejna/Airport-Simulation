@@ -18,6 +18,7 @@ public class StatisticsViewController implements Observer<Weather> {
     private XYChart.Series<String, Number> wind_series = new XYChart.Series<>();
 
     public void initialize() {
+        ControllersHandler.getInstance().setStatisticsViewController(this);
         Simulation.getInstance().addObserver(this);
         temperatureChart.getData().add(temp_series);
         windChart.getData().add(wind_series);
