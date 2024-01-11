@@ -10,7 +10,7 @@ public class ControllersHandler {
     private SimulationViewController simulationViewController = null;
     private AdminViewController adminViewController = null;
     private SalesmanViewController salesmanViewController = null;
-    private WorkmanViewController workmanViewController = null;
+    private StatisticsViewController statisticsViewController = null;
 
     public MainViewController getMainViewController() {
         return mainViewController;
@@ -44,11 +44,11 @@ public class ControllersHandler {
         this.salesmanViewController = salesmanViewController;
     }
 
-    public WorkmanViewController getWorkmanViewController() {
-        return workmanViewController;
+    public StatisticsViewController getWorkmanViewController() {
+        return statisticsViewController;
     }
 
-    public void setWorkmanViewController(WorkmanViewController workmanViewController) {
-        this.workmanViewController = workmanViewController;
+    public void setWorkmanViewController(StatisticsViewController statisticsViewController) {
+        this.statisticsViewController = statisticsViewController;
     }
 }

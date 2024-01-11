@@ -28,7 +28,7 @@
                 maxWidth="Infinity" onAction="#showAdminContent"/>
         <Button fx:id="salesmanButton" styleClass="RoleButton" text="SALESMAN" GridPane.columnIndex="2"
                 GridPane.rowIndex="0" onAction="#showSalesmanContent"/>
-        <Button fx:id="workmanButton" styleClass="RoleButton" text="PHYSICAL WORKER" GridPane.columnIndex="3"
+        <Button fx:id="workmanButton" styleClass="RoleButton" text="STATISTICS" GridPane.columnIndex="3"
                 GridPane.rowIndex="0" onAction="#showWorkmanContent"/>
     </GridPane>
     <fx:include fx:id="simulationContent" source="SimulationView.fxml"/>
