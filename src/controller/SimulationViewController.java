@@ -8,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.Admin;
 import model.Salesman;
@@ -135,6 +134,7 @@ public class SimulationViewController {
         pauseButton.setDisable(true);
         rerunButton.setDisable(true);
         ControllersHandler.getInstance().getMainViewController().lockButtonsOnSimulationRunning(false);
+        currentTimeLabel.setText("-");
     }
 
     public void handlePlayButtonClick() {
