@@ -176,6 +176,8 @@ public class SimulationViewController {
         pauseButton.setDisable(false);
         rerunButton.setDisable(true);
         ControllersHandler.getInstance().getMainViewController().lockButtonsOnSimulationRunning(true);
+        ControllersHandler.getInstance().getStatisticsViewController().getTemp_series().getData().clear();
+        ControllersHandler.getInstance().getStatisticsViewController().getWind_series().getData().clear();
     }
 
     public void handleSettingsButtonClick() throws IOException {

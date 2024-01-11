@@ -16,22 +16,27 @@
     <stylesheets>
         <URL value="@/styles/style.css"/>
     </stylesheets>
-    <LineChart fx:id="temperatureChart" title="Temperature Over Time" createSymbols="false" legendVisible="false">
-        <xAxis>
-            <CategoryAxis label="Time" side="BOTTOM"/>
-        </xAxis>
-        <yAxis>
-            <NumberAxis label="Temperature (°C)" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
-        </yAxis>
-    </LineChart>
 
-    <LineChart fx:id="windChart" title="Wind Over Time" createSymbols="false" legendVisible="false">
-        <xAxis>
-            <CategoryAxis label="Wind" side="BOTTOM"/>
-        </xAxis>
-        <yAxis>
-            <NumberAxis label="Wind (km/h)" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
-        </yAxis>
-    </LineChart>
-
+    <HBox alignment="CENTER">
+        <Button fx:id="temperatureButton" text="Temperature" onAction="#temperatureButtonClicked"/>
+        <Button fx:id="windButton" text="Wind" onAction="#windButtonClicked"/>
+    </HBox>
+    <StackPane alignment="CENTER">
+        <LineChart fx:id="temperatureChart" title="Temperature Over Time" createSymbols="false" legendVisible="false" visible="false">
+            <xAxis>
+                <CategoryAxis label="Time" side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Temperature (°C)" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
+            </yAxis>
+        </LineChart>
+        <LineChart fx:id="windChart" title="Wind Over Time" createSymbols="false" legendVisible="false" visible="false">
+            <xAxis>
+                <CategoryAxis label="Time" side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Wind (km/h)" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
+            </yAxis>
+        </LineChart>
+   </StackPane>
 </VBox>

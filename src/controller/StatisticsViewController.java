@@ -9,7 +9,10 @@ import model.classes.Observer;
 import model.classes.simulation.Weather;
 import model.tools.Tools;
 
+import java.awt.*;
+
 public class StatisticsViewController implements Observer<Weather> {
+
     @FXML
     private LineChart<String, Number> temperatureChart;
     @FXML
@@ -34,5 +37,24 @@ public class StatisticsViewController implements Observer<Weather> {
             wind_series.getData().add(new XYChart.Data<>(time, wind));
         });
     }
+
+    @FXML
+    private void temperatureButtonClicked() {
+        temperatureChart.setVisible(true);
+        windChart.setVisible(false);
+    }
+    @FXML
+    private void windButtonClicked(){
+        temperatureChart.setVisible(false);
+        windChart.setVisible(true);
+    }
+
+    public XYChart.Series<String, Number> getTemp_series() {
+        return temp_series;
+    }
+    public XYChart.Series<String, Number> getWind_series() {
+        return wind_series;
+    }
+
 }
 
