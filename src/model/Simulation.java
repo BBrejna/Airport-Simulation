@@ -3,6 +3,7 @@ package model;
 import controller.ControllersHandler;
 import controller.SimulationViewController;
 import javafx.application.Platform;
+import model.classes.StatisticsSubject;
 import model.classes.Subject;
 import model.classes.admin.Flight;
 import model.classes.logging.Log;
@@ -34,7 +35,6 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
     private final int LAST_CALL_TIME = 15;
     private final int MAX_TIME_DELTA = 60;
     private ArrayList<Passenger> arrivingPassengers = new ArrayList<>();
-
 
     /** Singleton design pattern */
     private static final Simulation instance = new Simulation("Simulation Thread");
@@ -140,6 +140,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                 ArrayList<Flight> flights = Admin.getInstance().getFlights();
                 ArrayList<Flight> futureFlights = new ArrayList<>();
 //                System.out.println("DEBUG "+prevTime+" "+stopTime);
+                ArrayList<Flight> newFlights = new ArrayList<>();
                 flights.forEach(flight -> {
 //                    System.out.println("DEBUG "+flight.getActualHour());
                     if (flight.getActualHour() <= prevTime) {
@@ -173,6 +174,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                         Admin.getInstance().checkFlight(flight);
 
                         log("Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departed")+"!");
+                        newFlights.add(flight);
                     }
                     else {
                         if (prevTime < flight.getActualHour()-LAST_CALL_TIME && flight.getActualHour()-LAST_CALL_TIME <= stopTime) {
@@ -195,6 +197,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                 // realizacja timetables, announceLastCall do ekspedienta
                 weather.generateWeather();
                 System.out.println("temperature: "+weather.getTemperature());
+                StatisticsSubject.getInstance().notifyObserver(newFlights);
                 notifyObservers(weather);
                 updateUI();
             } catch (InterruptedException e) {
@@ -352,5 +355,6 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
     public int getMAX_TIME_DELTA() {
         return MAX_TIME_DELTA;
     }
+
 }
 

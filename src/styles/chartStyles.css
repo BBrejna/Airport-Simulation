@@ -1,0 +1,14 @@
+.barchart .default-color0.chart-bar {
+    -fx-bar-fill: #2D2D53;
+}
+
+.chart-line .default-color0.chart-series-line {
+    -fx-stroke: #2D2D53;
+    -fx-stroke-width: 5px;
+}
+.button {
+    -fx-border-color: #2D2D53 #2D2D53 #2D2D53 #2D2D53; /* Top, Right, Bottom, Left */
+    -fx-border-width: 2px 2px 2px 2px; /* Top, Right, Bottom, Left */
+    -fx-border-style: solid;
+}
+

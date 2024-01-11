@@ -9,20 +9,44 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.BarChart?>
 <VBox
         xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
         fx:controller="controller.StatisticsViewController">
     <stylesheets>
         <URL value="@/styles/style.css"/>
+        <URL value="@/styles/chartStyles.css"/>
     </stylesheets>
 
     <HBox alignment="CENTER">
-        <Button fx:id="temperatureButton" text="Temperature" onAction="#temperatureButtonClicked"/>
-        <Button fx:id="windButton" text="Wind" onAction="#windButtonClicked"/>
+        <Button fx:id="temperatureButton" text="Temperature" onAction="#temperatureButtonClicked" styleClass="button" />
+        <Button fx:id="windButton" text="Wind" onAction="#windButtonClicked" styleClass="button"/>
+        <Button fx:id="PassengersButton" text="Passengers" onAction="#passengersButtonClicked" styleClass="button"/>
     </HBox>
     <StackPane alignment="CENTER">
-        <LineChart fx:id="temperatureChart" title="Temperature Over Time" createSymbols="false" legendVisible="false" visible="false">
+        <VBox fx:id="passengersBox" visible="false">
+            <BarChart fx:id="arrivingPassengersChart" title="Arriving Passengers" legendVisible="false" styleClass="barchart">
+                <xAxis>
+                    <CategoryAxis label="Time" side="BOTTOM"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Passengers" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
+                </yAxis>
+            </BarChart>
+            <BarChart fx:id="departingPassengersChart" title="Departing Passengers" legendVisible="false" styleClass="barchart">
+                <xAxis>
+                    <CategoryAxis label="Time" side="BOTTOM"/>
+
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Passengers" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
+                </yAxis>
+            </BarChart>
+        </VBox>
+
+        <LineChart fx:id="temperatureChart" title="Temperature Over Time" createSymbols="false" legendVisible="false"
+                   visible="false" styleClass="chart-line">
             <xAxis>
                 <CategoryAxis label="Time" side="BOTTOM"/>
             </xAxis>
@@ -30,7 +54,7 @@
                 <NumberAxis label="Temperature (°C)" side="LEFT" autoRanging="true" forceZeroInRange="false"/>
             </yAxis>
         </LineChart>
-        <LineChart fx:id="windChart" title="Wind Over Time" createSymbols="false" legendVisible="false" visible="false">
+        <LineChart fx:id="windChart" title="Wind Over Time" createSymbols="false" legendVisible="false" visible="false" styleClass="chart-line">
             <xAxis>
                 <CategoryAxis label="Time" side="BOTTOM"/>
             </xAxis>
