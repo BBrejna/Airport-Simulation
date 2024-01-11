@@ -10,6 +10,7 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.BarChart?>
+<?import javafx.geometry.Insets?>
 <VBox
         xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
@@ -19,7 +20,10 @@
         <URL value="@/styles/chartStyles.css"/>
     </stylesheets>
 
-    <HBox alignment="CENTER">
+    <HBox alignment="CENTER" spacing="5">
+        <padding>
+            <Insets top="20" right="0" bottom="0" left="0"/>
+        </padding>
         <Button fx:id="temperatureButton" text="Temperature" onAction="#temperatureButtonClicked" styleClass="button" />
         <Button fx:id="windButton" text="Wind" onAction="#windButtonClicked" styleClass="button"/>
         <Button fx:id="PassengersButton" text="Passengers" onAction="#passengersButtonClicked" styleClass="button"/>

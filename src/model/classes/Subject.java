@@ -1,5 +1,7 @@
 package model.classes;
 
+import model.classes.admin.Flight;
+
 import java.util.ArrayList;
 
 public abstract class Subject<T> {
