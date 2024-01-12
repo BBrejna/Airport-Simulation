@@ -24,3 +24,6 @@
 .buttonBox {
     -fx-padding:0 20 0 0; /*top right bottom left*/
 }
+.exitButtonBox {
+    -fx-alignment: center;
+}

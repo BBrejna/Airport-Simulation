@@ -42,7 +42,7 @@
         <Label text="New clouds: " GridPane.rowIndex="5" GridPane.columnIndex="0"/>
         <TextField fx:id="textFieldClouds" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
     </GridPane>
-    <HBox styleClass="buttonBox">
+    <HBox styleClass="container, exitButtonBox">
         <Button styleClass="defaultButton" text="OK" onAction="#onOkButtonClicked" />
         <Button styleClass="secondaryButton" text="Cancel" onAction="#onCancelButtonClicked" />
     </HBox>

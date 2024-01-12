@@ -40,7 +40,7 @@
         <ComboBox fx:id="airlineComboBox" GridPane.rowIndex="4" GridPane.columnIndex="1" minWidth="200"/>
     </GridPane>
 
-    <HBox styleClass="container, buttonBox">
+    <HBox styleClass="container, exitButtonBox">
         <Button styleClass="defaultButton" text="Create" onAction="#onCreateButtonClicked" />
         <Button styleClass="secondaryButton" text="Cancel" onAction="#onCancelButtonClicked" />
     </HBox>

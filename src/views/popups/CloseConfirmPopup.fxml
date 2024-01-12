@@ -17,7 +17,7 @@
     </stylesheets>
 
     <Label text="Please confirm aborting and closing the program"/>
-    <HBox alignment="CENTER" spacing="10">
+    <HBox styleClass="container, exitButtonBox">
         <Button fx:id="confirm" styleClass="redButton" text="Confirm" onAction="#onConfirmButtonClicked"/>
         <Button fx:id="cancel"  styleClass="defaultButton" text="Cancel" onAction="#onCancelButtonClicked"/>
     </HBox>
