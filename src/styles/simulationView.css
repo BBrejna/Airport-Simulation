@@ -131,17 +131,5 @@
     -fx-background-color: #ffffff;
 }
 
-.timeLabel {
-    -fx-font-family: "Space Mono";
-    -fx-font-weight: bold;
-    -fx-font-size: 20;
-    }
 
-.simButton {
-        -fx-background-color: transparent;
-        -fx-border-color: transparent;
-    }
-.simButton:hover,
-.simButton:disabled {
-        -fx-opacity: 25%;
-    }
+

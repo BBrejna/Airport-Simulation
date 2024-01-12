@@ -5,34 +5,46 @@
 <?import java.net.URL ?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox
     VBox.vgrow="ALWAYS"
     xmlns="http://javafx.com/javafx"
     xmlns:fx="http://javafx.com/fxml"
-    fx:controller="controller.AdminViewController">
+    fx:controller="controller.AdminViewController"
+    styleClass="container" style="-fx-padding: 10">
 
     <stylesheets>
         <URL value="@/styles/style.css"/>
+        <URL value="@/styles/adminView.css"/>
     </stylesheets>
 
-    <GridPane minHeight="36" maxHeight="64">
+        <HBox minHeight="36" maxHeight="64" styleClass="container">
 
-        <columnConstraints>
-            <ColumnConstraints percentWidth="100"/>
-        </columnConstraints>
-        <HBox GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" >
-            <padding>
-                <Insets left="10" right="10"/>
-            </padding>
-            <Button fx:id="createFlightButton" text="Create a flight" onAction="#handleCreateFlightButtonClick"/>
+            <?comment LOGO?>
+            <ImageView preserveRatio="true" fitHeight="60">
+                <Image url="@/resources/iconSmall.png"/>
+            </ImageView>
 
-            <Region HBox.hgrow="ALWAYS"/>
-            <HBox fx:id="delayInfoBox" alignment="TOP_RIGHT">
-                <Label fx:id="delayInfo" text="Current flight delay:"/>
+            <?comment DELAY INFO?>
+            <HBox fx:id="delayInfoBox" alignment="CENTER_LEFT">
+                <Label styleClass="timeLabel" text="CURRENT FLIGHT DELAY: "/>
+                <Label fx:id="delayInfo" text="-" styleClass="timeLabel"/>
+            </HBox>
+
+            <?comment BUTTONS SECTION?>
+            <HBox styleClass="container, buttonBox" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+
+                <?comment CREATE?>
+                <Button fx:id="createFlightButton" styleClass="iconButton" onAction="#handleCreateFlightButtonClick">
+                    <graphic>
+                        <ImageView preserveRatio="true" fitHeight="30">
+                            <Image url="@/resources/addSmall.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
             </HBox>
         </HBox>
-
-    </GridPane>
     <VBox VBox.vgrow="ALWAYS">
         <TableView fx:id="flightsTableView" VBox.vgrow="ALWAYS">
             <columnResizePolicy>

@@ -1,12 +1,15 @@
 .root {
     -fx-background-color: white;
 }
+
 .buttonBox {
     -fx-spacing: 10;
     -fx-alignment: center;
 }
+
 .button {
     -fx-font-family: "Space Mono";
+    -fx-font-weight: bold;
     -fx-alignment: center;
     -fx-font-size: 16;
     -fx-padding: 5;
@@ -19,6 +22,7 @@
 .button:pressed {
     -fx-opacity: 75%;
 }
+
 .defaultButton {
     -fx-background-color: #B2AA8A;
     -fx-border-color: #B2AA8A;
@@ -30,12 +34,42 @@
 .redButton:hover {
     -fx-background-color: #d75050;
     -fx-text-fill: white;
+    -fx-opacity: 100%;
 }
 .secondaryButton {
     -fx-background-color: white;
     -fx-border-color: #B2AA8A ;
 }
+
 .label {
     -fx-font-family: "Space Mono";
     -fx-font-size: 16;
+}
+
+.slider{
+    -fx-background-color: transparent;
+}
+.slider .track {
+    -fx-background-color: #B2AA8A;
+    -fx-opacity: 30%;
+}
+.slider .thumb {
+    -fx-background-color: #FFD42A;
+    -fx-effect: dropshadow(gaussian,#B2AA8A,5,0.2,0,0);
+}
+
+.text-field {
+    -fx-border-color: #B2AA8A;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.spinner .text-field {
+    -fx-border-color: #B2AA8A;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.combo-box {
+    -fx-min-width: 100%;
 }

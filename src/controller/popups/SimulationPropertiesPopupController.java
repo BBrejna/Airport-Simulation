@@ -38,7 +38,7 @@ public class SimulationPropertiesPopupController {
         this.stage = stage;
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("SIM properties");
+        stage.setTitle("Simulation Settings");
 
         stage.setOnCloseRequest(e -> {
             e.consume();

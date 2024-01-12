@@ -7,6 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import java.lang.String?>
 <VBox VBox.vgrow="ALWAYS"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
@@ -39,10 +40,10 @@
                 </HBox>
 
                 <?comment BUTTONS?>
-                <HBox alignment="CENTER_RIGHT" styleClass="container" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_RIGHT" styleClass="container, buttonBox" HBox.hgrow="ALWAYS">
 
                     <?comment PLAY?>
-                    <Button fx:id="playButton" styleClass="simButton" onAction="#handlePlayButtonClick">
+                    <Button fx:id="playButton" styleClass="iconButton" onAction="#handlePlayButtonClick">
                         <graphic>
                             <ImageView preserveRatio="true" fitHeight="30">
                                 <Image url="@/resources/playSmall.png"/>
@@ -51,7 +52,7 @@
                     </Button>
 
                     <?comment PAUSE?>
-                    <Button disable="true" fx:id="pauseButton" styleClass="simButton" onAction="#handlePauseButtonClick">
+                    <Button disable="true" fx:id="pauseButton" styleClass="iconButton" onAction="#handlePauseButtonClick">
                         <graphic>
                             <ImageView preserveRatio="true" fitHeight="30">
                                 <Image url="@/resources/pauseSmall.png"/>
@@ -60,7 +61,7 @@
                     </Button>
 
                     <?comment RERUN?>
-                    <Button disable="true" fx:id="rerunButton" styleClass="simButton" onAction="#handleRerunButtonClick">
+                    <Button disable="true" fx:id="rerunButton" styleClass="iconButton" onAction="#handleRerunButtonClick">
                         <graphic>
                             <ImageView preserveRatio="true" fitHeight="30">
                                 <Image url="@/resources/rerunSmall.png"/>
@@ -69,7 +70,7 @@
                     </Button>
 
                     <?comment SETTINGS?>
-                    <Button styleClass="simButton" onAction="#handleSettingsButtonClick">
+                    <Button styleClass="iconButton" onAction="#handleSettingsButtonClick">
                         <graphic>
                             <ImageView preserveRatio="true" fitHeight="30">
                                 <Image url="@/resources/settingsSmall.png"/>

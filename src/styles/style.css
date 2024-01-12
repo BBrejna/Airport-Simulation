@@ -7,3 +7,20 @@
     -fx-spacing: 10;
 }
 
+.iconButton {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.iconButton:hover,
+.iconButton:disabled {
+    -fx-opacity: 25%;
+}
+
+.timeLabel {
+    -fx-font-family: "Space Mono";
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+.buttonBox {
+    -fx-padding:0 20 0 0; /*top right bottom left*/
+}

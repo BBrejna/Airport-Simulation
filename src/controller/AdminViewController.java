@@ -58,7 +58,7 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
 
         Platform.runLater(() -> {
 
-            delayInfo.setText("Current flight delay: " + Admin.getInstance().getCurrentDelayProbability());
+            delayInfo.setText(Admin.getInstance().getCurrentDelayProbability());
 
             flightsTableView.getItems().clear();
 

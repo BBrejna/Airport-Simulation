@@ -6,6 +6,7 @@
 <?import javafx.geometry.Insets?>
 
 <?import java.net.URL?>
+<?import javafx.scene.text.Text?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controller.popups.AdminFlightPopupController"
@@ -14,41 +15,32 @@
         <URL value="@/styles/style.css"/>
         <URL value="@/styles/popup.css"/>
     </stylesheets>
-    <GridPane>
+    <GridPane hgap="10" vgap="10">
 
+        <Label text="Flight type:" alignment="CENTER" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <HBox styleClass="container" alignment="CENTER_LEFT" GridPane.rowIndex="0" GridPane.columnIndex="1" >
+            <RadioButton fx:id="arrivalRadioButton" text="Arrival" />
+            <RadioButton fx:id="departureRadioButton" text="Departure" alignment="CENTER_RIGHT"/>
+        </HBox>
+
+        <Label text="Hour:" alignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <HBox alignment="CENTER_LEFT" GridPane.rowIndex="1" GridPane.columnIndex="1">
+            <Spinner fx:id="hourSpinner" min="0" max="23" editable="true" initialValue="0" prefWidth="60"/>
+            <Text text=" : "/>
+            <Spinner fx:id="minutesSpinner" min="0" max="59" editable="true" initialValue="0" prefWidth="60" />
+        </HBox>
+
+        <Label text="Delay amount (minutes):" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <Spinner fx:id="delaySpinner" min="0" max="1000" editable="true" initialValue="0" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="City:" alignment="CENTER" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="cityComboBox" GridPane.rowIndex="3" GridPane.columnIndex="1" HBox.hgrow="ALWAYS"/>
+
+        <Label text="Airline:" alignment="CENTER" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="airlineComboBox" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
     </GridPane>
-    <HBox spacing="10" alignment="CENTER">
-        <RadioButton fx:id="arrivalRadioButton" text="Arrival" />
-        <RadioButton fx:id="departureRadioButton" text="Departure" />
-    </HBox>
 
-    <HBox spacing="5">
-        <VBox spacing="5">
-            <Label text="Select an hour:" />
-            <Spinner fx:id="hourSpinner" min="0" max="23" initialValue="0" />
-        </VBox>
-        <VBox spacing="5">
-            <Label text="Select minutes:" />
-            <Spinner fx:id="minutesSpinner" min="0" max="59" initialValue="0" />
-        </VBox>
-    </HBox>
-
-    <VBox spacing="5" alignment="CENTER">
-        <Label text="Select a delay amount (minutes):" />
-        <Spinner fx:id="delaySpinner" min="0" max="59" initialValue="0" />
-    </VBox>
-
-    <VBox alignment="CENTER" spacing="5">
-        <Label text="Select city:"/>
-        <ComboBox fx:id="cityComboBox"/>
-    </VBox>
-
-    <VBox alignment="CENTER" spacing="5">
-        <Label text="Select airline:"/>
-        <ComboBox fx:id="airlineComboBox"/>
-    </VBox>
-
-    <HBox spacing="5" alignment="CENTER">
+    <HBox spacing="5" styleClass="buttonBox">
         <Button styleClass="defaultButton" text="Create" onAction="#onCreateButtonClicked" />
         <Button styleClass="secondaryButton" text="Cancel" onAction="#onCancelButtonClicked" />
     </HBox>
