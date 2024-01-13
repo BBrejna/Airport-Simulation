@@ -115,15 +115,17 @@ public class StatisticsViewController {
         });
     }
     public void clearAllCharts(){
-        temp_series.getData().clear();
-        wind_series.getData().clear();
-        clouds_series.getData().clear();
-        rain_series.getData().clear();
-        snow_series.getData().clear();
-        arriving_passengers_series.getData().clear();
-        departing_passengers_series.getData().clear();
-        arriving_flights_series.getData().clear();
-        departing_flights_series.getData().clear();
+        Platform.runLater(() -> {
+            temp_series.getData().clear();
+            wind_series.getData().clear();
+            clouds_series.getData().clear();
+            rain_series.getData().clear();
+            snow_series.getData().clear();
+            arriving_passengers_series.getData().clear();
+            departing_passengers_series.getData().clear();
+            arriving_flights_series.getData().clear();
+            departing_flights_series.getData().clear();
+        });
     }
     @FXML
     private void temperatureButtonClicked() {
