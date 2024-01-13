@@ -19,30 +19,29 @@
     </stylesheets>
 
 
-
-    <?comment SIMMENU, TIMETABLES, ADMIN, SALESMAN, WORKER?>
+    <!-- SIMMENU, TIMETABLES, ADMIN, SALESMAN, WORKER -->
     <HBox styleClass="container" minHeight="250" >
 
-        <?comment SIMMENU, TIMETABLES?>
+        <!-- SIMMENU, TIMETABLES -->
         <VBox styleClass="container">
 
-            <?comment SIMULATION BAR?>
+            <!-- SIMULATION BAR -->
             <HBox alignment="CENTER_LEFT" styleClass="container" minWidth="500">
-                <?comment LOGO?>
+                <!-- LOGO -->
                 <ImageView preserveRatio="true" fitHeight="60">
                     <Image url="@/resources/iconSmall.png"/>
                 </ImageView>
 
-                <?comment TIME?>
+                <!-- TIME -->
                 <HBox alignment="CENTER_LEFT">
                     <Label text="CURRENT TIME: " styleClass="timeLabel"/>
                     <Label fx:id="currentTimeLabel" text="-" styleClass="timeLabel"/>
                 </HBox>
 
-                <?comment BUTTONS?>
+                <!-- BUTTONS -->
                 <HBox alignment="CENTER_RIGHT" styleClass="container, buttonBox" HBox.hgrow="ALWAYS">
 
-                    <?comment PLAY?>
+                    <!-- PLAY -->
                     <Button fx:id="playButton" styleClass="iconButton" onAction="#handlePlayButtonClick">
                         <graphic>
                             <ImageView preserveRatio="true" fitHeight="30">
@@ -51,7 +50,7 @@
                         </graphic>
                     </Button>
 
-                    <?comment PAUSE?>
+                    <!-- PAUSE -->
                     <Button disable="true" fx:id="pauseButton" styleClass="iconButton" onAction="#handlePauseButtonClick">
                         <graphic>
                             <ImageView preserveRatio="true" fitHeight="30">
@@ -60,7 +59,7 @@
                         </graphic>
                     </Button>
 
-                    <?comment RERUN?>
+                    <!-- RERUN -->
                     <Button disable="true" fx:id="rerunButton" styleClass="iconButton" onAction="#handleRerunButtonClick">
                         <graphic>
                             <ImageView preserveRatio="true" fitHeight="30">
@@ -69,7 +68,7 @@
                         </graphic>
                     </Button>
 
-                    <?comment SETTINGS?>
+                    <!-- SETTINGS -->
                     <Button styleClass="iconButton" onAction="#handleSettingsButtonClick">
                         <graphic>
                             <ImageView preserveRatio="true" fitHeight="30">
@@ -80,10 +79,10 @@
                 </HBox>
             </HBox>
 
-            <?comment TIMETABLES?>
+            <!-- TIMETABLES -->
             <HBox styleClass="container" VBox.vgrow="ALWAYS">
 
-                <?comment DEPARTURES?>
+                <!-- DEPARTURES -->
                 <VBox  minWidth="250" styleClass="timetable" alignment="CENTER" >
                     <VBox alignment="CENTER">
                         <Label text="DEPARTURES" styleClass="timetableTitle" />
@@ -118,7 +117,7 @@
                     </TableView>
                 </VBox>
 
-                <?comment ARRIVALS?>
+                <!-- ARRIVALS -->
                 <VBox  minWidth="250" styleClass="timetable" alignment="CENTER" >
                     <VBox alignment="CENTER">
                         <Label text="ARRIVALS" styleClass="timetableTitle" />
@@ -155,22 +154,22 @@
             </HBox>
         </VBox>
 
-        <?comment ADMIN, SALESMAN, WORKER?>
+        <!-- ADMIN, SALESMAN, WORKER -->
         <VBox minWidth="250" styleClass="container" HBox.hgrow="ALWAYS">
 
-            <?comment ADMIN?>
+            <!-- ADMIN -->
             <VBox styleClass="activityBox" >
                 <Label text="ADMIN ACTIVITY"/>
                 <ListView VBox.vgrow="ALWAYS" fx:id="adminLogsList"/>
             </VBox>
 
-            <?comment SALESMAN?>
+            <!-- SALESMAN -->
             <VBox styleClass="activityBox">
                 <Label text="SALESMAN ACTIVITY"/>
                 <ListView VBox.vgrow="ALWAYS" fx:id="salesmanLogsList"/>
             </VBox>
 
-            <?comment WORKER?>
+            <!-- WORKER -->
             <VBox styleClass="activityBox">
                 <Label text="PHYSICAL WORKER ACTIVITY"/>
                 <ListView VBox.vgrow="ALWAYS" fx:id="workmanLogsList"/>
@@ -179,10 +178,10 @@
 
     </HBox>
 
-    <?comment WEATHER, SIMULATION?>
+    <!-- WEATHER, SIMULATION -->
     <HBox minHeight="208" styleClass="container">
 
-        <?comment WEATHER?>
+        <!-- WEATHER -->
         <VBox minWidth="301" styleClass="activityBox" >
             <Label text="CURRENT WEATHER"/>
             <TableView fx:id="weatherTableView">
@@ -204,13 +203,10 @@
             </TableView>
         </VBox>
 
-        <?comment SIMULATION?>
+        <!-- SIMULATION -->
         <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" styleClass="activityBox">
             <Label text="SIMULATION ACTIVITY"/>
             <ListView VBox.vgrow="ALWAYS" fx:id="simulationLogsList"/>
         </VBox>
     </HBox>
-
-
-
 </VBox>

@@ -11,41 +11,50 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox
         xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
-        fx:controller="controller.StatisticsViewController">
+        fx:controller="controller.StatisticsViewController"
+        styleClass="container" style="-fx-padding: 10">
     <stylesheets>
         <URL value="@/styles/style.css"/>
         <URL value="@/styles/chartStyles.css"/>
     </stylesheets>
+    <HBox minHeight="36" maxHeight="64" styleClass="container">
 
-    <StackPane alignment="CENTER">
+        <!-- LOGO -->
+        <ImageView preserveRatio="true" fitHeight="60">
+            <Image url="@/resources/iconSmall.png"/>
+        </ImageView>
 
-        <HBox fx:id="buttonsBox" alignment="CENTER" spacing="5" visible="true">
+        <!-- MENU BUTTONS -->
+        <StackPane alignment="CENTER" HBox.hgrow="ALWAYS" >
+            <!-- padding rozmiaru loga aby bylo wysrodkowane -->
             <padding>
-                <Insets top="20" right="0" bottom="0" left="0"/>
+                <Insets right="64"/>
             </padding>
 
-            <Button fx:id="weatherButton" text="Weather" onAction="#weatherButtonClicked" styleClass="customButton, primaryButton" />
-            <Button fx:id="PassengersButton" text="Passengers" onAction="#passengersButtonClicked" styleClass="customButton, primaryButton"/>
-            <Button fx:id="FlightsButton" text="Flights" onAction="#flightsButtonClicked" styleClass="customButton, primaryButton"/>
-        </HBox>
+            <HBox fx:id="buttonsBox" alignment="CENTER" styleClass="container" visible="true">
 
-        <HBox fx:id="weatherButtonsBox" alignment="CENTER" spacing="5" visible="false">
-            <padding>
-                <Insets top="20" right="0" bottom="0" left="0"/>
-            </padding>
-            <Button fx:id="temperatureButton" text="Temperature" onAction="#temperatureButtonClicked" styleClass="customButton, primaryButton" />
-            <Button fx:id="windButton" text="Wind" onAction="#windButtonClicked" styleClass="customButton, primaryButton"/>
-            <Button fx:id="cloudsBox" text="Clouds" onAction="#cloudsButtonClicked" styleClass="customButton, primaryButton"/>
-            <Button fx:id="rainBox" text="Rain" onAction="#rainButtonClicked" styleClass="customButton, primaryButton"/>
-            <Button fx:id="snowBox" text="Snow" onAction="#snowButtonClicked" styleClass="customButton, primaryButton"/>
-        </HBox>
+                    <Button fx:id="weatherButton" text="Weather" onAction="#weatherButtonClicked" styleClass="customButton, primaryButton" />
+                    <Button fx:id="PassengersButton" text="Passengers" onAction="#passengersButtonClicked" styleClass="customButton, primaryButton"/>
+                    <Button fx:id="FlightsButton" text="Flights" onAction="#flightsButtonClicked" styleClass="customButton, primaryButton"/>
+                </HBox>
 
-    </StackPane>
+            <HBox fx:id="weatherButtonsBox" alignment="CENTER" styleClass="container" visible="false">
+                    <Button fx:id="temperatureButton" text="Temperature" onAction="#temperatureButtonClicked" styleClass="customButton, primaryButton" />
+                    <Button fx:id="windButton" text="Wind" onAction="#windButtonClicked" styleClass="customButton, primaryButton"/>
+                    <Button fx:id="cloudsBox" text="Clouds" onAction="#cloudsButtonClicked" styleClass="customButton, primaryButton"/>
+                    <Button fx:id="rainBox" text="Rain" onAction="#rainButtonClicked" styleClass="customButton, primaryButton"/>
+                    <Button fx:id="snowBox" text="Snow" onAction="#snowButtonClicked" styleClass="customButton, primaryButton"/>
+                </HBox>
+        </StackPane>
+    </HBox>
 
 
+<!-- CHARTS -->
     <StackPane alignment="CENTER">
 
         <!-- FLIGHTS -->

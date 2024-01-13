@@ -1,8 +1,11 @@
 .barchart .default-color0.chart-bar {
-    -fx-bar-fill: #2D2D53;
+    -fx-bar-fill: #000080;
 }
 
 .chart-line .default-color0.chart-series-line {
-    -fx-stroke: #2D2D53;
+    -fx-stroke: #000080;
     -fx-stroke-width: 5px;
+}
+.label {
+    -fx-font-weight: bold;
 }

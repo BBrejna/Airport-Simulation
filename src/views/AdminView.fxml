@@ -19,32 +19,32 @@
         <URL value="@/styles/adminView.css"/>
     </stylesheets>
 
-        <HBox minHeight="36" maxHeight="64" styleClass="container">
+    <HBox minHeight="36" maxHeight="64" styleClass="container">
 
-            <?comment LOGO?>
-            <ImageView preserveRatio="true" fitHeight="60">
-                <Image url="@/resources/iconSmall.png"/>
-            </ImageView>
+        <!-- LOGO -->
+        <ImageView preserveRatio="true" fitHeight="60">
+            <Image url="@/resources/iconSmall.png"/>
+        </ImageView>
 
-            <?comment DELAY INFO?>
-            <HBox fx:id="delayInfoBox" alignment="CENTER_LEFT">
-                <Label styleClass="timeLabel" text="CURRENT FLIGHT DELAY: "/>
-                <Label fx:id="delayInfo" text="-" styleClass="timeLabel"/>
-            </HBox>
+        <!-- DELAY INFO -->
+        <HBox fx:id="delayInfoBox" alignment="CENTER_LEFT">
+            <Label styleClass="timeLabel" text="CURRENT FLIGHT DELAY: "/>
+            <Label fx:id="delayInfo" text="-" styleClass="timeLabel"/>
+        </HBox>
 
-            <?comment BUTTONS SECTION?>
-            <HBox styleClass="container, buttonBox" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+        <!-- BUTTON BOX -->
+        <HBox styleClass="container, buttonBox" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
 
-                <?comment CREATE?>
-                <Button fx:id="createFlightButton" styleClass="iconButton" onAction="#handleCreateFlightButtonClick">
+            <!-- CREATE -->
+            <Button fx:id="createFlightButton" styleClass="iconButton" onAction="#handleCreateFlightButtonClick">
                     <graphic>
                         <ImageView preserveRatio="true" fitHeight="30">
                             <Image url="@/resources/addSmall.png"/>
                         </ImageView>
                     </graphic>
                 </Button>
-            </HBox>
         </HBox>
+    </HBox>
     <VBox VBox.vgrow="ALWAYS">
         <TableView fx:id="flightsTableView" VBox.vgrow="ALWAYS">
             <columnResizePolicy>
