@@ -9,15 +9,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.Simulation;
 import model.classes.Observer;
-import model.classes.StatisticsObserver;
-import model.classes.StatisticsSubject;
 import model.classes.admin.Flight;
 import model.classes.simulation.Weather;
 import model.tools.Tools;
 
 import java.util.ArrayList;
 
-public class StatisticsViewController implements Observer<Weather>, StatisticsObserver {
+public class StatisticsViewController {
 
     @FXML
     private LineChart<String, Number> temperatureChart;
@@ -57,9 +55,7 @@ public class StatisticsViewController implements Observer<Weather>, StatisticsOb
 
     public void initialize() {
         ControllersHandler.getInstance().setStatisticsViewController(this);
-        Simulation.getInstance().addObserver(this);
-        StatisticsSubject.getInstance().addObserver(this);
-
+        Simulation.getInstance().addObserver(new WeatherObserver());
         temperatureChart.getData().add(temp_series);
         windChart.getData().add(wind_series);
         cloudsChart.getData().add(clouds_series);
@@ -71,40 +67,38 @@ public class StatisticsViewController implements Observer<Weather>, StatisticsOb
         departingFlightsChart.getData().add(departing_flights_series);
     }
 
-
-
-    @Override
-    public void observerUpdateState(Weather weather) {
-        Platform.runLater(() -> {
-            String time = Tools.convertMinutesToTime(Simulation.getInstance().getTime());
-            Number temperature = weather.getTemperature();
-            temp_series.getData().add(new XYChart.Data<>(time, temperature));
-            Number wind = weather.getWind();
-            wind_series.getData().add(new XYChart.Data<>(time, wind));
-            Number clouds = weather.getClouds();
-            clouds_series.getData().add(new XYChart.Data<>(time, clouds));
-            Number rain = weather.getRain();
-            rain_series.getData().add(new XYChart.Data<>(time, rain));
-            Number snow = weather.getSnow();
-            snow_series.getData().add(new XYChart.Data<>(time, snow));
-        });
+    class WeatherObserver implements Observer<Weather>{
+        @Override
+        public void observerUpdateState(Weather weather) {
+            Platform.runLater(() -> {
+                String time = Tools.convertMinutesToTime(Simulation.getInstance().getTime());
+                Number temperature = weather.getTemperature();
+                temp_series.getData().add(new XYChart.Data<>(time, temperature));
+                Number wind = weather.getWind();
+                wind_series.getData().add(new XYChart.Data<>(time, wind));
+                Number clouds = weather.getClouds();
+                clouds_series.getData().add(new XYChart.Data<>(time, clouds));
+                Number rain = weather.getRain();
+                rain_series.getData().add(new XYChart.Data<>(time, rain));
+                Number snow = weather.getSnow();
+                snow_series.getData().add(new XYChart.Data<>(time, snow));
+            });
+        }
     }
 
-    @Override
-    public void observerUpdateState(ArrayList<Flight> flights) {
-        Platform.runLater(() ->{
+    public void getNewFlights(ArrayList<Flight> flights) {
+        Platform.runLater(() -> {
             String time = Tools.convertMinutesToTime(Simulation.getInstance().getTime());
             int arriving_passengers = 0;
             int departing_passengers = 0;
             int arrivingFlights = 0;
             int departingFlights = 0;
-            for(Flight flight: flights) {
-                if(flight.isArrival()){
+            for (Flight flight : flights) {
+                if (flight.isArrival()) {
                     arriving_passengers += flight.getNumOfOccupiedSeats()[0] + flight.getNumOfOccupiedSeats()[1] +
                             flight.getNumOfOccupiedSeats()[2];
                     arrivingFlights++;
-                }
-                else{
+                } else {
                     departing_passengers += flight.getNumOfOccupiedSeats()[0] + flight.getNumOfOccupiedSeats()[1] +
                             flight.getNumOfOccupiedSeats()[2];
                     departingFlights++;
@@ -114,16 +108,23 @@ public class StatisticsViewController implements Observer<Weather>, StatisticsOb
             Number departingPassengers = departing_passengers;
             Number arrivingFlightsNumber = arrivingFlights;
             Number departingFlightsNumber = departingFlights;
-
             arriving_passengers_series.getData().add(new XYChart.Data<>(time, arrivingPassengers));
             departing_passengers_series.getData().add(new XYChart.Data<>(time, departingPassengers));
             arriving_flights_series.getData().add(new XYChart.Data<>(time, arrivingFlightsNumber));
             departing_flights_series.getData().add(new XYChart.Data<>(time, departingFlightsNumber));
-
         });
     }
-
-
+    public void clearAllCharts(){
+        temp_series.getData().clear();
+        wind_series.getData().clear();
+        clouds_series.getData().clear();
+        rain_series.getData().clear();
+        snow_series.getData().clear();
+        arriving_passengers_series.getData().clear();
+        departing_passengers_series.getData().clear();
+        arriving_flights_series.getData().clear();
+        departing_flights_series.getData().clear();
+    }
     @FXML
     private void temperatureButtonClicked() {
         flightsBox.setVisible(false);

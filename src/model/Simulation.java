@@ -3,7 +3,6 @@ package model;
 import controller.ControllersHandler;
 import controller.SimulationViewController;
 import javafx.application.Platform;
-import model.classes.StatisticsSubject;
 import model.classes.Subject;
 import model.classes.admin.Flight;
 import model.classes.logging.Log;
@@ -71,7 +70,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
         if (t == null || isSimulationFinished) {
             if (t != null) {
                 clearAllLogs();
-
+                ControllersHandler.getInstance().getStatisticsViewController().clearAllCharts();
                 weather = new Weather();
                 log("!!! RESTARTING SIMULATION... !!!", false);
 
@@ -173,7 +172,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
 
                         Admin.getInstance().checkFlight(flight);
 
-                        log("Flight "+flight.getFlightNumber()+" has just "+(flight.isArrival() ? "arrived" : "departed")+"!");
+                        log("Flight " + flight.getFlightNumber() + " has just " + (flight.isArrival() ? "arrived" : "departed") + "!");
                         newFlights.add(flight);
                     }
                     else {
@@ -197,7 +196,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                 // realizacja timetables, announceLastCall do ekspedienta
                 weather.generateWeather();
                 System.out.println("temperature: "+weather.getTemperature());
-                StatisticsSubject.getInstance().notifyObserver(newFlights);
+                ControllersHandler.getInstance().getStatisticsViewController().getNewFlights(newFlights);
                 notifyObservers(weather);
                 updateUI();
             } catch (InterruptedException e) {
