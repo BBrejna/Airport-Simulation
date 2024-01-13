@@ -22,6 +22,8 @@
         <URL value="@/styles/style.css"/>
         <URL value="@/styles/chartStyles.css"/>
     </stylesheets>
+
+    <!-- UPPER MENU -->
     <HBox minHeight="36" maxHeight="64" styleClass="container">
 
         <!-- LOGO -->
@@ -30,8 +32,8 @@
         </ImageView>
 
         <!-- MENU BUTTONS -->
-        <StackPane alignment="CENTER" HBox.hgrow="ALWAYS" >
-            <!-- padding rozmiaru loga aby bylo wysrodkowane -->
+        <StackPane HBox.hgrow="ALWAYS" alignment="CENTER">
+            <!-- padding the size of logo to make box centered -->
             <padding>
                 <Insets right="64"/>
             </padding>
