@@ -5,31 +5,35 @@
 <?import java.net.URL ?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox
         VBox.vgrow="ALWAYS"
         xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
-        fx:controller="controller.SalesmanViewController">
+        fx:controller="controller.SalesmanViewController"
+        styleClass="container" style="-fx-padding: 10">
 
     <stylesheets>
         <URL value="@/styles/style.css"/>
+        <URL value="@/styles/adminView.css"/>
     </stylesheets>
 
-    <GridPane minHeight="36" maxHeight="64">
+    <HBox minHeight="36" maxHeight="64" styleClass="container">
 
-        <columnConstraints>
-            <ColumnConstraints percentWidth="100"/>
-        </columnConstraints>
-        <HBox GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" >
-            <padding>
-                <Insets left="10" right="10"/>
-            </padding>
-            <Button fx:id="createPassengerButton" text="Create a passenger" />
+        <?comment LOGO?>
+        <ImageView preserveRatio="true" fitHeight="60">
+            <Image url="@/resources/iconSmall.png"/>
+        </ImageView>
 
-
+        <?comment DELAY INFO?>
+        <HBox fx:id="delayInfoBox" alignment="CENTER_LEFT">
+            <Label styleClass="timeLabel" text="CURRENT FLIGHT DELAY: "/>
+            <Label fx:id="delayInfo" text="-" styleClass="timeLabel"/>
         </HBox>
 
-    </GridPane>
+
+    </HBox>
     <VBox VBox.vgrow="ALWAYS">
         <TableView fx:id="flightsTableView" VBox.vgrow="ALWAYS">
             <columnResizePolicy>
@@ -41,24 +45,24 @@
                         <javafx.scene.control.cell.PropertyValueFactory property="flightNumber"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Name">
+                <TableColumn text="Hour">
                     <cellValueFactory>
-                        <javafx.scene.control.cell.PropertyValueFactory property="name"/>
+                        <javafx.scene.control.cell.PropertyValueFactory property="hour"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Surname">
+                <TableColumn text="City">
                     <cellValueFactory>
-                        <javafx.scene.control.cell.PropertyValueFactory property="surname"/>
+                        <javafx.scene.control.cell.PropertyValueFactory property="city"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="PESEL">
+                <TableColumn text="Seats">
                     <cellValueFactory>
-                        <javafx.scene.control.cell.PropertyValueFactory property="pesel"/>
+                        <javafx.scene.control.cell.PropertyValueFactory property="seats"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Class">
+                <TableColumn text="Price">
                     <cellValueFactory>
-                        <javafx.scene.control.cell.PropertyValueFactory property="class"/>
+                        <javafx.scene.control.cell.PropertyValueFactory property="price"/>
                     </cellValueFactory>
                 </TableColumn>
             </columns>
