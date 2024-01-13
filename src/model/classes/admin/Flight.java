@@ -1,6 +1,6 @@
 package model.classes.admin;
 
-import model.classes.people.Pilot;
+import model.classes.people.*;
 import model.tools.Tools;
 
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ public class Flight {
     private Airplane airplane;
     private String flightNumber;
     private ArrayList<Pilot> pilots;
+    private static ArrayList<Passenger> passengers = new ArrayList<>();
     private Runway runway;
     private int[] numOfOccupiedSeats;
     private double[] ticketPrice;
@@ -167,5 +168,14 @@ public class Flight {
             }
         }
         return true;
+    }
+
+    public static void addPassenger(Passenger passenger)
+    {
+        passengers.add(passenger);
+    }
+
+    public ArrayList<Passenger> getPassengers() {
+        return passengers;
     }
 }

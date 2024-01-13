@@ -292,6 +292,7 @@ public class Simulation extends Subject<Weather> implements Runnable, Logger {
                     }
                     passenger = new Passenger(name, surname, personalInfo, luggageWeight, destinationCity, new Ticket(flight.getFlightNumber(), flightClass));
                     arrivingPassengers.add(passenger);
+                    flight.addPassenger(passenger);
                 }
                 flight.setNumOfOccupiedSeats(occupied_seats);
             }
