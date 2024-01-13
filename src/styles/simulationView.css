@@ -97,6 +97,10 @@
     }
 .activityBox .table-view .table-cell{
     -fx-border-color: transparent;
+    -fx-text-fill: black;
+}
+.activityBox .table-view .table-cell:selected{
+    -fx-border-color: transparent;
 }
 .activityBox .table-view {
     -fx-border-color: #FFD42A;
@@ -110,8 +114,8 @@
     }
 .activityBox .table-row-cell:hover,
 .activityBox .table-row-cell:selected{
-        -fx-opacity: 50%;
-    }
+    -fx-opacity: 50%;
+}
 .activityBox .table-view .table-cell {
         -fx-border-color: transparent;
     }

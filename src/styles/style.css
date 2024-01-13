@@ -24,6 +24,36 @@
 .buttonBox {
     -fx-padding:0 20 0 0; /*top right bottom left*/
 }
-.exitButtonBox {
+.customButton {
+    -fx-font-family: "Space Mono";
+    -fx-font-weight: bold;
     -fx-alignment: center;
+    -fx-font-size: 16;
+    -fx-padding: 5;
+    -fx-min-width: 70;
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+.customButton:hover,
+.customButton:pressed {
+    -fx-opacity: 75%;
+}
+
+.primaryButton {
+    -fx-background-color: #B2AA8A;
+    -fx-border-color: #B2AA8A;
+}
+.redButton {
+    -fx-background-color: transparent;
+    -fx-border-color: #d75050;
+}
+.redButton:hover {
+    -fx-background-color: #d75050;
+    -fx-text-fill: white;
+    -fx-opacity: 100%;
+}
+.secondaryButton {
+    -fx-background-color: transparent;
+    -fx-border-color: #B2AA8A ;
 }

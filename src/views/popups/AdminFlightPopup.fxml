@@ -41,8 +41,8 @@
     </GridPane>
 
     <HBox styleClass="container, exitButtonBox">
-        <Button styleClass="defaultButton" text="Create" onAction="#onCreateButtonClicked" />
-        <Button styleClass="secondaryButton" text="Cancel" onAction="#onCancelButtonClicked" />
+        <Button styleClass="customButton, primaryButton" text="Create" onAction="#onCreateButtonClicked" />
+        <Button styleClass="customButton, secondaryButton" text="Cancel" onAction="#onCancelButtonClicked" />
     </HBox>
 
 </VBox>

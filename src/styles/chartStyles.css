@@ -6,10 +6,3 @@
     -fx-stroke: #2D2D53;
     -fx-stroke-width: 5px;
 }
-.button {
-    -fx-border-color: #2D2D53 #2D2D53 #2D2D53 #2D2D53;
-    -fx-border-width: 2px 2px 2px 2px;
-    -fx-border-style: solid;
-    -fx-border-radius: 5px;
-}
-

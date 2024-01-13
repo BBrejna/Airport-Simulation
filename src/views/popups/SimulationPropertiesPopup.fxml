@@ -43,7 +43,7 @@
         <TextField fx:id="textFieldClouds" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
     </GridPane>
     <HBox styleClass="container, exitButtonBox">
-        <Button styleClass="defaultButton" text="OK" onAction="#onOkButtonClicked" />
-        <Button styleClass="secondaryButton" text="Cancel" onAction="#onCancelButtonClicked" />
+        <Button styleClass="customButton, primaryButton" text="OK" onAction="#onOkButtonClicked" />
+        <Button styleClass="customButton, secondaryButton" text="Cancel" onAction="#onCancelButtonClicked" />
     </HBox>
 </VBox>

@@ -27,20 +27,20 @@
                 <Insets top="20" right="0" bottom="0" left="0"/>
             </padding>
 
-            <Button fx:id="weatherButton" text="Weather" onAction="#weatherButtonClicked" styleClass="button" />
-            <Button fx:id="PassengersButton" text="Passengers" onAction="#passengersButtonClicked" styleClass="button"/>
-            <Button fx:id="FlightsButton" text="Flights" onAction="#flightsButtonClicked" styleClass="button"/>
+            <Button fx:id="weatherButton" text="Weather" onAction="#weatherButtonClicked" styleClass="customButton, primaryButton" />
+            <Button fx:id="PassengersButton" text="Passengers" onAction="#passengersButtonClicked" styleClass="customButton, primaryButton"/>
+            <Button fx:id="FlightsButton" text="Flights" onAction="#flightsButtonClicked" styleClass="customButton, primaryButton"/>
         </HBox>
 
         <HBox fx:id="weatherButtonsBox" alignment="CENTER" spacing="5" visible="false">
             <padding>
                 <Insets top="20" right="0" bottom="0" left="0"/>
             </padding>
-            <Button fx:id="temperatureButton" text="Temperature" onAction="#temperatureButtonClicked" styleClass="button" />
-            <Button fx:id="windButton" text="Wind" onAction="#windButtonClicked" styleClass="button"/>
-            <Button fx:id="cloudsBox" text="Clouds" onAction="#cloudsButtonClicked" styleClass="button"/>
-            <Button fx:id="rainBox" text="Rain" onAction="#rainButtonClicked" styleClass="button"/>
-            <Button fx:id="snowBox" text="Snow" onAction="#snowButtonClicked" styleClass="button"/>
+            <Button fx:id="temperatureButton" text="Temperature" onAction="#temperatureButtonClicked" styleClass="customButton, primaryButton" />
+            <Button fx:id="windButton" text="Wind" onAction="#windButtonClicked" styleClass="customButton, primaryButton"/>
+            <Button fx:id="cloudsBox" text="Clouds" onAction="#cloudsButtonClicked" styleClass="customButton, primaryButton"/>
+            <Button fx:id="rainBox" text="Rain" onAction="#rainButtonClicked" styleClass="customButton, primaryButton"/>
+            <Button fx:id="snowBox" text="Snow" onAction="#snowButtonClicked" styleClass="customButton, primaryButton"/>
         </HBox>
 
     </StackPane>

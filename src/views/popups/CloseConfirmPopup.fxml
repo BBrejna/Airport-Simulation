@@ -18,8 +18,8 @@
 
     <Label text="Please confirm aborting and closing the program"/>
     <HBox styleClass="container, exitButtonBox">
-        <Button fx:id="confirm" styleClass="redButton" text="Confirm" onAction="#onConfirmButtonClicked"/>
-        <Button fx:id="cancel"  styleClass="defaultButton" text="Cancel" onAction="#onCancelButtonClicked"/>
+        <Button fx:id="confirm" styleClass="customButton, redButton" text="Confirm" onAction="#onConfirmButtonClicked"/>
+        <Button fx:id="cancel" styleClass="customButton, primaryButton" text="Cancel" onAction="#onCancelButtonClicked"/>
     </HBox>
 
 </VBox>

@@ -2,44 +2,12 @@
     -fx-background-color: white;
 }
 
-.buttonBox {
+.exitButtonBox {
     -fx-spacing: 10;
     -fx-alignment: center;
 }
 
-.button {
-    -fx-font-family: "Space Mono";
-    -fx-font-weight: bold;
-    -fx-alignment: center;
-    -fx-font-size: 16;
-    -fx-padding: 5;
-    -fx-min-width: 70;
-    -fx-border-width: 2;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-}
-.button:hover,
-.button:pressed {
-    -fx-opacity: 75%;
-}
 
-.defaultButton {
-    -fx-background-color: #B2AA8A;
-    -fx-border-color: #B2AA8A;
-}
-.redButton {
-    -fx-background-color: transparent;
-    -fx-border-color: #d75050;
-}
-.redButton:hover {
-    -fx-background-color: #d75050;
-    -fx-text-fill: white;
-    -fx-opacity: 100%;
-}
-.secondaryButton {
-    -fx-background-color: white;
-    -fx-border-color: #B2AA8A ;
-}
 
 .label {
     -fx-font-family: "Space Mono";
