@@ -80,7 +80,7 @@ public class Workman extends Person implements Logger {
 
     public void emptyBins(Airplane airplane, String flightNumber) {
         if (airplane.isAreBinsFull()) {
-            log("The garbage cans on the plane for flight "+flightNumber+" have been emptied");
+            log("Garbage cans on the plane for flight "+flightNumber+" have been emptied");
             airplane.setAreBinsFull(false);
         }
     }
