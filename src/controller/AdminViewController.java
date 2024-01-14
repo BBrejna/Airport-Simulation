@@ -149,7 +149,7 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
                         type,
                         flight.getAirplane().getAirplaneModel().getModelName(),
                         delay,
-                        new ImageView(new Image("/images/delete.png", 22, 20, false, false))
+                        new ImageView(new Image("/resources/delete.png", 22, 20, false, false))
                         //new ImageView(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/delete.png"))))
                 );
 
