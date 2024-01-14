@@ -40,7 +40,7 @@
 
             <HBox fx:id="buttonsBox" alignment="CENTER" styleClass="container" visible="true">
 
-                    <Button fx:id="weatherButton" text="Weather" onAction="#weatherButtonClicked" styleClass="customButton, primaryButton" />
+                    <Button fx:id="weatherButton" text="Weather" onAction="#weatherButtonClicked" styleClass="customButton, secondaryButton" />
                     <Button fx:id="PassengersButton" text="Passengers" onAction="#passengersButtonClicked" styleClass="customButton, primaryButton"/>
                     <Button fx:id="FlightsButton" text="Flights" onAction="#flightsButtonClicked" styleClass="customButton, primaryButton"/>
                 </HBox>
