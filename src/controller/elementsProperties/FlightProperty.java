@@ -23,6 +23,15 @@ public class FlightProperty {
         this.deleteImage = deleteImage;
     }
 
+    public FlightProperty(String flightNumber, int hour, String city, String type, String airplane, String delay) {
+        this.flightNumber = flightNumber;
+        this.hour = Tools.convertMinutesToTime(hour);
+        this.city = city;
+        this.type = type;
+        this.airplane = airplane;
+        this.delay = delay;
+    }
+
     /** GETTERS AND SETTERS */
     public String getFlightNumber() {return flightNumber;}
     public void setFlightNumber(String flightNumber) {this.flightNumber = flightNumber;}

@@ -7,10 +7,11 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.Admin;
 import model.Salesman;
 import model.Simulation;
@@ -18,16 +19,11 @@ import model.Workman;
 import model.classes.Observer;
 import model.classes.admin.Flight;
 import model.classes.logging.Log;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.stage.Stage;
 import model.classes.simulation.Weather;
 import model.tools.Tools;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class SimulationViewController {
     @FXML
@@ -333,10 +329,10 @@ public class SimulationViewController {
 
                 flights.forEach(flight -> {
                     if (flight.isArrival()) {
-                        arrivalsTable.getItems().add(new FlightProperty(flight.getFlightNumber(), flight.getHour(), flight.getSourcePoint().getCity(), "ARRIVAL", "AIRPLANE", Tools.convertMinutesToTime(flight.getActualHour()), new ImageView(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/delete.png"))))));
+                        arrivalsTable.getItems().add(new FlightProperty(flight.getFlightNumber(), flight.getHour(), flight.getSourcePoint().getCity(), "ARRIVAL", "AIRPLANE", Tools.convertMinutesToTime(flight.getActualHour())));
                     }
                     else {
-                        departuresTable.getItems().add(new FlightProperty(flight.getFlightNumber(), flight.getHour(), flight.getDestinationPoint().getCity(), "DEPARTURE", "AIRPLANE", Tools.convertMinutesToTime(flight.getActualHour()), new ImageView(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/delete.png"))))));
+                        departuresTable.getItems().add(new FlightProperty(flight.getFlightNumber(), flight.getHour(), flight.getDestinationPoint().getCity(), "DEPARTURE", "AIRPLANE", Tools.convertMinutesToTime(flight.getActualHour())));
                     }
                 });
             });
