@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
@@ -105,7 +106,20 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
 
         popupController.displayPopup(popupStage, root);
 
-        ArrayList<Object> flightComponents = popupController.getComoponents();
+        if (popupController.getIsCreate()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Flight created successfully.");
+            alert.showAndWait();
+
+            handleCreateFlight(popupController);
+        }
+    }
+
+
+    private void handleCreateFlight(AdminFlightPopupController popupController){
+        Admin.getInstance().createFlight(popupController.getComoponents());
 
     }
 }

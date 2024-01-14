@@ -25,13 +25,13 @@
 
         <Label text="Hour:" alignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
         <HBox alignment="CENTER_LEFT" GridPane.rowIndex="1" GridPane.columnIndex="1">
-            <Spinner fx:id="hourSpinner" min="0" max="23" editable="true" initialValue="0" prefWidth="60"/>
+            <TextField fx:id="hourField" prefWidth="60"/>
             <Text text=" : "/>
-            <Spinner fx:id="minutesSpinner" min="0" max="59" editable="true" initialValue="0" prefWidth="60" />
+            <TextField fx:id="minutesField" prefWidth="60" />
         </HBox>
 
         <Label text="Delay amount (minutes):" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <Spinner fx:id="delaySpinner" min="0" max="1000" editable="true" initialValue="0" GridPane.rowIndex="2" GridPane.columnIndex="1"  minWidth="200"/>
+        <TextField fx:id="delayField" GridPane.rowIndex="2" GridPane.columnIndex="1"  minWidth="200"/>
 
         <Label text="City:" alignment="CENTER" GridPane.rowIndex="3" GridPane.columnIndex="0" />
         <ComboBox fx:id="cityComboBox" GridPane.rowIndex="3" GridPane.columnIndex="1" minWidth="200"/>

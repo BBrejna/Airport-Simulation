@@ -8,7 +8,7 @@ import java.util.Random;
 public class Airplane  {
 
     private final AirplaneModel airplaneModel;
-    private final Airline airline;
+    private Airline airline;
     private final int numberOfSeats;
     private final int[] numberOfSeatsClasses;
     private final int maxFreeLuggageWeight;
@@ -120,5 +120,9 @@ public class Airplane  {
 
     public void setBroken(boolean broken) {
         isBroken = broken;
+    }
+
+    public void setAirline(Airline airline) {
+        this.airline = airline;
     }
 }

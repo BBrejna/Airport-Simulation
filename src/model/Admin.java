@@ -1,12 +1,10 @@
 package model;
 
+import data.admin.AirlinesSet;
 import data.admin.AirportSet;
 import model.classes.Observer;
 import model.classes.Subject;
-import model.classes.admin.Airplane;
-import model.classes.admin.Airport;
-import model.classes.admin.Flight;
-import model.classes.admin.Runway;
+import model.classes.admin.*;
 import model.classes.logging.Log;
 import model.classes.logging.Logger;
 import model.classes.people.Pilot;
@@ -15,6 +13,7 @@ import model.classes.simulation.Weather;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.Random;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -225,7 +224,7 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
     }
 
     /** checks whether there are free runways at a specific time */
-    private int getRunway(int hour) {
+    public int getRunway(int hour) {
 
         ArrayList<Runway> freeRunways = new ArrayList<>(getRunways());
 
@@ -240,6 +239,89 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
         return freeRunways.get(random.nextInt(freeRunways.size())).getRunwayNumber();
 
     }
+
+
+    //creating and adding flight with input from user
+    public void createFlight(ArrayList<Object> components) {
+
+        boolean isArrival = (boolean) components.get(0);
+
+        int hour = (int) components.get(1) * 60 + (int) components.get(2);
+        int delay = (int) components.get(3);
+        int actualhour = hour + delay;
+
+        String city = (String) components.get(4);
+        String airlineName = (String) components.get(5);
+        Airline airline = null;
+        Airline[] airlines = AirlinesSet.AIRLINES;
+        for (int i = 0; i < airlines.length; i++) {
+            if (Objects.equals(airlines[i].getAirlineName(), airlineName)){
+                airline = airlines[i];
+                break;
+            }
+        }
+
+        int runwayNum = getRunway(actualhour);
+        Runway runway = runways.get(0);
+        for (Runway runwayCandidate : runways) {
+            if (runwayNum == runwayCandidate.getRunwayNumber()) runway = runwayCandidate;
+        }
+
+
+        Airplane airplane = new Airplane();
+        airplane.setAirline(airline);
+
+        String flightNumber = generateFlightNumber(airplane, hour);
+        existingFlightNumbers.add(flightNumber);
+        ArrayList<Pilot> pilots = generatePilots(airplane.getNumberOfSeats());
+
+        int[] numberOfOccupiedSeats = {0, 0, 0};
+
+        Random random = new Random();
+        double[] ticketPrices = {-1, -1, -1};
+        ticketPrices[0] = 200 + random.nextInt(3000);
+        ticketPrices[1] = ticketPrices[0] + 200 + random.nextInt(500);
+        ticketPrices[2] = ticketPrices[1] + 1100 + random.nextInt(5000);
+
+
+        Airport[] airports = AirportSet.AIRPORTS;
+
+        Airport point = null;
+        for (int i = 0; i < airports.length; i++) {
+            if (Objects.equals(airports[i].getCity(), city)) {
+                point = airports[i];
+                break;
+            }
+        }
+
+        Airport otherCity = airports[random.nextInt(airports.length)];
+        while (otherCity.equals(point)) otherCity = airports[random.nextInt(airports.length)];
+
+        Airport destination;
+        Airport source;
+        if (isArrival) {
+            destination = otherCity;
+            source = point;
+        } else {
+            destination = point;
+            source = otherCity;
+        }
+
+        Flight flight = new Flight(isArrival, hour, actualhour, airplane, flightNumber, pilots, runway,
+                numberOfOccupiedSeats, ticketPrices, source, destination, delay);
+
+        flights.add(flight);
+
+        flights.sort(Comparator.comparing(Flight::getHour));
+
+        log("Flight " + flightNumber + " have been added", false);
+
+        notifyObservers(getFlights());
+
+    }
+
+
+
 
     /** observe weather and calculate delay probability */
     @Override
