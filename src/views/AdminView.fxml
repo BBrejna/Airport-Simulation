@@ -82,7 +82,7 @@
                     </cellValueFactory>
                 </TableColumn>
 
-                <TableColumn text="Usuń" maxWidth="50" fx:id="deleteColumn">
+                <TableColumn text="Delete" maxWidth="50" fx:id="deleteColumn">
                     <cellValueFactory>
                         <javafx.scene.control.cell.PropertyValueFactory property="deleteImage"/>
                     </cellValueFactory>
