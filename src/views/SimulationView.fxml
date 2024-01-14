@@ -83,7 +83,7 @@
             <HBox styleClass="container" VBox.vgrow="ALWAYS">
 
                 <!-- DEPARTURES -->
-                <VBox  minWidth="250" styleClass="timetable" alignment="CENTER" >
+                <VBox  minWidth="301" styleClass="timetable" alignment="CENTER" >
                     <VBox alignment="CENTER">
                         <Label text="DEPARTURES" styleClass="timetableTitle" />
                         <Line endX="200.0" stroke="white" strokeLineCap="ROUND"/>
@@ -118,7 +118,7 @@
                 </VBox>
 
                 <!-- ARRIVALS -->
-                <VBox  minWidth="250" styleClass="timetable" alignment="CENTER" >
+                <VBox  minWidth="301" styleClass="timetable" alignment="CENTER" >
                     <VBox alignment="CENTER">
                         <Label text="ARRIVALS" styleClass="timetableTitle" />
                         <Line endX="200.0" stroke="white" strokeLineCap="ROUND"/>
