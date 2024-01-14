@@ -37,29 +37,27 @@ public class FlightViewPopupController implements Logger {
     private TableView<PassengerProperty> PassengersTableView;
     private ArrayList<Passenger> passengers = new ArrayList<>();
     public void initialize() {
-        loadPassengersTable(passengers);
+    }
+    public void display(Stage stage, Parent root, ArrayList<Passenger> passengers)
+    {
+        stage.setScene(new Scene(root));
+        stage.show();
+        PassengersTableView.getItems().clear();
+        ArrayList<PassengerProperty> passengersProperties = new ArrayList<>();
+        for (Passenger passenger : passengers) {
+            PassengerProperty passengerProperty = new PassengerProperty(
+                    passenger.getName(),
+                    passenger.getSurname(),
+                    passenger.getPesel(),
+                    Integer.toString(passenger.getTicket().getFlightClass()),
+                    Integer.toString(passenger.getLuggageWeight())
+            );
+            passengersProperties.add(passengerProperty);
+        }
+        PassengersTableView.getItems().addAll(passengersProperties);
+        System.out.println("A");
     }
 
-    public void loadPassengersTable(ArrayList<Passenger> passengers) {
-            PassengersTableView.getItems().clear();
-            ArrayList<PassengerProperty> passengersProperties = new ArrayList<>();
-            for (Passenger passenger : passengers) {
-                PassengerProperty passengerProperty = new PassengerProperty(
-                        passenger.getName(),
-                        passenger.getSurname(),
-                        passenger.getPesel(),
-                        Integer.toString(passenger.getTicket().getFlightClass()),
-                        Integer.toString(passenger.getLuggageWeight())
-                );
-                passengersProperties.add(passengerProperty);
-            }
-            PassengersTableView.getItems().addAll(passengersProperties);
-            System.out.println("A");
-    }
-
-    public void setPassengers(ArrayList<Passenger> passengers) {
-        this.passengers = passengers;
-    }
 }
 
 

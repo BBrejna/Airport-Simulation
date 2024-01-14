@@ -73,6 +73,7 @@ public class Salesman extends Person implements Logger {
         int flightClass = passenger.chooseFlightClass(flight.getTicketPrice(), flightClassAvailability);
         //adding passenger to database
         passenger.setTicket(new Ticket(flight.getFlightNumber(), flightClass));
+        flight.addPassenger(passenger);
         passengers.add(passenger);
         //changing flight info
         int[] tmp = flight.getNumOfOccupiedSeats();

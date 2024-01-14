@@ -103,17 +103,14 @@ public class SalesmanViewController implements Observer<ArrayList<Flight>>, Logg
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/popups/FlightViewPopup.fxml"));
             Parent root = loader.load();
-
+            Stage popupStage = new Stage();
             // Get the controller of the new window and pass the data
             FlightViewPopupController controller = loader.getController();
-            controller.setPassengers(data.getFlight().getPassengers());
+            controller.display(popupStage,root,data.getFlight().getPassengers());
 
 
             // Set up the stage (i.e., the new window)
-            Stage stage = new Stage();
-            stage.setTitle(data.getFlightNumber());
-            stage.setScene(new Scene(root));
-            stage.show();
+            popupStage.setTitle(data.getFlightNumber());
         } catch (IOException e) {
             e.printStackTrace();
             // Handle exceptions

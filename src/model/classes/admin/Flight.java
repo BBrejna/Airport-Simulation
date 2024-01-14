@@ -12,7 +12,7 @@ public class Flight {
     private Airplane airplane;
     private String flightNumber;
     private ArrayList<Pilot> pilots;
-    private static ArrayList<Passenger> passengers = new ArrayList<>();
+    private ArrayList<Passenger> passengers = new ArrayList<>();
     private Runway runway;
     private int[] numOfOccupiedSeats;
     private double[] ticketPrice;
@@ -170,9 +170,9 @@ public class Flight {
         return true;
     }
 
-    public static void addPassenger(Passenger passenger)
+    public void addPassenger(Passenger passenger)
     {
-        passengers.add(passenger);
+        this.passengers.add(passenger);
     }
 
     public ArrayList<Passenger> getPassengers() {

@@ -50,12 +50,12 @@
                 </TableColumn>
                 <TableColumn text="Pesel">
                     <cellValueFactory>
-                        <javafx.scene.control.cell.PropertyValueFactory property="pesel"/>
+                        <javafx.scene.control.cell.PropertyValueFactory property="PESEL"/>
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn text="Class">
                     <cellValueFactory>
-                        <javafx.scene.control.cell.PropertyValueFactory property="class"/>
+                        <javafx.scene.control.cell.PropertyValueFactory property="flightClass"/>
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn text="Luggage">
