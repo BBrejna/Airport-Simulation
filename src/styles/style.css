@@ -60,6 +60,11 @@
 .button:hover,
 .slider:hover,
 .combo-box:hover,
-.radio-button:hover{
+.combo-box-popup .list-cell:hover,
+.radio-button:hover,
+.thumb:hover{
     -fx-cursor: hand;
+}
+.thumb:hover {
+    -fx-opacity: 75%;
 }

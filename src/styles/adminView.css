@@ -49,3 +49,6 @@
 .table-column {
     -fx-alignment: CENTER;
 }
+.clickable:hover {
+    -fx-cursor: hand;
+}
