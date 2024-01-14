@@ -106,7 +106,8 @@ public class SalesmanViewController implements Observer<ArrayList<Flight>>, Logg
 
             // Get the controller of the new window and pass the data
             FlightViewPopupController controller = loader.getController();
-            controller.setFlight(data.getFlight());
+            controller.setPassengers(data.getFlight().getPassengers());
+
 
             // Set up the stage (i.e., the new window)
             Stage stage = new Stage();
