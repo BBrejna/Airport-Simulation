@@ -45,3 +45,7 @@
     /*-fx-background-color: #ABA27E;*/
     -fx-background-color: #FFD42A;
 }
+
+.table-column {
+    -fx-alignment: CENTER;
+}

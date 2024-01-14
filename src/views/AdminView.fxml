@@ -51,14 +51,19 @@
                 <TableView fx:constant = "CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
-                <TableColumn text="Flight number">
+                <TableColumn text="Flight number" fx:id="flightNumberColumn">
                     <cellValueFactory>
                         <javafx.scene.control.cell.PropertyValueFactory property="flightNumber"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Hour">
+                <TableColumn text="Hour" fx:id="hourColumn" maxWidth="70">
                     <cellValueFactory>
                         <javafx.scene.control.cell.PropertyValueFactory property="hour"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Delay" fx:id="delayColumn" maxWidth="70">
+                    <cellValueFactory>
+                        <javafx.scene.control.cell.PropertyValueFactory property="delay"/>
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn text="City">
@@ -66,7 +71,7 @@
                         <javafx.scene.control.cell.PropertyValueFactory property="city"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Type">
+                <TableColumn text="Type" fx:id="typeColumn">
                     <cellValueFactory>
                         <javafx.scene.control.cell.PropertyValueFactory property="type"/>
                     </cellValueFactory>
@@ -76,9 +81,10 @@
                         <javafx.scene.control.cell.PropertyValueFactory property="airplane"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Delay">
+
+                <TableColumn text="Usuń" maxWidth="50" fx:id="deleteColumn">
                     <cellValueFactory>
-                        <javafx.scene.control.cell.PropertyValueFactory property="delay"/>
+                        <javafx.scene.control.cell.PropertyValueFactory property="deleteImage"/>
                     </cellValueFactory>
                 </TableColumn>
             </columns>

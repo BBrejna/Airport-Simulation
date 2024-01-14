@@ -8,6 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import model.Admin;
 import model.Salesman;
@@ -25,6 +27,7 @@ import model.tools.Tools;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SimulationViewController {
     @FXML
@@ -330,10 +333,10 @@ public class SimulationViewController {
 
                 flights.forEach(flight -> {
                     if (flight.isArrival()) {
-                        arrivalsTable.getItems().add(new FlightProperty(flight.getFlightNumber(), flight.getHour(), flight.getSourcePoint().getCity(), "ARRIVAL", "AIRPLANE", Tools.convertMinutesToTime(flight.getActualHour())));
+                        arrivalsTable.getItems().add(new FlightProperty(flight.getFlightNumber(), flight.getHour(), flight.getSourcePoint().getCity(), "ARRIVAL", "AIRPLANE", Tools.convertMinutesToTime(flight.getActualHour()), new ImageView(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/delete.png"))))));
                     }
                     else {
-                        departuresTable.getItems().add(new FlightProperty(flight.getFlightNumber(), flight.getHour(), flight.getDestinationPoint().getCity(), "DEPARTURE", "AIRPLANE", Tools.convertMinutesToTime(flight.getActualHour())));
+                        departuresTable.getItems().add(new FlightProperty(flight.getFlightNumber(), flight.getHour(), flight.getDestinationPoint().getCity(), "DEPARTURE", "AIRPLANE", Tools.convertMinutesToTime(flight.getActualHour()), new ImageView(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/delete.png"))))));
                     }
                 });
             });

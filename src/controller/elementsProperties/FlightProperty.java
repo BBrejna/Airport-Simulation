@@ -1,5 +1,6 @@
 package controller.elementsProperties;
 
+import javafx.scene.image.ImageView;
 import model.tools.Tools;
 
 public class FlightProperty {
@@ -10,14 +11,16 @@ public class FlightProperty {
     private String type;
     private String airplane;
     private String delay;
+    private ImageView deleteImage;
 
-    public FlightProperty(String flightNumber, int hour, String city, String type, String airplane, String delay) {
+    public FlightProperty(String flightNumber, int hour, String city, String type, String airplane, String delay, ImageView deleteImage) {
         this.flightNumber = flightNumber;
         this.hour = Tools.convertMinutesToTime(hour);
         this.city = city;
         this.type = type;
         this.airplane = airplane;
         this.delay = delay;
+        this.deleteImage = deleteImage;
     }
 
     /** GETTERS AND SETTERS */
@@ -56,5 +59,9 @@ public class FlightProperty {
 
     public void setDelay(String delay) {
         this.delay = delay;
+    }
+
+    public ImageView getDeleteImage() {
+        return deleteImage;
     }
 }

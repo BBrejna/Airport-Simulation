@@ -500,6 +500,10 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
         }
     }
 
+    public void deleteFlight(String flightNumber) {
+        flights.removeIf(flight -> (flight.getFlightNumber().equals(flightNumber)));
+    }
+
     /** GETTERS AND SETTERS */
     public ArrayList<Flight> getFlights() {
         return flights.stream().sorted(Comparator.comparing(Flight::getActualHour))

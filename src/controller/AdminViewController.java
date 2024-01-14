@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.Admin;
@@ -37,6 +39,16 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
     private Label delayInfo;
     @FXML
     private TableView flightsTableView;
+    @FXML
+    private TableColumn flightNumberColumn;
+    @FXML
+    private TableColumn hourColumn;
+    @FXML
+    private TableColumn delayColumn;
+    @FXML
+    private TableColumn typeColumn;
+    @FXML
+    private TableColumn deleteColumn;
 
 
     public void initialize() {
@@ -47,13 +59,13 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
 
         flightsTableView.setEditable(true);
 
-        //
-        ((TableColumn)flightsTableView.getColumns().get(0)).setCellFactory(TextFieldTableCell.forTableColumn());
-        ((TableColumn)flightsTableView.getColumns().get(1)).setCellFactory(TextFieldTableCell.forTableColumn());
-        ((TableColumn)flightsTableView.getColumns().get(3)).setCellFactory(TextFieldTableCell.forTableColumn());
-        ((TableColumn)flightsTableView.getColumns().get(5)).setCellFactory(TextFieldTableCell.forTableColumn());
+        flightNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        hourColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        delayColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        typeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+//        deleteColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        ((TableColumn)flightsTableView.getColumns().get(0)).setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FlightProperty, String>>() {
+        flightNumberColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FlightProperty, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<FlightProperty, String> flightStringCellEditEvent) {
                 String oldFlightNumber = flightStringCellEditEvent.getRowValue().getFlightNumber();
@@ -63,7 +75,7 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
             }
         });
 
-        ((TableColumn)flightsTableView.getColumns().get(1)).setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FlightProperty, String>>() {
+        hourColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FlightProperty, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<FlightProperty, String> flightPropertyStringCellEditEvent) {
                 String flightNumber = flightPropertyStringCellEditEvent.getRowValue().getFlightNumber();
@@ -73,7 +85,7 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
             }
         });
 
-        ((TableColumn)flightsTableView.getColumns().get(3)).setOnEditStart(new EventHandler<TableColumn.CellEditEvent<FlightProperty, String>>() {
+        typeColumn.setOnEditStart(new EventHandler<TableColumn.CellEditEvent<FlightProperty, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<FlightProperty, String> flightPropertyStringCellEditEvent) {
                 String flightNumber = flightPropertyStringCellEditEvent.getRowValue().getFlightNumber();
@@ -82,7 +94,7 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
             }
         });
 
-        ((TableColumn)flightsTableView.getColumns().get(5)).setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FlightProperty, String>>() {
+        delayColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FlightProperty, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<FlightProperty, String> flightPropertyStringCellEditEvent) {
                 String flightNumber = flightPropertyStringCellEditEvent.getRowValue().getFlightNumber();
@@ -90,6 +102,16 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
                 Admin.getInstance().modifyDelay(flightNumber, newDelay);
                 Admin.getInstance().notifyObservers(Admin.getInstance().getFlights());
                 //observerUpdateState(Admin.getInstance().getFlights());
+            }
+        });
+
+        deleteColumn.setOnEditStart(new EventHandler<TableColumn.CellEditEvent<FlightProperty, String>>() {
+
+            @Override
+            public void handle(TableColumn.CellEditEvent<FlightProperty, String> flightPropertyStringCellEditEvent) {
+                String flightNumber = flightPropertyStringCellEditEvent.getRowValue().getFlightNumber();
+                Admin.getInstance().deleteFlight(flightNumber);
+                Admin.getInstance().notifyObservers(Admin.getInstance().getFlights());
             }
         });
 
@@ -126,7 +148,9 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
                         city,
                         type,
                         flight.getAirplane().getAirplaneModel().getModelName(),
-                        delay
+                        delay,
+                        new ImageView(new Image("/images/delete.png", 22, 20, false, false))
+                        //new ImageView(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/delete.png"))))
                 );
 
                 flightsProperties.add(flightProperty);
