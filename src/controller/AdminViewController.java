@@ -3,13 +3,12 @@ package controller;
 import controller.elementsProperties.FlightProperty;
 import controller.popups.AdminFlightPopupController;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.Admin;
@@ -40,15 +39,59 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
     private TableView flightsTableView;
 
 
-    public void createFlightAction() {
-
-    }
-
     public void initialize() {
 
         ControllersHandler.getInstance().setAdminViewController(this);
 
         Admin.getInstance().addObserver(this);
+
+        flightsTableView.setEditable(true);
+
+        //
+        ((TableColumn)flightsTableView.getColumns().get(0)).setCellFactory(TextFieldTableCell.forTableColumn());
+        ((TableColumn)flightsTableView.getColumns().get(1)).setCellFactory(TextFieldTableCell.forTableColumn());
+        ((TableColumn)flightsTableView.getColumns().get(3)).setCellFactory(TextFieldTableCell.forTableColumn());
+        ((TableColumn)flightsTableView.getColumns().get(5)).setCellFactory(TextFieldTableCell.forTableColumn());
+
+        ((TableColumn)flightsTableView.getColumns().get(0)).setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FlightProperty, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<FlightProperty, String> flightStringCellEditEvent) {
+                String oldFlightNumber = flightStringCellEditEvent.getRowValue().getFlightNumber();
+                String newFlightNumber = flightStringCellEditEvent.getNewValue();
+                Admin.getInstance().modifyFlightNumber(oldFlightNumber, newFlightNumber);
+                Admin.getInstance().notifyObservers(Admin.getInstance().getFlights());
+            }
+        });
+
+        ((TableColumn)flightsTableView.getColumns().get(1)).setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FlightProperty, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<FlightProperty, String> flightPropertyStringCellEditEvent) {
+                String flightNumber = flightPropertyStringCellEditEvent.getRowValue().getFlightNumber();
+                String newHour = flightPropertyStringCellEditEvent.getNewValue();
+                Admin.getInstance().modifyHour(flightNumber, newHour);
+                Admin.getInstance().notifyObservers(Admin.getInstance().getFlights());
+            }
+        });
+
+        ((TableColumn)flightsTableView.getColumns().get(3)).setOnEditStart(new EventHandler<TableColumn.CellEditEvent<FlightProperty, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<FlightProperty, String> flightPropertyStringCellEditEvent) {
+                String flightNumber = flightPropertyStringCellEditEvent.getRowValue().getFlightNumber();
+                Admin.getInstance().modifyType(flightNumber);
+                Admin.getInstance().notifyObservers(Admin.getInstance().getFlights());
+            }
+        });
+
+        ((TableColumn)flightsTableView.getColumns().get(5)).setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<FlightProperty, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<FlightProperty, String> flightPropertyStringCellEditEvent) {
+                String flightNumber = flightPropertyStringCellEditEvent.getRowValue().getFlightNumber();
+                String newDelay = flightPropertyStringCellEditEvent.getNewValue();
+                Admin.getInstance().modifyDelay(flightNumber, newDelay);
+                Admin.getInstance().notifyObservers(Admin.getInstance().getFlights());
+                //observerUpdateState(Admin.getInstance().getFlights());
+            }
+        });
 
     }
 

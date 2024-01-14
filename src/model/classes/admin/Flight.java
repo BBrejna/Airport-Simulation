@@ -178,4 +178,11 @@ public class Flight {
     public ArrayList<Passenger> getPassengers() {
         return passengers;
     }
+    public void changeIsArrival() {
+        isArrival = !isArrival;
+        Airport temp = sourcePoint;
+        sourcePoint = destinationPoint;
+        destinationPoint = temp;
+    }
+
 }

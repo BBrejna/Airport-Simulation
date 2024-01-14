@@ -1,5 +1,6 @@
 package model;
 
+import controller.ControllersHandler;
 import data.admin.AirlinesSet;
 import data.admin.AirportSet;
 import model.classes.Observer;
@@ -9,6 +10,7 @@ import model.classes.logging.Log;
 import model.classes.logging.Logger;
 import model.classes.people.Pilot;
 import model.classes.simulation.Weather;
+import model.tools.Tools;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -448,6 +450,55 @@ public final class Admin extends Subject<ArrayList<Flight>> implements Observer<
         log("All Admin components have just been cleared", false);
     }
 
+    /** MODIFYING */
+    public boolean modifyFlightNumber(String oldFlightNumber, String newFlightNumber)  {
+        int flightId = -1;
+        for(int i = 0; i < flights.size(); i++) {
+            if(flights.get(i).getFlightNumber().equals(oldFlightNumber)) flightId = i;
+        }
+        if(checkFreeNumber(newFlightNumber)) {
+            flights.get(flightId).setFlightNumber(newFlightNumber);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean modifyHour(String oldFlightNumber, String newHour) {
+        int newMinutes = Tools.convertTimeToMinutes(newHour);
+        if(newMinutes == -1) return false;
+        int flightId = -1;
+        for(int i = 0; i < flights.size(); i++) {
+            if(flights.get(i).getFlightNumber().equals(oldFlightNumber)) flightId = i;
+        }
+        flights.get(flightId).setHour(newMinutes);
+        return true;
+    }
+
+    public boolean modifyType(String oldFlightNumber) {
+        int flightId = -1;
+        for(int i = 0; i < flights.size(); i++) {
+            if(flights.get(i).getFlightNumber().equals(oldFlightNumber)) flightId = i;
+        }
+        flights.get(flightId).changeIsArrival();
+        return true;
+    }
+
+    public boolean modifyDelay(String oldFlightNumber, String newDelay) {
+        try {
+            int newDelayInt = Integer.parseInt(newDelay);
+            int flightId = -1;
+            for(int i = 0; i < flights.size(); i++) {
+                if(flights.get(i).getFlightNumber().equals(oldFlightNumber)) flightId = i;
+            }
+            flights.get(flightId).setDelayMinutes(newDelayInt);
+            Salesman.getInstance().announceDelay(flights.get(flightId));
+            ControllersHandler.getInstance().getSimulationViewController().updateLogs();
+            return true;
+        } catch (NumberFormatException e) {
+            System.out.println("\u001B[31mIncorrect input for delay minutes");
+            return false;
+        }
+    }
 
     /** GETTERS AND SETTERS */
     public ArrayList<Flight> getFlights() {

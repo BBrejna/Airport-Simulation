@@ -18,4 +18,13 @@ public class Tools {
 
         return hoursStr + ":" + minsStr;
     }
+
+    public static int convertTimeToMinutes(String time) {
+        int minutes = 0;
+        minutes += Integer.parseInt(time.substring(0,2)) * 60;
+        minutes += Integer.parseInt(time.substring(3,5));
+        if(minutes < 0 || minutes >= 1440) return -1;
+        return minutes;
+    }
+
 }
