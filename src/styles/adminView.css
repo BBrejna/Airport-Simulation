@@ -27,9 +27,11 @@
 .table-row-cell:odd {
     -fx-background-color: #ffffff;
 }
-.table-row-cell:hover,
-.table-row-cell:selected{
+.table-row-cell:hover{
     -fx-opacity: 50%;
+}
+.table-row-cell:selected{
+    -fx-background-color: #FFD42A ;
 }
 .table-view .table-cell {
     -fx-border-color: transparent;
