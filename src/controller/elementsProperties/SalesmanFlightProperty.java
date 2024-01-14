@@ -1,7 +1,7 @@
 package controller.elementsProperties;
 
 import model.tools.Tools;
-
+import model.classes.admin.Flight;
 public class SalesmanFlightProperty {
 
     private String flightNumber;
@@ -9,13 +9,15 @@ public class SalesmanFlightProperty {
     private String city;
     private String seats;
     private String price;
+    private Flight flight;
 
-    public SalesmanFlightProperty(String flightNumber, int hour, String city, String seats, String price) {
+    public SalesmanFlightProperty(String flightNumber, int hour, String city, String seats, String price, Flight flight) {
         this.flightNumber = flightNumber;
         this.hour = Tools.convertMinutesToTime(hour);
         this.city = city;
         this.seats = seats;
         this.price = price;
+        this.flight = flight;
     }
 
     /** GETTERS AND SETTERS */
@@ -48,5 +50,7 @@ public class SalesmanFlightProperty {
         this.price = price;
     }
 
-
+    public Flight getFlight() {
+        return flight;
+    }
 }
