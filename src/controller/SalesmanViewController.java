@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -106,7 +107,8 @@ public class SalesmanViewController implements Observer<ArrayList<Flight>>, Logg
             controller.setFlight(data.getFlight());
             controller.setSvc(this);
             // Set up the stage (i.e., the new window)
-            popupStage.setTitle(data.getFlightNumber());
+            popupStage.setTitle("Lotnisko - Lot: " + data.getFlightNumber());
+            popupStage.getIcons().add(new Image("/resources/icon.png"));
         } catch (IOException e) {
             e.printStackTrace();
             // Handle exceptions

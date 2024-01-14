@@ -46,7 +46,6 @@ public class FlightViewPopupController implements Logger {
         stage.setScene(new Scene(root));
         stage.show();
         PassengersTableView.getItems().clear();
-        stage.getIcons().add(new Image("/resources/icon.png"));
         ArrayList<PassengerProperty> passengersProperties = new ArrayList<>();
         for (Passenger passenger : passengers) {
             PassengerProperty passengerProperty = new PassengerProperty(
