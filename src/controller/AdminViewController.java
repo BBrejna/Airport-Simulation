@@ -52,12 +52,21 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
 
 
     public void initialize() {
-
         ControllersHandler.getInstance().setAdminViewController(this);
 
         Admin.getInstance().addObserver(this);
 
         flightsTableView.setEditable(true);
+//        flightNumberColumn.setEditable(true);
+//        hourColumn.setEditable(true);
+//        delayColumn.setEditable(true);
+//        typeColumn.setEditable(true);
+//        deleteColumn.setEditable(true);
+        for(Object column : flightsTableView.getColumns()){
+            if(((TableColumn)column).isEditable()){
+                ((TableColumn)column).getStyleClass().addAll("clickable");
+            }
+        }
 
         flightNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         hourColumn.setCellFactory(TextFieldTableCell.forTableColumn());

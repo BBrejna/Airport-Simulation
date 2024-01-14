@@ -61,22 +61,23 @@
                         <javafx.scene.control.cell.PropertyValueFactory property="hour"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Delay" fx:id="delayColumn" maxWidth="70">
+                <TableColumn text="Delay" fx:id="delayColumn" maxWidth="70" >
                     <cellValueFactory>
                         <javafx.scene.control.cell.PropertyValueFactory property="delay"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="City">
+                <TableColumn text="City" editable="false" fx:id="cityColumn">
+
                     <cellValueFactory>
                         <javafx.scene.control.cell.PropertyValueFactory property="city"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Type" fx:id="typeColumn">
+                <TableColumn text="Type" fx:id="typeColumn" styleClass="clickable">
                     <cellValueFactory>
                         <javafx.scene.control.cell.PropertyValueFactory property="type"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Airplane" minWidth="150">
+                <TableColumn text="Airplane" minWidth="150" fx:id="airplaneColumn" editable="false">
                     <cellValueFactory>
                         <javafx.scene.control.cell.PropertyValueFactory property="airplane"/>
                     </cellValueFactory>
