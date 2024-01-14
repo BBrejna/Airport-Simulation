@@ -71,15 +71,11 @@ public class SalesmanViewController implements Observer<ArrayList<Flight>>, Logg
             for(Flight flight: flights) {
 
                 String city = flight.getDestinationPoint().getCity();
-                String seats = Integer.toString(flight.getNumOfOccupiedSeats()[0] + flight.getNumOfOccupiedSeats()[1] +
-                        flight.getNumOfOccupiedSeats()[2])+"/"+flight.getAirplane().getNumberOfSeats();
+                String seats = Integer.toString(flight.getPassengers().size())+"/"+flight.getAirplane().getNumberOfSeats();
                 String prices = Double.toString(flight.getTicketPrice()[0])+" / "+Double.toString(flight.getTicketPrice()[1])+" / "+Double.toString(flight.getTicketPrice()[2]);
                 if(flight.isArrival()) {
                     continue;
                 }
-
-
-
                 SalesmanFlightProperty flightProperty = new SalesmanFlightProperty(
                         flight.getFlightNumber(),
                         flight.getHour(),
@@ -107,14 +103,46 @@ public class SalesmanViewController implements Observer<ArrayList<Flight>>, Logg
             // Get the controller of the new window and pass the data
             FlightViewPopupController controller = loader.getController();
             controller.display(popupStage,root,data.getFlight().getPassengers());
-
-
+            controller.setFlight(data.getFlight());
+            controller.setSvc(this);
             // Set up the stage (i.e., the new window)
             popupStage.setTitle(data.getFlightNumber());
         } catch (IOException e) {
             e.printStackTrace();
             // Handle exceptions
         }
+    }
+    public void updateFlightsTableView() {
+        Platform.runLater(() -> {
+            flightsTableView.getItems().clear();
+            ArrayList<SalesmanFlightProperty> updatedFlightsProperties = getUpdatedFlightsProperties();
+            flightsTableView.getItems().addAll(updatedFlightsProperties);
+        });
+    }
+
+    private ArrayList<SalesmanFlightProperty> getUpdatedFlightsProperties() {
+        // Assuming you have a method to fetch or compute the updated list of flights
+        ArrayList<Flight> updatedFlights = Admin.getInstance().getFlights();
+        ArrayList<SalesmanFlightProperty> flightsProperties = new ArrayList<>();
+        for (Flight flight : updatedFlights) {
+            String city = flight.getDestinationPoint().getCity();
+            String seats = Integer.toString(flight.getPassengers().size())+"/"+flight.getAirplane().getNumberOfSeats();
+            String prices = Double.toString(flight.getTicketPrice()[0])+" / "+Double.toString(flight.getTicketPrice()[1])+" / "+Double.toString(flight.getTicketPrice()[2]);
+            if(flight.isArrival()) {
+                continue;
+            }
+            SalesmanFlightProperty flightProperty = new SalesmanFlightProperty(
+                    flight.getFlightNumber(),
+                    flight.getHour(),
+                    city,
+                    seats,
+                    prices,
+                    flight
+            );
+
+            flightsProperties.add(flightProperty);
+        }
+        return flightsProperties;
     }
 
 

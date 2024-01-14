@@ -3,12 +3,14 @@ package controller.popups;
 import controller.elementsProperties.PassengerProperty;
 import controller.elementsProperties.SalesmanFlightProperty;
 import javafx.application.Platform;
+import controller.SalesmanViewController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -35,7 +37,8 @@ public class FlightViewPopupController implements Logger {
 
     @FXML
     private TableView<PassengerProperty> PassengersTableView;
-    private ArrayList<Passenger> passengers = new ArrayList<>();
+    private Flight flight;
+    private SalesmanViewController svc;
     public void initialize() {
     }
     public void display(Stage stage, Parent root, ArrayList<Passenger> passengers)
@@ -43,6 +46,7 @@ public class FlightViewPopupController implements Logger {
         stage.setScene(new Scene(root));
         stage.show();
         PassengersTableView.getItems().clear();
+        stage.getIcons().add(new Image("/resources/icon.png"));
         ArrayList<PassengerProperty> passengersProperties = new ArrayList<>();
         for (Passenger passenger : passengers) {
             PassengerProperty passengerProperty = new PassengerProperty(
@@ -55,9 +59,32 @@ public class FlightViewPopupController implements Logger {
             passengersProperties.add(passengerProperty);
         }
         PassengersTableView.getItems().addAll(passengersProperties);
-        System.out.println("A");
+    }
+    public void deletePassenger()
+    {
+        int selectedIndex = PassengersTableView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            PassengersTableView.getItems().remove(selectedIndex);
+            flight.getPassengers().remove(selectedIndex);
+            svc.updateFlightsTableView();
+        }
+    }
+    public void addPassenger()
+    {
+
     }
 
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
+    public void setSvc(SalesmanViewController svc) {
+        this.svc = svc;
+    }
 }
 
 

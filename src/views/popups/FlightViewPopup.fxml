@@ -21,13 +21,30 @@
         <URL value="@/styles/adminView.css"/>
     </stylesheets>
 
-    <HBox minHeight="60" maxHeight="64" styleClass="container">
+    <HBox minHeight="64" maxHeight="64" styleClass="container">
 
         <!-- LOGO -->
         <ImageView preserveRatio="true" fitHeight="60">
             <Image url="@/resources/iconSmall.png"/>
         </ImageView>
+        <HBox styleClass="container, buttonBox" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
 
+            <!-- CREATE -->
+            <Button fx:id="addPassenger" styleClass="iconButton" onAction="#addPassenger">
+                <graphic>
+                    <ImageView preserveRatio="true" fitHeight="30">
+                        <Image url="@/resources/addSmall.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="deletePassenger" styleClass="iconButton" onAction="#deletePassenger">
+                <graphic>
+                    <ImageView preserveRatio="true" fitHeight="30">
+                        <Image url="@/resources/removeSmall.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
 
 
 
