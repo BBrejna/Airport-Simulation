@@ -21,7 +21,7 @@
         <URL value="@/styles/adminView.css"/>
     </stylesheets>
 
-    <HBox minHeight="36" maxHeight="64" styleClass="container">
+    <HBox minHeight="60" maxHeight="64" styleClass="container">
 
         <!-- LOGO -->
         <ImageView preserveRatio="true" fitHeight="60">
