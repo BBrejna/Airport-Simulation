@@ -91,6 +91,7 @@ public class Flight {
 
     public void setHour(int hour) {
         this.hour = hour;
+        this.actualHour = hour + delayMinutes;
     }
     public int getActualHour() {return actualHour;}
     public void setActualHour(int actualHour) {this.actualHour = actualHour;}
