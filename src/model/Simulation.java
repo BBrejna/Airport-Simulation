@@ -292,6 +292,8 @@ public class Simulation extends ObserverSubject<Weather> implements Runnable, Lo
                     }
                     passenger = new Passenger(name, surname, personalInfo, luggageWeight, destinationCity, new Ticket(flight.getFlightNumber(), flightClass));
                     arrivingPassengers.add(passenger);
+                    flight.addPassenger(passenger);
+                    Salesman.getInstance().getPassengers().add(passenger);
                 }
                 flight.setNumOfOccupiedSeats(occupied_seats);
             }
