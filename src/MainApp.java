@@ -44,7 +44,7 @@ public class MainApp extends Application {
             }
         });
         stage.getIcons().add(new Image("/resources/icon.png"));
-        stage.setTitle("Lotnisko");
+        stage.setTitle("Airport Simulation");
         stage.setScene(scene);
         stage.show();
     }

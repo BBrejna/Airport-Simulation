@@ -122,7 +122,7 @@ public class SalesmanViewController implements Observer<ArrayList<Flight>>, Logg
             controller.display(popupStage,root,data.getFlight().getPassengers());
             controller.setSvc(this);
             // Set up the stage (i.e., the new window)
-            popupStage.setTitle("Lotnisko - Lot: " + data.getFlightNumber());
+            popupStage.setTitle("Airport Simulation - Flight: " + data.getFlightNumber());
             popupStage.getIcons().add(new Image("/resources/icon.png"));
         } catch (IOException e) {
             e.printStackTrace();
