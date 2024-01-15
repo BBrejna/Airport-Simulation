@@ -1,11 +1,7 @@
 package controller.popups;
 
-import controller.AdminViewController;
-import data.admin.AirlinesSet;
-import data.admin.AirportSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,17 +9,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Admin;
-import model.classes.admin.Airline;
-import model.classes.admin.Airport;
 import model.classes.admin.Flight;
 import model.classes.people.Passenger;
 import model.classes.salesman.Ticket;
-import model.classes.simulation.Weather;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class AddPassengerPopupController {
 
     @FXML
@@ -51,15 +39,15 @@ public class AddPassengerPopupController {
             e.consume();
             onCancelButtonClicked();
         });
-
+        if(flight.getNumOfOccupiedSeats()[0]!=flight.getAirplane().getNumberOfSeatsClasses()[0]) classComboBox.getItems().add("0");
+        if(flight.getNumOfOccupiedSeats()[1]!=flight.getAirplane().getNumberOfSeatsClasses()[1]) classComboBox.getItems().add("1");
+        if(flight.getNumOfOccupiedSeats()[2]!=flight.getAirplane().getNumberOfSeatsClasses()[2]) classComboBox.getItems().add("2");
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.getIcons().add(new Image("/resources/icon.png"));
         stage.showAndWait();
 
-        if(flight.getNumOfOccupiedSeats()[0]!=flight.getAirplane().getNumberOfSeatsClasses()[0]) classComboBox.getItems().add("0");
-        if(flight.getNumOfOccupiedSeats()[1]!=flight.getAirplane().getNumberOfSeatsClasses()[1]) classComboBox.getItems().add("1");
-        if(flight.getNumOfOccupiedSeats()[2]!=flight.getAirplane().getNumberOfSeatsClasses()[2]) classComboBox.getItems().add("2");
+
     }
     @FXML
     private void onCancelButtonClicked() {
