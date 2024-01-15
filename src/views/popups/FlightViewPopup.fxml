@@ -77,7 +77,7 @@
                         <javafx.scene.control.cell.PropertyValueFactory property="luggage"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Delete" maxWidth="50" fx:id="deleteColumn">
+                <TableColumn text="Delete" maxWidth="50" fx:id="deleteColumn" styleClass="clickable">
                     <cellValueFactory>
                         <javafx.scene.control.cell.PropertyValueFactory property="deleteImage"/>
                     </cellValueFactory>
