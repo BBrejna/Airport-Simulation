@@ -69,7 +69,7 @@ public class FlightViewPopupController implements Logger {
             passengersProperties.add(passengerProperty);
         }
         PassengersTableView.getItems().addAll(passengersProperties);
-        if(flight.getAirplane().getNumberOfSeats()==passengers.size())addPassenger.setVisible(false);
+        if(flight.getAirplane().getNumberOfSeats()==passengers.size())addPassenger.setDisable(true);
         PassengersTableView.setEditable(true);
         deleteColumn.setOnEditStart(new EventHandler<TableColumn.CellEditEvent<PassengerProperty, String>>() {
             @Override
@@ -133,8 +133,8 @@ public class FlightViewPopupController implements Logger {
             PassengersTableView.getItems().clear();
             ArrayList<PassengerProperty> updatedPassengerProperties = getUpdatedPassengerProperties();
             PassengersTableView.getItems().addAll(updatedPassengerProperties );
-            if(flight.getAirplane().getNumberOfSeats()==passengers.size())addPassenger.setVisible(false);
-            else addPassenger.setVisible(true);
+            if(flight.getAirplane().getNumberOfSeats()==passengers.size())addPassenger.setDisable(true);
+            else addPassenger.setDisable(false);
         });
     }
 
