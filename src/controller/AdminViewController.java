@@ -52,6 +52,8 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
 
 
     public void initialize() {
+        createFlightButton.setDisable(true);
+
         ControllersHandler.getInstance().setAdminViewController(this);
 
         Admin.getInstance().addObserver(this);
@@ -128,6 +130,8 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
 
     @Override
     public void observerUpdateState(ArrayList<Flight> flights) {
+
+        createFlightButton.setDisable(false);
 
         log("Adding flights to the Admin UI");
 
