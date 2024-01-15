@@ -136,6 +136,7 @@ public class SimulationViewController extends ObserverSubject<String> {
         rerunButton.setDisable(true);
         ControllersHandler.getInstance().getMainViewController().lockButtonsOnSimulationRunning(false);
         updateCurrentTimeLabel("-");
+        ControllersHandler.getInstance().getAdminViewController().getCreateFlightButton().setDisable(true);
     }
 
     public void handlePlayButtonClick() {
@@ -148,6 +149,8 @@ public class SimulationViewController extends ObserverSubject<String> {
         pauseButton.setDisable(false);
         rerunButton.setDisable(true);
         ControllersHandler.getInstance().getMainViewController().lockButtonsOnSimulationRunning(true);
+        ControllersHandler.getInstance().getAdminViewController().getCreateFlightButton().setDisable(false);
+
 
         //UI FEATURES
         simulationLogsList.setStyle("-fx-background-color: white");
