@@ -27,17 +27,19 @@ import java.util.ArrayList;
 
 public class FlightViewPopupController implements Logger {
 
+    @FXML
+    private TableView<PassengerProperty> PassengersTableView;
+    @FXML
+    private Button addPassenger;
+    private Flight flight;
+    private ArrayList<Passenger> passengers;
+    private SalesmanViewController svc;
     private ArrayList<Log> logs = new ArrayList<>();
 
     public ArrayList<Log> getLogs() {
         return logs;
     }
 
-    @FXML
-    private TableView<PassengerProperty> PassengersTableView;
-    private Flight flight;
-    private ArrayList<Passenger> passengers;
-    private SalesmanViewController svc;
     public void initialize() {
     }
     public void display(Stage stage, Parent root, ArrayList<Passenger> passengers)
@@ -58,14 +60,19 @@ public class FlightViewPopupController implements Logger {
             passengersProperties.add(passengerProperty);
         }
         PassengersTableView.getItems().addAll(passengersProperties);
+        if(flight.getAirplane().getNumberOfSeats()==passengers.size())addPassenger.setVisible(false);
     }
     public void deletePassenger()
     {
         int selectedIndex = PassengersTableView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             PassengersTableView.getItems().remove(selectedIndex);
+            int[] tmpNumOfSeats= flight.getNumOfOccupiedSeats();
+            tmpNumOfSeats[flight.getPassengers().get(selectedIndex).getTicket().getFlightClass()]--;
             flight.getPassengers().remove(selectedIndex);
+            flight.setNumOfOccupiedSeats(tmpNumOfSeats);
             svc.updateFlightsTableView();
+            updateFlightsTableView();
         }
     }
     public void addPassenger ()throws IOException
@@ -111,6 +118,8 @@ public class FlightViewPopupController implements Logger {
             PassengersTableView.getItems().clear();
             ArrayList<PassengerProperty> updatedPassengerProperties = getUpdatedPassengerProperties();
             PassengersTableView.getItems().addAll(updatedPassengerProperties );
+            if(flight.getAirplane().getNumberOfSeats()==passengers.size())addPassenger.setVisible(false);
+            else addPassenger.setVisible(true);
         });
     }
 
