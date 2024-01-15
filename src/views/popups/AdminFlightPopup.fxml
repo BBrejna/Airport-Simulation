@@ -3,8 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.geometry.Insets?>
-
 <?import java.net.URL?>
 <?import javafx.scene.text.Text?>
 <VBox xmlns="http://javafx.com/javafx"
@@ -25,13 +23,13 @@
 
         <Label text="Hour:" alignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
         <HBox alignment="CENTER_LEFT" GridPane.rowIndex="1" GridPane.columnIndex="1">
-            <TextField fx:id="hourField" prefWidth="60"/>
+            <TextField fx:id="hourField" prefWidth="30"/>
             <Text text=" : "/>
-            <TextField fx:id="minutesField" prefWidth="60" />
+            <TextField fx:id="minutesField" prefWidth="30" />
         </HBox>
 
         <Label text="Delay amount (minutes):" alignment="CENTER" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <TextField fx:id="delayField" GridPane.rowIndex="2" GridPane.columnIndex="1"  minWidth="200"/>
+        <TextField fx:id="delayField" GridPane.rowIndex="2" GridPane.columnIndex="1"  maxWidth="50"/>
 
         <Label text="City:" alignment="CENTER" GridPane.rowIndex="3" GridPane.columnIndex="0" />
         <ComboBox fx:id="cityComboBox" GridPane.rowIndex="3" GridPane.columnIndex="1" minWidth="200"/>
