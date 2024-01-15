@@ -211,7 +211,7 @@ public class AdminFlightPopupController {
     private void formatTextField(TextField textField) {
         if (checkIfInt(textField.getText())){
             int number = Integer.parseInt(textField.getText());
-            if (number < 10 && number > 0){
+            if (number < 10 && number >= 0){
                 textField.setText("0" + number);
             }
         }
