@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Admin;
@@ -73,6 +74,9 @@ public class SimulationViewController extends ObserverSubject<String> {
         workmanLogsList.setItems(workmanLogs);
 
         //UI FEATURES
+        Font digitalFont = Font.loadFont(getClass().getResourceAsStream("/resources/E1234.ttf"),30);
+        currentTimeLabel.setFont(digitalFont);
+
         simulationLogsList.setStyle("-fx-background-color: white");
         adminLogsList.setStyle("-fx-background-color: white");
         salesmanLogsList.setStyle("-fx-background-color: white");

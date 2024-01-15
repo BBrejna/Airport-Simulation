@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.Admin;
 import model.classes.Observer;
@@ -39,6 +40,8 @@ public class SalesmanViewController implements Observer<ArrayList<Flight>>, Logg
 
     @FXML
     private TableView<SalesmanFlightProperty> flightsTableView;
+    @FXML
+    private Label currentTimeLabel;
 
 
     public void createFlightAction() {
@@ -56,6 +59,9 @@ public class SalesmanViewController implements Observer<ArrayList<Flight>>, Logg
                 openNewWindow(rowData);
             }
         });
+        //UI FEATURES
+        Font digitalFont = Font.loadFont(getClass().getResourceAsStream("/resources/E1234.ttf"),30);
+        currentTimeLabel.setFont(digitalFont);
     }
 
     @Override

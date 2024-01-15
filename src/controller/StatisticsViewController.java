@@ -5,8 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import model.Simulation;
 import model.classes.Observer;
 import model.classes.admin.Flight;
@@ -43,6 +45,8 @@ public class StatisticsViewController {
     private BarChart<String, Number> arrivingFlightsChart;
     @FXML
     private BarChart<String, Number> departingFlightsChart;
+    @FXML
+    private Label currentTimeLabel;
     private XYChart.Series<String, Number> temp_series = new XYChart.Series<>();
     private XYChart.Series<String, Number> wind_series = new XYChart.Series<>();
     private XYChart.Series<String, Number> clouds_series = new XYChart.Series<>();
@@ -65,6 +69,10 @@ public class StatisticsViewController {
         departingPassengersChart.getData().add(departing_passengers_series);
         arrivingFlightsChart.getData().add(arriving_flights_series);
         departingFlightsChart.getData().add(departing_flights_series);
+
+        //UI FEATURES
+        Font digitalFont = Font.loadFont(getClass().getResourceAsStream("/resources/E1234.ttf"),30);
+        currentTimeLabel.setFont(digitalFont);
     }
 
     class WeatherObserver implements Observer<Weather>{

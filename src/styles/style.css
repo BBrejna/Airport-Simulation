@@ -68,3 +68,10 @@
 .thumb:hover {
     -fx-opacity: 75%;
 }
+.clock {
+    -fx-background-color: black;
+    -fx-border-color: #6B655A;
+    -fx-border-width: 5;
+    -fx-text-fill: red;
+    -fx-padding: 5 5 0 5;
+}

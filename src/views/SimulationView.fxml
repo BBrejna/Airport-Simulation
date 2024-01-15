@@ -32,11 +32,8 @@
                     <Image url="@/resources/iconSmall.png"/>
                 </ImageView>
 
-                <!-- TIME -->
-                <HBox alignment="CENTER_LEFT">
-                    <Label text="CURRENT TIME: " styleClass="timeLabel"/>
-                    <Label fx:id="currentTimeLabel" text="-" styleClass="timeLabel"/>
-                </HBox>
+                <!-- CLOCK -->
+                <Label fx:id="currentTimeLabel" text="XX:XX" alignment="CENTER_LEFT" styleClass="clock"/>
 
                 <!-- BUTTONS -->
                 <HBox alignment="CENTER_RIGHT" styleClass="container, buttonBox" HBox.hgrow="ALWAYS">

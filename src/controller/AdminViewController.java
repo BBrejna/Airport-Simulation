@@ -13,6 +13,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.Admin;
 import model.classes.Observer;
@@ -50,6 +51,8 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
     private TableColumn typeColumn;
     @FXML
     private TableColumn deleteColumn;
+    @FXML
+    private Label currentTimeLabel;
 
 
     public void initialize() {
@@ -148,7 +151,9 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
 
             }
         });
-
+        //UI FEATURES
+        Font digitalFont = Font.loadFont(getClass().getResourceAsStream("/resources/E1234.ttf"),30);
+        currentTimeLabel.setFont(digitalFont);
     }
 
     @Override
