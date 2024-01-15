@@ -17,6 +17,7 @@
     <stylesheets>
         <URL value="@/styles/style.css"/>
         <URL value="@/styles/adminView.css"/>
+        <URL value="@/styles/salesmanView.css"/>
     </stylesheets>
 
     <HBox minHeight="60" maxHeight="64" alignment="CENTER_LEFT" styleClass="container">
