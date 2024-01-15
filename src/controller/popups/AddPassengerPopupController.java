@@ -159,7 +159,7 @@ public class AddPassengerPopupController {
     public Passenger getPassenger() throws ClassCastException{
         Ticket ticket = new Ticket(flight.getFlightNumber(), Integer.parseInt(classComboBox.getValue()));
         Passenger passenger = new Passenger(nameField.getText(),surnameField.getText(),true,Integer.parseInt(luggageField.getText()),flight.getDestinationPoint().getCity(),ticket);
-
+        passenger.setPesel(PESELField.getText());
         return passenger;
     }
 
