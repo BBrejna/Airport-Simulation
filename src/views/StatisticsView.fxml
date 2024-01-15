@@ -24,7 +24,7 @@
     </stylesheets>
 
     <!-- UPPER MENU -->
-    <HBox minHeight="60" maxHeight="64" styleClass="container" alignment="CENTER_LEFT">
+    <HBox minHeight="60" maxHeight="64" styleClass="container" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
 
         <!-- LOGO -->
         <ImageView preserveRatio="true" fitHeight="60">
@@ -35,20 +35,16 @@
         <Label fx:id="currentTimeLabel" text="XX:XX" alignment="CENTER_LEFT" styleClass="clock"/>
 
         <!-- MENU BUTTONS -->
-        <StackPane HBox.hgrow="ALWAYS" alignment="CENTER">
-            <!-- padding the size of logo to make box centered -->
-            <padding>
-                <Insets right="74"/>
-            </padding>
+        <StackPane HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT">
 
-            <HBox fx:id="buttonsBox" alignment="CENTER" styleClass="container" visible="true">
+            <HBox fx:id="buttonsBox" alignment="CENTER_RIGHT" styleClass="container" visible="true">
 
                     <Button fx:id="weatherButton" text="Weather [...]" onAction="#weatherButtonClicked" styleClass="customButton, primaryButton" />
                     <Button fx:id="PassengersButton" text="Passengers" onAction="#passengersButtonClicked" styleClass="customButton, primaryButton"/>
                     <Button fx:id="FlightsButton" text="Flights" onAction="#flightsButtonClicked" styleClass="customButton, primaryButton"/>
                 </HBox>
 
-            <HBox fx:id="weatherButtonsBox" alignment="CENTER" styleClass="container" visible="false">
+            <HBox fx:id="weatherButtonsBox" alignment="CENTER_RIGHT" styleClass="container" visible="false">
                     <Button fx:id="temperatureButton" text="Temperature" onAction="#temperatureButtonClicked" styleClass="customButton, primaryButton" />
                     <Button fx:id="windButton" text="Wind" onAction="#windButtonClicked" styleClass="customButton, primaryButton"/>
                     <Button fx:id="cloudsBox" text="Clouds" onAction="#cloudsButtonClicked" styleClass="customButton, primaryButton"/>

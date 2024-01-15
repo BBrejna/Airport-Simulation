@@ -39,7 +39,7 @@ public class MainViewController {
     private void changeView(Button newButton, Parent newContent) {
         disabledButton.setDisable(false);
         disabledButton.getStyleClass().clear();
-        disabledButton.getStyleClass().add("RoleButton");
+        disabledButton.getStyleClass().addAll("button","RoleButton");
         disabledButton = newButton;
         disabledButton.setDisable(true);
         disabledButton.getStyleClass().add("activeButton");
