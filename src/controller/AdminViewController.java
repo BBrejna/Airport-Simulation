@@ -2,6 +2,7 @@ package controller;
 
 import controller.elementsProperties.FlightProperty;
 import controller.popups.AdminFlightPopupController;
+import controller.popups.DeleteFlightPopupController;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -120,9 +121,31 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
 
             @Override
             public void handle(TableColumn.CellEditEvent<FlightProperty, String> flightPropertyStringCellEditEvent) {
-                String flightNumber = flightPropertyStringCellEditEvent.getRowValue().getFlightNumber();
-                Admin.getInstance().deleteFlight(flightNumber);
-                Admin.getInstance().notifyObservers(Admin.getInstance().getFlights());
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/popups/DeleteFlightPopup.fxml"));
+                    Parent root = loader.load();
+                    Stage popupStage = new Stage();
+                    DeleteFlightPopupController popupController = loader.getController();
+                    if(popupController.displayPopup(popupStage, root)) {
+                        String flightNumber = flightPropertyStringCellEditEvent.getRowValue().getFlightNumber();
+                        Admin.getInstance().deleteFlight(flightNumber);
+                        Admin.getInstance().notifyObservers(Admin.getInstance().getFlights());
+                    }
+                } catch (IOException ignored) {}
+
+//                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//                alert.setTitle("Delete flight");
+//                alert.setContentText("Are you sure you want to delete the flight?");
+//
+//                Optional<ButtonType> result = alert.showAndWait();
+//
+//                if(result.get() == ButtonType.OK) {
+//                    String flightNumber = flightPropertyStringCellEditEvent.getRowValue().getFlightNumber();
+//
+//                    Admin.getInstance().deleteFlight(flightNumber);
+//                    Admin.getInstance().notifyObservers(Admin.getInstance().getFlights());
+//                }
+
             }
         });
 
@@ -204,4 +227,5 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
     public Button getCreateFlightButton() {
         return createFlightButton;
     }
+
 }
