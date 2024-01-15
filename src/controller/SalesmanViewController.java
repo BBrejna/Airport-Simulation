@@ -94,7 +94,7 @@ public class SalesmanViewController implements Observer<ArrayList<Flight>>, Logg
                 }
                 SalesmanFlightProperty flightProperty = new SalesmanFlightProperty(
                         flight.getFlightNumber(),
-                        flight.getHour(),
+                        flight.getActualHour(),
                         city,
                         seats,
                         prices,
@@ -150,7 +150,7 @@ public class SalesmanViewController implements Observer<ArrayList<Flight>>, Logg
             }
             SalesmanFlightProperty flightProperty = new SalesmanFlightProperty(
                     flight.getFlightNumber(),
-                    flight.getHour(),
+                    flight.getActualHour(),
                     city,
                     seats,
                     prices,

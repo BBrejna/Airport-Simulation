@@ -36,6 +36,8 @@ public class FlightViewPopupController implements Logger {
     private Button addPassenger;
     @FXML
     private TableColumn deleteColumn;
+    @FXML
+    private Label seatsInfo;
     private Flight flight;
     private ArrayList<Passenger> passengers;
     private SalesmanViewController svc;
@@ -70,6 +72,7 @@ public class FlightViewPopupController implements Logger {
         }
         PassengersTableView.getItems().addAll(passengersProperties);
         if(flight.getAirplane().getNumberOfSeats()==passengers.size())addPassenger.setDisable(true);
+        seatsInfo.setText(Integer.toString(passengers.size())+"/"+flight.getAirplane().getNumberOfSeats());
         PassengersTableView.setEditable(true);
         deleteColumn.setOnEditStart(new EventHandler<TableColumn.CellEditEvent<PassengerProperty, String>>() {
             @Override
@@ -112,7 +115,9 @@ public class FlightViewPopupController implements Logger {
         }
     }
     private void handleCreatePassenger(AddPassengerPopupController popupController){
-        Salesman.getInstance().addPassenger(popupController.getPassenger());
+        Passenger passenger = popupController.getPassenger();
+        Salesman.getInstance().getPassengers().add(passenger);
+        flight.addPassenger(passenger);
         svc.updateFlightsTableView();
         updateFlightsTableView();
     }
@@ -135,6 +140,7 @@ public class FlightViewPopupController implements Logger {
             PassengersTableView.getItems().addAll(updatedPassengerProperties );
             if(flight.getAirplane().getNumberOfSeats()==passengers.size())addPassenger.setDisable(true);
             else addPassenger.setDisable(false);
+            seatsInfo.setText(Integer.toString(passengers.size())+"/"+flight.getAirplane().getNumberOfSeats());
         });
     }
 

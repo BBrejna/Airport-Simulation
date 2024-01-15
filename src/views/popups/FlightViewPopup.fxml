@@ -27,6 +27,10 @@
         <ImageView preserveRatio="true" fitHeight="60">
             <Image url="@/resources/iconSmall.png"/>
         </ImageView>
+    <HBox styleClass="container, buttonBox" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+        <Label styleClass="timeLabel" text="SEATS: "/>
+        <Label fx:id="seatsInfo" text="-" styleClass="timeLabel"/>
+    </HBox>
         <HBox styleClass="container, buttonBox" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
 
             <!-- CREATE -->
