@@ -3,7 +3,7 @@ package model;
 import controller.ControllersHandler;
 import controller.SimulationViewController;
 import javafx.application.Platform;
-import model.classes.Subject;
+import model.classes.ObserverSubject;
 import model.classes.admin.Flight;
 import model.classes.logging.Log;
 import model.classes.logging.Logger;
@@ -17,7 +17,7 @@ import java.util.Random;
 
 import static model.tools.Tools.convertMinutesToTime;
 
-public class Simulation extends Subject<Weather> implements Runnable, Logger {
+public class Simulation extends ObserverSubject<Weather> implements Runnable, Logger {
     private ArrayList<Log> logs = new ArrayList<>();
     public ArrayList<Log> getLogs() {
         return logs;

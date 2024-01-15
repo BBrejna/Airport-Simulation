@@ -4,7 +4,7 @@ import controller.ControllersHandler;
 import data.admin.AirlinesSet;
 import data.admin.AirportSet;
 import model.classes.Observer;
-import model.classes.Subject;
+import model.classes.ObserverSubject;
 import model.classes.admin.*;
 import model.classes.logging.Log;
 import model.classes.logging.Logger;
@@ -20,7 +20,7 @@ import java.util.Random;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public final class Admin extends Subject<ArrayList<Flight>> implements Observer<Weather>, Logger{
+public final class Admin extends ObserverSubject<ArrayList<Flight>> implements Observer<Weather>, Logger{
     private ArrayList<Log> logs = new ArrayList<>();
     public ArrayList<Log> getLogs() {
         return logs;

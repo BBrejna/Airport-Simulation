@@ -17,6 +17,7 @@ import model.Salesman;
 import model.Simulation;
 import model.Workman;
 import model.classes.Observer;
+import model.classes.ObserverSubject;
 import model.classes.admin.Flight;
 import model.classes.logging.Log;
 import model.classes.simulation.Weather;
@@ -25,7 +26,7 @@ import model.tools.Tools;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SimulationViewController {
+public class SimulationViewController extends ObserverSubject<String> {
     @FXML
     private TableView<FlightProperty> departuresTable;
     @FXML
@@ -92,6 +93,7 @@ public class SimulationViewController {
 
     public void updateCurrentTimeLabel(String newText) {
         currentTimeLabel.setText(newText);
+        notifyObservers(newText);
     }
 
     public void updateLogs() {
