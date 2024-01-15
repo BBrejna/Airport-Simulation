@@ -60,7 +60,6 @@ public class SimulationViewController extends ObserverSubject<String> {
         Simulation.getInstance().addObserver(Admin.getInstance());
         Simulation.getInstance().addObserver(new WeatherObserver());
         Admin.getInstance().addObserver(new FlightsObserver());
-
         simulationLogs = FXCollections.observableArrayList(Simulation.getInstance().getLogs());
         simulationLogsList.setItems(simulationLogs);
 

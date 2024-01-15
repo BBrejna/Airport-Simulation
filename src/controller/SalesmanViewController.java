@@ -51,7 +51,7 @@ public class SalesmanViewController implements Observer<ArrayList<Flight>>, Logg
     public void initialize() {
 
         ControllersHandler.getInstance().setSalesmanViewController(this);
-
+        ControllersHandler.getInstance().getSimulationViewController().addObserver(new TimeObserver());
         Admin.getInstance().addObserver(this);
         flightsTableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && (! flightsTableView.getSelectionModel().isEmpty()) ) {
@@ -62,6 +62,15 @@ public class SalesmanViewController implements Observer<ArrayList<Flight>>, Logg
         //UI FEATURES
         Font digitalFont = Font.loadFont(getClass().getResourceAsStream("/resources/E1234.ttf"),30);
         currentTimeLabel.setFont(digitalFont);
+    }
+
+    class TimeObserver implements Observer<String> {
+        @Override
+        public void observerUpdateState(String time) {
+            Platform.runLater(() -> {
+                currentTimeLabel.setText(time);
+            });
+        }
     }
 
     @Override

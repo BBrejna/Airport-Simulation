@@ -59,7 +59,7 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
         createFlightButton.setDisable(true);
 
         ControllersHandler.getInstance().setAdminViewController(this);
-
+        ControllersHandler.getInstance().getSimulationViewController().addObserver(new TimeObserver());
         Admin.getInstance().addObserver(this);
 
         flightsTableView.setEditable(true);
@@ -223,6 +223,14 @@ public class AdminViewController implements Observer<ArrayList<Flight>>, Logger 
         }
     }
 
+    class TimeObserver implements Observer<String> {
+        @Override
+        public void observerUpdateState(String time) {
+            Platform.runLater(() -> {
+                currentTimeLabel.setText(time);
+            });
+        }
+    }
 
     private void handleCreateFlight(AdminFlightPopupController popupController){
         Admin.getInstance().createFlight(popupController.getComoponents());

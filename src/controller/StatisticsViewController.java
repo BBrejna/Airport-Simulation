@@ -17,7 +17,7 @@ import model.tools.Tools;
 
 import java.util.ArrayList;
 
-public class StatisticsViewController {
+public class StatisticsViewController implements Observer<String>{
 
     @FXML
     private LineChart<String, Number> temperatureChart;
@@ -60,6 +60,7 @@ public class StatisticsViewController {
     public void initialize() {
         ControllersHandler.getInstance().setStatisticsViewController(this);
         Simulation.getInstance().addObserver(new WeatherObserver());
+        ControllersHandler.getInstance().getSimulationViewController().addObserver(this);
         temperatureChart.getData().add(temp_series);
         windChart.getData().add(wind_series);
         cloudsChart.getData().add(clouds_series);
@@ -73,6 +74,14 @@ public class StatisticsViewController {
         //UI FEATURES
         Font digitalFont = Font.loadFont(getClass().getResourceAsStream("/resources/E1234.ttf"),30);
         currentTimeLabel.setFont(digitalFont);
+
+    }
+
+    @Override
+    public void observerUpdateState(String s) {
+        Platform.runLater(() -> {
+            currentTimeLabel.setText(s);
+        });
     }
 
     class WeatherObserver implements Observer<Weather>{
@@ -227,35 +236,5 @@ public class StatisticsViewController {
     private void weatherButtonClicked(){
         weatherButtonsBox.setVisible(true);
         buttonsBox.setVisible(false);
-    }
-
-
-
-    public XYChart.Series<String, Number> getTemp_series() {
-        return temp_series;
-    }
-    public XYChart.Series<String, Number> getWind_series() {
-        return wind_series;
-    }
-    public XYChart.Series<String, Number> getArriving_passengers_series() {
-        return arriving_passengers_series;
-    }
-    public XYChart.Series<String, Number> getDeparting_passengers_series() {
-        return departing_passengers_series;
-    }
-    public XYChart.Series<String, Number> getArriving_flights_series() {
-        return arriving_flights_series;
-    }
-    public XYChart.Series<String, Number> getDeparting_flights_series() {
-        return departing_flights_series;
-    }
-    public XYChart.Series<String, Number> getClouds_series() {
-        return clouds_series;
-    }
-    public XYChart.Series<String, Number> getRain_series() {
-        return rain_series;
-    }
-    public XYChart.Series<String, Number> getSnow_series() {
-        return snow_series;
     }
 }
