@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Admin;
+import model.Simulation;
 import model.classes.admin.Airline;
 import model.classes.admin.Airport;
 import model.classes.simulation.Weather;
@@ -145,6 +146,9 @@ public class AdminFlightPopupController {
             if (runwayNumber == -1){
                 exceptions.add("There is no free runway at this time.");
             }
+            if (hour <= Simulation.getInstance().getTime()){
+                exceptions.add("The time of the flight have to be later than current time.");
+            }
         }
 
 
@@ -177,9 +181,41 @@ public class AdminFlightPopupController {
         departureRadioButton.setToggleGroup(toggleGroup);
 
         arrivalRadioButton.setSelected(true);
+
+
+        hourField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                formatTextField(hourField);
+            }
+        });
+
+        minutesField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                formatTextField(minutesField);
+            }
+        });
+
+        delayField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                formatDelayField();
+            }
+        });
     }
 
+    private void formatDelayField() {
+        if (checkIfInt(delayField.getText())){
+            delayField.setText(String.valueOf(Integer.parseInt(delayField.getText())));
+        }
+    }
 
+    private void formatTextField(TextField textField) {
+        if (checkIfInt(textField.getText())){
+            int number = Integer.parseInt(textField.getText());
+            if (number < 10 && number > 0){
+                textField.setText("0" + number);
+            }
+        }
+    }
 
 
     public ArrayList<Object> getComoponents() throws ClassCastException{
