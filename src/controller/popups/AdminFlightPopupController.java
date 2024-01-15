@@ -182,18 +182,8 @@ public class AdminFlightPopupController {
 
         arrivalRadioButton.setSelected(true);
 
-
-        hourField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                formatTextField(hourField);
-            }
-        });
-
-        minutesField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                formatTextField(minutesField);
-            }
-        });
+        focusHandling(hourField);
+        focusHandling(minutesField);
 
         delayField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
@@ -202,10 +192,12 @@ public class AdminFlightPopupController {
         });
     }
 
-    private void formatDelayField() {
-        if (checkIfInt(delayField.getText())){
-            delayField.setText(String.valueOf(Integer.parseInt(delayField.getText())));
-        }
+    private void focusHandling(TextField textField) {
+        textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                formatTextField(textField);
+            }
+        });
     }
 
     private void formatTextField(TextField textField) {
@@ -217,6 +209,11 @@ public class AdminFlightPopupController {
         }
     }
 
+    private void formatDelayField() {
+        if (checkIfInt(delayField.getText())){
+            delayField.setText(String.valueOf(Integer.parseInt(delayField.getText())));
+        }
+    }
 
     public ArrayList<Object> getComoponents() throws ClassCastException{
         ArrayList<Object> components = new ArrayList<>();
