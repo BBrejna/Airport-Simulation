@@ -1,5 +1,6 @@
 package controller.elementsProperties;
 
+import javafx.scene.image.ImageView;
 import model.classes.admin.Flight;
 import model.tools.Tools;
 
@@ -11,7 +12,16 @@ public class PassengerProperty {
         private String PESEL;
         private String flightClass;
         private String luggage;
+        private ImageView deleteImage;
 
+        public PassengerProperty(String name, String surname, String PESEL, String flightClass, String luggage,ImageView deleteImage) {
+            this.name = name;
+            this.surname = surname;
+            this.PESEL = PESEL;
+            this.flightClass = flightClass;
+            this.luggage = luggage;
+            this.deleteImage = deleteImage;
+        }
         public PassengerProperty(String name, String surname, String PESEL, String flightClass, String luggage) {
             this.name = name;
             this.surname = surname;
@@ -58,5 +68,13 @@ public class PassengerProperty {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public ImageView getDeleteImage() {
+        return deleteImage;
+    }
+
+    public void setDeleteImage(ImageView deleteImage) {
+        this.deleteImage = deleteImage;
     }
 }

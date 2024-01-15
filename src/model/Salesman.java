@@ -83,6 +83,14 @@ public class Salesman extends Person implements Logger {
         cashbox += flight.getTicketPrice()[flightClass] * multiplier;
         return true;
     }
+    public Passenger findPassenger(String PESEL, Flight flight)
+    {
+        for(Passenger passenger : flight.getPassengers())
+        {
+            if(passenger.getPesel().equals(PESEL))return passenger;
+        }
+        return null;
+    }
 
     public boolean changeData(Passenger passenger) {
         cashbox += 50;

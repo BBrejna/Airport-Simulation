@@ -1,14 +1,17 @@
 package controller.popups;
 
+import controller.elementsProperties.FlightProperty;
 import controller.elementsProperties.PassengerProperty;
 import controller.elementsProperties.SalesmanFlightProperty;
 import javafx.application.Platform;
 import controller.SalesmanViewController;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -21,7 +24,7 @@ import model.classes.logging.Logger;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.classes.people.Passenger;
-
+import model.Salesman;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -31,6 +34,8 @@ public class FlightViewPopupController implements Logger {
     private TableView<PassengerProperty> PassengersTableView;
     @FXML
     private Button addPassenger;
+    @FXML
+    private TableColumn deleteColumn;
     private Flight flight;
     private ArrayList<Passenger> passengers;
     private SalesmanViewController svc;
@@ -41,6 +46,8 @@ public class FlightViewPopupController implements Logger {
     }
 
     public void initialize() {
+
+
     }
     public void display(Stage stage, Parent root, ArrayList<Passenger> passengers)
     {
@@ -55,25 +62,33 @@ public class FlightViewPopupController implements Logger {
                     passenger.getSurname(),
                     passenger.getPesel(),
                     Integer.toString(passenger.getTicket().getFlightClass()),
-                    Integer.toString(passenger.getLuggageWeight())
+                    Integer.toString(passenger.getLuggageWeight()),
+                    new ImageView(new Image("/resources/delete.png", 22, 20, false, false))
+
             );
             passengersProperties.add(passengerProperty);
         }
         PassengersTableView.getItems().addAll(passengersProperties);
         if(flight.getAirplane().getNumberOfSeats()==passengers.size())addPassenger.setVisible(false);
+        PassengersTableView.setEditable(true);
+        deleteColumn.setOnEditStart(new EventHandler<TableColumn.CellEditEvent<PassengerProperty, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<PassengerProperty, String> passengerPropertyStringCellEditEvent) {
+                deletePassenger(passengerPropertyStringCellEditEvent.getRowValue().getPESEL());
+            }
+        });
+
     }
-    public void deletePassenger()
+    public void deletePassenger(String PESEL)
     {
-        int selectedIndex = PassengersTableView.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0) {
-            PassengersTableView.getItems().remove(selectedIndex);
+        Passenger passenger = Salesman.getInstance().findPassenger(PESEL, flight);
+            PassengersTableView.getItems().remove(passenger);
             int[] tmpNumOfSeats= flight.getNumOfOccupiedSeats();
-            tmpNumOfSeats[flight.getPassengers().get(selectedIndex).getTicket().getFlightClass()]--;
-            flight.getPassengers().remove(selectedIndex);
+            tmpNumOfSeats[passenger.getTicket().getFlightClass()]--;
+            flight.getPassengers().remove(passenger);
             flight.setNumOfOccupiedSeats(tmpNumOfSeats);
             svc.updateFlightsTableView();
             updateFlightsTableView();
-        }
     }
     public void addPassenger ()throws IOException
     {
@@ -133,7 +148,8 @@ public class FlightViewPopupController implements Logger {
                     passenger.getSurname(),
                     passenger.getPesel(),
                     Integer.toString(passenger.getTicket().getFlightClass()),
-                    Integer.toString(passenger.getLuggageWeight())
+                    Integer.toString(passenger.getLuggageWeight()),
+                    new ImageView(new Image("/resources/delete.png", 22, 20, false, false))
             );
             passengersProperties.add(passengerProperty);
         }

@@ -37,13 +37,6 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button fx:id="deletePassenger" styleClass="iconButton" onAction="#deletePassenger">
-                <graphic>
-                    <ImageView preserveRatio="true" fitHeight="30">
-                        <Image url="@/resources/removeSmall.png"/>
-                    </ImageView>
-                </graphic>
-            </Button>
         </HBox>
 
 
@@ -78,6 +71,11 @@
                 <TableColumn text="Luggage">
                     <cellValueFactory>
                         <javafx.scene.control.cell.PropertyValueFactory property="luggage"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Delete" maxWidth="50" fx:id="deleteColumn">
+                    <cellValueFactory>
+                        <javafx.scene.control.cell.PropertyValueFactory property="deleteImage"/>
                     </cellValueFactory>
                 </TableColumn>
             </columns>
