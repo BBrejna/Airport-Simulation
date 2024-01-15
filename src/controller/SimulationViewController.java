@@ -135,7 +135,7 @@ public class SimulationViewController extends ObserverSubject<String> {
         pauseButton.setDisable(true);
         rerunButton.setDisable(true);
         ControllersHandler.getInstance().getMainViewController().lockButtonsOnSimulationRunning(false);
-        currentTimeLabel.setText("-");
+        updateCurrentTimeLabel("-");
     }
 
     public void handlePlayButtonClick() {
