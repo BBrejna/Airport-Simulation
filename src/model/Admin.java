@@ -88,7 +88,7 @@ public final class Admin extends ObserverSubject<ArrayList<Flight>> implements O
     }
 
     /** generate and assign runways */
-    private void generateRunways(int runwaysNum) {
+    public void generateRunways(int runwaysNum) {
 
         for(int i = 0; i < runwaysNum; i++) {
             runways.add(new Runway(i+1));
@@ -200,7 +200,7 @@ public final class Admin extends ObserverSubject<ArrayList<Flight>> implements O
         return true;
     }
 
-    private ArrayList<Pilot> generatePilots(int numberOfSeats) {
+    public ArrayList<Pilot> generatePilots(int numberOfSeats) {
 
         Random random = new Random();
 
