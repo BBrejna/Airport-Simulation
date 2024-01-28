@@ -1,9 +1,13 @@
 package tests.admin;
 
 import model.Admin;
+import model.classes.people.Pilot;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import model.tools.Tools;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -51,4 +55,33 @@ public class JUnitAdminTests {
 
     }
 
+    @RepeatedTest(1000)
+    public void runwayTest(){
+        Random random = new Random();
+        int numberOfRunways = random.nextInt(0, 100);
+
+        Admin admin = Admin.getInstance();
+        admin.generateRunways(numberOfRunways);
+
+        assertEquals(numberOfRunways, admin.getRunways().size());
+
+        admin.clearAllComponents();
+    }
+
+    @RepeatedTest(1000)
+    public void pilotTest(){
+        Random random = new Random();
+        int numberOfSeats = random.nextInt(0, 1000);
+
+        Admin admin = Admin.getInstance();
+        ArrayList<Pilot> pilots = admin.generatePilots(numberOfSeats);
+
+        if (numberOfSeats <= 177){
+            assertEquals(2, pilots.size());
+        } else if (numberOfSeats <= 303){
+            assertTrue((pilots.size() >= 2) && (pilots.size() <= 3) );
+        } else {
+            assertTrue((pilots.size() >= 2) && (pilots.size() <= 5) );
+        }
+    }
 }
