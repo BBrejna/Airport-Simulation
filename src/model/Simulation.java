@@ -216,7 +216,7 @@ public class Simulation extends ObserverSubject<Weather> implements Runnable, Lo
         Workman.getInstance().clearLogs();
     }
 
-    private int generatePeople(int peopleCount) {
+    public int generatePeople(int peopleCount) {
         int peopleGenerated = 0;
         for (int i = 0; i < peopleCount; i++) {
             if (generatePassenger()) {
@@ -246,7 +246,9 @@ public class Simulation extends ObserverSubject<Weather> implements Runnable, Lo
 
         return Salesman.getInstance().addPassenger(passenger);
     }
-    public void generateArrivingPassengers(){
+    public int generateArrivingPassengers(){
+        int numOfPassengers = 0;
+
         Random rand = new Random();
         for(Flight flight : Admin.getInstance().getFlights()){
             if(flight.isArrival()){
@@ -294,10 +296,13 @@ public class Simulation extends ObserverSubject<Weather> implements Runnable, Lo
                     arrivingPassengers.add(passenger);
                     flight.addPassenger(passenger);
                     Salesman.getInstance().getPassengers().add(passenger);
+                    numOfPassengers++;
                 }
                 flight.setNumOfOccupiedSeats(occupied_seats);
             }
         }
+
+        return numOfPassengers;
     }
     public int seats_median(){
         int all_seats = 0;
