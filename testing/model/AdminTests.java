@@ -1,6 +1,9 @@
 package model;
 
+import model.classes.admin.Flight;
+import model.classes.admin.Runway;
 import model.classes.people.Pilot;
+import model.classes.simulation.Weather;
 import model.tools.Tools;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -8,8 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AdminTests {
 
@@ -84,5 +86,84 @@ public class AdminTests {
         }
     }
 
+    @Test
+    public void SnowyAndIcedGoodWeather() {
+
+        Admin admin = Admin.getInstance();
+        admin.generateFlights(10, 3);
+
+        /** airplanes and runways when weather is good */
+        admin.observerUpdateState(new Weather(1, 1, 1, 0, 1, 1));
+        for(Flight flight: admin.getFlights()) {
+            assertFalse(flight.getAirplane().isIced());
+            assertFalse(flight.getAirplane().isSnowy());
+        }
+        for(Runway runway: admin.getRunways()) {
+            assertFalse(runway.isSnowy());
+            assertFalse(runway.isIced());
+        }
+
+        admin.clearAllComponents();
+
+    }
+
+    @Test
+    public void snowyAndIcedCold() {
+        /** airplanes and runways when it is freezing cold */
+        Admin admin = Admin.getInstance();
+        admin.generateFlights(10, 3);
+        admin.observerUpdateState(new Weather(-6, 1, 1, 0, 1, 1));
+        for(Flight flight: admin.getFlights()) {
+            if(!flight.isArrival()) assertTrue(flight.getAirplane().isIced());
+            else assertFalse(flight.getAirplane().isIced());
+            System.out.println(flight.getAirplane().isSnowy());
+            assertFalse(flight.getAirplane().isSnowy());
+        }
+        for(Runway runway: admin.getRunways()) {
+            assertFalse(runway.isSnowy());
+            assertTrue(runway.isIced());
+        }
+        admin.clearAllComponents();
+    }
+
+    @Test
+    void snowyAndIcedSnowy() {
+        /** airplanes and runways when it is snowy */
+        Admin admin = Admin.getInstance();
+        admin.generateFlights(10, 3);
+        admin.observerUpdateState(new Weather(1, 1, 1, 20, 1, 1));
+        for(Flight flight: admin.getFlights()) {
+            assertFalse(flight.getAirplane().isIced());
+            if(!flight.isArrival()) assertTrue(flight.getAirplane().isSnowy());
+            else assertFalse(flight.getAirplane().isSnowy());
+        }
+        for(Runway runway: admin.getRunways()) {
+            assertTrue(runway.isSnowy());
+            assertFalse(runway.isIced());
+        }
+        admin.clearAllComponents();
+    }
+
+    @Test
+    void snowyAndIcedBadWeather() {
+        /** airplanes and runways when it is freezing cold and snowy (bad weather)*/
+        Admin admin = Admin.getInstance();
+        admin.generateFlights(10, 3);
+        admin.observerUpdateState(new Weather(-6, 1, 1, 20, 1, 1));
+        for(Flight flight: admin.getFlights()) {
+            if(!flight.isArrival()) {
+                assertTrue(flight.getAirplane().isIced());
+                assertTrue(flight.getAirplane().isSnowy());
+            } else {
+                assertFalse(flight.getAirplane().isIced());
+                assertFalse(flight.getAirplane().isSnowy());
+            }
+        }
+        for(Runway runway: admin.getRunways()) {
+            assertTrue(runway.isSnowy());
+            assertTrue(runway.isIced());
+        }
+        admin.clearAllComponents();
+    }
 
 }
